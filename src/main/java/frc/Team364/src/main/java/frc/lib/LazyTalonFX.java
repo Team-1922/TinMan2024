@@ -1,4 +1,4 @@
-package frc.lib;
+package frc.Team364.src.main.java.frc.lib;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;

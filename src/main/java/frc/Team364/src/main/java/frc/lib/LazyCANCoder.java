@@ -1,4 +1,4 @@
-package frc.lib;
+package frc.Team364.src.main.java.frc.lib;
 
 import com.ctre.phoenix.sensors.CANCoder;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
