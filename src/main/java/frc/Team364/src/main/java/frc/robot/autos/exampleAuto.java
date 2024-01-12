@@ -2,10 +2,10 @@
 
 
 
-package frc.robot.autos;
+package frc.Team364.src.main.java.frc.robot.autos;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.Swerve;
+import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 
 import java.util.List;
 
