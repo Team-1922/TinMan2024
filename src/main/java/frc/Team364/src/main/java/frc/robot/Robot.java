@@ -2,12 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot;
+package frc.Team364.src.main.java.frc.robot;
 
-import org.littletonrobotics.junction.LoggedRobot;
-import org.littletonrobotics.junction.Logger;
-import org.littletonrobotics.junction.networktables.NT4Publisher;
+//import org.littletonrobotics.junction.LoggedRobot;
+//import org.littletonrobotics.junction.Logger;
+//import org.littletonrobotics.junction.networktables.NT4Publisher;
 
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-public class Robot extends LoggedRobot {
+public class Robot extends TimedRobot {
   public static CTREConfigs ctreConfigs;
 
   private Command m_autonomousCommand;
@@ -30,7 +31,7 @@ public class Robot extends LoggedRobot {
    */
   @Override
   public void robotInit() {
-
+/* 
    // Record metadata
    Logger.recordMetadata("ProjectName", BuildConstants.MAVEN_NAME);
    Logger.recordMetadata("BuildDate", BuildConstants.BUILD_DATE);
@@ -50,7 +51,7 @@ public class Robot extends LoggedRobot {
    }
    Logger.addDataReceiver(new NT4Publisher());
    Logger.start();;
-
+*/
     ctreConfigs = new CTREConfigs();
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
@@ -75,11 +76,7 @@ public class Robot extends LoggedRobot {
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
-  @Override
-  public void disabledInit() {}
 
-  @Override
-  public void disabledPeriodic() {}
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
@@ -93,8 +90,7 @@ public class Robot extends LoggedRobot {
   }
 
   /** This function is called periodically during autonomous. */
-  @Override
-  public void autonomousPeriodic() {}
+ 
 
   @Override
   public void teleopInit() {
@@ -108,8 +104,7 @@ public class Robot extends LoggedRobot {
   }
 
   /** This function is called periodically during operator control. */
-  @Override
-  public void teleopPeriodic() {}
+
 
   @Override
   public void testInit() {
@@ -117,7 +112,5 @@ public class Robot extends LoggedRobot {
     CommandScheduler.getInstance().cancelAll();
   }
 
-  /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {}
+
 }

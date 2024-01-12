@@ -1,6 +1,7 @@
 package frc.Team364.src.main.java.frc.robot;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;

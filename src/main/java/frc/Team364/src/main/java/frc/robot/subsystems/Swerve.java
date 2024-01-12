@@ -8,7 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
-import org.littletonrobotics.junction.Logger;
+//import org.littletonrobotics.junction.Logger;
 
 import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -40,14 +40,14 @@ public class Swerve extends SubsystemBase {
 
     public Swerve() {
         gyro = new Pigeon2(frc.Team364.src.main.java.frc.robot.Constants.Swerve.pigeonID, "canivore");
-        gyro.configFactoryDefault();
+     //   gyro.configFactoryDefaults();
         zeroGyro();
 
         mSwerveMods = new SwerveMod[] {
-            new SwerveMod(0, Constants.Swerve.Mod0.constants),
-            new SwerveMod(1, Constants.Swerve.Mod1.constants),
-            new SwerveMod(2, Constants.Swerve.Mod2.constants),
-            new SwerveMod(3, Constants.Swerve.Mod3.constants)
+            new SwerveMod(0, frc.Team364.src.main.java.frc.robot.Constants.Swerve.Mod0.constants),
+            new SwerveMod(1, frc.Team364.src.main.java.frc.robot.Constants.Swerve.Mod1.constants),
+            new SwerveMod(2, frc.Team364.src.main.java.frc.robot.Constants.Swerve.Mod2.constants),
+            new SwerveMod(3, frc.Team364.src.main.java.frc.robot.Constants.Swerve.Mod3.constants)
         };
 
         /* By pausing init for a second before setting module offsets, we avoid a bug with inverting motors.
@@ -84,7 +84,7 @@ public class Swerve extends SubsystemBase {
             },
             this // Reference to this subsystem to set requirements
     );
-    
+
         // Set up custom logging to add the current path to a field 2d widget
         PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
 
@@ -160,7 +160,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getYaw() {
-        return (frc.Team364.src.main.java.frc.robot.Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
+        return (frc.Team364.src.main.java.frc.robot.Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw().getValueAsDouble()) : Rotation2d.fromDegrees( gyro.getYaw().getValueAsDouble());
     }
 
     public void resetModulesToAbsolute(){
@@ -174,14 +174,14 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getYaw(), getModulePositions());  
         field.setRobotPose(getPose());
 
-         Logger.recordOutput("Mystates", getModuleStates());
-         Logger.recordOutput("MyPose", getPose());
+         //Logger.recordOutput("Mystates", getModuleStates());
+        // Logger.recordOutput("MyPose", getPose());
 
-        for(SwerveMod mod : mSwerveMods){
+     /*    for(SwerveMod mod : mSwerveMods){
             Logger.recordOutput("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             Logger.recordOutput("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
             Logger.recordOutput("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond); 
              
-        }
+        }*/
     }
 }

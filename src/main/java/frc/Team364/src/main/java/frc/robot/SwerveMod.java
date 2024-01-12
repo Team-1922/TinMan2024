@@ -4,14 +4,15 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import frc.lib.LazyCANCoder;
-import frc.lib.LazyTalonFX;
-import frc.lib.math.Conversions;
-import frc.lib.util.CTREModuleState;
-import frc.lib.util.SwerveModuleConstants;
+import frc.Team364.src.main.java.frc.lib.LazyCANCoder;
+import frc.Team364.src.main.java.frc.lib.LazyTalonFX;
+import frc.Team364.src.main.java.frc.lib.math.Conversions;
+import frc.Team364.src.main.java.frc.lib.util.CTREModuleState;
+import frc.Team364.src.main.java.frc.lib.util.SwerveModuleConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 
@@ -21,9 +22,9 @@ public class SwerveMod {
     private Rotation2d angleOffset;
     private Rotation2d lastAngle;
 
-    private TalonFX mAngleMotor;
-    private TalonFX mDriveMotor;
-    private CANCoder angleEncoder;
+    private LazyTalonFX mAngleMotor;
+    private LazyTalonFX mDriveMotor;
+    private LazyCANCoder angleEncoder;
 
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
