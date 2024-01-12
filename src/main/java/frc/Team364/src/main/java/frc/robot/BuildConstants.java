@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.Team364.src.main.java.frc.robot;
 
 /** Automatically generated file containing build version information. */
 public final class BuildConstants {

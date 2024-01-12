@@ -1,6 +1,6 @@
-package frc.robot.subsystems;
+package frc.Team364.src.main.java.frc.robot.subsystems;
 
-import frc.robot.SwerveMod;
+import frc.Team364.src.main.java.frc.robot.SwerveMod;
 import frc.robot.Constants;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -10,7 +10,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import org.littletonrobotics.junction.Logger;
 
-import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
 import com.pathplanner.lib.util.PIDConstants;
@@ -39,7 +39,7 @@ public class Swerve extends SubsystemBase {
     private Field2d field = new Field2d();
 
     public Swerve() {
-        gyro = new Pigeon2(Constants.Swerve.pigeonID, "canivore");
+        gyro = new Pigeon2(frc.Team364.src.main.java.frc.robot.Constants.Swerve.pigeonID, "canivore");
         gyro.configFactoryDefault();
         zeroGyro();
 
@@ -56,7 +56,7 @@ public class Swerve extends SubsystemBase {
         Timer.delay(1.0);
         resetModulesToAbsolute();
 
-        swerveOdometry = new SwerveDriveOdometry(Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
+        swerveOdometry = new SwerveDriveOdometry(frc.Team364.src.main.java.frc.robot.Constants.Swerve.swerveKinematics, getYaw(), getModulePositions());
 
              // Configure the AutoBuilder last
         AutoBuilder.configureHolonomic(
@@ -93,7 +93,7 @@ public class Swerve extends SubsystemBase {
 
     public void drive(Translation2d translation, double rotation, boolean fieldRelative, boolean isOpenLoop) {
         SwerveModuleState[] swerveModuleStates =
-            Constants.Swerve.swerveKinematics.toSwerveModuleStates(
+        frc.Team364.src.main.java.frc.robot.Constants.Swerve.swerveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(
                                     translation.getX(), 
                                     translation.getY(), 
@@ -105,7 +105,7 @@ public class Swerve extends SubsystemBase {
                                     translation.getY(), 
                                     rotation)
                                 );
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, frc.Team364.src.main.java.frc.robot.Constants.Swerve.maxSpeed);
 
         for(SwerveMod mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
@@ -114,7 +114,7 @@ public class Swerve extends SubsystemBase {
 
     /* Used by Pathplanner autobuilder */
     public void setModuleStates(SwerveModuleState[] desiredStates) {
-        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, Constants.Swerve.maxSpeed);
+        SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, frc.Team364.src.main.java.frc.robot.Constants.Swerve.maxSpeed);
         
         for(SwerveMod mod : mSwerveMods){
             mod.setDesiredState(desiredStates[mod.moduleNumber], false);
@@ -146,12 +146,12 @@ public class Swerve extends SubsystemBase {
     }
 
     public ChassisSpeeds getRobotRelativeSpeeds(){
-        return Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
+        return frc.Team364.src.main.java.frc.robot.Constants.Swerve.swerveKinematics.toChassisSpeeds(getModuleStates());
     }
 
     public void driveRobotRelative(ChassisSpeeds speeds){
-        SwerveModuleState[] states = Constants.Swerve.swerveKinematics.toSwerveModuleStates(speeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(states, Constants.Swerve.maxSpeed);
+        SwerveModuleState[] states = frc.Team364.src.main.java.frc.robot.Constants.Swerve.swerveKinematics.toSwerveModuleStates(speeds);
+        SwerveDriveKinematics.desaturateWheelSpeeds(states, frc.Team364.src.main.java.frc.robot.Constants.Swerve.maxSpeed);
         setModuleStates(states);
     }
 
@@ -160,7 +160,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public Rotation2d getYaw() {
-        return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
+        return (frc.Team364.src.main.java.frc.robot.Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
     }
 
     public void resetModulesToAbsolute(){

@@ -1,8 +1,8 @@
 package frc.Team364.src.main.java.frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.States;
-import frc.robot.subsystems.Swerve;
+import frc.Team364.src.main.java.frc.robot.States;
+import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
@@ -30,9 +30,9 @@ public class SwerveCommand extends Command {
         addRequirements(s_Swerve);
 
         //TODO: Tune heading PID
-        rotationController = new PIDController(Constants.Swerve.HeadingKP, Constants.Swerve.HeadingKI, Constants.Swerve.HeadingKD );
+        rotationController = new PIDController(frc.Team364.src.main.java.frc.robot.Constants.Swerve.HeadingKP, frc.Team364.src.main.java.frc.robot.Constants.Swerve.HeadingKI, frc.Team364.src.main.java.frc.robot.Constants.Swerve.HeadingKD );
         rotationController.enableContinuousInput(-Math.PI, Math.PI);
-        rotationController.setTolerance(Constants.Swerve.HeadingTolerence);
+        rotationController.setTolerance(frc.Team364.src.main.java.frc.robot.Constants.Swerve.HeadingTolerence);
 
         this.translationSup = translationSup;
         this.strafeSup = strafeSup;
@@ -45,9 +45,9 @@ public class SwerveCommand extends Command {
     @Override
     public void execute() {
         /* Get Values, Deadband, Dampen */
-        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
-        double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
-        double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
+        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), frc.Team364.src.main.java.frc.robot.Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
+        double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), frc.Team364.src.main.java.frc.robot.Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
+        double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), frc.Team364.src.main.java.frc.robot.Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
         //TODO: Add code for dynamic heading- the supplier is a placeholder right now
         double dynamicHeading = dynamicHeadingSup.getAsDouble();
         
@@ -86,13 +86,13 @@ public class SwerveCommand extends Command {
             case standard:
             
                 //normal
-                rotationVal = rotationVal * Constants.Swerve.maxAngularVelocity;
+                rotationVal = rotationVal * frc.Team364.src.main.java.frc.robot.Constants.Swerve.maxAngularVelocity;
                 break;
         }
 
         /* Drive */
         s_Swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
+            new Translation2d(translationVal, strafeVal).times(frc.Team364.src.main.java.frc.robot.Constants.Swerve.maxSpeed), 
             rotationVal,
             !robotCentricSup.getAsBoolean(), 
             true

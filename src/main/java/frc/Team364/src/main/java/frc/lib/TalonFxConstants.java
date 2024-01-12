@@ -1,8 +1,9 @@
-package frc.lib;
+package frc.Team364.src.main.java.frc.lib;
 
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+
 
 public class TalonFxConstants {
     public final int deviceNumber;
