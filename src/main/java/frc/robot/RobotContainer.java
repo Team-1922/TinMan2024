@@ -4,15 +4,20 @@
 
 package frc.robot;
 
+import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
+import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -32,13 +37,41 @@ public class RobotContainer {
   private final XboxController m_operatorController = new XboxController(2);
 
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
+    private final Swerve s_Swerve = new Swerve();
 
+    private final Joystick driver = new Joystick(0);
+
+   /* Driver Controls */
+	private final int translationAxis = XboxController.Axis.kLeftY.value;
+	private final int strafeAxis = XboxController.Axis.kLeftX.value;
+	private final int rotationAxis = XboxController.Axis.kRightX.value;
+
+    /* Driver Buttons */
+    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+
+    private final JoystickButton dampen = new JoystickButton(driver, PS4Controller.Button.kR1.value);
+
+    private final JoystickButton DynamicLock = new JoystickButton(driver, PS4Controller.Button.kSquare.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
 
+
+
+     s_Swerve.setDefaultCommand(
+            new SwerveCommand(
+                s_Swerve, 
+                () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(strafeAxis), 
+                () -> -driver.getRawAxis(rotationAxis), 
+                () -> robotCentric.getAsBoolean(),
+                () -> dampen.getAsBoolean(),
+                () -> 0 // Dynamic heading placeholder
+            )
+        );
 
     autoChooser();
   }
