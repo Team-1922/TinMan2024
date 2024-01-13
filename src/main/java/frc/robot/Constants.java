@@ -16,4 +16,14 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int kDriverControllerPort = 0;
   }
+  
+
+  public static class LedConstants {
+
+    public static final int CandleID = 0 ; // TODO update id
+    
+    public static final int TotalLedCount = 50; //TODO update number of leds
+
+  }
+
 }
