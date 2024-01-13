@@ -1,11 +1,7 @@
 package frc.Team364.src.main.java.frc.robot;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.sensors.AbsoluteSensorRange;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-import com.ctre.phoenix.sensors.SensorTimeBase;
-import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
 
@@ -29,7 +25,7 @@ public final class CTREConfigs {
         swerveAngleFXConfig.Slot0.kP = Constants.Swerve.angleKP;
         swerveAngleFXConfig.Slot0.kI = Constants.Swerve.angleKI;
         swerveAngleFXConfig.Slot0.kD = Constants.Swerve.angleKD;
-       // swerveAngleFXConfig.Slot0.kF = Constants.Swerve.angleKF;
+        swerveAngleFXConfig.Slot0.kS = Constants.Swerve.angleKF;
       //  swerveAngleFXConfig.supplyCurrLimit = angleSupplyLimit;
 
         /* Swerve Drive Motor Configuration */
@@ -42,7 +38,7 @@ public final class CTREConfigs {
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
         swerveDriveFXConfig.Slot0.kD = Constants.Swerve.driveKD;
-      //  swerveDriveFXConfig.Slot0.kF = Constants.Swerve.driveKF;        
+        swerveDriveFXConfig.Slot0.kS = Constants.Swerve.driveKF;        
        // swerveDriveFXConfig.supplyCurrLimit = driveSupplyLimit;
        // swerveDriveFXConfig.openloopRamp = Constants.Swerve.openLoopRamp;
        // swerveDriveFXConfig.closedloopRamp = Constants.Swerve.closedLoopRamp;
