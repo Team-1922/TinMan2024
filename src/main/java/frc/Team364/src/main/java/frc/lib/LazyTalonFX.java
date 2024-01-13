@@ -40,7 +40,7 @@ public class LazyTalonFX extends TalonFX {
      * Config using talonFxConstants.
      * @param talonFxConstants
      */
-   /* public LazyTalonFX(TalonFxConstants talonFxConstants){
+    public LazyTalonFX(TalonFxConstants talonFxConstants){
         super(talonFxConstants.deviceNumber, "canivore");
         super.configFactoryDefault();
         super.configAllSettings(talonFxConstants.allConfigs);
@@ -52,7 +52,15 @@ public class LazyTalonFX extends TalonFX {
             super.setStatusFramePeriod(StatusFrame.Status_1_General, 255, 30);
             super.setStatusFramePeriod(StatusFrame.Status_2_Feedback0, 255, 30);
         }
-    } */
+    }
+
+
+
+
+ ///   public LazyTalonFX(int driveMotorID, com.ctre.phoenix6.configs.TalonFXConfiguration swerveDriveFXConfig,
+    //        NeutralMode driveneutralmode, boolean drivemotorinvert, boolean slowStatusFrame) {
+        //TODO Auto-generated constructor stub
+   // } */
 
  /*   public LazyTalonFX(int angleMotorID, TalonFXConfiguration swerveAngleFXConfig, NeutralMode angleneutralmode,
             boolean anglemotorinvert, boolean slowStatusFrame) {

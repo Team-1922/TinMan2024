@@ -7,7 +7,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
 public class TalonFxConstants {
     public final int deviceNumber;
-    public final TalonFXConfiguration allConfigs;
+    public final com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration allConfigs;
     public final NeutralMode neutralMode;
     public final InvertType invertType;
     public final boolean slowStatusFrame;    
@@ -20,7 +20,7 @@ public class TalonFxConstants {
      * @param invertType
      * @param slowStatusFrames
      */
-    public TalonFxConstants(int deviceNumber, TalonFXConfiguration allConfigs, NeutralMode neutralMode, InvertType invertType, boolean slowStatusFrame) {
+    public TalonFxConstants(int deviceNumber, com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration allConfigs, NeutralMode neutralMode, InvertType invertType, boolean slowStatusFrame) {
         this.deviceNumber = deviceNumber;
         this.allConfigs = allConfigs;
         this.neutralMode = neutralMode;

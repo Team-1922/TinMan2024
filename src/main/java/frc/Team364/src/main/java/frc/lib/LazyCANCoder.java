@@ -14,5 +14,7 @@ public class LazyCANCoder extends CANCoder {
         super.configFactoryDefault();
         super.configAllSettings(swerveCanCoderConfig);
     }
-    
+
+        
+   
 }
