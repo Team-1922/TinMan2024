@@ -33,10 +33,10 @@ public class SwerveMod {
         this.angleOffset = moduleConstants.angleOffset;
     
         /* Angle Encoder Config */
-   // angleEncoder = new LazyCANCoder(
-     //       moduleConstants.cancoderID, 
-      //      Robot.ctreConfigs.swerveCanCoderConfig
-       // ); 
+    angleEncoder = new LazyCANCoder(
+            moduleConstants.cancoderID, 
+            Robot.ctreConfigs.swerveCanCoderConfig
+        ); 
 
         /* Angle Motor Config */
        mAngleMotor = new LazyTalonFX(
