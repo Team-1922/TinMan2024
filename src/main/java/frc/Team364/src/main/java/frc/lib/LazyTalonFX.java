@@ -19,10 +19,10 @@ public class LazyTalonFX extends TalonFX {
      * @param anglemotorinvert
      * @param slowStatusFrame
      */
-    public LazyTalonFX(int deviceNumber, TalonFXConfiguration swerveDriveFXConfig, NeutralMode neutralMode, boolean anglemotorinvert, boolean slowStatusFrame){
+    public LazyTalonFX(int deviceNumber, com.ctre.phoenix6.configs.TalonFXConfiguration swerveDriveFXConfig, NeutralMode neutralMode, boolean anglemotorinvert, boolean slowStatusFrame){
         super(deviceNumber, "canivore");
         super.configFactoryDefault();
-        super.configAllSettings(swerveDriveFXConfig);
+       // super.configAllSettings(swerveDriveFXConfig);
         super.setNeutralMode(neutralMode);
         super.setInverted(anglemotorinvert);
         super.setSelectedSensorPosition(0);

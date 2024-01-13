@@ -31,24 +31,24 @@ public class SwerveMod {
     public SwerveMod(int moduleNumber, SwerveModuleConstants moduleConstants){
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;
-    }
+    
         /* Angle Encoder Config */
-     /* *  angleEncoder = new LazyCANCoder(
-            moduleConstants.cancoderID, 
-            Robot.ctreConfigs.swerveCanCoderConfig
-        ); */
+   // angleEncoder = new LazyCANCoder(
+     //       moduleConstants.cancoderID, 
+      //      Robot.ctreConfigs.swerveCanCoderConfig
+       // ); 
 
         /* Angle Motor Config */
-      /*   mAngleMotor = new LazyTalonFX(
+       mAngleMotor = new LazyTalonFX(
             moduleConstants.angleMotorID,
             Robot.ctreConfigs.swerveAngleFXConfig,
             Constants.Swerve.angleNeutralMode,
             Constants.Swerve.angleMotorInvert,
             false
-        );*/
+        );
 
         /* Drive Motor Config */
-  /*       mDriveMotor = new LazyTalonFX(
+       mDriveMotor = new LazyTalonFX(
             moduleConstants.driveMotorID,
             Robot.ctreConfigs.swerveDriveFXConfig,
             Constants.Swerve.driveNeutralMode,
@@ -56,7 +56,7 @@ public class SwerveMod {
             false);
 
         lastAngle = getState().angle;
-    } */
+    } 
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
         /* This is a custom optimize function, since default WPILib optimize assumes continuous controller which CTRE and Rev onboard is not */
