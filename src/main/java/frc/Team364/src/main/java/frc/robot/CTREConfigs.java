@@ -2,6 +2,7 @@ package frc.Team364.src.main.java.frc.robot;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.sensors.CANCoderConfiguration;
+import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 
 
@@ -35,13 +36,17 @@ public final class CTREConfigs {
             Constants.Swerve.drivePeakCurrentLimit, 
             Constants.Swerve.drivePeakCurrentDuration);
 
+        ClosedLoopRampsConfigs SwerveRampConfig = new ClosedLoopRampsConfigs();
+            SwerveRampConfig.withVoltageClosedLoopRampPeriod(Constants.Swerve.closedLoopVoltageRamp);
+            SwerveRampConfig.withTorqueClosedLoopRampPeriod(Constants.Swerve.closedLoopTorqueRamp);
+
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
         swerveDriveFXConfig.Slot0.kD = Constants.Swerve.driveKD;
         swerveDriveFXConfig.Slot0.kS = Constants.Swerve.driveKF;        
        // swerveDriveFXConfig.supplyCurrLimit = driveSupplyLimit;
        // swerveDriveFXConfig.openloopRamp = Constants.Swerve.openLoopRamp;
-       // swerveDriveFXConfig.closedloopRamp = Constants.Swerve.closedLoopRamp;
+        swerveDriveFXConfig.withClosedLoopRamps(SwerveRampConfig);
         
         /* Swerve CANCoder Configuration */
       //  swerveCanCoderConfig.absoluteSensorRange = AbsoluteSensorRange.Unsigned_0_to_360;
