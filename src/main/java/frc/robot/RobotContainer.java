@@ -75,7 +75,8 @@ m_autoChooser.setDefaultOption("Placeholder", null);
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+return m_autoChooser.getSelected();
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    //return Autos.exampleAuto(m_exampleSubsystem);
   }
 }
