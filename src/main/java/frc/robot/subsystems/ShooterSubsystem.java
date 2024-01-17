@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -13,10 +14,13 @@ public class ShooterSubsystem extends SubsystemBase {
 
   TalonFX m_Left = new TalonFX(Constants.ShooterConstants.LeftShooterMotorID);
   TalonFX m_Right = new TalonFX(Constants.ShooterConstants.RightShooterMotorID);
-
+ 
   
   /** Creates a new SshooterSsubsystem. */
-  public ShooterSubsystem() {}
+  public ShooterSubsystem() {
+    
+    m_Right.setInverted(true);// could be the left one is supposed to be inverted, just putting this here for now
+  }
 
   @Override
   public void periodic() {
@@ -28,7 +32,6 @@ public class ShooterSubsystem extends SubsystemBase {
     m_Left.setVoltage(leftVoltage); // voltage
     m_Right.setVoltage(rightVoltage);
 
-    m_Right.setInverted(true);// could be the left one is supposed to be inverted, just putting this here for now
   }
 
   public void StopShoot(){// just in case they dont stop
