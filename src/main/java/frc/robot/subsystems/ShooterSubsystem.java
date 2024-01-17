@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -19,7 +19,7 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new SshooterSsubsystem. */
   public ShooterSubsystem() {
     
-    m_Right.setInverted(true);// could be the left one is supposed to be inverted, just putting this here for now
+    m_Left.setInverted(true);// could be the left one is supposed to be inverted, just putting this here for now
   }
 
   @Override
