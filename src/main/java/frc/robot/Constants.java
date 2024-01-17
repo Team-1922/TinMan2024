@@ -17,6 +17,11 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
   
+  public static class ShooterConstants {
+    public static final int LeftShooterMotorID = 1;
+    public static final int RightShooterMotorID = 2;
+
+  }
 
   public static class LedConstants {
 
