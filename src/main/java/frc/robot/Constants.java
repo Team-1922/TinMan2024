@@ -17,6 +17,12 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
   }
   
+  public final class MotorConstants {
+    public static final int kCollectorMotorID = 0;
+  
+    public static final double kRollerVoltage = 0.0;
+  }
+  
 
   public static class LedConstants {
 
