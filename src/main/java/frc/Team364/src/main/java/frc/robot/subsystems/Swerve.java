@@ -39,7 +39,7 @@ public class Swerve extends SubsystemBase {
     private Field2d field = new Field2d();
 
     public Swerve() {
-        gyro = new Pigeon2(frc.Team364.src.main.java.frc.robot.Constants.Swerve.pigeonID, "canivore");
+        gyro = new Pigeon2(frc.Team364.src.main.java.frc.robot.Constants.Swerve.pigeonID, "rio");
      //   gyro.configFactoryDefaults();
         zeroGyro();
 
