@@ -9,7 +9,7 @@ public class Collector extends SubsystemBase {
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.MotorConstants.kCollectorMotorID); 
 
     public Collector() {
-        m_CollectorTalon.setInverted(false);
+        m_CollectorTalon.setInverted(true);
     }
 
     public void ActivateMotor(double volts) {

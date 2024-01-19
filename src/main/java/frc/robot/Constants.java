@@ -18,14 +18,14 @@ public final class Constants {
   }
   
   public static class ShooterConstants {
-    public static final int LeftShooterMotorID = 1;
+    public static final int LeftShooterMotorID = 4;
     public static final int RightShooterMotorID = 2;
 
   }
   public final class MotorConstants {
-    public static final int kCollectorMotorID = 0;
+    public static final int kCollectorMotorID = 1;
   
-    public static final double kRollerVoltage = 0.0;
+    public static final double kRollerVoltage = 3.0;
   }
   
 

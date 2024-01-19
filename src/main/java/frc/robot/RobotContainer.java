@@ -6,8 +6,10 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -28,11 +30,14 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
   private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
+  private final Collector m_Collector = new Collector();
+  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  private final CommandXboxController m_operatorController = new CommandXboxController(2);
+  private final CommandXboxController m_operatorController = new CommandXboxController(0);
 
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
 
@@ -72,6 +77,7 @@ m_autoChooser.setDefaultOption("Placeholder", null);
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
     m_operatorController.a().whileTrue(m_shoot);
+    m_operatorController.x().whileTrue(m_CollectNote);
 
   }
 
