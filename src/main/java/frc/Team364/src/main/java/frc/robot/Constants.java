@@ -16,7 +16,7 @@ import frc.Team364.src.main.java.frc.lib.util.COTSFalconSwerveConstants;
 import frc.Team364.src.main.java.frc.lib.util.SwerveModuleConstants;
 
 public final class Constants {
-    public static final double stickDeadband = 0.2;
+    public static final double stickDeadband = 0.25;
 
     public static final class Swerve {
         public static final int pigeonID = 0;
@@ -92,9 +92,9 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 1; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = .25; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = 1; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = .5; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralMode angleNeutralMode = NeutralMode.Coast;
