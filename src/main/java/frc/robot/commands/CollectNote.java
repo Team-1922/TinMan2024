@@ -3,16 +3,16 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-import frc.robot.subsystems.NoteGatherSubsystem;
+import frc.robot.subsystems.Collector;
 import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class CollectNote extends Command {
   /** Creates a new CollectNote. */
-  NoteGatherSubsystem m_Collector;
+  Collector m_Collector;
 
-  public CollectNote(NoteGatherSubsystem Collector) {
+  public CollectNote(Collector Collector) {
     m_Collector = Collector;
     
     addRequirements(Collector);
