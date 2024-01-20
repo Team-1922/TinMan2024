@@ -20,12 +20,12 @@ public final class Constants {
   public static class ShooterConstants {
     public static final int LeftShooterMotorID = 4;
     public static final int RightShooterMotorID = 2;
-
+// voltage for shooting is set in the shoot command, incase we want to change voltage for shooting at different locations
   }
   public final class MotorConstants {
     public static final int kCollectorMotorID = 1;
   
-    public static final double kRollerVoltage = 3.0;
+    public static final double kRollerVoltage = 10.0;
   }
   
 
