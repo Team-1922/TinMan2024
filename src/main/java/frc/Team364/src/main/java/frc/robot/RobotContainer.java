@@ -43,8 +43,8 @@ public class RobotContainer {
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, PS4Controller.Button.kSquare.value);
 
-    private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(PS4Controller.Axis.kL2.value) > 0.2));
-    private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(PS4Controller.Axis.kR2.value) > 0.2));
+  //  private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(PS4Controller.Axis.kL2.value) > 0.2));
+    //private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(PS4Controller.Axis.kR2.value) > 0.2));
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -93,14 +93,14 @@ public class RobotContainer {
         zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroGyro()));
 
     //Heading lock bindings
-        forwardHold.onTrue(
+      /*  forwardHold.onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.forwardHold)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
             );
         backwardHold.onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            );
+            ); */
         DynamicLock.onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.DynamicLock)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)

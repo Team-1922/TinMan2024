@@ -12,6 +12,9 @@ import frc.Team364.src.main.java.frc.lib.util.SwerveModuleConstants;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
+import com.ctre.phoenix6.controls.ControlRequest;
+import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -64,16 +67,20 @@ public class SwerveMod {
         }
         else {
             double velocity = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio);
+           VelocityVoltage Voutput1 = new VelocityVoltage(velocity);
+          VelocityVoltage Voutput2 = Voutput1.withFeedForward(feedforward.calculate(desiredState.speedMetersPerSecond));
+            mDriveMotor.setControl(Voutput2);
           //  mDriveMotor.set(ControlMode.Velocity, velocity, DemandType.ArbitraryFeedForward, feedforward.calculate(desiredState.speedMetersPerSecond));
-            mDriveMotor.set(velocity);
+ 
         }
     }
 /* */
     private void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
-    
-     //   mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
-        mAngleMotor.set(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+        PositionVoltage Aoutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio)  );  
+        mAngleMotor.setControl(Aoutput1);
+   // mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+     
      
        lastAngle = angle;
        
