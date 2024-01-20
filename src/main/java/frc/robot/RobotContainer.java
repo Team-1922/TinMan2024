@@ -15,6 +15,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.CollectReverse;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -32,7 +33,7 @@ public class RobotContainer {
   private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
-
+  private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -78,7 +79,7 @@ m_autoChooser.setDefaultOption("Placeholder", null);
 
     m_operatorController.a().whileTrue(m_shoot);
     m_operatorController.x().whileTrue(m_CollectNote);
-
+    m_operatorController.y().whileTrue(m_CollectReverse);
   }
 
   /**
