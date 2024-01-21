@@ -48,8 +48,10 @@ public class SwerveMod {
           
         );
         Slot0Configs mAngleConfigs = new Slot0Configs();
-            mAngleConfigs.kP = 0.05;
-            mAngleConfigs.kS = 0.05;
+            mAngleConfigs.kP = Constants.Swerve.angleKP;
+            mAngleConfigs.kI = Constants.Swerve.angleKI;
+            mAngleConfigs.kD = Constants.Swerve.angleKD;
+            mAngleConfigs.kS = Constants.Swerve.angleKF;
 
         mAngleMotor.getConfigurator().apply(mAngleConfigs);
 
@@ -86,7 +88,7 @@ public class SwerveMod {
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
         PositionVoltage Aoutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio)  );  
         mAngleMotor.setControl(Aoutput1);
-   // mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+    //  mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
      
      
        lastAngle = angle;
