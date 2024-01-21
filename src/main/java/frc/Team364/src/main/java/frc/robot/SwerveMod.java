@@ -17,6 +17,7 @@ import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.configs.Slot0Configs;
 
 
 
@@ -43,8 +44,14 @@ public class SwerveMod {
         /* Angle Motor Config */
        mAngleMotor = new TalonFX(
             moduleConstants.angleMotorID
+            
           
         );
+        Slot0Configs mAngleConfigs = new Slot0Configs();
+            mAngleConfigs.kP = 0.05;
+            mAngleConfigs.kS = 0.05;
+
+        mAngleMotor.getConfigurator().apply(mAngleConfigs);
 
         /* Drive Motor Config */
        mDriveMotor = new TalonFX(
