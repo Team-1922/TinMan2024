@@ -34,12 +34,12 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  private final XboxController m_operatorController = new XboxController(2);
+  private final XboxController m_operatorController = new XboxController(0);
 
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
     private final Swerve s_Swerve = new Swerve();
 
-    private final Joystick driver = new Joystick(0);
+    private final XboxController driver = new XboxController(0);
 
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;

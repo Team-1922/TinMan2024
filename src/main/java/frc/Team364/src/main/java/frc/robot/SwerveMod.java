@@ -4,6 +4,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.Team364.src.main.java.frc.lib.LazyCANCoder;
 import frc.Team364.src.main.java.frc.lib.LazyTalonFX;
 import frc.Team364.src.main.java.frc.lib.math.Conversions;
@@ -86,9 +87,15 @@ public class SwerveMod {
 /* */
     private void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
-        PositionVoltage Aoutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio)  );  
-        mAngleMotor.setControl(Aoutput1);
-    //  mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+        PositionVoltage Aoutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio)/2048  );  
+        PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
+        mAngleMotor.setControl(Aoutput2);
+
+       if (this.moduleNumber == 0) {
+        SmartDashboard.putNumber("angle.get", angle.getDegrees());
+        SmartDashboard.putNumber("get angle", getState().angle.getDegrees());}
+        SmartDashboard.putNumber("position", Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+    //mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
      
      
        lastAngle = angle;

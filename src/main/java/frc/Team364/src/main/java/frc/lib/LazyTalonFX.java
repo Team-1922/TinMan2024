@@ -22,7 +22,7 @@ public class LazyTalonFX extends TalonFX {
     public LazyTalonFX(int deviceNumber, TalonFXConfiguration swerveDriveFXConfig, NeutralMode neutralMode, boolean anglemotorinvert, boolean slowStatusFrame){
         super(deviceNumber, "rio");
         super.configFactoryDefault();
-       // super.configAllSettings(swerveDriveFXConfig);
+        super.configAllSettings(swerveDriveFXConfig);
         super.setNeutralMode(neutralMode);
         super.setInverted(anglemotorinvert);
         super.setSelectedSensorPosition(0);
