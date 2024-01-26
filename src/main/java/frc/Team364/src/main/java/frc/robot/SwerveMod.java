@@ -87,14 +87,19 @@ public class SwerveMod {
 /* */
     private void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
-        PositionVoltage Aoutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio)/2048  );  
-        PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
-        mAngleMotor.setControl(Aoutput2);
+     //   PositionVoltage Aoutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio)  );  
+      //  PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
+PositionVoltage kOutput1 = new PositionVoltage(Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio), desiredState.angle.getRotations()*20.48, false, 0, 0, false, false, false);
+       // it goes at whatever the velocity number is set to, but setAngle doesn't get called enough for that to work 
+
+        mAngleMotor.setControl(kOutput1);
 
        if (this.moduleNumber == 0) {
         SmartDashboard.putNumber("angle.get", angle.getDegrees());
-        SmartDashboard.putNumber("get angle", getState().angle.getDegrees());}
-        SmartDashboard.putNumber("position", Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+       SmartDashboard.putNumber("get speed", desiredState.angle.getRotations());
+    }
+   
+
     //mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
      
      
