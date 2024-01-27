@@ -95,7 +95,7 @@ public class SwerveMod {
     if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
         mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
     else{mAngleMotor.set(0);
-    lastAngle = angle;}
+   }
 
 
 
@@ -111,7 +111,9 @@ public class SwerveMod {
    
 
     //mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
-     
+     if(Math.abs(desiredState.speedMetersPerSecond)<(Constants.Swerve.maxSpeed * 0.01)){
+        lastAngle = angle;
+     }
      
       // lastAngle = angle;
        

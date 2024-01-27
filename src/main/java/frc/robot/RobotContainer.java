@@ -10,6 +10,9 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+
+import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
@@ -45,7 +48,8 @@ public class RobotContainer {
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
 	private final int rotationAxis = XboxController.Axis.kRightX.value;
-
+  private final int placeholderAxis = XboxController.Axis.kLeftTrigger.value;
+  
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
@@ -59,9 +63,19 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
+    /* s_Swerve.setDefaultCommand(
+            new SwerveCommand(
+                s_Swerve, 
+                () -> -driver.getRawAxis(placeholderAxis), 
+                () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(placeholderAxis), 
+                () -> robotCentric.getAsBoolean(),
+                () -> dampen.getAsBoolean(),
+                () -> 0 // Dynamic heading placeholder
+            )
+        ); */ 
 
-
-     s_Swerve.setDefaultCommand(
+      s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
                 () -> -driver.getRawAxis(translationAxis), 
@@ -71,7 +85,8 @@ public class RobotContainer {
                 () -> dampen.getAsBoolean(),
                 () -> 0 // Dynamic heading placeholder
             )
-        );
+        ); 
+        
 
     autoChooser();
   }
