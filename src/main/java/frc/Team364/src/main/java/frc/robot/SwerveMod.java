@@ -84,36 +84,36 @@ public class SwerveMod {
  
         }
     }
-/* */
+
     private void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
    
     PositionVoltage Aoutput1 = new PositionVoltage(desiredState.angle.getRotations());
     PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
-  //  PositionVoltage Aoutput3 = Aoutput2.withUpdateFreqHz(1000);
-     PositionVoltage Aoutput4 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
+    PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
     
-if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
-mAngleMotor.set(Math.copySign(Aoutput4.Velocity, (angle.getDegrees()-getAngle().getDegrees())));}
-else{mAngleMotor.set(0);}
+    if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
+        mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
+    else{mAngleMotor.set(0);
+    lastAngle = angle;}
 
 
 
-     //   mAngleMotor.setControl(Aoutput4);
+   
 
        if (this.moduleNumber == 0) {
-        SmartDashboard.putNumber("angle.get", angle.getDegrees());
+    
+       SmartDashboard.putNumber("angle.get", angle.getDegrees());
        SmartDashboard.putNumber("get speed", desiredState.angle.getRotations());
-       SmartDashboard.putNumber(".velocity",Aoutput4.Velocity );
-       SmartDashboard.putNumber("target ", Math.copySign(Aoutput4.Velocity, (angle.getDegrees()-getAngle().getDegrees())));
-     SmartDashboard.putNumber("current angle", getAngle().getDegrees());
+       SmartDashboard.putNumber("target ", Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);
+       SmartDashboard.putNumber("current angle", getAngle().getDegrees());
     }
    
 
     //mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
      
      
-       lastAngle = angle;
+      // lastAngle = angle;
        
     }  
 
