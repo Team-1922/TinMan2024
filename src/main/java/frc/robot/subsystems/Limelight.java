@@ -16,12 +16,34 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry m_ty;
   private NetworkTableEntry m_ta;
 
-  public Limelight(int id) {
-    LimelightTable = NetworkTableInstance.getDefault().getTable("limelight" + Integer.toString(id));
+  public Limelight(String LimelightName) {
+    LimelightTable = NetworkTableInstance.getDefault().getTable(LimelightName);
     m_tx = LimelightTable.getEntry("tx");
     m_ty = LimelightTable.getEntry("ty");
     m_ta = LimelightTable.getEntry("ta");
   }
+  
+  /**
+   * @return Target X
+   */
+  public NetworkTableEntry GetTx(){
+  return m_tx;  
+  }
+
+  /**
+   * @return Target Y 
+   */
+  public NetworkTableEntry GetTy(){
+return m_ty;
+  }
+
+    /**
+   * @return Target angle
+   */
+  public NetworkTableEntry GetTa(){
+return m_ta;
+  }
+
 
   @Override
   public void periodic() {
