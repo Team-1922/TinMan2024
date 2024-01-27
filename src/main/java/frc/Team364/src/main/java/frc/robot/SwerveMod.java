@@ -14,6 +14,8 @@ import frc.Team364.src.main.java.frc.lib.util.SwerveModuleConstants;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix6.controls.ControlRequest;
+import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -87,35 +89,37 @@ public class SwerveMod {
 
     private void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
-   
-    PositionVoltage Aoutput1 = new PositionVoltage(desiredState.angle.getRotations());
-    PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
-    PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
     
-    if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
-        mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
-    else{mAngleMotor.set(0);
-   }
+   PositionDutyCycle Aoutput1 = new PositionDutyCycle(0).withSlot(0);
+        if(Math.abs(desiredState.angle.getDegrees()- getAngle().getDegrees())>5){
+        mAngleMotor.setControl(Aoutput1.withPosition(Conversions.degreesToFalcon(desiredState.angle.getDegrees(), Constants.Swerve.angleGearRatio)));
+    }else{
+        mAngleMotor.setControl(Aoutput1.withPosition(0));
+    }
 
-
-
+       
+   // PositionVoltage Aoutput1 = new PositionVoltage(desiredState.angle.getDegrees());
+   // PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
+    //PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
+   // mAngleMotor.setControl(Aoutput3);
    
 
-       if (this.moduleNumber == 0) {
-    
+    //if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
+        //mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
+    //else{mAngleMotor.set(0);
+   //}
+    /*   if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle.get", angle.getDegrees());
        SmartDashboard.putNumber("get speed", desiredState.angle.getRotations());
        SmartDashboard.putNumber("target ", Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);
        SmartDashboard.putNumber("current angle", getAngle().getDegrees());
-    }
-   
+    } */
 
-    //mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
-     if(Math.abs(desiredState.speedMetersPerSecond)<(Constants.Swerve.maxSpeed * 0.01)){
-        lastAngle = angle;
-     }
+
+   // mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+    
      
-      // lastAngle = angle;
+       lastAngle = angle;
        
     }  
 
