@@ -1,9 +1,7 @@
 package frc.Team364.src.main.java.frc.robot;
 
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
-import com.ctre.phoenix.sensors.AbsoluteSensorRange;
-import com.ctre.phoenix.sensors.SensorInitializationStrategy;
-import com.ctre.phoenix.sensors.SensorTimeBase;
+
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.mechanisms.swerve.SwerveRequest.SwerveControlRequestParameters;
@@ -44,7 +42,8 @@ public final class CTREConfigs {
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
         swerveDriveFXConfig.Slot0.kD = Constants.Swerve.driveKD;
-        swerveDriveFXConfig.Slot0.kV = Constants.Swerve.driveKF;        
+        swerveDriveFXConfig.Slot0.kV = Constants.Swerve.driveKF; 
+             
        // swerveDriveFXConfig.supplyCurrLimit = driveSupplyLimit;
         //swerveDriveFXConfig.openloopRamp = Constants.Swerve.openLoopRamp;
         //swerveDriveFXConfig.closedloopRamp = Constants.Swerve.closedLoopRamp;
@@ -52,7 +51,7 @@ public final class CTREConfigs {
         /* Swerve CANCoder Configuration */
        swerveCanCoderConfig.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1;
        swerveCanCoderConfig.MagnetSensor.withSensorDirection(SensorDirectionValue.Clockwise_Positive);
-       swerveCanCoderConfig.initializationStrategy = SensorInitializationStrategy.BootToAbsolutePosition;
-        swerveCanCoderConfig.sensorTimeBase = SensorTimeBase.PerSecond;
+      
+       
     }
 }
