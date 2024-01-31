@@ -43,7 +43,7 @@ public class LazyTalonFX extends TalonFX {
     public LazyTalonFX(TalonFxConstants talonFxConstants){
         super(talonFxConstants.deviceNumber, "rio");
         super.configFactoryDefault();
-        super.configAllSettings(talonFxConstants.allConfigs);
+     //   super.configAllSettings(talonFxConstants.allConfigs);
         super.setNeutralMode(talonFxConstants.neutralMode);
         super.setInverted(talonFxConstants.invertType);
         super.setSelectedSensorPosition(0);

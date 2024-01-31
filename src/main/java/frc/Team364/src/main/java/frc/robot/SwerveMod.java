@@ -32,7 +32,7 @@ public class SwerveMod {
     private TalonFX mAngleMotor;
     private TalonFX mDriveMotor;
     private CANcoder angleEncoder;
-
+ PositionDutyCycle Aoutput1 = new PositionDutyCycle(0);
     SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
     public SwerveMod(int moduleNumber, SwerveModuleConstants moduleConstants){
@@ -98,11 +98,13 @@ public class SwerveMod {
     } */
 
    
-    PositionVoltage Aoutput1 = new PositionVoltage(desiredState.angle.getRotations());
+   
  //
   //  PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
 //PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
-    mAngleMotor.setControl(Aoutput1);
+    mAngleMotor.setControl(Aoutput1.withPosition(
+        desiredState.angle.getRotations()
+    ));
 
 
     //if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
