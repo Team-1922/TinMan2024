@@ -96,25 +96,28 @@ public class SwerveMod {
     }else{
         mAngleMotor.setControl(Aoutput1.withPosition(0));
     } */
-PositionDutyCycle Aoutput1 = new PositionDutyCycle(angle.getRotations());
+//PositionDutyCycle Aoutput1 = new PositionDutyCycle(desiredState.angle.getRotations());
    
    
  //
   //  PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
 //PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
-    mAngleMotor.setControl(Aoutput1.withPosition(0));
+   //mAngleMotor.setControl(Aoutput1);
 
-
+//mAngleMotor.setPosition(.2);
     //if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
         //mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
     //else{mAngleMotor.set(0);
    //}
       if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle (deg)", angle.getDegrees());
+
+       SmartDashboard.putNumber("angle (rot)",angle.getRotations());
        SmartDashboard.putNumber("desired angle (rot)", desiredState.angle.getRotations());
-   
-       SmartDashboard.putNumber("current angle (deg)", getAngle().getDegrees());
-    //   SmartDashboard.putNumber(".get position (rot)", mAngleMotor.getPosition().getValueAsDouble());
+    
+       SmartDashboard.putNumber("target", Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+       SmartDashboard.putNumber("current angle (rot)", mAngleMotor.getPosition().getValueAsDouble());
+ 
      
     } 
 
@@ -127,7 +130,7 @@ PositionDutyCycle Aoutput1 = new PositionDutyCycle(angle.getRotations());
     }  
 
     private Rotation2d getAngle(){
-        return Rotation2d.fromDegrees(Conversions.falconToDegrees(mAngleMotor.getPosition().getValueAsDouble(), Constants.Swerve.angleGearRatio));
+        return Rotation2d.fromDegrees(Conversions.falconToDegrees(mAngleMotor.getPosition().getValueAsDouble(), Constants.Swerve.angleGearRatio)/2048);
     }
 
     public Rotation2d getCanCoder(){
@@ -135,7 +138,7 @@ PositionDutyCycle Aoutput1 = new PositionDutyCycle(angle.getRotations());
     }
 
     public void resetToAbsolute(){
-        double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio);
+        double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio)/2048;
         mAngleMotor.setPosition(absolutePosition);
     }
 
