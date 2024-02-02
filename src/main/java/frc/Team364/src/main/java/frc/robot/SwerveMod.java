@@ -96,15 +96,15 @@ public class SwerveMod {
     }else{
         mAngleMotor.setControl(Aoutput1.withPosition(0));
     } */
-//PositionDutyCycle Aoutput1 = new PositionDutyCycle(desiredState.angle.getRotations());
-   
+PositionDutyCycle Aoutput1 = new PositionDutyCycle( desiredState.angle.getRotations()*Constants.Swerve.angleGearRatio);
+  // mAngleMotor.setPosition(0);
    
  //
   //  PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
 //PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
-   //mAngleMotor.setControl(Aoutput1);
+   mAngleMotor.setControl(Aoutput1);
 
-//mAngleMotor.setPosition(.2);
+  //mAngleMotor.setPosition(.2);
     //if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
         //mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
     //else{mAngleMotor.set(0);
@@ -112,14 +112,14 @@ public class SwerveMod {
       if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle (deg)", angle.getDegrees());
 
-       SmartDashboard.putNumber("angle (rot)",angle.getRotations());
        SmartDashboard.putNumber("desired angle (rot)", desiredState.angle.getRotations());
     
-       SmartDashboard.putNumber("target", Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
+
        SmartDashboard.putNumber("current angle (rot)", mAngleMotor.getPosition().getValueAsDouble());
  
      
     } 
+
 
 
    // mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
@@ -134,11 +134,11 @@ public class SwerveMod {
     }
 
     public Rotation2d getCanCoder(){
-        return Rotation2d.fromDegrees(angleEncoder.getAbsolutePosition().getValueAsDouble());
-    }
+        return Rotation2d.fromRotations(angleEncoder.getAbsolutePosition().getValueAsDouble());
+    } 
 
     public void resetToAbsolute(){
-        double absolutePosition = Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio)/2048;
+        double absolutePosition = (Conversions.degreesToFalcon(getCanCoder().getDegrees() - angleOffset.getDegrees(), Constants.Swerve.angleGearRatio)/2048); // the getcancoder is i
         mAngleMotor.setPosition(absolutePosition);
     }
 
