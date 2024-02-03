@@ -12,6 +12,9 @@ import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
+import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.Slot0Configs;
 
 
@@ -34,7 +37,11 @@ public class SwerveMod {
         /* Angle Encoder Config */
     angleEncoder = new CANcoder(
             moduleConstants.cancoderID
-        ); 
+        );
+        CANcoderConfiguration mCanCoderConfigs = new CANcoderConfiguration();
+        mCanCoderConfigs.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1;
+        mCanCoderConfigs.MagnetSensor.withSensorDirection(SensorDirectionValue.Clockwise_Positive);
+        angleEncoder.getConfigurator().apply(mCanCoderConfigs);
 
         /* Angle Motor Config */
        mAngleMotor = new TalonFX(
@@ -83,9 +90,8 @@ public class SwerveMod {
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
 
 
-PositionDutyCycle Aoutput1 = new PositionDutyCycle( desiredState.angle.getRotations()*Constants.Swerve.angleGearRatio);
-
-   mAngleMotor.setControl(Aoutput1.withSlot(0));
+        PositionDutyCycle Aoutput1 = new PositionDutyCycle(angle.getRotations()*Constants.Swerve.angleGearRatio);
+        mAngleMotor.setControl(Aoutput1.withSlot(0));
 
    /*    if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle (deg)", angle.getDegrees());

@@ -63,17 +63,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-    /* s_Swerve.setDefaultCommand(
-            new SwerveCommand(
-                s_Swerve, 
-                () -> -driver.getRawAxis(placeholderAxis), 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(placeholderAxis), 
-                () -> robotCentric.getAsBoolean(),
-                () -> dampen.getAsBoolean(),
-                () -> 0 // Dynamic heading placeholder
-            )
-        ); */ 
+  
 
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
