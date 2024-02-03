@@ -5,18 +5,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.Team364.src.main.java.frc.lib.LazyCANCoder;
-import frc.Team364.src.main.java.frc.lib.LazyTalonFX;
 import frc.Team364.src.main.java.frc.lib.math.Conversions;
 import frc.Team364.src.main.java.frc.lib.util.CTREModuleState;
 import frc.Team364.src.main.java.frc.lib.util.SwerveModuleConstants;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.DemandType;
-import com.ctre.phoenix6.controls.ControlRequest;
-import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
-import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -93,8 +85,8 @@ public class SwerveMod {
 
 PositionDutyCycle Aoutput1 = new PositionDutyCycle( desiredState.angle.getRotations()*Constants.Swerve.angleGearRatio);
 
-   mAngleMotor.setControl(Aoutput1);
-   
+   mAngleMotor.setControl(Aoutput1.withSlot(0));
+
    /*    if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle (deg)", angle.getDegrees());
        SmartDashboard.putNumber("desired angle (rot)", desiredState.angle.getRotations());
