@@ -12,14 +12,14 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  TalonFX m_Left = new TalonFX(Constants.ShooterConstants.LeftShooterMotorID);
-  TalonFX m_Right = new TalonFX(Constants.ShooterConstants.RightShooterMotorID);
+//  TalonFX m_Left = new TalonFX(Constants.ShooterConstants.LeftShooterMotorID);
+//  TalonFX m_Right = new TalonFX(Constants.ShooterConstants.RightShooterMotorID);
  
   
   /** Creates a new SshooterSsubsystem. */
   public ShooterSubsystem() {
-    m_Left.setInverted(false);
-    m_Right.setInverted(true);// could be the left one is supposed to be inverted, just putting this here for now
+    //m_Left.setInverted(false);
+  //  m_Right.setInverted(true);// could be the left one is supposed to be inverted, just putting this here for now
   }
 
   @Override
@@ -29,15 +29,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
 
   public void Shoot(double leftVoltage, double rightVoltage ){
-    m_Left.setVoltage(leftVoltage); // voltage
-    m_Right.setVoltage(rightVoltage);
+  //  m_Left.setVoltage(leftVoltage); // voltage
+ //   m_Right.setVoltage(rightVoltage);
 
   }
 
   public void StopShoot(){// just in case they dont stop
 
-    m_Left.setVoltage(0);
-    m_Right.setVoltage(0);
+   // m_Left.setVoltage(0);
+  //  m_Right.setVoltage(0);
   }  
 
 

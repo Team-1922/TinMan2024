@@ -14,6 +14,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.CollectReverse;
 
@@ -29,8 +30,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-  private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
+ // private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+ /// private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
@@ -39,7 +40,7 @@ public class RobotContainer {
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   private final CommandXboxController m_operatorController = new CommandXboxController(0);
-
+  
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
 
 
@@ -51,6 +52,9 @@ public class RobotContainer {
 
     autoChooser();
   }
+
+ 
+
 
   public void autoChooser(){
 
@@ -77,9 +81,9 @@ m_autoChooser.setDefaultOption("Placeholder", null);
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_operatorController.a().whileTrue(m_shoot);
-    m_operatorController.x().whileTrue(m_CollectNote);
-    m_operatorController.y().whileTrue(m_CollectReverse);
+   // m_operatorController.button(1).whileTrue(m_shoot);
+    m_operatorController.button(2).whileTrue(m_CollectNote);
+    m_operatorController.button(3).whileTrue(m_CollectReverse);
   }
 
   /**
