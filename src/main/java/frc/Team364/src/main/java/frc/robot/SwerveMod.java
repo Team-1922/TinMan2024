@@ -90,38 +90,16 @@ public class SwerveMod {
     private void setAngle(SwerveModuleState desiredState){
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
 
-/*    PositionDutyCycle Aoutput1 = new PositionDutyCycle(0).withSlot(0);
-        if(Math.abs(desiredState.angle.getDegrees()- getAngle().getDegrees())>5){
-        mAngleMotor.setControl(Aoutput1.withPosition(Conversions.degreesToFalcon(desiredState.angle.getDegrees(), Constants.Swerve.angleGearRatio)));
-    }else{
-        mAngleMotor.setControl(Aoutput1.withPosition(0));
-    } */
+
 PositionDutyCycle Aoutput1 = new PositionDutyCycle( desiredState.angle.getRotations()*Constants.Swerve.angleGearRatio);
-  // mAngleMotor.setPosition(0);
-   
- //
-  //  PositionVoltage Aoutput2 = Aoutput1.withSlot(0);
-//PositionVoltage Aoutput3 = Aoutput2.withVelocity(getAngle().getDegrees()-desiredState.angle.getDegrees());
+
    mAngleMotor.setControl(Aoutput1);
-
-  //mAngleMotor.setPosition(.2);
-    //if(Math.abs(angle.getDegrees()- getAngle().getDegrees())>20){
-        //mAngleMotor.set(Math.copySign(Aoutput3.Velocity, (angle.getDegrees()-getAngle().getDegrees()))/360);}
-    //else{mAngleMotor.set(0);
-   //}
-      if (this.moduleNumber == 0) {
+   
+   /*    if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle (deg)", angle.getDegrees());
-
        SmartDashboard.putNumber("desired angle (rot)", desiredState.angle.getRotations());
-    
-
        SmartDashboard.putNumber("current angle (rot)", mAngleMotor.getPosition().getValueAsDouble());
- 
-     
-    } 
-
-
-
+    }*/
    // mAngleMotor.set(ControlMode.Position, Conversions.degreesToFalcon(angle.getDegrees(), Constants.Swerve.angleGearRatio));
     
      
