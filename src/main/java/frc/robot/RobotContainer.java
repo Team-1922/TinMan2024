@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -68,8 +69,8 @@ public class RobotContainer {
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
+                () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
                 () -> dampen.getAsBoolean(),
@@ -79,15 +80,18 @@ public class RobotContainer {
         
 
     autoChooser();
+
   }
 
   public void autoChooser(){
 
 m_autoChooser.setDefaultOption("Placeholder", null);
+m_autoChooser.addOption("do nothing", null);
 
 
-
+SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
+
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
