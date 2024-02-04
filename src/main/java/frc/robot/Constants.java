@@ -27,7 +27,7 @@ public final class Constants {
     public static final int kCollectorSecondMotorID = 5;
 
   
-    public static final double kRollerVoltage = 10.0;
+    public static final double kRollerVoltage = 8.0;
   }
   
 
