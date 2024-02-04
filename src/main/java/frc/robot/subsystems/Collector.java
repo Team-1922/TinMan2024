@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 
+
 public class Collector extends SubsystemBase {
+    
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.MotorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.MotorConstants.kCollectorSecondMotorID);
 
