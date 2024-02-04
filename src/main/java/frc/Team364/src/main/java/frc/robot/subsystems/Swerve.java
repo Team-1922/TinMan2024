@@ -39,7 +39,7 @@ public class Swerve extends SubsystemBase {
     private Field2d field = new Field2d();
 
     public Swerve() {
-        gyro = new Pigeon2(frc.Team364.src.main.java.frc.robot.Constants.Swerve.pigeonID, "canivore");
+        gyro = new Pigeon2(frc.Team364.src.main.java.frc.robot.Constants.Swerve.pigeonID, "rio");
      //   gyro.configFactoryDefaults();
         zeroGyro();
 
@@ -110,6 +110,7 @@ public class Swerve extends SubsystemBase {
         for(SwerveMod mod : mSwerveMods){
             mod.setDesiredState(swerveModuleStates[mod.moduleNumber], isOpenLoop);
         }
+ 
     }    
 
     /* Used by Pathplanner autobuilder */
@@ -173,6 +174,12 @@ public class Swerve extends SubsystemBase {
     public void periodic(){
         swerveOdometry.update(getYaw(), getModulePositions());  
         field.setRobotPose(getPose());
+        
+        for(SwerveMod mod : mSwerveMods){
+                SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+      
+        
+        }
 
          //Logger.recordOutput("Mystates", getModuleStates());
         // Logger.recordOutput("MyPose", getPose());

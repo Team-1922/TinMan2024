@@ -31,20 +31,20 @@ public class RobotContainer {
     private final Joystick driver = new Joystick(0);
 
    /* Driver Controls */
-	private final int translationAxis = PS4Controller.Axis.kLeftY.value;
-	private final int strafeAxis = PS4Controller.Axis.kLeftX.value;
-	private final int rotationAxis = PS4Controller.Axis.kRightX.value;
+	private final int translationAxis = XboxController.Axis.kLeftX.value;
+	private final int strafeAxis = XboxController.Axis.kLeftY.value;
+	private final int rotationAxis = XboxController.Axis.kRightX.value;
 
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
-    private final JoystickButton dampen = new JoystickButton(driver, PS4Controller.Button.kR1.value);
+    private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kX.value);
 
-    private final JoystickButton DynamicLock = new JoystickButton(driver, PS4Controller.Button.kSquare.value);
+    private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
 
-    private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(PS4Controller.Axis.kL2.value) > 0.2));
-    private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(PS4Controller.Axis.kR2.value) > 0.2));
+    private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.7));
+    private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.7));
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
@@ -70,7 +70,7 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
 
-
+        SmartDashboard.putBoolean("DriveRotate", Math.abs(driver.getRawAxis(rotationAxis))>.2);
         //Pathplanner commands - templates
         NamedCommands.registerCommand("marker1", Commands.print("Passed marker 1"));
         NamedCommands.registerCommand("marker2", Commands.print("Passed marker 2"));
@@ -100,7 +100,7 @@ public class RobotContainer {
         backwardHold.onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            );
+            ); 
         DynamicLock.onTrue(
             new InstantCommand(() -> States.driveState = States.DriveStates.DynamicLock)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
