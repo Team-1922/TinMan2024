@@ -33,7 +33,7 @@ public final class Constants {
 
   public static class LedConstants {
 
-    public static final int CandleID = 0 ; // TODO update id
+    public static final int CandleID = 10 ; // TODO update id
     
     public static final int TotalLedCount = 50; //TODO update number of leds
 
