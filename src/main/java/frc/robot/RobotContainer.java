@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.Team364.src.main.java.frc.robot.States;
 import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
 import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
@@ -19,7 +20,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -49,15 +50,16 @@ public class RobotContainer {
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
 	private final int rotationAxis = XboxController.Axis.kRightX.value;
-  private final int placeholderAxis = XboxController.Axis.kLeftTrigger.value;
-  
+
+  private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.7));
+  private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.7));
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
 
-    private final JoystickButton dampen = new JoystickButton(driver, PS4Controller.Button.kR1.value);
+    private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
-    private final JoystickButton DynamicLock = new JoystickButton(driver, PS4Controller.Button.kSquare.value);
+    private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -69,8 +71,8 @@ public class RobotContainer {
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
-                () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
                 () -> dampen.getAsBoolean(),
@@ -106,6 +108,22 @@ SmartDashboard.putData("Auto Chooser",m_autoChooser);
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
+
+
+        
+    //Heading lock bindings
+    /*   forwardHold.onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.forwardHold)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
+            );
+        backwardHold.onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
+            ); 
+        DynamicLock.onTrue(
+            new InstantCommand(() -> States.driveState = States.DriveStates.DynamicLock)).onFalse(
+            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
+            ); */
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());

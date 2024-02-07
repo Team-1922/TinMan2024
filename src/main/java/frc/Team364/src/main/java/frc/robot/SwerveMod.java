@@ -54,6 +54,7 @@ public class SwerveMod {
             mAngleConfigs.kI = Constants.Swerve.angleKI;
             mAngleConfigs.kD = Constants.Swerve.angleKD;
             mAngleConfigs.kS = Constants.Swerve.angleKF;
+            
 
         mAngleMotor.getConfigurator().apply(mAngleConfigs);
 
@@ -90,7 +91,7 @@ public class SwerveMod {
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
 
 
-        PositionDutyCycle Aoutput1 = new PositionDutyCycle(angle.getRotations()*Constants.Swerve.angleGearRatio);
+        PositionDutyCycle Aoutput1 = new PositionDutyCycle(-angle.getRotations()*Constants.Swerve.angleGearRatio);
         mAngleMotor.setControl(Aoutput1.withSlot(0));
 
    /*    if (this.moduleNumber == 0) {
