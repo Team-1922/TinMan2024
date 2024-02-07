@@ -11,13 +11,15 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 public class ShooterSubsystem extends SubsystemBase {
 
   CANSparkMax m_Left = new CANSparkMax(Constants.ShooterConstants.LeftShooterMotorID, MotorType.kBrushless);
   CANSparkMax m_Right = new CANSparkMax(Constants.ShooterConstants.RightShooterMotorID, MotorType.kBrushless);
  // TalonFX m_Left = new TalonFX(Constants.ShooterConstants.LeftShooterMotorID);
 //  TalonFX m_Right = new TalonFX(Constants.ShooterConstants.RightShooterMotorID);
+ 
  
   
   /** Creates a new SshooterSsubsystem. */
