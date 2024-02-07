@@ -25,7 +25,7 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ShootSubsystem.Shoot(6, 6); // might need to be higher, starting low to see if it workds
+    m_ShootSubsystem.Shoot(8, 8); // might need to be higher, starting low to see if it workds
   }
 
   // Called once the command ends or is interrupted.
