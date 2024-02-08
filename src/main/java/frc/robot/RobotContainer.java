@@ -35,6 +35,7 @@ public class RobotContainer {
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -84,6 +85,8 @@ m_autoChooser.setDefaultOption("Placeholder", null);
     m_operatorController.button(1).whileTrue(m_shoot);
     m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
+
+    
   }
 
   /**

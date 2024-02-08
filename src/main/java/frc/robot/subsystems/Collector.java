@@ -4,15 +4,18 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.playingwithfusion.TimeOfFlight;
 
 
 public class Collector extends SubsystemBase {
     
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.MotorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.MotorConstants.kCollectorSecondMotorID);
-
+      TimeOfFlight m_TOF = new TimeOfFlight(Constants.LedConstants.TOFid);
+    private LedSubsystem m_LED = new LedSubsystem();
     public Collector() {
         SmartDashboard.putNumber("Collector_VOLTAGE", 8);
+        m_TOF.setRangeOfInterest(0, 0, 0, 0); //TODO update this 
     }
 /**
  * 
@@ -38,10 +41,25 @@ public void ReverseMotor(double volts) {
         m_CollectorTalon.setInverted(true);
         m_CollectorTalon2.setInverted(true);
     }
+    public boolean TOFcheckTarget(){
+        boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
+        SmartDashboard.putBoolean("Has Note?",InTarget);
+        if (InTarget) {
+            m_LED.SetColor(0, 255, 0, 0, 0, 0);
+        }else{m_LED.SetColor(255, 0, 0, 0, 0, 0);}
+        return InTarget; 
+    }
+    public double TOFcheckDistance(){
+        double target = m_TOF.getRange();
+        
+        SmartDashboard.putNumber("TOF target distance", target);
+        return target;
+    }
 
     @Override
     public void periodic() {
-
+    TOFcheckDistance();
+    TOFcheckTarget();
     }
     
 }

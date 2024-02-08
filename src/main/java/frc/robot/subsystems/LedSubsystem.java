@@ -7,7 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.RainbowAnimation;
-import com.playingwithfusion.TimeOfFlight;
+
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,11 +16,11 @@ import frc.robot.Constants;
 public class LedSubsystem extends SubsystemBase {
 
   CANdle m_CaNdle = new CANdle(Constants.LedConstants.CandleID); 
-  TimeOfFlight m_TOF = new TimeOfFlight(Constants.LedConstants.TOFid);
+ 
   RainbowAnimation m_rainbow = new RainbowAnimation(0.1, 0.1, Constants.LedConstants.TotalLedCount);
   /** Creates a new LedSubsystem. */
   public LedSubsystem() {
-  m_TOF.setRangeOfInterest(0, 0, 0, 0); //TODO update this 
+ 
   }
   
 
@@ -41,14 +41,5 @@ public class LedSubsystem extends SubsystemBase {
   }
 
 
-  public boolean TOFcheckTarget(){
-   return m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
-  }
-
-  @Override
-  public void periodic() {
-  if (TOFcheckTarget()){SetColor(0, 255, 0, 0, 0, 8);}
-  else{SetColor(255, 0, 0, 0, 0, 8);}
-  }
 
 }
