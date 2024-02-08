@@ -18,8 +18,8 @@ public final class Constants {
   }
   
   public static class ShooterConstants {
-    public static final int LeftShooterMotorID = 8;
-    public static final int RightShooterMotorID = 7;
+    public static final int LeftShooterMotorID = 7;
+    public static final int RightShooterMotorID = 8;
 // voltage for shooting is set in the shoot command, incase we want to change voltage for shooting at different locations
   }
   public final class MotorConstants {
