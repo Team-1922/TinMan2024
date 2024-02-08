@@ -8,6 +8,7 @@ import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.RainbowAnimation;
 
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -15,11 +16,13 @@ import frc.robot.Constants;
 public class LedSubsystem extends SubsystemBase {
 
   CANdle m_CaNdle = new CANdle(Constants.LedConstants.CandleID); 
+ 
   RainbowAnimation m_rainbow = new RainbowAnimation(0.1, 0.1, Constants.LedConstants.TotalLedCount);
   /** Creates a new LedSubsystem. */
   public LedSubsystem() {
-
+ 
   }
+  
 
   public void SetColor(int Red, int Green, int Blue, int White, int Start,int Count){// sets the leds to a specified color 
      
@@ -38,8 +41,5 @@ public class LedSubsystem extends SubsystemBase {
   }
 
 
-
-
-  
 
 }
