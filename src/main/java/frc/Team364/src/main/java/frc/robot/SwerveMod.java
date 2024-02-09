@@ -36,7 +36,7 @@ public class SwerveMod {
     
         /* Angle Encoder Config */
     angleEncoder = new CANcoder(
-            moduleConstants.cancoderID
+            moduleConstants.cancoderID,"Drivebase"
         );
         CANcoderConfiguration mCanCoderConfigs = new CANcoderConfiguration();
         mCanCoderConfigs.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1;
@@ -45,7 +45,7 @@ public class SwerveMod {
 
         /* Angle Motor Config */
        mAngleMotor = new TalonFX(
-            moduleConstants.angleMotorID
+            moduleConstants.angleMotorID,"Drivebase"
             
           
         );
@@ -60,7 +60,7 @@ public class SwerveMod {
 
         /* Drive Motor Config */
        mDriveMotor = new TalonFX(
-            moduleConstants.driveMotorID);
+            moduleConstants.driveMotorID,"Drivebase");
 
         lastAngle = getState().angle;
     } 
