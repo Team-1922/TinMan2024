@@ -15,7 +15,7 @@ public class Collector extends SubsystemBase {
     private LedSubsystem m_LED = new LedSubsystem();
     public Collector() {
         SmartDashboard.putNumber("Collector_VOLTAGE", 8);
-        m_TOF.setRangeOfInterest(0, 0, 0, 0); //TODO update this 
+        m_TOF.setRangeOfInterest(8, 8, 8, 8); //TODO update this 
     }
 /**
  * 
@@ -45,8 +45,8 @@ public void ReverseMotor(double volts) {
         boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
-            m_LED.SetColor(0, 255, 0, 0, 0, 0);
-        }else{m_LED.SetColor(255, 0, 0, 0, 0, 0);}
+            m_LED.SetColor(0, 255, 0, 0, 0, 8);
+        }else{m_LED.SetColor(255, 0, 0, 0, 0, 8);}
         return InTarget; 
     }
     public double TOFcheckDistance(){
