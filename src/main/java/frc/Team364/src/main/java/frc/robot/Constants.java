@@ -21,7 +21,7 @@ public final class Constants {
     public static final class Swerve {
         public static final int pigeonID = 0;
         public static final boolean invertGyro = false; // Always ensure Gyro is CCW+ CW-
-
+        
         public static final COTSFalconSwerveConstants chosenModule =  //TODO: This must be tuned to specific robot
             COTSFalconSwerveConstants.SDSMK4i(COTSFalconSwerveConstants.driveGearRatios.SDSMK4i_L3);
 
@@ -29,14 +29,14 @@ public final class Constants {
         public static final double trackWidth = Units.inchesToMeters(17.625); //TODO: This must be tuned to specific robot
         public static final double wheelBase = Units.inchesToMeters(13.625); //TODO: This must be tuned to specific robot
         public static final double wheelCircumference = chosenModule.wheelCircumference;
-
+        public static final double collectorOffset = Units.inchesToMeters(5);
         /* Swerve Kinematics 
          * No need to ever change this unless you are not doing a traditional rectangular/square 4 module swerve */
          public static final SwerveDriveKinematics swerveKinematics = new SwerveDriveKinematics(
-            new Translation2d(wheelBase / 2.0, trackWidth / 2.0),
-            new Translation2d(wheelBase / 2.0, -trackWidth / 2.0),
-            new Translation2d(-wheelBase / 2.0, trackWidth / 2.0),
-            new Translation2d(-wheelBase / 2.0, -trackWidth / 2.0));
+            new Translation2d((wheelBase-collectorOffset) / 2.0, trackWidth / 2.0),
+            new Translation2d((wheelBase-collectorOffset) / 2.0, -trackWidth / 2.0),
+            new Translation2d(-(wheelBase+collectorOffset) / 2.0, trackWidth / 2.0),
+            new Translation2d(-(wheelBase+collectorOffset) / 2.0, -trackWidth / 2.0));
 
         /* Module Gear Ratios */
         public static final double driveGearRatio = chosenModule.driveGearRatio;
