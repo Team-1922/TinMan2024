@@ -9,18 +9,25 @@ import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
 import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Shoot;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 
 import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
+import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.CollectReverse;
+
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -34,13 +41,20 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
+  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+ private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
+  private final Collector m_Collector = new Collector();
+  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+  private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
+  
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  private final XboxController m_operatorController = new XboxController(0);
-
+  //private final XboxController m_operatorController = new XboxController(0);
+ 
+  private final CommandXboxController m_operatorController = new CommandXboxController(0);
+  
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
     private final Swerve s_Swerve = new Swerve();
 
@@ -85,6 +99,9 @@ public class RobotContainer {
 
   }
 
+ 
+
+
   public void autoChooser(){
 
 m_autoChooser.setDefaultOption("Placeholder", null);
@@ -127,6 +144,12 @@ SmartDashboard.putData("Auto Chooser",m_autoChooser);
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+
+    m_operatorController.button(1).whileTrue(m_shoot);
+    m_operatorController.button(2).whileTrue(m_CollectNote);
+    m_operatorController.button(3).whileTrue(m_CollectReverse);
+
+    
   }
 
   /**
