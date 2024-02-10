@@ -57,14 +57,4 @@ public class LazyTalonFX extends TalonFX {
 
 
 
- ///   public LazyTalonFX(int driveMotorID, com.ctre.phoenix6.configs.TalonFXConfiguration swerveDriveFXConfig,
-    //        NeutralMode driveneutralmode, boolean drivemotorinvert, boolean slowStatusFrame) {
-        //TODO Auto-generated constructor stub
-   // } */
-
- /*   public LazyTalonFX(int angleMotorID, TalonFXConfiguration swerveAngleFXConfig, NeutralMode angleneutralmode,
-            boolean anglemotorinvert, boolean slowStatusFrame) {
-        //TODO Auto-generated constructor stub
-    }*/
-    
 }
