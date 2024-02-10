@@ -14,7 +14,9 @@ public class AutoCollect extends Command {
   CollectNote m_CollectNote = new CollectNote(m_Collector);
   Timer m_Timer = new Timer();
   double m_delay = 0 ;
-  /** Creates a new AutoCollect. */
+  /** Creates a new AutoCollect. 
+   * @param EndDelay how long it will keep running for after the TOF sees the note (seconds)
+  */
   public AutoCollect( Collector collector, CollectNote collectNote, double EndDelay) {
   m_CollectNote = collectNote;
   m_Collector = collector;
@@ -48,4 +50,5 @@ public class AutoCollect extends Command {
   public boolean isFinished() {
     return m_Timer.hasElapsed(m_delay);
   }
+
 }

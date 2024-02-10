@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import frc.robot.commands.AutoCommands.AutoCollect;
+import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -20,9 +21,8 @@ public final class Autos {
   private static Collector m_Collector = new Collector();
   private static ShooterSubsystem m_Shooter = new ShooterSubsystem();
   private static CollectNote m_Collect = new CollectNote(m_Collector);
-  private static AutoCollect m_AutoCollect = new AutoCollect(m_Collector, m_Collect, 0.2);
-
-
+  
+  
 
   public Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
@@ -30,15 +30,18 @@ public final class Autos {
 
 
   private final static AutoCollect Collect(){
-    AutoCollect collect = new AutoCollect(m_Collector, m_Collect, .2);
+    AutoCollect collect = new AutoCollect(m_Collector, m_Collect, 1);
   return collect;
   }
 
+  private final static AutoShoot Shoot(){
+AutoShoot shoot = new AutoShoot(m_Shooter, 7, 9, 3);
+return shoot;
+  }
 
-  private static final SequentialCommandGroup TestAuto = new SequentialCommandGroup( Collect()
-  
 
-  );
+
+  public  final SequentialCommandGroup TestAuto = new SequentialCommandGroup( Collect(), Shoot()  );
 
   
 }

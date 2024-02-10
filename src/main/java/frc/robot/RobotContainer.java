@@ -102,7 +102,7 @@ public class RobotContainer {
 
 m_autoChooser.setDefaultOption("Placeholder", null);
 m_autoChooser.addOption("do nothing", null);
-m_autoChooser.addOption("Test", m_CollectNote);
+m_autoChooser.addOption("Test", m_Autos.TestAuto);
 
 SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
