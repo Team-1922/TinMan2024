@@ -24,19 +24,21 @@ public final class Autos {
 
 
 
-  private Autos() {
+  public Autos() {
     throw new UnsupportedOperationException("This is a utility class!");
   }
 
 
-  private final AutoCollect Collect(){
+  private final static AutoCollect Collect(){
     AutoCollect collect = new AutoCollect(m_Collector, m_Collect, .2);
   return collect;
   }
 
 
-  private static final SequentialCommandGroup TestAuto = new SequentialCommandGroup(
-   null 
+  private static final SequentialCommandGroup TestAuto = new SequentialCommandGroup( Collect()
+  
 
   );
+
+  
 }

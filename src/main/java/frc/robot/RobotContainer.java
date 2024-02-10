@@ -46,7 +46,7 @@ public class RobotContainer {
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
-  
+  private final Autos m_Autos = new Autos();
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -105,7 +105,7 @@ public class RobotContainer {
 
 m_autoChooser.setDefaultOption("Placeholder", null);
 m_autoChooser.addOption("do nothing", null);
-
+m_autoChooser.addOption("Test", m_CollectNote);
 
 SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
