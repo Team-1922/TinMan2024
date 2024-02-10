@@ -13,6 +13,7 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.Slot0Configs;
@@ -44,7 +45,7 @@ public class SwerveMod {
         angleEncoder.getConfigurator().apply(mCanCoderConfigs);
 
         /* Angle Motor Config */
-       mAngleMotor = new TalonFX(
+        mAngleMotor = new TalonFX(
             moduleConstants.angleMotorID,"Drivebase"
             
           
@@ -59,10 +60,12 @@ public class SwerveMod {
         mAngleMotor.getConfigurator().apply(mAngleConfigs);
 
         /* Drive Motor Config */
-       mDriveMotor = new TalonFX(
+        mDriveMotor = new TalonFX(
             moduleConstants.driveMotorID,"Drivebase");
 
         lastAngle = getState().angle;
+        mDriveMotor.setNeutralMode(NeutralModeValue.Brake);
+        mAngleMotor.setNeutralMode(NeutralModeValue.Coast);
     } 
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
@@ -76,6 +79,7 @@ public class SwerveMod {
         if(isOpenLoop){
             double percentOutput = desiredState.speedMetersPerSecond / Constants.Swerve.maxSpeed;
             mDriveMotor.set(percentOutput);
+            
         }
         else {
             double velocity = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio);
