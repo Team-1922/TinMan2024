@@ -29,7 +29,6 @@ public final class Constants {
   
     public static final double kRollerVoltage = 8.0;
   }
-  
 
   public static class LedConstants {
     public static final int TOFid= 1; 

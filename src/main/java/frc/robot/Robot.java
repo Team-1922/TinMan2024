@@ -4,12 +4,9 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.led.StrobeAnimation;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.LedSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,8 +18,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  private LedSubsystem m_LedSubsystem = new LedSubsystem();
-  //private StrobeAnimation mAnimation = new StrobeAnimation(255, 0, 0,0,0,8);
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -32,7 +28,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-  
   }
 
   /**
@@ -53,9 +48,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {
-   // m_LedSubsystem.SetColor(255, 0, 0, 40, 0, 8);
-  }
+  public void disabledInit() {}
 
   @Override
   public void disabledPeriodic() {}
@@ -84,8 +77,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-   // m_LedSubsystem.SetColor(0, 255, 0, 40, 0, 8);
-   // m_LedSubsystem.AnimateLEDs(mAnimation, 1);
   }
 
   /** This function is called periodically during operator control. */
