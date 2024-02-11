@@ -5,15 +5,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
+import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class Shoot extends Command {
  ShooterSubsystem m_ShootSubsystem;
-
+ Collector m_Collector;
   /** Creates a new Shoot. */
-  public Shoot( ShooterSubsystem ShootSubsystem ) {
+  public Shoot( ShooterSubsystem ShootSubsystem, Collector collectorSubsystem ) {
     m_ShootSubsystem = ShootSubsystem;
-
+    m_Collector = collectorSubsystem;
     addRequirements(ShootSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -25,12 +27,14 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
     m_ShootSubsystem.Shoot(9, 7); // might need to be higher, starting low to see if it workds
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    m_Collector.StopMotor();
     m_ShootSubsystem.StopShoot();
   }
 

@@ -37,10 +37,12 @@ public class Collector extends SubsystemBase {
 
 public void ReverseMotor(double volts) {
         m_CollectorTalon.setVoltage(volts);   
-     m_CollectorTalon2.setVoltage(volts);
+        m_CollectorTalon2.setVoltage(volts);
         m_CollectorTalon.setInverted(true);
         m_CollectorTalon2.setInverted(true);
     }
+
+/** checks if there is something in the TOF target range */
     public boolean TOFcheckTarget(){
         boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
@@ -49,6 +51,8 @@ public void ReverseMotor(double volts) {
         }else{m_LED.SetColor(255, 0, 0, 0, 0, 8);}
         return InTarget; 
     }
+
+
     public double TOFcheckDistance(){
         double target = m_TOF.getRange();
         
