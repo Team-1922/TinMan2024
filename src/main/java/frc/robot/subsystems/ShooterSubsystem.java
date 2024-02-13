@@ -5,14 +5,12 @@
 package frc.robot.subsystems;
 
 
-import com.ctre.phoenix6.hardware.TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkLowLevel.MotorType;
+
 public class ShooterSubsystem extends SubsystemBase {
 
   CANSparkMax m_Left = new CANSparkMax(Constants.ShooterConstants.LeftShooterMotorID, MotorType.kBrushless);
@@ -42,7 +40,7 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public void StopShoot(){// just in case they dont stop
 
-    m_Left.setVoltage(0);
+   m_Left.setVoltage(0);
     m_Right.setVoltage(0);
   }  
 

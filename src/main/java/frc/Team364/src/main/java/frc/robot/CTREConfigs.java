@@ -26,15 +26,19 @@ public final class CTREConfigs {
         swerveAngleFXConfig.Slot0.kD = Constants.Swerve.angleKD;
         swerveAngleFXConfig.Slot0.kV = Constants.Swerve.angleKF;
 
+
         /* Swerve Drive Motor Configuration */
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.driveContinuousCurrentLimit;
-        swerveDriveFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.drivePeakCurrentDuration;
+        swerveDriveFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.drivePeakCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.drivePeakCurrentDuration;
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
         swerveDriveFXConfig.Slot0.kD = Constants.Swerve.driveKD;
         swerveDriveFXConfig.Slot0.kV = Constants.Swerve.driveKF;
+        swerveDriveFXConfig.OpenLoopRamps.DutyCycleOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
+        swerveDriveFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopVoltageRamp;
+        swerveDriveFXConfig.ClosedLoopRamps.TorqueClosedLoopRampPeriod = Constants.Swerve.closedLoopTorqueRamp;
         //swerveDriveFXConfig.openloopRamp = Constants.Swerve.openLoopRamp;
         //swerveDriveFXConfig.closedloopRamp = Constants.Swerve.closedLoopRamp;
         

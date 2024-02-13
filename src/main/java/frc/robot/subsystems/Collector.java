@@ -14,7 +14,7 @@ public class Collector extends SubsystemBase {
       TimeOfFlight m_TOF = new TimeOfFlight(Constants.LedConstants.TOFid);
     private LedSubsystem m_LED = new LedSubsystem();
     public Collector() {
-        SmartDashboard.putNumber("Collector_VOLTAGE", 8);
+  //      SmartDashboard.putNumber("Collector_VOLTAGE", 8);
         m_TOF.setRangeOfInterest(8, 8, 8, 8); //TODO update this 
     }
 /**
@@ -22,8 +22,8 @@ public class Collector extends SubsystemBase {
  * @param volts the default value for voltage if the smartdashboard doesn't work 
  */
     public void ActivateMotor(double volts) {
-        m_CollectorTalon.setVoltage(SmartDashboard.getNumber("Collector_VOLTAGE", volts));   
-        m_CollectorTalon2.setVoltage(SmartDashboard.getNumber("Collector_VOLTAGE", volts));
+        m_CollectorTalon.setVoltage(volts);   
+        m_CollectorTalon2.setVoltage(volts);
             m_CollectorTalon.setInverted(false);
             m_CollectorTalon2.setInverted(false);
     }
@@ -43,7 +43,7 @@ public void ReverseMotor(double volts) {
     }
     public boolean TOFcheckTarget(){
         boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
-        SmartDashboard.putBoolean("Has Note?",InTarget);
+           SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
             m_LED.SetColor(0, 255, 0, 0, 0, 8);
         }else{m_LED.SetColor(255, 0, 0, 0, 0, 8);}
@@ -52,14 +52,14 @@ public void ReverseMotor(double volts) {
     public double TOFcheckDistance(){
         double target = m_TOF.getRange();
         
-        SmartDashboard.putNumber("TOF target distance", target);
+          SmartDashboard.putNumber("TOF target distance", target);
         return target;
     }
 
     @Override
     public void periodic() {
-    TOFcheckDistance();
-    TOFcheckTarget();
+   // TOFcheckDistance();
+   // TOFcheckTarget();
     }
     
 }
