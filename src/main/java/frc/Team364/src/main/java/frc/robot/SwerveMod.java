@@ -68,7 +68,7 @@ public class SwerveMod {
        
        
        mAngleMotor.getConfigurator().apply(mAngleCurrentLimitsConfigs);
-  //      mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig);
+  //      mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig); // that returns null and makes code crash
        
 
         /* Drive Motor Config */
