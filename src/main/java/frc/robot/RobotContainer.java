@@ -112,7 +112,7 @@ m_autoChooser.setDefaultOption("Placeholder", null);
 m_autoChooser.addOption("do nothing", null);
 
 
-SmartDashboard.putData("Auto Chooser",m_autoChooser);
+  SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
 
   /**

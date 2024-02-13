@@ -9,6 +9,7 @@ import frc.Team364.src.main.java.frc.lib.math.Conversions;
 import frc.Team364.src.main.java.frc.lib.util.CTREModuleState;
 import frc.Team364.src.main.java.frc.lib.util.SwerveModuleConstants;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
+
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
@@ -16,6 +17,7 @@ import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 
 
@@ -50,22 +52,41 @@ public class SwerveMod {
             
           
         );
+
         Slot0Configs mAngleConfigs = new Slot0Configs();
             mAngleConfigs.kP = Constants.Swerve.angleKP;
             mAngleConfigs.kI = Constants.Swerve.angleKI;
             mAngleConfigs.kD = Constants.Swerve.angleKD;
             mAngleConfigs.kS = Constants.Swerve.angleKF;
-            
+       mAngleMotor.getConfigurator().apply(mAngleConfigs);      
 
-        mAngleMotor.getConfigurator().apply(mAngleConfigs);
+       CurrentLimitsConfigs mAngleCurrentLimitsConfigs = new CurrentLimitsConfigs();
+         mAngleCurrentLimitsConfigs.SupplyCurrentLimitEnable = Constants.Swerve.angleEnableCurrentLimit;
+         mAngleCurrentLimitsConfigs.SupplyCurrentLimit = Constants.Swerve.angleContinuousCurrentLimit;
+         mAngleCurrentLimitsConfigs.SupplyCurrentThreshold = Constants.Swerve.anglePeakCurrentLimit;
+         mAngleCurrentLimitsConfigs.SupplyTimeThreshold = Constants.Swerve.anglePeakCurrentDuration;
+       
+       
+       mAngleMotor.getConfigurator().apply(mAngleCurrentLimitsConfigs);
+  //      mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig); // that returns null and makes code crash
+       
 
         /* Drive Motor Config */
         mDriveMotor = new TalonFX(
             moduleConstants.driveMotorID,"Drivebase");
 
+        CurrentLimitsConfigs mDriveCurrentLimitsConfigs = new CurrentLimitsConfigs();
+         mDriveCurrentLimitsConfigs.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
+         mDriveCurrentLimitsConfigs.SupplyCurrentLimit = Constants.Swerve.driveContinuousCurrentLimit;
+         mDriveCurrentLimitsConfigs.SupplyCurrentThreshold = Constants.Swerve.drivePeakCurrentLimit;
+         mDriveCurrentLimitsConfigs.SupplyTimeThreshold = Constants.Swerve.drivePeakCurrentDuration;
+
+        mDriveMotor.getConfigurator().apply(mDriveCurrentLimitsConfigs);
+  
         lastAngle = getState().angle;
         mDriveMotor.setNeutralMode(NeutralModeValue.Brake);
         mAngleMotor.setNeutralMode(NeutralModeValue.Coast);
+        
     } 
 
     public void setDesiredState(SwerveModuleState desiredState, boolean isOpenLoop){
@@ -80,11 +101,14 @@ public class SwerveMod {
             double percentOutput = desiredState.speedMetersPerSecond / Constants.Swerve.maxSpeed;
             mDriveMotor.set(percentOutput);
             
+            
         }
         else {
             double velocity = Conversions.MPSToFalcon(desiredState.speedMetersPerSecond, Constants.Swerve.wheelCircumference, Constants.Swerve.driveGearRatio);
            VelocityVoltage Voutput1 = new VelocityVoltage(velocity);
+
           VelocityVoltage Voutput2 = Voutput1.withFeedForward(feedforward.calculate(desiredState.speedMetersPerSecond));
+          
             mDriveMotor.setControl(Voutput2);
           //  mDriveMotor.set(ControlMode.Velocity, velocity, DemandType.ArbitraryFeedForward, feedforward.calculate(desiredState.speedMetersPerSecond));
  
@@ -95,8 +119,10 @@ public class SwerveMod {
         Rotation2d angle = (Math.abs(desiredState.speedMetersPerSecond) <= (Constants.Swerve.maxSpeed * 0.01)) ? lastAngle : desiredState.angle; //Prevent rotating module if speed is less then 1%. Prevents Jittering.
 
 
-        PositionDutyCycle Aoutput1 = new PositionDutyCycle(-angle.getRotations()*Constants.Swerve.angleGearRatio);
-        mAngleMotor.setControl(Aoutput1.withSlot(0));
+    PositionDutyCycle Aoutput1 = new PositionDutyCycle(-angle.getRotations()*Constants.Swerve.angleGearRatio);
+    Aoutput1.withSlot(0);
+    
+        mAngleMotor.setControl(Aoutput1);
 
    /*    if (this.moduleNumber == 0) {
        SmartDashboard.putNumber("angle (deg)", angle.getDegrees());

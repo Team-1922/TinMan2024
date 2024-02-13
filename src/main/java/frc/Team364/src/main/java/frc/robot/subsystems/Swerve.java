@@ -61,7 +61,7 @@ public class Swerve extends SubsystemBase {
              // Configure the AutoBuilder last
         AutoBuilder.configureHolonomic(
          this::getPose, // Robot pose supplier
-         this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
+         this::resetOdometry, //Method to reset odometry (will be called if your auto has a starting pose)
          this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
          this::driveRobotRelative, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
         new HolonomicPathFollowerConfig( // HolonomicPathFollowerConfig, this should likely live in your Constants class
@@ -173,13 +173,16 @@ public class Swerve extends SubsystemBase {
     @Override
     public void periodic(){
         swerveOdometry.update(getYaw(), getModulePositions());  
-        field.setRobotPose(getPose());
+
+
+
+      //  field.setRobotPose(getPose());
         
-        for(SwerveMod mod : mSwerveMods){
-                SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
+      //  for(SwerveMod mod : mSwerveMods){
+       //         SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
       
         
-        }
+        //}
 
          //Logger.recordOutput("Mystates", getModuleStates());
         // Logger.recordOutput("MyPose", getPose());
