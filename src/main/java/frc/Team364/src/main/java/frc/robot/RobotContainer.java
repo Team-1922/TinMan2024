@@ -70,7 +70,7 @@ public class RobotContainer {
         // Configure the button bindings
         configureButtonBindings();
 
-        SmartDashboard.putBoolean("DriveRotate", Math.abs(driver.getRawAxis(rotationAxis))>.2);
+          SmartDashboard.putBoolean("DriveRotate", Math.abs(driver.getRawAxis(rotationAxis))>.2);
         //Pathplanner commands - templates
         NamedCommands.registerCommand("marker1", Commands.print("Passed marker 1"));
         NamedCommands.registerCommand("marker2", Commands.print("Passed marker 2"));
@@ -79,7 +79,7 @@ public class RobotContainer {
         
         //Auto chooser
         autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
-        SmartDashboard.putData("Auto Mode", autoChooser);
+          SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
     /**

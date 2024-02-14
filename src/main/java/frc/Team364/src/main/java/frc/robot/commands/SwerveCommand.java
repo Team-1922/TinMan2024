@@ -44,6 +44,8 @@ public class SwerveCommand extends Command {
 
     @Override
     public void execute() {
+    
+    
         /* Get Values, Deadband, Dampen */
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), frc.Team364.src.main.java.frc.robot.Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), frc.Team364.src.main.java.frc.robot.Constants.stickDeadband) * (dampenSup.getAsBoolean() ? 0.2 : 1);

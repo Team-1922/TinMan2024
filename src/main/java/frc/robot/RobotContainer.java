@@ -45,8 +45,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
- private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
+
   private final Collector m_Collector = new Collector();
+   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector );
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   
@@ -112,7 +113,7 @@ m_autoChooser.setDefaultOption("Placeholder", null);
 m_autoChooser.addOption("do nothing", null);
 
 
-SmartDashboard.putData("Auto Chooser",m_autoChooser);
+  SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
 
   /**
