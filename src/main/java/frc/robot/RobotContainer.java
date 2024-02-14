@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.Team364.src.main.java.frc.robot.States;
+
 import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
 import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
@@ -15,10 +15,9 @@ import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 
-import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
+
+
 
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
@@ -27,8 +26,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.CollectReverse;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;

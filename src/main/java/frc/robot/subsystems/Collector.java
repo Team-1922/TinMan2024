@@ -14,12 +14,11 @@ public class Collector extends SubsystemBase {
       TimeOfFlight m_TOF = new TimeOfFlight(Constants.LedConstants.TOFid);
     private LedSubsystem m_LED = new LedSubsystem();
     public Collector() {
-  //      SmartDashboard.putNumber("Collector_VOLTAGE", 8);
-        m_TOF.setRangeOfInterest(8, 8, 8, 8); //TODO update this 
+ 
+        m_TOF.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
     }
 /**
- * 
- * @param volts the default value for voltage if the smartdashboard doesn't work 
+ * @param volts what voltage you want to set the motors to
  */
     public void ActivateMotor(double volts) {
         m_CollectorTalon.setVoltage(volts);   
@@ -27,7 +26,7 @@ public class Collector extends SubsystemBase {
             m_CollectorTalon.setInverted(false);
             m_CollectorTalon2.setInverted(false);
     }
-
+/** stops the collector motors */
     public void StopMotor() {
         m_CollectorTalon.setVoltage(0);
         m_CollectorTalon2.setVoltage(0);
@@ -42,14 +41,16 @@ public void ReverseMotor(double volts) {
         m_CollectorTalon2.setInverted(true);
     }
 
-/** checks if there is something in the TOF target range */
+/** checks if there is something in the TOF target range 
+ * @return if the TOF detects something within the target range
+*/
     public boolean TOFcheckTarget(){
         boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
            SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
             m_LED.SetColor(0, 255, 0, 0, 0, 8);
         }else{m_LED.SetColor(255, 0, 0, 0, 0, 8);}
-        return InTarget; 
+        return InTarget; // the LEDs are just there to help with testing, can be removed later. 
     }
 
 

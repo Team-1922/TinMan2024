@@ -50,19 +50,20 @@ public class CollectNote extends Command {
   @Override
   public void execute() {
    
-    if (!ReverseCheck ) {// if it didn't have a note, it stops the reverse after .5 seconds, or if it sees a note 
+    if (!ReverseCheck && !HasNote  ) {// if it didn't have a note, it stops the reverse after .5 seconds, or if it sees a note 
       if (m_Collector.TOFcheckTarget()|| m_Timer.hasElapsed(.5)) {
         m_Collector.StopMotor();
         ReverseCheck = true;
       }
     }
-    if(ReverseCheck&& !HasNote){// if it didn't have a note to start, and it has run the reverse, run the collector until it does 
-       if (!m_Collector.TOFcheckTarget()) {
+    if(ReverseCheck&& !HasNote ){// if it didn't have a note to start, and it has run the reverse, run the collector until it does 
+       if(!m_Collector.TOFcheckTarget()) {
         m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
        }else{
-        HasNote= true;
+        HasNote = true;
        } 
         }
+        
     if(ReverseCheck && HasNote && !NoteCollected){ // if it did have a note, run collect until it doesn't see it anymore 
      if (m_Collector.TOFcheckTarget()) {
       m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
@@ -70,14 +71,14 @@ public class CollectNote extends Command {
         m_Collector.StopMotor();
         NoteCollected = true;
        }
-    }
+    } 
       
     if(NoteCollected){
-      if(!m_Collector.TOFcheckTarget()){
+      if(!m_Collector.TOFcheckTarget()) {
       m_Collector.ReverseMotor(Constants.MotorConstants.kRollerVoltage);
       }else{
         m_Collector.StopMotor();
-        EndCheck= true;
+        EndCheck = true;
       }
     }
 
