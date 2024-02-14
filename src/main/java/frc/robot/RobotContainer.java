@@ -9,9 +9,11 @@ import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
 import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 
@@ -42,14 +44,17 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
- private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
+  private final Shoot m_shoot = new Shoot(m_shooterSubsystem);
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
-  
+  private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
+  private final ClimbCommand m_ClimbUP = new ClimbCommand(m_ClimberSubsystem, false);
+   private final ClimbCommand m_ClimbDOWN = new ClimbCommand(m_ClimberSubsystem, true);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -153,6 +158,8 @@ m_autoChooser.addOption("do nothing", null);
     m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
 
+    m_operatorController.povUp().whileTrue(m_ClimbUP);
+    m_operatorController.povDown().whileTrue(m_ClimbDOWN);
     
   }
 

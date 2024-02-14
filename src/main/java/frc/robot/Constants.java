@@ -25,11 +25,15 @@ public final class Constants {
   public final class MotorConstants {
     public static final int kCollectorMotorID = 6;
     public static final int kCollectorSecondMotorID = 5;
-
-  
     public static final double kRollerVoltage = 8.0;
   }
   
+  public final class ClimberConstants {
+    public static final int ClimberMotorID = 9;
+    public static final int ClimberMotorID2 = 10;
+    public static final double kClimbVoltage = 0.1; //TODO test this
+
+  }
 
 
   public static class LedConstants {
