@@ -4,36 +4,48 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class Shoot extends Command {
- ShooterSubsystem m_ShootSubsystem;
- Collector m_Collector;
+  ShooterSubsystem m_ShootSubsystem;
+  Collector m_Collector;
+  Timer m_Timer = new Timer();
   /** Creates a new Shoot. */
   public Shoot( ShooterSubsystem ShootSubsystem, Collector collectorSubsystem ) {
+
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
-    addRequirements(ShootSubsystem);
+    addRequirements(ShootSubsystem, collectorSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+
+    m_Timer.reset();
+    m_Timer.start();
+    m_ShootSubsystem.Shoot(Constants.ShooterConstants.kLeftShooterVoltage, Constants.ShooterConstants.kRightShooterVoltage); // might need to be higher, starting low to see if it works
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
-    m_ShootSubsystem.Shoot(9, 7); // might need to be higher, starting low to see if it workds
+
+    if (m_Timer.hasElapsed(Constants.ShooterConstants.kCollectorActivateDelay)) {
+      m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
+    m_Timer.stop();
     m_Collector.StopMotor();
     m_ShootSubsystem.StopShoot();
   }
@@ -41,6 +53,7 @@ public class Shoot extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+
     return false;
   }
 }

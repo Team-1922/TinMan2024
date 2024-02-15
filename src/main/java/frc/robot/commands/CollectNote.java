@@ -11,82 +11,86 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class CollectNote extends Command {
  
   Collector m_Collector;
-  Timer m_Timer = new Timer();// used to run reverse for .5 seconds 
- 
+  Timer m_Timer = new Timer();// used to run reverse for .5 seconds  
 
-  boolean ReverseCheck; // false if it needs to reverse to see if there is a note in the collector currently 
-  boolean HasNote; // true if there is a note in the robot
-  boolean NoteCollected; // true if the note is all the way in the robot 
-  boolean EndCheck; // true if command should end
+  boolean m_ReverseCheck; // false if it needs to reverse to see if there is a note in the collector currently 
+  boolean m_HasNote; // true if there is a note in the robot
+  boolean m_NoteCollected; // true if the note is all the way in the robot 
+  boolean m_EndCheck; // true if command should end
+
+  double m_ReverseDuration = Constants.CollectorConstants.kReverseDuration;
 
  /** Creates a new CollectNote. */
   public CollectNote(Collector Collector) {
+
     m_Collector = Collector;
-    
     addRequirements(Collector);
-  
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if(!m_Collector.TOFcheckTarget()){// if it doesn't have a note, run reverse 
-      m_Collector.ReverseMotor(Constants.MotorConstants.kRollerVoltage);
-      ReverseCheck= false;
-      HasNote= false;
+
+    if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
+      m_Collector.ReverseMotor(Constants.CollectorConstants.kRollerVoltage);
+      m_ReverseCheck = false;
+      m_HasNote = false;
+    } else {
+      m_ReverseCheck = true; 
+      m_HasNote = true;
     }
-    else{
-      ReverseCheck= true; 
-      HasNote = true;
-    }
-    NoteCollected = false;
-    EndCheck = false;
+    m_NoteCollected = false;
+    m_EndCheck = false;
     m_Timer.reset();
     m_Timer.start();
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
    
-    if (!ReverseCheck && !HasNote  ) {// if it didn't have a note, it stops the reverse after .5 seconds, or if it sees a note 
-      if (m_Collector.TOFcheckTarget()|| m_Timer.hasElapsed(.5)) {
-        m_Collector.StopMotor();
-        ReverseCheck = true;
+    if (!m_HasNote) {
+      if (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
+        if (m_Collector.TofcheckTarget() || m_Timer.hasElapsed(m_ReverseDuration)) {
+          m_Collector.StopMotor();
+          m_ReverseCheck = true;
+        } 
+        return;
       }
-    }
-    if(ReverseCheck&& !HasNote ){// if it didn't have a note to start, and it has run the reverse, run the collector until it does 
-       if(!m_Collector.TOFcheckTarget()) {
-        m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
-       }else{
-        HasNote = true;
-       } 
-        }
-        
-    if(ReverseCheck && HasNote && !NoteCollected){ // if it did have a note, run collect until it doesn't see it anymore 
-     if (m_Collector.TOFcheckTarget()) {
-      m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
-      }else{
+   
+      if (!m_Collector.TofcheckTarget()) {
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
+      } else {
+        m_HasNote = true;
+      } 
+      return;
+    }         
+
+    if (!m_NoteCollected) { // Sees note, but note is not all the way in the robot 
+      if (m_Collector.TofcheckTarget()) {
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
+      } else {
         m_Collector.StopMotor();
-        NoteCollected = true;
-       }
+        m_NoteCollected = true;
+      }
+      return;
     } 
       
-    if(NoteCollected){
-      if(!m_Collector.TOFcheckTarget()) {
-      m_Collector.ReverseMotor(Constants.MotorConstants.kRollerVoltage);
-      }else{
+    if (m_NoteCollected) { // sees note, note has gone past Tof, reversing collector until it sees note again
+      if (!m_Collector.TofcheckTarget()) {
+        m_Collector.ReverseMotor(Constants.CollectorConstants.kRollerVoltage);
+      } else {
         m_Collector.StopMotor();
-        EndCheck = true;
+        m_EndCheck = true;
       }
+      return;
     }
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
     m_Collector.StopMotor();
     m_Timer.stop();
   }
@@ -95,6 +99,6 @@ public class CollectNote extends Command {
   @Override
   public boolean isFinished() {
 
-    return EndCheck;
+    return m_EndCheck;
   }
 }

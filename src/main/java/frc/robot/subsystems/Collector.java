@@ -9,13 +9,13 @@ import com.playingwithfusion.TimeOfFlight;
 
 public class Collector extends SubsystemBase {
     
-    private static TalonFX m_CollectorTalon = new TalonFX(Constants.MotorConstants.kCollectorMotorID); 
-    private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.MotorConstants.kCollectorSecondMotorID);
-      TimeOfFlight m_TOF = new TimeOfFlight(Constants.LedConstants.TOFid);
+    private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
+    private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
+      TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
     private LedSubsystem m_LED = new LedSubsystem();
     public Collector() {
  
-        m_TOF.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
+        m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
     }
 /**
  * @param volts what voltage you want to set the motors to
@@ -23,48 +23,53 @@ public class Collector extends SubsystemBase {
     public void ActivateMotor(double volts) {
         m_CollectorTalon.setVoltage(volts);   
         m_CollectorTalon2.setVoltage(volts);
-            m_CollectorTalon.setInverted(false);
-            m_CollectorTalon2.setInverted(false);
+        m_CollectorTalon.setInverted(false);
+        m_CollectorTalon2.setInverted(false);
     }
 /** stops the collector motors */
     public void StopMotor() {
-        m_CollectorTalon.setVoltage(0);
-        m_CollectorTalon2.setVoltage(0);
-        m_CollectorTalon.disable();
-        m_CollectorTalon2.disable();
+        
+        m_CollectorTalon.stopMotor();
+        m_CollectorTalon2.stopMotor();
     }
 
 public void ReverseMotor(double volts) {
+
         m_CollectorTalon.setVoltage(volts);   
         m_CollectorTalon2.setVoltage(volts);
         m_CollectorTalon.setInverted(true);
         m_CollectorTalon2.setInverted(true);
     }
 
-/** checks if there is something in the TOF target range 
- * @return if the TOF detects something within the target range
+/** checks if there is something in the Tof target range 
+ * @return if the Tof detects something within the target range
 */
-    public boolean TOFcheckTarget(){
-        boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
-           SmartDashboard.putBoolean("Has Note?",InTarget);
+    public boolean TofcheckTarget(){
+        
+        boolean InTarget =
+                m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
+                && m_Tof.getRange() > Constants.TofConstants.TofminRange;
+        SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
-            m_LED.SetColor(0, 255, 0, 0, 0, 8);
-        }else{m_LED.SetColor(255, 0, 0, 0, 0, 8);}
+            m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
+        } else {
+            m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
+        }
         return InTarget; // the LEDs are just there to help with testing, can be removed later. 
     }
 
 
-    public double TOFcheckDistance(){
-        double target = m_TOF.getRange();
-        
-          SmartDashboard.putNumber("TOF target distance", target);
+    public double TofcheckDistance(){
+
+        double target = m_Tof.getRange();
+        SmartDashboard.putNumber("Tof target distance", target);
         return target;
     }
 
     @Override
     public void periodic() {
-   // TOFcheckDistance();
-   // TOFcheckTarget();
+   // TofcheckDistance();
+   // TofcheckTarget();
     }
     
 }

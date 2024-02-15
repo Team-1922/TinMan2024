@@ -13,8 +13,8 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  CANSparkMax m_Left = new CANSparkMax(Constants.ShooterConstants.LeftShooterMotorID, MotorType.kBrushless);
-  CANSparkMax m_Right = new CANSparkMax(Constants.ShooterConstants.RightShooterMotorID, MotorType.kBrushless);
+  CANSparkMax m_Left = new CANSparkMax(Constants.ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
+  CANSparkMax m_Right = new CANSparkMax(Constants.ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
 
  
  

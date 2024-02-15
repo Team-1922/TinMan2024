@@ -15,9 +15,9 @@ import frc.robot.Constants;
 
 public class LedSubsystem extends SubsystemBase {
 
-  CANdle m_CaNdle = new CANdle(Constants.LedConstants.CandleID); 
+  CANdle m_CaNdle = new CANdle(Constants.LedConstants.kCandleID); 
  
-  RainbowAnimation m_rainbow = new RainbowAnimation(0.1, 0.1, Constants.LedConstants.TotalLedCount);
+  RainbowAnimation m_rainbow = new RainbowAnimation(0.1, 0.1, Constants.LedConstants.kTotalLedCount);
   /** Creates a new LedSubsystem. */
   public LedSubsystem() {
  
