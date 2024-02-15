@@ -30,10 +30,11 @@ m_ClimberMotor2.setIdleMode(IdleMode.kBrake);
  * @param Reversed true will move climber down
  */
 public void Climb( boolean Reversed){
+
   m_ClimberMotor2.setInverted(Reversed);  
   m_ClimberMotor1.setInverted(Reversed);
-    m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage);
-    m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage);
+  m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage);
+  m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage);
 
 }
 

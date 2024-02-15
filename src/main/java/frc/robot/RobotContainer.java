@@ -54,7 +54,7 @@ public class RobotContainer {
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final ClimbCommand m_ClimbUP = new ClimbCommand(m_ClimberSubsystem, false);
-   private final ClimbCommand m_ClimbDOWN = new ClimbCommand(m_ClimberSubsystem, true);
+  private final ClimbCommand m_ClimbDOWN = new ClimbCommand(m_ClimberSubsystem, true);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
