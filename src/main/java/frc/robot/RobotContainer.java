@@ -9,7 +9,7 @@ import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
 import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ClimbCommand;
+import frc.robot.commands.LeftClimb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
@@ -53,8 +53,8 @@ public class RobotContainer {
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
-  private final ClimbCommand m_ClimbUP = new ClimbCommand(m_ClimberSubsystem, false);
-  private final ClimbCommand m_ClimbDOWN = new ClimbCommand(m_ClimberSubsystem, true);
+  private final LeftClimb m_ClimbUP = new LeftClimb(m_ClimberSubsystem, false);
+  private final LeftClimb m_ClimbDOWN = new LeftClimb(m_ClimberSubsystem, true);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);

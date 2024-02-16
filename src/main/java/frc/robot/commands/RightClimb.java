@@ -7,13 +7,15 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClimberSubsystem;
 
-public class ClimbCommand extends Command {
-  boolean m_Reverse;
-  ClimberSubsystem m_ClimberSubsystem;
-  /** Creates a new ClimbCommand.
-   * @param Reversed false for up, true for down
+public class RightClimb extends Command {
+boolean m_Reverse;
+ClimberSubsystem m_ClimberSubsystem;
+
+  /** Creates a new RightClimb.
+   * 
+   * @ makes right climber hook go up/down
    */
-  public ClimbCommand(ClimberSubsystem climberSubsystem,Boolean Reversed) {
+  public RightClimb(ClimberSubsystem climberSubsystem, boolean Reversed) {
     m_Reverse = Reversed;
     m_ClimberSubsystem = climberSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -22,7 +24,7 @@ public class ClimbCommand extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-m_ClimberSubsystem.Climb(m_Reverse); 
+  m_ClimberSubsystem.RightClimb(m_Reverse); 
 
   }
 
@@ -33,7 +35,7 @@ m_ClimberSubsystem.Climb(m_Reverse);
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-m_ClimberSubsystem.StopClimber();
+m_ClimberSubsystem.StopRightClimber();
   }
 
   // Returns true when the command should end.

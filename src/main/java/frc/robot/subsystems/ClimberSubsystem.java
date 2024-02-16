@@ -29,22 +29,28 @@ m_ClimberMotor2.setIdleMode(IdleMode.kBrake);
  * @param Voltage how many volts motors will output
  * @param Reversed true will move climber down
  */
-public void Climb( boolean Reversed){
+public void LeftClimb( boolean Reversed){
 
-  m_ClimberMotor2.setInverted(Reversed);  
+  
   m_ClimberMotor1.setInverted(Reversed);
   m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage);
-  m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage);
-
 }
 
-/** Stops Climber motors */
-public void StopClimber(){
+public void RightClimb(boolean Reversed){
+
+   m_ClimberMotor2.setInverted(Reversed); 
+   m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage);
+}
+/** Stops Right Climber motor */
+public void StopRightClimber(){
+
+ m_ClimberMotor2.stopMotor();  
+}
+/** stops Left climber motor */
+public void StopLeftClimber(){
+
   m_ClimberMotor1.stopMotor();
-  m_ClimberMotor2.stopMotor();
-  
 }
-
 
 
 
