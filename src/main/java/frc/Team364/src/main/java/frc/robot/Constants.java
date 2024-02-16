@@ -50,21 +50,30 @@ public final class Constants {
         public static final boolean canCoderInvert = chosenModule.canCoderInvert;
 
         /* Swerve Current Limiting */
-        public static final int angleContinuousCurrentLimit = 25;
-        public static final int anglePeakCurrentLimit = 30; // 40
+        public static final int angleContinuousCurrentLimit = 10;
+        public static final int anglePeakCurrentLimit = 20;
         public static final double anglePeakCurrentDuration = 0.1;
         public static final boolean angleEnableCurrentLimit = true;
 
-        public static final int driveContinuousCurrentLimit = 40;
-        public static final int drivePeakCurrentLimit = 50; // 60
+        public static final double anglePeakVoltage = 1;
+        public static final double anglePeakDutyCycleOutput = .5;
+
+        public static final int driveContinuousCurrentLimit = 35;
+        public static final int drivePeakCurrentLimit = 40;
         public static final double drivePeakCurrentDuration = 0.1;
         public static final boolean driveEnableCurrentLimit = true;
-
+        public static final double drivePeakVoltage = 2;
+        public static final double drivePeakMotorOutput = .75;// out of 1
         /* These values are used by the drive falcon to ramp in open loop and closed loop driving.
          * We found a small open loop ramp (0.25) helps with tread wear, tipping, etc */
         public static final double openLoopRamp = 0.2;
         public static final double closedLoopVoltageRamp = 0.25;
         public static final double closedLoopTorqueRamp = 0.25;
+
+        /* angle motor ramp */
+        public static final double angleOpenLoopRamp = 0.5;
+        public static final double angleClosedLoopVoltageRamp = 0.5;
+        public static final double angleClosedLoopTorqueRamp = 0.5;
 
         /* Angle Motor PID Values */
         public static final double angleKP = chosenModule.angleKP;
@@ -95,7 +104,7 @@ public final class Constants {
         /** Meters per Second */
         public static final double maxSpeed = .25; //TODO: This must be tuned to specific robot
         /** Radians per Second */
-        public static final double maxAngularVelocity = .5; //TODO: This must be tuned to specific robot
+        public static final double maxAngularVelocity = .4; //TODO: This must be tuned to specific robot
 
         /* Neutral Modes */
         public static final NeutralMode angleNeutralMode = NeutralMode.Coast;
