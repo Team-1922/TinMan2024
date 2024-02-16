@@ -17,8 +17,12 @@ import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
 import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
+import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
+import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.VoltageConfigs;
 
 
 
@@ -63,17 +67,53 @@ public class SwerveMod {
        CurrentLimitsConfigs mAngleCurrentLimitsConfigs = new CurrentLimitsConfigs();
          mAngleCurrentLimitsConfigs.SupplyCurrentLimitEnable = Constants.Swerve.angleEnableCurrentLimit;
          mAngleCurrentLimitsConfigs.SupplyCurrentLimit = Constants.Swerve.angleContinuousCurrentLimit;
-         mAngleCurrentLimitsConfigs.SupplyCurrentThreshold = Constants.Swerve.anglePeakCurrentLimit;
-         mAngleCurrentLimitsConfigs.SupplyTimeThreshold = Constants.Swerve.anglePeakCurrentDuration;
-       
+       //  mAngleCurrentLimitsConfigs.SupplyCurrentThreshold = Constants.Swerve.anglePeakCurrentLimit;
+     //    mAngleCurrentLimitsConfigs.SupplyTimeThreshold = Constants.Swerve.anglePeakCurrentDuration;
+       VoltageConfigs mAngleVoltageConfigs = new VoltageConfigs();
+         mAngleVoltageConfigs.PeakForwardVoltage = Constants.Swerve.anglePeakVoltage;
+         mAngleVoltageConfigs.PeakReverseVoltage = Constants.Swerve.anglePeakVoltage;
+
+     mAngleMotor.getConfigurator().apply(mAngleVoltageConfigs);
        
        mAngleMotor.getConfigurator().apply(mAngleCurrentLimitsConfigs);
+
+        ClosedLoopRampsConfigs mAngleClosedLoopRampsConfigs = new ClosedLoopRampsConfigs();
+         mAngleClosedLoopRampsConfigs.TorqueClosedLoopRampPeriod = Constants.Swerve.angleClosedLoopTorqueRamp;
+         mAngleClosedLoopRampsConfigs.VoltageClosedLoopRampPeriod = Constants.Swerve.angleClosedLoopVoltageRamp;
+        mAngleMotor.getConfigurator().apply(mAngleClosedLoopRampsConfigs);
+
+        MotorOutputConfigs mAngleMotorOutputConfigs = new MotorOutputConfigs();
+         mAngleMotorOutputConfigs.PeakForwardDutyCycle = Constants.Swerve.anglePeakDutyCycleOutput;
+         mAngleMotorOutputConfigs.PeakReverseDutyCycle = -Constants.Swerve.anglePeakDutyCycleOutput;
+        mAngleMotor.getConfigurator().apply(mAngleMotorOutputConfigs);
+         
+        OpenLoopRampsConfigs mAngleOpenLoopRampsConfigs = new OpenLoopRampsConfigs();
+         mAngleOpenLoopRampsConfigs.DutyCycleOpenLoopRampPeriod = Constants.Swerve.angleOpenLoopRamp;
+         mAngleMotor.getConfigurator().apply(mAngleOpenLoopRampsConfigs);
+
   //      mAngleMotor.getConfigurator().apply(Robot.ctreConfigs.swerveAngleFXConfig); // that returns null and makes code crash
        
 
         /* Drive Motor Config */
         mDriveMotor = new TalonFX(
             moduleConstants.driveMotorID,"Drivebase");
+
+        ClosedLoopRampsConfigs mClosedLoopRampsConfigs = new ClosedLoopRampsConfigs();
+         mClosedLoopRampsConfigs.TorqueClosedLoopRampPeriod = Constants.Swerve.closedLoopTorqueRamp;
+         mClosedLoopRampsConfigs.VoltageClosedLoopRampPeriod = Constants.Swerve.closedLoopVoltageRamp;
+        mDriveMotor.getConfigurator().apply(mClosedLoopRampsConfigs);
+        
+     VoltageConfigs mDriveVoltageConfigs = new VoltageConfigs();
+         mDriveVoltageConfigs.PeakForwardVoltage = Constants.Swerve.drivePeakVoltage;
+         mDriveVoltageConfigs.PeakReverseVoltage = -Constants.Swerve.drivePeakVoltage;
+         mDriveMotor.getConfigurator().apply(mDriveVoltageConfigs);
+        
+        MotorOutputConfigs mDriveMotorOutputConfigs = new MotorOutputConfigs();
+         mDriveMotorOutputConfigs.PeakForwardDutyCycle = Constants.Swerve.drivePeakMotorOutput;
+         mDriveMotorOutputConfigs.PeakReverseDutyCycle = -Constants.Swerve.drivePeakMotorOutput; 
+        mDriveMotor.getConfigurator().apply(mDriveMotorOutputConfigs);
+        OpenLoopRampsConfigs mOpenLoopRampsConfigs = new OpenLoopRampsConfigs();
+         mOpenLoopRampsConfigs.DutyCycleOpenLoopRampPeriod = Constants.Swerve.openLoopRamp;
 
         CurrentLimitsConfigs mDriveCurrentLimitsConfigs = new CurrentLimitsConfigs();
          mDriveCurrentLimitsConfigs.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
