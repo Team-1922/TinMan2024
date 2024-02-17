@@ -4,9 +4,9 @@
 
 package frc.robot;
 
-import frc.Team364.src.main.java.frc.robot.States;
-import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
-import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
+import frc.Team364.robot.States;
+import frc.Team364.robot.commands.SwerveCommand;
+import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.CollectNote;
