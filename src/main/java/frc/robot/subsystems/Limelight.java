@@ -15,6 +15,10 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry m_tx;
   private NetworkTableEntry m_ty;
   private NetworkTableEntry m_ta;
+  private double tx;
+  private double ty;
+  private double ta;
+  private double mOffset = Math.PI/18;
 
   public Limelight(String LimelightName) {
     LimelightTable = NetworkTableInstance.getDefault().getTable(LimelightName);
@@ -26,22 +30,25 @@ public class Limelight extends SubsystemBase {
   /**
    * @return Target X
    */
-  public NetworkTableEntry GetTx(){
-  return m_tx;  
+  public double getTx(){
+    tx = m_tx.getDouble(0.0);
+    return tx;  
   }
 
   /**
    * @return Target Y 
    */
-  public NetworkTableEntry GetTy(){
-return m_ty;
+  public double getTy(){
+    ty = m_ty.getDouble(0.0);
+    return ty;
   }
 
     /**
    * @return Target angle
    */
-  public NetworkTableEntry GetTa(){
-return m_ta;
+  public double getTa(){
+    ta = m_ta.getDouble(0.0);
+    return ta;
   }
 
 
