@@ -9,12 +9,14 @@ import com.playingwithfusion.TimeOfFlight;
 
 public class Collector extends SubsystemBase {
     double CollectVoltage;
+   public boolean m_TofIsTriggered;
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
     private LedSubsystem m_LED = new LedSubsystem();
+    /**  Makes a new Collector subsystem */
     public Collector() {
-
+       
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
     }
 /**
@@ -57,6 +59,7 @@ public void ReverseMotor(double volts) {
         } else {
             m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
         }
+        m_TofIsTriggered = InTarget;
         return InTarget; // the LEDs are just there to help with testing, can be removed later. 
     }
 

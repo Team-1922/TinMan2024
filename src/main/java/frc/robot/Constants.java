@@ -21,10 +21,10 @@ public final class Constants {
   public static class ShooterConstants {
 
     public static final double kCollectorActivateDelay = 0.1;
-    public static final int kLeftShooterVoltage = 9;
-    public static final int kRightShooterVoltage = 7;
-    public static final int kLeftShooterMotorID = 7;
-    public static final int kRightShooterMotorID = 8;
+    public static final int kLeftShooterVoltage = 10;
+    public static final int kRightShooterVoltage = 8;
+    public static final int kLeftShooterMotorID = 8;
+    public static final int kRightShooterMotorID = 7;
 // voltage for shooting is set in the shoot command, incase we want to change voltage for shooting at different locations
   }
   public final class CollectorConstants {
@@ -32,9 +32,9 @@ public final class Constants {
     public static final int kCollectorMotorID = 6;
     public static final int kCollectorSecondMotorID = 5;  
     public static final double kRollerVoltage = 8.0;
-    public static final double kReverseRollerVoltage = 2; 
+    public static final double kReverseRollerVoltage = 2.5; 
     public static final double kReverseDuration = 0.5;
-
+    public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
 
   }
   public static class TofConstants{
