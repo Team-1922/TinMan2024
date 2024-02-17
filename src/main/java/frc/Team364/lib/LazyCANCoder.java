@@ -13,7 +13,7 @@ public class LazyCANCoder extends CANcoder {
      * @param allConfigs CTREConfig file
      */
     public LazyCANCoder(int deviceNumber, CANcoderConfiguration allConfigs){
-        super(deviceNumber, "rio");
+        super(deviceNumber, "drivebase");
         super.getConfigurator().apply(allConfigs);
     }
 }

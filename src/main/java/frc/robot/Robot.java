@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.Team364.robot.CTREConfigs;
 
 
 /**
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
-
+  public static CTREConfigs ctreConfigs;
   private RobotContainer m_robotContainer;
  
   //private StrobeAnimation mAnimation = new StrobeAnimation(255, 0, 0,0,0,8);
@@ -27,10 +28,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+ 
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-  
+     ctreConfigs = new CTREConfigs();
   }
 
   /**

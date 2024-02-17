@@ -14,6 +14,7 @@ import frc.Team364.lib.LazyCANCoder;
 import frc.Team364.lib.LazyTalonFX;
 import frc.Team364.lib.math.Conversions;
 import frc.Team364.lib.util.SwerveModuleConstants;
+import frc.Team364.robot.subsystems.Swerve;
 
 public class SwerveMod {
     private CTREConfigs ctreConfigs;
@@ -36,7 +37,7 @@ public class SwerveMod {
     private final PositionVoltage anglePosition = new PositionVoltage(0);
 
     public SwerveMod(int moduleNumber, SwerveModuleConstants moduleConstants){
-        this.ctreConfigs = Robot.ctreConfigs;
+        this.ctreConfigs = Swerve.ctreConfigs;
 
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;

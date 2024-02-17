@@ -1,6 +1,7 @@
 package frc.Team364.robot.subsystems;
 
 import frc.Team364.robot.SwerveMod;
+import frc.Team364.robot.CTREConfigs;
 import frc.Team364.robot.Constants;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -30,15 +31,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
     private PoseEstimator s_PoseEstimator = new PoseEstimator();
-
+    public static CTREConfigs ctreConfigs;
     public SwerveDriveOdometry swerveOdometry;
     public SwerveMod[] mSwerveMods;
     public Pigeon2 gyro;
     private Field2d field = new Field2d();
-
+    
     public Swerve(PoseEstimator s_PoseEstimator) {
         this.s_PoseEstimator = s_PoseEstimator;
-
+        this.ctreConfigs = new CTREConfigs();
         gyro = new Pigeon2(Constants.Swerve.pigeonID, "rio");
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
