@@ -4,9 +4,10 @@
 
 package frc.robot;
 
-import frc.Team364.src.main.java.frc.robot.States;
-import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
-import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
+import frc.Team364.robot.States;
+import frc.Team364.robot.commands.SwerveCommand;
+import frc.Team364.robot.subsystems.PoseEstimator;
+import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.CollectNote;
@@ -15,7 +16,7 @@ import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 
-import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
+
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PS4Controller;
@@ -58,9 +59,9 @@ public class RobotContainer {
  
 
   private final CommandXboxController m_operatorController = new CommandXboxController(0);
-  
+  private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
-    private final Swerve s_Swerve = new Swerve();
+    private final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
     private final XboxController driver = new XboxController(0);
 
