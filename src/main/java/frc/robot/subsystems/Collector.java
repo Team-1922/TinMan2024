@@ -8,13 +8,13 @@ import com.playingwithfusion.TimeOfFlight;
 
 
 public class Collector extends SubsystemBase {
-    
+    double CollectVoltage;
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
     private LedSubsystem m_LED = new LedSubsystem();
     public Collector() {
- 
+
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
     }
 /**
@@ -40,6 +40,8 @@ public void ReverseMotor(double volts) {
         m_CollectorTalon.setInverted(true);
         m_CollectorTalon2.setInverted(true);
     }
+  
+
 
 /** checks if there is something in the Tof target range 
  * @return if the Tof detects something within the target range
@@ -68,8 +70,9 @@ public void ReverseMotor(double volts) {
 
     @Override
     public void periodic() {
+   
    // TofcheckDistance();
-   // TofcheckTarget();
+    TofcheckTarget();
     }
     
 }

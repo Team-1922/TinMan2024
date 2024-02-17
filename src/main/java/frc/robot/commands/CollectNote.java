@@ -32,7 +32,7 @@ public class CollectNote extends Command {
   public void initialize() {
 
     if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
-      m_Collector.ReverseMotor(Constants.CollectorConstants.kRollerVoltage);
+      m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);
       m_ReverseCheck = false;
       m_HasNote = false;
     } else {
@@ -78,7 +78,7 @@ public class CollectNote extends Command {
       
     if (m_NoteCollected) { // sees note, note has gone past Tof, reversing collector until it sees note again
       if (!m_Collector.TofcheckTarget()) {
-        m_Collector.ReverseMotor(Constants.CollectorConstants.kRollerVoltage);
+        m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);
       } else {
         m_Collector.StopMotor();
         m_EndCheck = true;

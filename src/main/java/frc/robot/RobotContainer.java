@@ -61,7 +61,7 @@ public class RobotContainer {
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
     private final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
-    private final XboxController driver = new XboxController(0);
+    private final XboxController driver = new XboxController(1);
 
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;

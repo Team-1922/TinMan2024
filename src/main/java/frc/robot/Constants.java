@@ -32,7 +32,9 @@ public final class Constants {
     public static final int kCollectorMotorID = 6;
     public static final int kCollectorSecondMotorID = 5;  
     public static final double kRollerVoltage = 8.0;
+    public static final double kReverseRollerVoltage = 2; 
     public static final double kReverseDuration = 0.5;
+
 
   }
   public static class TofConstants{
