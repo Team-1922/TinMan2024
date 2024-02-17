@@ -1,7 +1,7 @@
-package frc.robot.subsystems;
+package frc.Team364.robot.subsystems;
 
-import frc.robot.SwerveMod;
-import frc.robot.Constants;
+import frc.Team364.robot.SwerveMod;
+import frc.Team364.robot.Constants;
 
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -11,7 +11,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import com.ctre.phoenix6.configs.Pigeon2Configuration;
 import com.ctre.phoenix6.hardware.Pigeon2;
 
-import org.littletonrobotics.junction.Logger;
+//import org.littletonrobotics.junction.Logger;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.HolonomicPathFollowerConfig;
@@ -39,7 +39,7 @@ public class Swerve extends SubsystemBase {
     public Swerve(PoseEstimator s_PoseEstimator) {
         this.s_PoseEstimator = s_PoseEstimator;
 
-        gyro = new Pigeon2(Constants.Swerve.pigeonID, "canivore");
+        gyro = new Pigeon2(Constants.Swerve.pigeonID, "rio");
         gyro.getConfigurator().apply(new Pigeon2Configuration());
         gyro.setYaw(0);
 
@@ -179,7 +179,7 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions()); 
         s_PoseEstimator.updateSwerve(getGyroYaw(), getModulePositions());
         field.setRobotPose(getPose());
-
+/*
         Logger.recordOutput("Mystates", getModuleStates());
         Logger.recordOutput("rawPose", getPose());
 
@@ -189,6 +189,6 @@ public class Swerve extends SubsystemBase {
             Logger.recordOutput("Mod " + mod.moduleNumber + " Cancoder", mod.getCANcoder().getDegrees());
             Logger.recordOutput("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
             Logger.recordOutput("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond); 
-        }
+        } */
     }
 }

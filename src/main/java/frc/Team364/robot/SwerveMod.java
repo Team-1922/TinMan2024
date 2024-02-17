@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.Team364.robot;
 
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionVoltage;
@@ -10,10 +10,10 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import frc.lib.LazyCANCoder;
-import frc.lib.LazyTalonFX;
-import frc.lib.math.Conversions;
-import frc.lib.util.SwerveModuleConstants;
+import frc.Team364.lib.LazyCANCoder;
+import frc.Team364.lib.LazyTalonFX;
+import frc.Team364.lib.math.Conversions;
+import frc.Team364.lib.util.SwerveModuleConstants;
 
 public class SwerveMod {
     private CTREConfigs ctreConfigs;

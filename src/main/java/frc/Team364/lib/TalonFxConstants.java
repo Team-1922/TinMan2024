@@ -1,4 +1,4 @@
-package frc.lib;
+package frc.Team364.lib;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.signals.InvertedValue;

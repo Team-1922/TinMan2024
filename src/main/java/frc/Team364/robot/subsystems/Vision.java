@@ -1,9 +1,9 @@
-package frc.robot.subsystems;
+package frc.Team364.robot.subsystems;
 
-import frc.robot.Constants;
-import frc.lib.util.Limelight;
+import frc.Team364.robot.Constants;
+import frc.Team364.lib.util.Limelight;
 
-import org.littletonrobotics.junction.Logger;
+//import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -57,7 +57,7 @@ public class Vision extends SubsystemBase {
         SmartDashboard.putNumber("left LL, Y", leftLL.getBlueBotPose2d().getY());
         SmartDashboard.putNumber("right LL, X", rightLL.getBlueBotPose2d().getX());
         SmartDashboard.putNumber("right LL, Y", rightLL.getBlueBotPose2d().getY());
-        Logger.recordOutput("LLLeft Pose", leftLL.getBlueBotPose2d());
+      //  Logger.recordOutput("LLLeft Pose", leftLL.getBlueBotPose2d());
         
          if(s_PoseEstimator.readyToUpdateVision()){
             updateVision();

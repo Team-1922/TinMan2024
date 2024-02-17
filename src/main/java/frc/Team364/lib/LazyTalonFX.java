@@ -1,4 +1,4 @@
-package frc.lib;
+package frc.Team364.lib;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfigurator;
@@ -16,7 +16,7 @@ public class LazyTalonFX extends TalonFX {
      * @param slowStatusFrame
      */
     public LazyTalonFX(int deviceNumber, TalonFXConfiguration allConfigs, boolean slowStatusFrame){
-        super(deviceNumber, "canivore");
+        super(deviceNumber, "rio");
         TalonFXConfigurator configurator = super.getConfigurator();
         configurator.apply(allConfigs);
 
@@ -31,7 +31,7 @@ public class LazyTalonFX extends TalonFX {
      * @param slowStatusFrame
      */
     public LazyTalonFX(TalonFXConstants talonFXConstants){
-        super(talonFXConstants.deviceNumber, "canivore");
+        super(talonFXConstants.deviceNumber, "rio");
         super.getConfigurator().apply(talonFXConstants.allConfigs);
 
         if (talonFXConstants.slowStatusFrame){

@@ -1,4 +1,4 @@
-package frc.lib;
+package frc.Team364.lib;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.hardware.CANcoder;
@@ -13,7 +13,7 @@ public class LazyCANCoder extends CANcoder {
      * @param allConfigs CTREConfig file
      */
     public LazyCANCoder(int deviceNumber, CANcoderConfiguration allConfigs){
-        super(deviceNumber, "canivore");
+        super(deviceNumber, "rio");
         super.getConfigurator().apply(allConfigs);
     }
 }

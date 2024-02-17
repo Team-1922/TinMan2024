@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.Team364.robot;
 
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
