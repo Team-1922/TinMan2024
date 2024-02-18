@@ -28,6 +28,8 @@ public final class Autos {
     throw new UnsupportedOperationException("This is a utility class!");
   }
 
+  
+
 
   private final AutoCollect Collect(){
     AutoCollect collect = new AutoCollect(m_Collector, m_Collect, .2);

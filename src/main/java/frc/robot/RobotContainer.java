@@ -45,7 +45,7 @@ public class RobotContainer {
   private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
 
   private final Collector m_Collector = new Collector();
-   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector );
+   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   
