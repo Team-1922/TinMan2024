@@ -14,12 +14,21 @@ public class Shoot extends Command {
   ShooterSubsystem m_ShootSubsystem;
   Collector m_Collector;
   Timer m_Timer = new Timer();
+  double m_VLeft;
+  double m_VRight;
+  double m_Delay;
+  double m_CollectVoltage;
   /** Creates a new Shoot. */
   public Shoot( ShooterSubsystem ShootSubsystem, Collector collectorSubsystem ) {
 
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
     addRequirements(ShootSubsystem, collectorSubsystem);
+
+    m_VLeft = Constants.ShooterConstants.kLeftShooterVoltage;
+    m_VRight = Constants.ShooterConstants.kRightShooterVoltage;
+    m_CollectVoltage = Constants.CollectorConstants.kRollerVoltage;
+    m_Delay = Constants.ShooterConstants.kCollectorActivateDelay;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -29,15 +38,15 @@ public class Shoot extends Command {
 
     m_Timer.reset();
     m_Timer.start();
-    m_ShootSubsystem.Shoot(Constants.ShooterConstants.kLeftShooterVoltage, Constants.ShooterConstants.kRightShooterVoltage); // might need to be higher, starting low to see if it works
+    m_ShootSubsystem.Shoot(m_VLeft, m_VRight); // might need to be higher, starting low to see if it works
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if (m_Timer.hasElapsed(Constants.ShooterConstants.kCollectorActivateDelay)) {
-      m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
+    if (m_Timer.hasElapsed(m_Delay)) {
+      m_Collector.ActivateMotor(m_CollectVoltage);
     }
   }
 
