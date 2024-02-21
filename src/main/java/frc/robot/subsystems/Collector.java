@@ -9,7 +9,7 @@ import com.playingwithfusion.TimeOfFlight;
 
 public class Collector extends SubsystemBase {
     double CollectVoltage;
-   public boolean m_TofIsTriggered;
+   //public boolean m_TofIsTriggered;
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);

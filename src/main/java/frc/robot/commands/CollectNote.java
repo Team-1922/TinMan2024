@@ -32,7 +32,7 @@ public class CollectNote extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (!m_Collector.m_TofIsTriggered) {// if it doesn't have a note, run reverse 
+    if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
     
     m_ReverseCheck = false;
     m_HasNote = false;
@@ -57,7 +57,7 @@ public class CollectNote extends Command {
         return;
       }
       m_DelayTimer.start();
-      if (!m_Collector.m_TofIsTriggered) {
+      if (!m_Collector.TofcheckTarget()) {
         
         WaitCommand m_Wait = new WaitCommand(0.2);
         m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
@@ -79,7 +79,7 @@ public class CollectNote extends Command {
       m_DelayTimer.stop();
       m_DelayTimer.reset();
          
-      if (m_Collector.m_TofIsTriggered) {
+      if (m_Collector.TofcheckTarget()) {
         
         m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerSecondVoltage);
       } else {
@@ -90,7 +90,7 @@ public class CollectNote extends Command {
       return;
     }  
     else { // sees note, note has gone past Tof, reversing collector until it sees note again
-      if (!m_Collector.m_TofIsTriggered) {
+      if (!m_Collector.TofcheckTarget()) {
         if (m_DelayTimer.advanceIfElapsed(.2)) {
           
       
