@@ -30,11 +30,9 @@ public class Shoot extends Command {
 
     m_IsAuto = IsAuto;
     m_AutoTime = AutoTime;
-
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
     addRequirements(ShootSubsystem, collectorSubsystem);
-    
     m_VLeft = Constants.ShooterConstants.kLeftShooterVoltage;
     m_VRight = Constants.ShooterConstants.kRightShooterVoltage;
     m_CollectVoltage = Constants.CollectorConstants.kRollerVoltage;
@@ -77,6 +75,6 @@ public class Shoot extends Command {
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime); // Because the timer won't 
+    return m_AutoTimer.hasElapsed(m_AutoTime); // Because the timer won't start if it's not auto
   }
 }

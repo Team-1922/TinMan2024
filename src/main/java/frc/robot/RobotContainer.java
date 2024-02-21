@@ -53,10 +53,10 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  //private final XboxController m_operatorController = new XboxController(0);
+  
  
-
-  private final CommandXboxController m_operatorController = new CommandXboxController(0);
+ 
+  private final CommandXboxController m_operatorController = new CommandXboxController(1);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
     private final Swerve s_Swerve = new Swerve(s_PoseEstimator);
@@ -152,7 +152,6 @@ m_autoChooser.addOption("do nothing", null);
     m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
 
-    
   }
 
   /**

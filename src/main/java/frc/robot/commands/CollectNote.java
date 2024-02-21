@@ -45,8 +45,13 @@ public class CollectNote extends Command {
   m_Timer.reset();
   m_Timer.start();
   m_DelayTimer.reset();
-  if (!m_HasNote) {
-      while (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
+}
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+   
+ if (!m_HasNote) {
+      if (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
         if (m_Collector.TofcheckTarget() || m_Timer.hasElapsed(m_ReverseDuration)) {
           m_Collector.StopMotor();
           m_ReverseCheck = true;
@@ -57,27 +62,20 @@ public class CollectNote extends Command {
         return;
       }
       m_DelayTimer.start();
-      if (!m_Collector.TofcheckTarget()) {
-        
-        WaitCommand m_Wait = new WaitCommand(0.2);
+      if (!m_Collector.TofcheckTarget()  ) {
+      if (m_DelayTimer.hasElapsed(.2)){
         m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
         m_DelayTimer.stop();
-          
+      }
       } else {
         m_HasNote = true;
+          m_DelayTimer.reset();
       } 
       return;
     }         
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-   
-
+  
     if (!m_NoteCollected) { // Sees note, but note is not all the way in the robot 
-      m_DelayTimer.stop();
-      m_DelayTimer.reset();
+    
          
       if (m_Collector.TofcheckTarget()) {
         
@@ -91,7 +89,7 @@ public class CollectNote extends Command {
     }  
     else { // sees note, note has gone past Tof, reversing collector until it sees note again
       if (!m_Collector.TofcheckTarget()) {
-        if (m_DelayTimer.advanceIfElapsed(.2)) {
+        if (m_DelayTimer.hasElapsed(.2)) {
           
       
         m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);

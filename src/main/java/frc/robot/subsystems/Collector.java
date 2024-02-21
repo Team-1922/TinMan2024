@@ -13,10 +13,12 @@ public class Collector extends SubsystemBase {
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
+
    // private LedSubsystem m_LED = new LedSubsystem();
     /**  Makes a new Collector subsystem */
     public Collector() {
-       
+        m_CollectorTalon.setInverted(false);
+        m_CollectorTalon2.setInverted(false); 
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
     }
 /**
@@ -25,8 +27,7 @@ public class Collector extends SubsystemBase {
     public void ActivateMotor(double volts) {
         m_CollectorTalon.setVoltage(volts);   
         m_CollectorTalon2.setVoltage(volts);
-        m_CollectorTalon.setInverted(false);
-        m_CollectorTalon2.setInverted(false);
+
     }
 /** stops the collector motors */
     public void StopMotor() {
@@ -37,10 +38,9 @@ public class Collector extends SubsystemBase {
 
 public void ReverseMotor(double volts) {
 
-        m_CollectorTalon.setVoltage(volts);   
-        m_CollectorTalon2.setVoltage(volts);
-        m_CollectorTalon.setInverted(true);
-        m_CollectorTalon2.setInverted(true);
+        m_CollectorTalon.setVoltage(-volts);   
+        m_CollectorTalon2.setVoltage(-volts);
+    
     }
   
 

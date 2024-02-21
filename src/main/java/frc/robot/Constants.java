@@ -31,8 +31,8 @@ public final class Constants {
     // CONFIGS 
     public static final double kLeftCurrentLimit = 40; // amps (not used)
     public static final double kRightCurrentLimit = 40; // amps (not used)
-    public static final double kOpenLoopRamp = 0.1; // seconds
-    public static final double kClosedLoopRamp = 0.1; // seconds
+    public static final double kOpenLoopRamp = 0.2; // seconds
+    public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
     
     
