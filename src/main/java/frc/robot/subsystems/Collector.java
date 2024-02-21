@@ -13,7 +13,7 @@ public class Collector extends SubsystemBase {
     private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
-    private LedSubsystem m_LED = new LedSubsystem();
+   // private LedSubsystem m_LED = new LedSubsystem();
     /**  Makes a new Collector subsystem */
     public Collector() {
        
@@ -54,12 +54,12 @@ public void ReverseMotor(double volts) {
                 m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
-        if (InTarget) {
+   /*      if (InTarget) {
             m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
         } else {
             m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
-        }
-        m_TofIsTriggered = InTarget;
+        }*/
+    
         return InTarget; // the LEDs are just there to help with testing, can be removed later. 
     }
 
