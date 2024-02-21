@@ -8,6 +8,7 @@ import frc.robot.Constants;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class CollectNote extends Command {
  
@@ -31,49 +32,48 @@ public class CollectNote extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
     if (!m_Collector.m_TofIsTriggered) {// if it doesn't have a note, run reverse 
- 
-      m_ReverseCheck = false;
-      m_HasNote = false;
-    } else {
-      m_ReverseCheck = true; 
-      m_HasNote = true;
-    }
-    m_NoteCollected = false;
-    m_EndCheck = false;
-    m_Timer.reset();
-    m_Timer.start();
-    m_DelayTimer.reset();
+    
+    m_ReverseCheck = false;
+    m_HasNote = false;
+  } else {
+    m_ReverseCheck = true; 
+    m_HasNote = true;
   }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-   
-    if (!m_HasNote) {
-      if (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
+  m_NoteCollected = false;
+  m_EndCheck = false;
+  m_Timer.reset();
+  m_Timer.start();
+  m_DelayTimer.reset();
+  if (!m_HasNote) {
+      while (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
         if (m_Collector.TofcheckTarget() || m_Timer.hasElapsed(m_ReverseDuration)) {
           m_Collector.StopMotor();
           m_ReverseCheck = true;
         } 
         else {
-               m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);
+          m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);
         }
         return;
       }
       m_DelayTimer.start();
       if (!m_Collector.m_TofIsTriggered) {
-         
-        if (m_DelayTimer.hasElapsed(0.2)){
-          m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
-          m_DelayTimer.stop();}
+        
+        WaitCommand m_Wait = new WaitCommand(0.2);
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
+        m_DelayTimer.stop();
           
       } else {
         m_HasNote = true;
       } 
       return;
     }         
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+   
 
     if (!m_NoteCollected) { // Sees note, but note is not all the way in the robot 
       m_DelayTimer.stop();
@@ -89,7 +89,7 @@ public class CollectNote extends Command {
       }
       return;
     }  
-    if (m_NoteCollected) { // sees note, note has gone past Tof, reversing collector until it sees note again
+    else { // sees note, note has gone past Tof, reversing collector until it sees note again
       if (!m_Collector.m_TofIsTriggered) {
         if (m_DelayTimer.advanceIfElapsed(.2)) {
           
