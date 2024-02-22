@@ -180,9 +180,9 @@ public class Swerve extends SubsystemBase {
         swerveOdometry.update(getGyroYaw(), getModulePositions()); 
         s_PoseEstimator.updateSwerve(getGyroYaw(), getModulePositions());
         field.setRobotPose(getPose());
-         for(SwerveMod mod : mSwerveMods){
+    /*      for(SwerveMod mod : mSwerveMods){
              SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCANcoder().getDegrees());
-         }
+         } */
         /*
         Logger.recordOutput("Mystates", getModuleStates());
         Logger.recordOutput("rawPose", getPose());

@@ -1,7 +1,12 @@
 package frc.robot.subsystems;
 import frc.robot.Constants;
+import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
 
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
@@ -10,16 +15,41 @@ import com.playingwithfusion.TimeOfFlight;
 public class Collector extends SubsystemBase {
     double CollectVoltage;
    //public boolean m_TofIsTriggered;
-    private static TalonFX m_CollectorTalon = new TalonFX(Constants.CollectorConstants.kCollectorMotorID); 
-    private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.CollectorConstants.kCollectorSecondMotorID);
+    private static TalonFX m_CollectorTalon = new TalonFX(CollectorConstants.kCollectorMotorID); 
+    private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
-
+    CurrentLimitsConfigs m_Configs = new CurrentLimitsConfigs();
    // private LedSubsystem m_LED = new LedSubsystem();
     /**  Makes a new Collector subsystem */
     public Collector() {
         m_CollectorTalon.setInverted(false);
         m_CollectorTalon2.setInverted(false); 
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
+      
+        //  MOTOR CONFIGS 
+        m_Configs.SupplyCurrentLimitEnable = CollectorConstants.kCurrentLimitEnable;
+        m_Configs.SupplyCurrentLimit = CollectorConstants.kCurrentSoftLimit;
+        m_Configs.SupplyCurrentThreshold = CollectorConstants.kCurrentHardLimit;
+        m_Configs.SupplyTimeThreshold = CollectorConstants.kCurrentLimitTime;
+        m_CollectorTalon.getConfigurator().apply(m_Configs);
+        m_CollectorTalon.getConfigurator().apply(
+                new ClosedLoopRampsConfigs()
+                    .withVoltageClosedLoopRampPeriod(CollectorConstants.kClosedLoopRamp)
+        );
+        m_CollectorTalon.getConfigurator().apply(
+                new OpenLoopRampsConfigs()
+                    .withVoltageOpenLoopRampPeriod(CollectorConstants.kOpenLoopRamp)
+        );
+        m_CollectorTalon2.getConfigurator().apply(m_Configs);
+        m_CollectorTalon2.getConfigurator().apply(
+                new ClosedLoopRampsConfigs()
+                    .withVoltageClosedLoopRampPeriod(CollectorConstants.kClosedLoopRamp)
+        );
+        m_CollectorTalon2.getConfigurator().apply(
+                new OpenLoopRampsConfigs()
+                    .withVoltageOpenLoopRampPeriod(CollectorConstants.kOpenLoopRamp)
+        );
+
     }
 /**
  * @param volts what voltage you want to set the motors to
@@ -35,7 +65,7 @@ public class Collector extends SubsystemBase {
         m_CollectorTalon.stopMotor();
         m_CollectorTalon2.stopMotor();
     }
-
+/** Makes the collector spin backwards with the desired voltage */
 public void ReverseMotor(double volts) {
 
         m_CollectorTalon.setVoltage(-volts);   
@@ -74,7 +104,6 @@ public void ReverseMotor(double volts) {
     @Override
     public void periodic() {
    
-   // TofcheckDistance();
     TofcheckTarget();
     }
     

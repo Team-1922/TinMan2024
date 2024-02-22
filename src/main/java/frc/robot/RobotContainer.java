@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.CollectReverse;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -61,7 +62,7 @@ public class RobotContainer {
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
     private final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
-    private final XboxController driver = new XboxController(1);
+    private final XboxController driver = new XboxController(0);
 
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -129,7 +130,7 @@ m_autoChooser.addOption("do nothing", null);
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
-
+ zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
         
     //Heading lock bindings
     /*   forwardHold.onTrue(
@@ -148,9 +149,9 @@ m_autoChooser.addOption("do nothing", null);
     // cancelling on release.
     m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
-    m_operatorController.button(1).whileTrue(m_shoot);
-    m_operatorController.button(2).whileTrue(m_CollectNote);
-    m_operatorController.button(3).whileTrue(m_CollectReverse);
+ //   m_operatorController.button(1).whileTrue(m_shoot);
+ //   m_operatorController.button(2).whileTrue(m_CollectNote);
+ //   m_operatorController.button(3).whileTrue(m_CollectReverse);
 
   }
 

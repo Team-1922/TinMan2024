@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.TalonFXConfigurator;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -47,6 +49,13 @@ public final class Constants {
     public static final double kReverseDuration = 0.75;
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
 
+    // CONFIGS
+    public static final double kOpenLoopRamp = 0.2; // seconds
+    public static final double kClosedLoopRamp = 0.2; // seconds
+    public static final double kCurrentSoftLimit = 40; // amps
+    public static final double kCurrentHardLimit = 45; // amps
+    public static final boolean kCurrentLimitEnable = true; 
+    public static final double kCurrentLimitTime = 0.1;
   }
 
   public static class TofConstants{
