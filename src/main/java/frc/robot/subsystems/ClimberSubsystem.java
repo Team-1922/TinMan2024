@@ -26,32 +26,30 @@ m_ClimberMotor1.setInverted(false);
 m_ClimberMotor2.setInverted(false);
   }
 
-/**
- * @param Voltage how many volts motors will output
- * @param SpeedMultiplier negitive for down positive for up 
+/** makes left climber motor spin
  * 
+ * @param DirectionMulitplier 1 for up, -1 for down 
  */
-public void LeftClimb( double SpeedMultiplier){
+public void LeftClimb(double DirectionMulitplier){
 
-  
-
-  m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage*SpeedMultiplier);
+  m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage*DirectionMulitplier);
 }
 
-/** 
- * @param SpeedMultiplier -1 for down, 1 for up 
+/** makes right climber motor spin 
+ * 
+ * @param DirectionMulitplier {@value-1} for down, {@value 1} for up
  */
-public void RightClimb(double SpeedMultiplier){
+public void RightClimb(double DirectionMulitplier){
 
 
-   m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage*SpeedMultiplier);
+   m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage*DirectionMulitplier);
 }
 /** Stops Right Climber motor */
 public void StopRightClimber(){
 
- m_ClimberMotor2.stopMotor();  
+  m_ClimberMotor2.stopMotor();  
 }
-/** stops Left climber motor */
+/** stops Left climber motor  */
 public void StopLeftClimber(){
 
   m_ClimberMotor1.stopMotor();
