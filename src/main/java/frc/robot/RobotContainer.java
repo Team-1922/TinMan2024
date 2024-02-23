@@ -53,8 +53,11 @@ public class RobotContainer {
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
-  private final LeftClimb m_ClimbUP = new LeftClimb(m_ClimberSubsystem, false);
-  private final LeftClimb m_ClimbDOWN = new LeftClimb(m_ClimberSubsystem, true);
+  private final LeftClimb m_LeftClimbUP = new LeftClimb(m_ClimberSubsystem, false);
+  private final LeftClimb m_LeftClimbDOWN = new LeftClimb(m_ClimberSubsystem, true);
+
+    private final LeftClimb m_RightClimbUP = new LeftClimb(m_ClimberSubsystem, false);
+  private final LeftClimb m_RightClimbDOWN = new LeftClimb(m_ClimberSubsystem, true);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -68,7 +71,7 @@ public class RobotContainer {
     private final Swerve s_Swerve = new Swerve();
 
     private final XboxController driver = new XboxController(0);
-
+ 
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -158,9 +161,10 @@ m_autoChooser.addOption("do nothing", null);
     m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
 
-    m_operatorController.povUp().whileTrue(m_ClimbUP);
-    m_operatorController.povDown().whileTrue(m_ClimbDOWN);
-    
+    m_operatorController.button(4).whileTrue(m_RightClimbUP);
+    m_operatorController.button(5).whileTrue(m_RightClimbDOWN);
+    m_operatorController.button(6).whileTrue(m_LeftClimbUP);
+    m_operatorController.button(7).whileTrue(m_LeftClimbDOWN);
   }
 
   /**
