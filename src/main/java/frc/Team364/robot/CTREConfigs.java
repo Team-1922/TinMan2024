@@ -46,6 +46,11 @@ public final class CTREConfigs {
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.driveCurrentThreshold;
         swerveDriveFXConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.driveCurrentThresholdTime;
 
+        /* Voltage Limiting */
+        swerveAngleFXConfig.Voltage.PeakReverseVoltage = 1;
+        swerveAngleFXConfig.Voltage.PeakForwardVoltage= 1;
+        swerveDriveFXConfig.Voltage.PeakForwardVoltage = 1;
+        swerveDriveFXConfig.Voltage.PeakReverseVoltage = 1;
         /* PID Config */
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
