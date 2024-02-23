@@ -24,7 +24,12 @@ ClimberSubsystem m_ClimberSubsystem;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  m_ClimberSubsystem.RightClimb(m_Reverse); 
+    if(m_Reverse){
+     m_ClimberSubsystem.RightClimb(-1);   
+    }else{
+         m_ClimberSubsystem.RightClimb(1); 
+    }
+ 
 
   }
 

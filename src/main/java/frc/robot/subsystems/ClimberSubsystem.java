@@ -22,24 +22,29 @@ CANSparkMax m_ClimberMotor2 = new CANSparkMax(Constants.ClimberConstants.Climber
 
 m_ClimberMotor1.setIdleMode(IdleMode.kBrake);
 m_ClimberMotor2.setIdleMode(IdleMode.kBrake);
-
+m_ClimberMotor1.setInverted(false);
+m_ClimberMotor2.setInverted(false);
   }
 
 /**
  * @param Voltage how many volts motors will output
- * @param Reversed true will move climber down
+ * @param SpeedMultiplier negitive for down positive for up 
+ * 
  */
-public void LeftClimb( boolean Reversed){
+public void LeftClimb( double SpeedMultiplier){
 
   
-  m_ClimberMotor1.setInverted(Reversed);
-  m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage);
+
+  m_ClimberMotor1.setVoltage(Constants.ClimberConstants.kClimbVoltage*SpeedMultiplier);
 }
 
-public void RightClimb(boolean Reversed){
+/** 
+ * @param SpeedMultiplier -1 for down, 1 for up 
+ */
+public void RightClimb(double SpeedMultiplier){
 
-   m_ClimberMotor2.setInverted(Reversed); 
-   m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage);
+
+   m_ClimberMotor2.setVoltage(Constants.ClimberConstants.kClimbVoltage*SpeedMultiplier);
 }
 /** Stops Right Climber motor */
 public void StopRightClimber(){
