@@ -9,19 +9,13 @@ import frc.Team364.src.main.java.frc.robot.commands.SwerveCommand;
 import frc.Team364.src.main.java.frc.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.LeftClimb;
+import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
-
-import javax.swing.plaf.metal.MetalBorders.PaletteBorder;
-
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PS4Controller;
-
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -29,8 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+
 import frc.robot.commands.CollectReverse;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -53,11 +46,9 @@ public class RobotContainer {
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
-  private final LeftClimb m_LeftClimbUP = new LeftClimb(m_ClimberSubsystem, false);
-  private final LeftClimb m_LeftClimbDOWN = new LeftClimb(m_ClimberSubsystem, true);
-
-    private final LeftClimb m_RightClimbUP = new LeftClimb(m_ClimberSubsystem, false);
-  private final LeftClimb m_RightClimbDOWN = new LeftClimb(m_ClimberSubsystem, true);
+ 
+  private final CommandXboxController m_operatorController = new CommandXboxController(0);
+  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -65,7 +56,7 @@ public class RobotContainer {
   //private final XboxController m_operatorController = new XboxController(0);
  
 
-  private final CommandXboxController m_operatorController = new CommandXboxController(0);
+  
   
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
     private final Swerve s_Swerve = new Swerve();
@@ -91,7 +82,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-
+    m_ClimberSubsystem.setDefaultCommand(m_Climb);
   
 
       s_Swerve.setDefaultCommand(
@@ -161,10 +152,10 @@ m_autoChooser.addOption("do nothing", null);
     m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
 
-    m_operatorController.button(4).whileTrue(m_RightClimbUP);
-    m_operatorController.button(5).whileTrue(m_RightClimbDOWN);
-    m_operatorController.button(6).whileTrue(m_LeftClimbUP);
-    m_operatorController.button(7).whileTrue(m_LeftClimbDOWN);
+   // m_operatorController.button(4).whileTrue(m_RightClimbUP);
+   // m_operatorController.button(5).whileTrue(m_RightClimbDOWN);
+  //  m_operatorController.button(6).whileTrue(m_LeftClimbUP);
+   // m_operatorController.button(7).whileTrue(m_LeftClimbDOWN);
   }
 
   /**
