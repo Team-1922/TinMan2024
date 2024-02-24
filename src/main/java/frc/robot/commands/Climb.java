@@ -18,6 +18,9 @@ public class Climb extends Command {
   double m_Deadband;
   /** Creates a new Climb.
    * 
+   * @param LeftAxis the axis used for controlling the left climber motor
+   * @param RightAxis the axis used for controlling the right climber motor
+   * @param Deadband the deadband to apply to the controller
    */
   public Climb(ClimberSubsystem climberSubsystem, CommandXboxController controller, int LeftAxis, int RightAxis, double Deadband) {
     m_Controller = controller;
@@ -31,13 +34,12 @@ public class Climb extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    
-  }
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
     m_ClimberSubsystem.LeftClimb(
     MathUtil.applyDeadband(m_Controller.getRawAxis(m_LeftAxis), m_Deadband));
      m_ClimberSubsystem.RightClimb(
@@ -47,6 +49,7 @@ public class Climb extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
 m_ClimberSubsystem.StopLeftClimber();
 m_ClimberSubsystem.StopRightClimber();
 
