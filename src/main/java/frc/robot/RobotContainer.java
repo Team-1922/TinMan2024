@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
 
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -78,7 +79,7 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-
+   private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -108,9 +109,9 @@ public class RobotContainer {
 
   public void autoChooser(){
 
-m_autoChooser.setDefaultOption("Placeholder", null);
-m_autoChooser.addOption("do nothing", null);
-
+  m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
+  m_autoChooser.addOption("do nothing", null);
+  
 
   SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }

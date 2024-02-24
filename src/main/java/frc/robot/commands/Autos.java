@@ -21,7 +21,7 @@ public final class Autos {
   private static ShooterSubsystem m_Shooter = new ShooterSubsystem();
   private static CollectNote m_Collect = new CollectNote(m_Collector);
   private static AutoCollect m_AutoCollect = new AutoCollect(m_Collector, m_Collect, 0.2);
-
+  private static Shoot m_Shoot = new Shoot(m_Shooter, m_Collector, true, 3);
 
 
   private Autos() {
@@ -37,8 +37,8 @@ public final class Autos {
   }
 
 
-  private static final SequentialCommandGroup TestAuto = new SequentialCommandGroup(
-   null 
+  public static final SequentialCommandGroup Shoot = new SequentialCommandGroup(
+   m_Shoot
 
   );
 }
