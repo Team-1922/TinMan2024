@@ -18,12 +18,14 @@ public class ShooterSubsystem extends SubsystemBase {
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
     
+  //  m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless); 
+  // m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
     m_Left.setInverted(true);
     m_Right.setInverted(false);// could be the left one is supposed to be inverted, just putting this here for now
-    m_Left.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
-    m_Right.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
-    m_Left.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
-    m_Right.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
+  //  m_Left.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
+ //   m_Right.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
+  //  m_Left.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
+  //  m_Right.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
     
  
   }

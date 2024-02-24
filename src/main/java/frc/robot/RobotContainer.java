@@ -44,7 +44,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  private final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
+  public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
 
   private final Collector m_Collector = new Collector();
    private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
@@ -79,7 +79,7 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-   private final SequentialCommandGroup ShootAuto = Autos.Shoot;
+  // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -109,8 +109,8 @@ public class RobotContainer {
 
   public void autoChooser(){
 
-  m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
-  m_autoChooser.addOption("do nothing", null);
+//  m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
+  m_autoChooser.setDefaultOption("do nothing", null);
   SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
 

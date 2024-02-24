@@ -22,12 +22,12 @@ public final class Autos {
     return Commands.sequence(subsystem.exampleMethodCommand(), new ExampleCommand(subsystem));
   }
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
-  private Swerve s_Swerve = new Swerve(s_PoseEstimator);
+  //private Swerve s_Swerve = new Swerve(s_PoseEstimator);
   private static Collector m_Collector = new Collector();
-  private static ShooterSubsystem m_Shooter = new ShooterSubsystem();
+ 
   private static CollectNote m_Collect = new CollectNote(m_Collector);
   private static AutoCollect m_AutoCollect = new AutoCollect(m_Collector, m_Collect, 0.2);
-  private static Shoot m_Shoot = new Shoot(m_Shooter, m_Collector, true, 3);
+ // \private static Shoot m_Shoot = new Shoot(m_Shooter, m_Collector, true, 3); // this line causes code to crash
 
 
 
@@ -42,5 +42,5 @@ public final class Autos {
   }
 
 
-  public static final SequentialCommandGroup Shoot = new SequentialCommandGroup(m_Shoot);
+ // public static final SequentialCommandGroup Shoot = new SequentialCommandGroup(m_Shoot);
 }
