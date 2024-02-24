@@ -21,6 +21,7 @@ import frc.robot.subsystems.ExampleSubsystem;
 
 
 import frc.robot.subsystems.ShooterSubsystem;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -56,9 +57,11 @@ public class RobotContainer {
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   
- 
- 
-  private final CommandXboxController m_operatorController = new CommandXboxController(1);
+ SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.AngleSlewRate);
+ SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.DriveSlewRate);
+ SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.StraifeSlewRate);
+
+  private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
@@ -90,9 +93,9 @@ public class RobotContainer {
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
+                () -> DriveSlewRateLimiter.calculate(-driver.getRawAxis(translationAxis)), 
+                () -> StraifeSlewRateLimiter.calculate(-driver.getRawAxis(strafeAxis)), 
+                () -> AngleSlewRateLimiter.calculate(-driver.getRawAxis(rotationAxis)), 
                 () -> robotCentric.getAsBoolean(),
                 () -> dampen.getAsBoolean(),
                 () -> 0 // Dynamic heading placeholder
