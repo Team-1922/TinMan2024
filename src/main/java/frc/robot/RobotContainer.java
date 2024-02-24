@@ -61,7 +61,7 @@ public class RobotContainer {
   private final CommandXboxController m_operatorController = new CommandXboxController(1);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
-    private final Swerve s_Swerve = new Swerve(s_PoseEstimator);
+  public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
     private final XboxController driver = new XboxController(0);
 
@@ -111,8 +111,6 @@ public class RobotContainer {
 
   m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
   m_autoChooser.addOption("do nothing", null);
-  
-
   SmartDashboard.putData("Auto Chooser",m_autoChooser);
   }
 
