@@ -57,14 +57,14 @@ public class CollectNote extends Command {
           m_ReverseCheck = true;
         } 
         else {
-          m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);
+          m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseCollectRPM);
         }
         return;
       }
       m_DelayTimer.start();
       if (!m_Collector.TofcheckTarget()  ) {
       if (m_DelayTimer.hasElapsed(.2)){
-        m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerVoltage);
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
         m_DelayTimer.stop();
       }
       } else {
@@ -79,7 +79,7 @@ public class CollectNote extends Command {
          
       if (m_Collector.TofcheckTarget()) {
         
-        m_Collector.ActivateMotor(Constants.CollectorConstants.kRollerSecondVoltage);
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kSecondCollectRPM);
       } else {
         m_Collector.StopMotor();
         m_NoteCollected = true;
@@ -92,7 +92,7 @@ public class CollectNote extends Command {
         if (m_DelayTimer.hasElapsed(.2)) {
           
       
-        m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseRollerVoltage);
+        m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseCollectRPM);
         }
       } else {
         m_Collector.StopMotor();
