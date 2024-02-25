@@ -63,6 +63,7 @@ public class RobotContainer {
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   
+
  SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter( SmartDashboard.getNumber("AngleSlewRate", Constants.OperatorConstants.AngleSlewRate));
  SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(SmartDashboard.getNumber( "DriveSlewRate",Constants.OperatorConstants.DriveSlewRate));
  SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(SmartDashboard.getNumber("StraifeSlewRate",Constants.OperatorConstants.StraifeSlewRate));
@@ -100,7 +101,9 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-
+SmartDashboard.putNumber("AngleSlewRate",Constants.OperatorConstants.AngleSlewRate);
+SmartDashboard.putNumber("DriveSlewRate",Constants.OperatorConstants.DriveSlewRate);
+SmartDashboard.putNumber("StraifeSlewRate",Constants.OperatorConstants.StraifeSlewRate);
     NamedCommands.registerCommand("Shoot",m_AutoShoot);
   
       s_Swerve.setDefaultCommand(
