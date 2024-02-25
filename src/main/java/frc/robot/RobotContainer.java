@@ -21,6 +21,10 @@ import frc.robot.subsystems.ExampleSubsystem;
 
 
 import frc.robot.subsystems.ShooterSubsystem;
+
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -68,6 +72,11 @@ public class RobotContainer {
   private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
+
+  private final SendableChooser<Command> AutoChooser;
+  // AUTO COMMANDS
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3.5);
+
     private final XboxController driver = new XboxController(0);
 
    /* Driver Controls */
@@ -92,6 +101,7 @@ public class RobotContainer {
     configureBindings();
 
 
+    NamedCommands.registerCommand("Shoot",m_AutoShoot);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -105,20 +115,21 @@ public class RobotContainer {
             )
         ); 
         
-
-    autoChooser();
+AutoChooser = AutoBuilder.buildAutoChooser("Test");
+SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
+    //autoChooser();
 
   }
 
  
 
 
-  public void autoChooser(){
+ /* public void autoChooser(){
 
 //  m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
   m_autoChooser.setDefaultOption("do nothing", null);
   SmartDashboard.putData("Auto Chooser",m_autoChooser);
-  }
+  } */
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -166,7 +177,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-return m_autoChooser.getSelected();
+return AutoChooser.getSelected();
+//m_autoChooser.getSelected();
 
     // An example command will be run in autonomous
     //return Autos.exampleAuto(m_exampleSubsystem);
