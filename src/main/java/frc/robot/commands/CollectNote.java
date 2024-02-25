@@ -6,37 +6,115 @@ package frc.robot.commands;
 import frc.robot.subsystems.Collector;
 import frc.robot.Constants;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 
 public class CollectNote extends Command {
-  /** Creates a new CollectNote. */
+ 
   Collector m_Collector;
+  Timer m_Timer = new Timer();// used to run reverse for .5 seconds  
+  Timer m_DelayTimer = new Timer();
+  boolean m_ReverseCheck; // false if it needs to reverse to see if there is a note in the collector currently 
+  boolean m_HasNote; // true if there is a note in the robot
+  boolean m_NoteCollected; // true if the note is all the way in the robot 
+  boolean m_EndCheck; // true if command should end
 
+  double m_ReverseDuration = Constants.CollectorConstants.kReverseDuration;
+
+ /** Creates a new CollectNote. */
   public CollectNote(Collector Collector) {
+
     m_Collector = Collector;
-    
     addRequirements(Collector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Collector.ActivateMotor(Constants.MotorConstants.kRollerVoltage);
+    if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
+    
+    m_ReverseCheck = false;
+    m_HasNote = false;
+  } else {
+    m_ReverseCheck = true; 
+    m_HasNote = true;
   }
-
+  m_NoteCollected = false;
+  m_EndCheck = false;
+  m_Timer.reset();
+  m_Timer.start();
+  m_DelayTimer.reset();
+}
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+   
+ if (!m_HasNote) {
+      if (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
+        if (m_Collector.TofcheckTarget() || m_Timer.hasElapsed(m_ReverseDuration)) {
+          m_Collector.StopMotor();
+          m_ReverseCheck = true;
+        } 
+        else {
+          m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseCollectRPM);
+        }
+        return;
+      }
+      m_DelayTimer.start();
+      if (!m_Collector.TofcheckTarget()  ) {
+      if (m_DelayTimer.hasElapsed(.2)){
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
+        m_DelayTimer.stop();
+      }
+      } else {
+        m_HasNote = true;
+          m_DelayTimer.reset();
+      } 
+      return;
+    }         
+  
+    if (!m_NoteCollected) { // Sees note, but note is not all the way in the robot 
+    
+         
+      if (m_Collector.TofcheckTarget()) {
+        
+        m_Collector.ActivateMotor(Constants.CollectorConstants.kSecondCollectRPM);
+      } else {
+        m_Collector.StopMotor();
+        m_NoteCollected = true;
+        m_DelayTimer.start();
+      }
+      return;
+    }  
+    else { // sees note, note has gone past Tof, reversing collector until it sees note again
+      if (!m_Collector.TofcheckTarget()) {
+        if (m_DelayTimer.hasElapsed(.2)) {
+          
+      
+        m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseCollectRPM);
+        }
+      } else {
+        m_Collector.StopMotor();
+        m_EndCheck = true;
+      }
+      return;
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
     m_Collector.StopMotor();
+    m_Timer.stop();
+    m_DelayTimer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+
+    return m_EndCheck;
   }
 }

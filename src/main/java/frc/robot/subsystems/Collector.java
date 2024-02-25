@@ -1,65 +1,111 @@
 package frc.robot.subsystems;
 import frc.robot.Constants;
+import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
+import com.ctre.phoenix6.controls.MotionMagicVelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
 
 
 public class Collector extends SubsystemBase {
-    
-    private static TalonFX m_CollectorTalon = new TalonFX(Constants.MotorConstants.kCollectorMotorID); 
-    private static TalonFX m_CollectorTalon2 = new TalonFX(Constants.MotorConstants.kCollectorSecondMotorID);
-      TimeOfFlight m_TOF = new TimeOfFlight(Constants.LedConstants.TOFid);
-    private LedSubsystem m_LED = new LedSubsystem();
+    double CollectVoltage;
+   //public boolean m_TofIsTriggered;
+    private static TalonFX m_CollectorTalon = new TalonFX(CollectorConstants.kCollectorMotorID); 
+    private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
+      TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
+    CurrentLimitsConfigs m_Configs = new CurrentLimitsConfigs();
+   private LedSubsystem m_LED = new LedSubsystem();
+    /**  Makes a new Collector subsystem */
     public Collector() {
-  //      SmartDashboard.putNumber("Collector_VOLTAGE", 8);
-        m_TOF.setRangeOfInterest(8, 8, 8, 8); //TODO update this 
+        m_CollectorTalon.setInverted(false);
+        m_CollectorTalon2.setInverted(false); 
+        m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
+   
+        //  MOTOR CONFIGS 
+        m_Configs.SupplyCurrentLimitEnable = CollectorConstants.kCurrentLimitEnable;
+        m_Configs.SupplyCurrentLimit = CollectorConstants.kCurrentSoftLimit;
+        m_Configs.SupplyCurrentThreshold = CollectorConstants.kCurrentHardLimit;
+        m_Configs.SupplyTimeThreshold = CollectorConstants.kCurrentLimitTime;
+        m_CollectorTalon.getConfigurator().apply(m_Configs);
+        m_CollectorTalon.getConfigurator().apply(
+                new ClosedLoopRampsConfigs()
+                    .withVoltageClosedLoopRampPeriod(CollectorConstants.kClosedLoopRamp)
+        );
+        m_CollectorTalon.getConfigurator().apply(
+                new OpenLoopRampsConfigs()
+                    .withVoltageOpenLoopRampPeriod(CollectorConstants.kOpenLoopRamp)
+        );
+        m_CollectorTalon2.getConfigurator().apply(m_Configs);
+        m_CollectorTalon2.getConfigurator().apply(
+                new ClosedLoopRampsConfigs()
+                    .withVoltageClosedLoopRampPeriod(CollectorConstants.kClosedLoopRamp)
+        );
+        m_CollectorTalon2.getConfigurator().apply(
+                new OpenLoopRampsConfigs()
+                    .withVoltageOpenLoopRampPeriod(CollectorConstants.kOpenLoopRamp)
+        );
+
     }
 /**
- * 
- * @param volts the default value for voltage if the smartdashboard doesn't work 
+ * @param RPM what RPM you want to set the motors to
  */
-    public void ActivateMotor(double volts) {
-        m_CollectorTalon.setVoltage(volts);   
-        m_CollectorTalon2.setVoltage(volts);
-            m_CollectorTalon.setInverted(false);
-            m_CollectorTalon2.setInverted(false);
+    public void ActivateMotor(double RPM) {
+            MotionMagicVelocityDutyCycle m_Output = new MotionMagicVelocityDutyCycle(RPM);
+  
+        m_CollectorTalon2.setControl(m_Output);
+        m_CollectorTalon.setControl(m_Output);
     }
-
+/** stops the collector motors */
     public void StopMotor() {
-        m_CollectorTalon.setVoltage(0);
-        m_CollectorTalon2.setVoltage(0);
-        m_CollectorTalon.disable();
-        m_CollectorTalon2.disable();
+        
+        m_CollectorTalon.stopMotor();
+        m_CollectorTalon2.stopMotor();
+    }
+/** Makes the collector spin backwards with the desired RPM */
+public void ReverseMotor(double RPM) {
+      MotionMagicVelocityDutyCycle m_Output = new MotionMagicVelocityDutyCycle(-RPM);
+        m_CollectorTalon.setControl(m_Output);   
+        m_CollectorTalon2.setControl(m_Output);
+    
+    }
+  
+
+
+/** checks if there is something in the Tof target range 
+ * @return if the Tof detects something within the target range
+*/
+    public boolean TofcheckTarget(){
+        
+        boolean InTarget =
+                m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
+                && m_Tof.getRange() > Constants.TofConstants.TofminRange;
+        SmartDashboard.putBoolean("Has Note?",InTarget);
+        if (InTarget) {
+            m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
+        } else {
+            m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
+        }
+    
+        return InTarget; // the LEDs are just there to help with testing, can be removed later. 
     }
 
-public void ReverseMotor(double volts) {
-        m_CollectorTalon.setVoltage(volts);   
-     m_CollectorTalon2.setVoltage(volts);
-        m_CollectorTalon.setInverted(true);
-        m_CollectorTalon2.setInverted(true);
-    }
-    public boolean TOFcheckTarget(){
-        boolean InTarget = m_TOF.getRange() < Constants.LedConstants.TOFmaxRange && m_TOF.getRange() > Constants.LedConstants.TOFminRange;
-           SmartDashboard.putBoolean("Has Note?",InTarget);
-        if (InTarget) {
-            m_LED.SetColor(0, 255, 0, 0, 0, 8);
-        }else{m_LED.SetColor(255, 0, 0, 0, 0, 8);}
-        return InTarget; 
-    }
-    public double TOFcheckDistance(){
-        double target = m_TOF.getRange();
-        
-          SmartDashboard.putNumber("TOF target distance", target);
+
+    public double TofcheckDistance(){
+
+        double target = m_Tof.getRange();
+        SmartDashboard.putNumber("Tof target distance", target);
         return target;
     }
 
     @Override
     public void periodic() {
-   // TOFcheckDistance();
-   // TOFcheckTarget();
+   
+    TofcheckTarget();
     }
     
 }
