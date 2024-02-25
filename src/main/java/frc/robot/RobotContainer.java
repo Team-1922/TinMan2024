@@ -23,6 +23,8 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -57,9 +59,9 @@ public class RobotContainer {
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   
- SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.AngleSlewRate);
- SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.DriveSlewRate);
- SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.StraifeSlewRate);
+ SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter( SmartDashboard.getNumber("AngleSlewRate", Constants.OperatorConstants.AngleSlewRate));
+ SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(SmartDashboard.getNumber( "DriveSlewRate",Constants.OperatorConstants.DriveSlewRate));
+ SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(SmartDashboard.getNumber("StraifeSlewRate",Constants.OperatorConstants.StraifeSlewRate));
 
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
@@ -82,14 +84,15 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
+    
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
 
-  
 
+  
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
@@ -164,6 +167,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 return m_autoChooser.getSelected();
+
     // An example command will be run in autonomous
     //return Autos.exampleAuto(m_exampleSubsystem);
   }
