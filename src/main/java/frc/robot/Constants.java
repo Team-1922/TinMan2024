@@ -29,8 +29,8 @@ public final class Constants {
   public static class ShooterConstants {
 
     public static final double kCollectorActivateDelay = 0.25;
-    public static final int kLeftShooterRPM = 5000;
-    public static final int kRightShooterRPM = 2000; // 5676 is max
+    public static final int kLeftShooterRPM = 2000;
+    public static final int kRightShooterRPM = 5000; // 5676 is max
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
 
@@ -53,9 +53,9 @@ public final class Constants {
     public static final double kReverseRollerVoltage = 2.5; 
     public static final double kReverseDuration = 0.5;
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
-    public static final double kCollectRPM = 5000;
-    public static final double kSecondCollectRPM = 4000;
-    public static final double kReverseCollectRPM = 1000;
+    public static final double kCollectRPM = (1000/600)*2048;
+    public static final double kSecondCollectRPM = (1000/600)*2048;
+    public static final double kReverseCollectRPM = (1000/600)*2048;
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds

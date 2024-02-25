@@ -56,7 +56,7 @@ public class Shoot extends Command {
   public void execute() {
 
     if ( m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)) {
-      m_Collector.ActivateMotor(m_CollectVoltage);
+      m_Collector.ActivateMotor(10000);
     }
   }
 
