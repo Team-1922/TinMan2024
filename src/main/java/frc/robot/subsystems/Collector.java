@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
-
+import com.ctre.phoenix6.controls.MotionMagicVelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
 
@@ -19,13 +19,13 @@ public class Collector extends SubsystemBase {
     private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
     CurrentLimitsConfigs m_Configs = new CurrentLimitsConfigs();
-   // private LedSubsystem m_LED = new LedSubsystem();
+   private LedSubsystem m_LED = new LedSubsystem();
     /**  Makes a new Collector subsystem */
     public Collector() {
         m_CollectorTalon.setInverted(false);
         m_CollectorTalon2.setInverted(false); 
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
-      
+   
         //  MOTOR CONFIGS 
         m_Configs.SupplyCurrentLimitEnable = CollectorConstants.kCurrentLimitEnable;
         m_Configs.SupplyCurrentLimit = CollectorConstants.kCurrentSoftLimit;
@@ -52,12 +52,13 @@ public class Collector extends SubsystemBase {
 
     }
 /**
- * @param volts what voltage you want to set the motors to
+ * @param RPM what RPM you want to set the motors to
  */
-    public void ActivateMotor(double volts) {
-        m_CollectorTalon.setVoltage(volts);   
-        m_CollectorTalon2.setVoltage(volts);
-
+    public void ActivateMotor(double RPM) {
+            MotionMagicVelocityDutyCycle m_Output = new MotionMagicVelocityDutyCycle(RPM);
+  
+        m_CollectorTalon2.setControl(m_Output);
+        m_CollectorTalon.setControl(m_Output);
     }
 /** stops the collector motors */
     public void StopMotor() {
@@ -65,11 +66,11 @@ public class Collector extends SubsystemBase {
         m_CollectorTalon.stopMotor();
         m_CollectorTalon2.stopMotor();
     }
-/** Makes the collector spin backwards with the desired voltage */
-public void ReverseMotor(double volts) {
-
-        m_CollectorTalon.setVoltage(-volts);   
-        m_CollectorTalon2.setVoltage(-volts);
+/** Makes the collector spin backwards with the desired RPM */
+public void ReverseMotor(double RPM) {
+      MotionMagicVelocityDutyCycle m_Output = new MotionMagicVelocityDutyCycle(-RPM);
+        m_CollectorTalon.setControl(m_Output);   
+        m_CollectorTalon2.setControl(m_Output);
     
     }
   
@@ -84,11 +85,11 @@ public void ReverseMotor(double volts) {
                 m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
-   /*      if (InTarget) {
+        if (InTarget) {
             m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
         } else {
             m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
-        }*/
+        }
     
         return InTarget; // the LEDs are just there to help with testing, can be removed later. 
     }

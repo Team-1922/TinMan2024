@@ -28,13 +28,15 @@ public final class CTREConfigs {
         swerveAngleFXConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.angleCurrentThresholdTime;
 
         /* Voltage Limiting */
-        swerveAngleFXConfig.Voltage.PeakReverseVoltage = -12;
-        swerveAngleFXConfig.Voltage.PeakForwardVoltage= 12;
+        swerveAngleFXConfig.Voltage.PeakReverseVoltage = -8;
+        swerveAngleFXConfig.Voltage.PeakForwardVoltage= 8;
 
         /* PID Config */
         swerveAngleFXConfig.Slot0.kP = Constants.Swerve.angleKP;
         swerveAngleFXConfig.Slot0.kI = Constants.Swerve.angleKI;
         swerveAngleFXConfig.Slot0.kD = Constants.Swerve.angleKD;
+
+       // swerveAngleFXConfig.ClosedLoopRamps.VoltageClosedLoopRampPeriod = .1;
 
         /** Swerve Drive Motor Configuration */
         /* Motor Inverts and Neutral Mode */

@@ -64,9 +64,9 @@ public class RobotContainer {
 
   
 
- SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter( SmartDashboard.getNumber("AngleSlewRate", Constants.OperatorConstants.AngleSlewRate));
- SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(SmartDashboard.getNumber( "DriveSlewRate",Constants.OperatorConstants.DriveSlewRate));
- SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(SmartDashboard.getNumber("StraifeSlewRate",Constants.OperatorConstants.StraifeSlewRate));
+ //SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter( Constants.OperatorConstants.AngleSlewRate);
+ //SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.DriveSlewRate);
+// SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.StraifeSlewRate);
 
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
@@ -101,17 +101,14 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
 
-SmartDashboard.putNumber("AngleSlewRate",Constants.OperatorConstants.AngleSlewRate);
-SmartDashboard.putNumber("DriveSlewRate",Constants.OperatorConstants.DriveSlewRate);
-SmartDashboard.putNumber("StraifeSlewRate",Constants.OperatorConstants.StraifeSlewRate);
     NamedCommands.registerCommand("Shoot",m_AutoShoot);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
-                () -> DriveSlewRateLimiter.calculate(-driver.getRawAxis(translationAxis)), 
-                () -> StraifeSlewRateLimiter.calculate(-driver.getRawAxis(strafeAxis)), 
-                () -> AngleSlewRateLimiter.calculate(-driver.getRawAxis(rotationAxis)), 
+                () -> -driver.getRawAxis(translationAxis), 
+                () -> -driver.getRawAxis(strafeAxis), 
+                () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
                 () -> dampen.getAsBoolean(),
                 () -> 0 // Dynamic heading placeholder
@@ -166,11 +163,11 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
             ); */
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+ //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
 
- //   m_operatorController.button(1).whileTrue(m_shoot);
- //   m_operatorController.button(2).whileTrue(m_CollectNote);
- //   m_operatorController.button(3).whileTrue(m_CollectReverse);
+    m_operatorController.button(1).whileTrue(m_shoot);
+   m_operatorController.button(2).whileTrue(m_CollectNote);
+    m_operatorController.button(3).whileTrue(m_CollectReverse);
 
   }
 

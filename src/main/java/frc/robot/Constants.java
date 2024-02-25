@@ -18,9 +18,9 @@ public final class Constants {
   public static class OperatorConstants {
 
     public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 1;
+    public static final int kOperatorControllerPort = 0;
 
-    public static final double AngleSlewRate = .5;
+    public static final double AngleSlewRate = 1.5;
     public static final double DriveSlewRate = 2;
     public static final double StraifeSlewRate = 2;
   }
@@ -28,9 +28,9 @@ public final class Constants {
   
   public static class ShooterConstants {
 
-    public static final double kCollectorActivateDelay = 0.1;
-    public static final int kLeftShooterVoltage = 10;
-    public static final int kRightShooterVoltage = 2; // 8 
+    public static final double kCollectorActivateDelay = 0.25;
+    public static final int kLeftShooterRPM = 5000;
+    public static final int kRightShooterRPM = 2000; // 5676 is max
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
 
@@ -51,9 +51,11 @@ public final class Constants {
     public static final int kCollectorSecondMotorID = 5;  
     public static final double kRollerVoltage = 8.0;
     public static final double kReverseRollerVoltage = 2.5; 
-    public static final double kReverseDuration = 0.75;
+    public static final double kReverseDuration = 0.5;
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
-
+    public static final double kCollectRPM = 5000;
+    public static final double kSecondCollectRPM = 4000;
+    public static final double kReverseCollectRPM = 1000;
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds

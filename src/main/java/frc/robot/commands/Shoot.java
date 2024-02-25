@@ -13,10 +13,10 @@ import frc.robot.subsystems.ShooterSubsystem;
 public class Shoot extends Command {
   ShooterSubsystem m_ShootSubsystem;
   Collector m_Collector;
-  Timer m_Timer = new Timer();
+  //Timer m_Timer = new Timer();
   Timer m_AutoTimer = new Timer(); // used for auto
-  double m_VLeft;
-  double m_VRight;
+  double m_RPMLeft;
+  double m_RPMRight;
   double m_Delay;
   double m_CollectVoltage;
   boolean m_IsAuto;
@@ -33,10 +33,10 @@ public class Shoot extends Command {
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
     addRequirements(ShootSubsystem, collectorSubsystem);
-    m_VLeft = Constants.ShooterConstants.kLeftShooterVoltage;
-    m_VRight = Constants.ShooterConstants.kRightShooterVoltage;
-    m_CollectVoltage = Constants.CollectorConstants.kRollerVoltage;
-    m_Delay = Constants.ShooterConstants.kCollectorActivateDelay;
+    m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPM;
+    m_RPMRight = Constants.ShooterConstants.kRightShooterRPM;
+    m_CollectVoltage = Constants.CollectorConstants.kCollectRPM;
+  
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -47,16 +47,15 @@ public class Shoot extends Command {
     if(m_IsAuto){
       m_AutoTimer.start();
     }
-    m_Timer.reset();
-    m_Timer.start();
-    m_ShootSubsystem.Shoot(m_VLeft, m_VRight); // might need to be higher, starting low to see if it works
+
+    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
 
-    if (m_Timer.hasElapsed(m_Delay)) {
+    if ( m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)) {
       m_Collector.ActivateMotor(m_CollectVoltage);
     }
   }
@@ -65,7 +64,7 @@ public class Shoot extends Command {
   @Override
   public void end(boolean interrupted) {
 
-    m_Timer.stop();
+ 
     m_Collector.StopMotor();
     m_ShootSubsystem.StopShoot();
     m_AutoTimer.stop();
