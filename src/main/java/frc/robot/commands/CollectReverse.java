@@ -5,7 +5,6 @@
 package frc.robot.commands;
 import frc.robot.subsystems.Collector;
 import frc.robot.Constants;
-
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class CollectReverse extends Command {
@@ -14,14 +13,14 @@ public class CollectReverse extends Command {
 
   public CollectReverse(Collector Collector) {
     m_Collector = Collector;
-    
+ 
     addRequirements(Collector);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Collector.ReverseMotor(Constants.MotorConstants.kRollerVoltage);
+    m_Collector.ReverseMotor(Constants.CollectorConstants.kCollectRPM);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

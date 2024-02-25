@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-   // m_LedSubsystem.SetColor(255, 0, 0, 40, 0, 8);
+
   }
 
   @Override
@@ -84,8 +84,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-   // m_LedSubsystem.SetColor(0, 255, 0, 40, 0, 8);
-   // m_LedSubsystem.AnimateLEDs(mAnimation, 1);
+
   }
 
   /** This function is called periodically during operator control. */

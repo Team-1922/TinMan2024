@@ -1,5 +1,6 @@
 package frc.Team364.robot;
 
+import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
@@ -26,6 +27,9 @@ public class SwerveMod {
     private TalonFX mDriveMotor;
     private CANcoder angleEncoder;
 
+  
+    
+
 
     private final SimpleMotorFeedforward driveFeedForward = new SimpleMotorFeedforward(Constants.Swerve.driveKS, Constants.Swerve.driveKV, Constants.Swerve.driveKA);
 
@@ -39,6 +43,7 @@ public class SwerveMod {
     public SwerveMod(int moduleNumber, SwerveModuleConstants moduleConstants){
         this.ctreConfigs = Swerve.ctreConfigs;
 
+   
         this.moduleNumber = moduleNumber;
         this.angleOffset = moduleConstants.angleOffset;
         
