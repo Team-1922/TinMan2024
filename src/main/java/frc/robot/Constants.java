@@ -18,7 +18,7 @@ public final class Constants {
   public static class OperatorConstants {
 
     public static final int kDriverControllerPort = 0;
-    public static final int kOperatorControllerPort = 0;
+    public static final int kOperatorControllerPort = 1;
 
     public static final double AngleSlewRate = 1.5;
     public static final double DriveSlewRate = 2;
@@ -54,8 +54,8 @@ public final class Constants {
     public static final double kReverseDuration = 0.5;
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
     public static final double kCollectRPM = (1000/600)*2048;
-    public static final double kSecondCollectRPM = (1000/600)*2048;
-    public static final double kReverseCollectRPM = (1000/600)*2048;
+    public static final double kSecondCollectRPM = (750/600)*2048;
+    public static final double kReverseCollectRPM = (7500/600)*2048;
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
@@ -68,7 +68,7 @@ public final class Constants {
   public final class ClimberConstants {
     public static final int ClimberMotorID = 9;
     public static final int ClimberMotorID2 = 10;
-    public static final double kClimbVoltage = 0.1; //TODO test this
+    public static final double kClimbVoltage = 5; //TODO test this
 
   }
 

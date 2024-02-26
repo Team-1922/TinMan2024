@@ -81,7 +81,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> AutoChooser;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3.5);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 2);
 
     private final XboxController driver = new XboxController(0);
  
@@ -175,10 +175,6 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
    m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
 
-   // m_operatorController.button(4).whileTrue(m_RightClimbUP);
-   // m_operatorController.button(5).whileTrue(m_RightClimbDOWN);
-  //  m_operatorController.button(6).whileTrue(m_LeftClimbUP);
-   // m_operatorController.button(7).whileTrue(m_LeftClimbDOWN);
   }
 
   /**
