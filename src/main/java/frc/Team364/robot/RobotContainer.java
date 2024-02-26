@@ -48,7 +48,7 @@ public class RobotContainer {
     private final Vision s_Vision = new Vision(s_PoseEstimator);
 
     /* AutoChooser */
-    private final SendableChooser<Command> autoChooser;
+    //private final SendableChooser<Command> autoChooser;
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -69,14 +69,14 @@ public class RobotContainer {
 
 
         //Pathplanner commands - templates
-        NamedCommands.registerCommand("marker1", Commands.print("Passed marker 1"));
-        NamedCommands.registerCommand("marker2", Commands.print("Passed marker 2"));
-        NamedCommands.registerCommand("print hello", Commands.print("hello"));
+      //  NamedCommands.registerCommand("marker1", Commands.print("Passed marker 1"));
+     //   NamedCommands.registerCommand("marker2", Commands.print("Passed marker 2"));
+    //    NamedCommands.registerCommand("print hello", Commands.print("hello"));
     
         
         //Auto chooser
-        autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
-        SmartDashboard.putData("Auto Mode", autoChooser);
+       // autoChooser = AutoBuilder.buildAutoChooser("New Auto"); // Default auto will be `Commands.none()`
+    //    SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
     /**
@@ -111,6 +111,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return autoChooser.getSelected();
+        return null;
+        //autoChooser.getSelected();
     }
 }

@@ -108,6 +108,7 @@ public class RobotContainer {
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
     NamedCommands.registerCommand("Shoot",m_AutoShoot);
+    NamedCommands.registerCommand("Collect", m_CollectNote);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -121,7 +122,7 @@ public class RobotContainer {
             )
         ); 
         
-AutoChooser = AutoBuilder.buildAutoChooser("Test");
+AutoChooser = AutoBuilder.buildAutoChooser("JustShoot");
 SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
     //autoChooser();
 

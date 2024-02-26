@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.25,
-      "y": 5.56
+      "x": 15.370188578214995,
+      "y": 5.565311310802802
     },
-    "rotation": 0.0
+    "rotation": 180.0
   },
   "command": {
     "type": "sequential",
@@ -30,7 +30,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "2 piece blue pt1"
+                  "pathName": "2 piece red pt1"
                 }
               }
             ]
@@ -39,7 +39,38 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2 piece blue pt2"
+            "pathName": "2 piece red pt2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "3 Piece Red pt3"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Collect"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "3 Piece Red pt4"
           }
         },
         {

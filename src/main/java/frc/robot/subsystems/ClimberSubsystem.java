@@ -22,8 +22,8 @@ CANSparkMax m_ClimberMotor2 = new CANSparkMax(Constants.ClimberConstants.Climber
 
 m_ClimberMotor1.setIdleMode(IdleMode.kBrake);
 m_ClimberMotor2.setIdleMode(IdleMode.kBrake);
-m_ClimberMotor1.setInverted(true);
-m_ClimberMotor2.setInverted(false);
+m_ClimberMotor1.setInverted(false);
+m_ClimberMotor2.setInverted(true);
   }
 
 /** makes left climber motor spin
