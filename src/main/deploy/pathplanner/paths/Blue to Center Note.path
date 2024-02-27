@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.904894952647049,
+        "x": 1.1888139091593497,
         "y": 5.56
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9048949526470498,
+        "x": 2.21881390915935,
         "y": 5.56
       },
       "isLocked": false,
-      "linkedName": "MiddleBlueNote"
+      "linkedName": "BlueCenterShootPt"
     },
     {
       "anchor": {
-        "x": 1.25,
+        "x": 2.904894952647049,
         "y": 5.56
       },
       "prevControl": {
-        "x": 0.9844748440322093,
+        "x": 1.904894952647049,
         "y": 5.56
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueCenterShootPt"
+      "linkedName": "MiddleBlueNote"
     }
   ],
   "rotationTargets": [],
@@ -45,7 +45,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

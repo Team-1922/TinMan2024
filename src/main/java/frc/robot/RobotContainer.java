@@ -76,11 +76,11 @@ public class RobotContainer {
 
  // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
-  private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
+
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
 
-  private final SendableChooser<Command> AutoChooser;
+  private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
    private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.5);
 
@@ -123,21 +123,14 @@ public class RobotContainer {
             )
         ); 
         
-AutoChooser = AutoBuilder.buildAutoChooser("JustShoot");
-SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
-    //autoChooser();
+AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
+SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
   }
 
  
 
 
- /* public void autoChooser(){
-
-//  m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
-  m_autoChooser.setDefaultOption("do nothing", null);
-  SmartDashboard.putData("Auto Chooser",m_autoChooser);
-  } */
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -169,14 +162,12 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
             new InstantCommand(() -> States.driveState = States.DriveStates.DynamicLock)).onFalse(
             new InstantCommand(() -> States.driveState = States.DriveStates.standard)
             ); */
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
- //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    m_operatorController.button(4).whileTrue(m_ShootStart);
-    m_operatorController.button(1).whileTrue(m_shoot);
-   m_operatorController.button(2).whileTrue(m_CollectNote);
-    m_operatorController.button(3).whileTrue(m_CollectReverse);
 
+    
+    m_operatorController.button(1).whileTrue(m_shoot);
+    m_operatorController.button(2).whileTrue(m_CollectNote);
+    m_operatorController.button(3).whileTrue(m_CollectReverse);
+    m_operatorController.button(4).whileTrue(m_ShootStart);
   }
 
   /**
@@ -185,7 +176,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-return AutoChooser.getSelected();
+return AutoSelector.getSelected();
 //m_autoChooser.getSelected();
 
     // An example command will be run in autonomous

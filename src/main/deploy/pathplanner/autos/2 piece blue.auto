@@ -30,7 +30,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "2 piece blue pt1"
+                  "pathName": "Blue to Center Note"
                 }
               }
             ]
@@ -39,7 +39,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2 piece blue pt2"
+            "pathName": "Blue from center note"
           }
         },
         {
