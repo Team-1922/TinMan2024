@@ -5,11 +5,11 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.EncoderType;
+
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
-import com.revrobotics.SparkMaxRelativeEncoder.Type;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
 
@@ -36,10 +36,10 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 public boolean TargetRpmReached(double LeftTargetRPM, double RightTargetRPM){
 
-boolean Left =  m_Left.getEncoder().getVelocity() < LeftTargetRPM;
-boolean Right =  m_Right.getEncoder().getVelocity() < RightTargetRPM;
+boolean Left =  m_Left.getEncoder().getVelocity() >= (LeftTargetRPM*0.5);
+boolean Right =  m_Right.getEncoder().getVelocity() >= (RightTargetRPM*0.5);
 
-  return Left&&Right;
+  return Left && Right;
 }
 
 
@@ -56,10 +56,11 @@ boolean Right =  m_Right.getEncoder().getVelocity() < RightTargetRPM;
     if( m_Left.getEncoder().getVelocity() < LeftTargetRPM){
       m_Left.set(1);
     } else{
-      m_Left.set(0);
+      m_Left.set(.0);
     }
+
     if( m_Right.getEncoder().getVelocity() < RightTargetRPM){
-      m_Right.set(1);
+      m_Right.set(.33);
     } else{
       m_Right.set(0);
     }
@@ -70,7 +71,11 @@ boolean Right =  m_Right.getEncoder().getVelocity() < RightTargetRPM;
 
    m_Left.set(0);
     m_Right.set(0);
+
+
   }  
+
+  
 
 
 }

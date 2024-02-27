@@ -14,6 +14,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.shootStart;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -81,7 +82,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> AutoChooser;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 2);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.5);
 
     private final XboxController driver = new XboxController(0);
  
@@ -99,7 +100,7 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-    
+    private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -171,7 +172,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
  //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-
+    m_operatorController.button(4).whileTrue(m_ShootStart);
     m_operatorController.button(1).whileTrue(m_shoot);
    m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);

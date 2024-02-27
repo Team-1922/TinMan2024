@@ -18,25 +18,19 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.25
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Collect"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "2 piece red pt1"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Collect"
                 }
               }
             ]
@@ -55,25 +49,19 @@
           }
         },
         {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.25
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "3 Piece Red pt3"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Collect"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "3 Piece Red pt3"
                 }
               }
             ]
@@ -83,6 +71,37 @@
           "type": "path",
           "data": {
             "pathName": "3 Piece Red pt4"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
+          "type": "sequential",
+          "data": {
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "4 piece Red pt5"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Shoot"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "4pc Red PT6"
           }
         },
         {
