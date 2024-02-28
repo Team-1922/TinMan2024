@@ -83,7 +83,7 @@ public final class Constants {
 
   public static class LedConstants {
     public static final int kCandleID = 10 ; 
-    public static final int kTotalLedCount = 8; //TODO update number of leds
+    public static final int kTotalLedCount = 32; //8 + 24
   }
 
 }

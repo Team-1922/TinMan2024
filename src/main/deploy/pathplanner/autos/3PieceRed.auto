@@ -43,9 +43,16 @@
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "red from center note"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "red from center note"
+                }
+              }
+            ]
           }
         },
         {
@@ -80,9 +87,16 @@
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "Red From right note"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Red From right note"
+                }
+              }
+            ]
           }
         },
         {
@@ -94,6 +108,6 @@
       ]
     }
   },
-  "folder": null,
+  "folder": "Red",
   "choreoAuto": false
 }

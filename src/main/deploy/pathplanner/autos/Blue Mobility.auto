@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 16.16523305118551,
-      "y": 2.0708135109958534
+      "x": 0.4584823584061582,
+      "y": 2.5792721855713987
     },
-    "rotation": -179.836507616262
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Red Mobility"
+            "pathName": "Blue Mobility"
           }
         }
       ]
     }
   },
-  "folder": "Red",
+  "folder": "Blue",
   "choreoAuto": false
 }

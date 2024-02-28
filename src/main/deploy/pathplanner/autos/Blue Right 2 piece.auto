@@ -2,35 +2,23 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.25,
-      "y": 5.56
+      "x": 1.07,
+      "y": 4.733288025134609
     },
-    "rotation": 0.0
+    "rotation": -29.634480662498888
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
           "type": "parallel",
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "Collect"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue to Center Note"
+                  "pathName": "Blue Right to Right Note"
                 }
               }
             ]
@@ -39,13 +27,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue from center note"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
+            "pathName": "New Path"
           }
         }
       ]

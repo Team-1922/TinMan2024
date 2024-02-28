@@ -20,10 +20,13 @@ import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
+import java.util.List;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
@@ -65,15 +68,6 @@ public class RobotContainer {
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
   //private final XboxController m_operatorController = new XboxController(0);
- 
-
-  
-  
-
- //SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter( Constants.OperatorConstants.AngleSlewRate);
- //SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.DriveSlewRate);
-// SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.StraifeSlewRate);
-
  // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
 
@@ -108,8 +102,9 @@ public class RobotContainer {
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
-    NamedCommands.registerCommand("Shoot",m_AutoShoot);
-    NamedCommands.registerCommand("Collect", m_CollectNote);
+   NamedCommands.registerCommand("Shoot",m_AutoShoot);
+   NamedCommands.registerCommand("Collect", m_CollectNote);
+   NamedCommands.registerCommand("Shoot Start", m_ShootStart);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -124,7 +119,9 @@ public class RobotContainer {
         ); 
         
 AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
+
 SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+
 
   }
 
@@ -177,7 +174,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
    */
   public Command getAutonomousCommand() {
 return AutoSelector.getSelected();
-//m_autoChooser.getSelected();
+
 
     // An example command will be run in autonomous
     //return Autos.exampleAuto(m_exampleSubsystem);
