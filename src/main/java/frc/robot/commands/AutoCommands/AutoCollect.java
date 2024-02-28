@@ -32,7 +32,7 @@ public class AutoCollect extends Command {
   @Override
   public void execute() {
     m_CollectNote.execute();
-    if (m_Collector.TOFcheckTarget()){
+    if (m_Collector.TofcheckTarget()){
  m_Timer.start();
     }
   }
