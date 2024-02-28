@@ -104,7 +104,7 @@ public class RobotContainer {
 
    NamedCommands.registerCommand("Shoot",m_AutoShoot);
    NamedCommands.registerCommand("Collect", m_CollectNote);
-   NamedCommands.registerCommand("Shoot Start", m_ShootStart);
+   NamedCommands.registerCommand("Shoot-Start", m_ShootStart);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(

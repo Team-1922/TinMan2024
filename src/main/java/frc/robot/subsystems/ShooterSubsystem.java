@@ -36,8 +36,8 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 public boolean TargetRpmReached(double LeftTargetRPM, double RightTargetRPM){
 
-boolean Left =  m_Left.getEncoder().getVelocity() >= (LeftTargetRPM*0.5);
-boolean Right =  m_Right.getEncoder().getVelocity() >= (RightTargetRPM*0.5);
+boolean Left =  m_Left.getEncoder().getVelocity() >= (LeftTargetRPM*0.9);
+boolean Right =  m_Right.getEncoder().getVelocity() >= (RightTargetRPM*0.9);
 
   return Left && Right;
 }
