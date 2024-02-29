@@ -4,12 +4,11 @@
 
 package frc.robot;
 
-import frc.Team364.robot.States;
+
 import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
@@ -19,26 +18,14 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-
-import java.util.List;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
-
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -144,27 +131,16 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
- zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        
-    //Heading lock bindings
-    /*   forwardHold.onTrue(
-            new InstantCommand(() -> States.driveState = States.DriveStates.forwardHold)).onFalse(
-            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            );
-        backwardHold.onTrue(
-            new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
-            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            ); 
-        DynamicLock.onTrue(
-            new InstantCommand(() -> States.driveState = States.DriveStates.DynamicLock)).onFalse(
-            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            ); */
-
-    
-    m_operatorController.button(1).whileTrue(m_shoot);
-    m_operatorController.button(2).whileTrue(m_CollectNote);
-    m_operatorController.button(3).whileTrue(m_CollectReverse);
-    m_operatorController.button(5).whileTrue(m_ShootStart);
+  
+  
+        // DRIVER CONTROLLS
+    zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
+  
+      // OPERATOR CONTROLLS
+    m_operatorController.button(1).whileTrue(m_shoot); // A
+    m_operatorController.button(2).whileTrue(m_CollectNote); // B
+    m_operatorController.button(3).whileTrue(m_CollectReverse); // X
+    m_operatorController.button(5).whileTrue(m_ShootStart); // LB
   }
 
   /**
@@ -174,9 +150,5 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
    */
   public Command getAutonomousCommand() {
 return AutoSelector.getSelected();
-
-
-    // An example command will be run in autonomous
-    //return Autos.exampleAuto(m_exampleSubsystem);
   }
 }
