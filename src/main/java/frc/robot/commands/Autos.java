@@ -4,17 +4,12 @@
 
 package frc.robot.commands;
 
-import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
-import frc.Team364.robot.subsystems.Swerve;
-import frc.robot.RobotContainer;
 import frc.robot.commands.AutoCommands.AutoCollect;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 public final class Autos {
   /** Example static factory for an autonomous command. */

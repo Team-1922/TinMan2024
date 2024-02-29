@@ -13,8 +13,7 @@ import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.units.Unit;
-import frc.Team364.lib.TalonFXConstants;
+
 import frc.Team364.lib.util.COTSTalonFXSwerveConstants;
 import frc.Team364.lib.util.SwerveModuleConstants;
 public final class Constants {

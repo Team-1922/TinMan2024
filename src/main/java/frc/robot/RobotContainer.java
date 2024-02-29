@@ -4,40 +4,28 @@
 
 package frc.robot;
 
-import frc.Team364.robot.States;
+
 import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
+import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.shootStart;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
-
-
-
-
-
 import frc.robot.subsystems.ShooterSubsystem;
-
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardContainer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
-
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -49,6 +37,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
@@ -57,29 +46,27 @@ public class RobotContainer {
    private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
-  
+  private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
+ 
+  private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
+  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
 
-  
-
- //SlewRateLimiter AngleSlewRateLimiter = new SlewRateLimiter( Constants.OperatorConstants.AngleSlewRate);
- //SlewRateLimiter DriveSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.DriveSlewRate);
-// SlewRateLimiter StraifeSlewRateLimiter = new SlewRateLimiter(Constants.OperatorConstants.StraifeSlewRate);
-
-  private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
+  //private final XboxController m_operatorController = new XboxController(0);
+ // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
-  private final SendableChooser<Command> m_autoChooser = new SendableChooser<Command>();
+
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
 
 
-  private final SendableChooser<Command> AutoChooser;
+  private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3.5);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.6);
 
     private final XboxController driver = new XboxController(0);
-
+ 
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -94,14 +81,17 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-    
+    private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
+    m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
-    NamedCommands.registerCommand("Shoot",m_AutoShoot);
+   NamedCommands.registerCommand("Shoot",m_AutoShoot);
+   NamedCommands.registerCommand("Collect", m_CollectNote);
+   NamedCommands.registerCommand("ShootStart", m_ShootStart);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -115,21 +105,16 @@ public class RobotContainer {
             )
         ); 
         
-AutoChooser = AutoBuilder.buildAutoChooser("Test");
-SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
-    //autoChooser();
+AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
+
+SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+
 
   }
 
  
 
 
- /* public void autoChooser(){
-
-//  m_autoChooser.setDefaultOption("Just Shoot", ShootAuto);
-  m_autoChooser.setDefaultOption("do nothing", null);
-  SmartDashboard.putData("Auto Chooser",m_autoChooser);
-  } */
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -146,29 +131,16 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
- zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading()));
-        
-    //Heading lock bindings
-    /*   forwardHold.onTrue(
-            new InstantCommand(() -> States.driveState = States.DriveStates.forwardHold)).onFalse(
-            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            );
-        backwardHold.onTrue(
-            new InstantCommand(() -> States.driveState = States.DriveStates.backwardHold)).onFalse(
-            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            ); 
-        DynamicLock.onTrue(
-            new InstantCommand(() -> States.driveState = States.DriveStates.DynamicLock)).onFalse(
-            new InstantCommand(() -> States.driveState = States.DriveStates.standard)
-            ); */
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
- //   m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-
-    m_operatorController.button(1).whileTrue(m_shoot);
-   m_operatorController.button(2).whileTrue(m_CollectNote);
-    m_operatorController.button(3).whileTrue(m_CollectReverse);
-
+  
+  
+        // DRIVER CONTROLLS
+    zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
+  
+      // OPERATOR CONTROLLS
+    m_operatorController.button(1).whileTrue(m_shoot); // A
+    m_operatorController.button(2).whileTrue(m_CollectNote); // B
+    m_operatorController.button(3).whileTrue(m_CollectReverse); // X
+    m_operatorController.button(5).whileTrue(m_ShootStart); // LB
   }
 
   /**
@@ -177,10 +149,6 @@ SmartDashboard.putData("AUTOCHOOSER", AutoChooser);
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-return AutoChooser.getSelected();
-//m_autoChooser.getSelected();
-
-    // An example command will be run in autonomous
-    //return Autos.exampleAuto(m_exampleSubsystem);
+return AutoSelector.getSelected();
   }
 }
