@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2427100710057277,
-        "y": 6.4435581123414485
+        "x": 2.2981782900502736,
+        "y": 6.425068705993269
       },
       "isLocked": false,
       "linkedName": "Blue Left Note"
@@ -20,8 +20,8 @@
         "y": 5.56
       },
       "prevControl": {
-        "x": 2.0393266011757247,
-        "y": 5.528332498106438
+        "x": 1.604825551993446,
+        "y": 5.824162999677351
       },
       "nextControl": null,
       "isLocked": false,
