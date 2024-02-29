@@ -41,9 +41,9 @@ public class Climb extends Command {
   public void execute() {
 
     m_ClimberSubsystem.LeftClimb(
-    MathUtil.applyDeadband(m_Controller.getRawAxis(m_LeftAxis), m_Deadband));
+    MathUtil.applyDeadband(-m_Controller.getRawAxis(m_RightAxis), m_Deadband));
      m_ClimberSubsystem.RightClimb(
-    MathUtil.applyDeadband(m_Controller.getRawAxis(m_RightAxis), m_Deadband));
+    MathUtil.applyDeadband(m_Controller.getRawAxis(m_LeftAxis), m_Deadband));
   }
 
   // Called once the command ends or is interrupted.

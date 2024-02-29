@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.2427100710057277,
-        "y": 6.4435581123414485
+        "x": 2.2242206646575453,
+        "y": 6.730143910738271
       },
       "isLocked": false,
       "linkedName": "Blue Left Note"
     },
     {
       "anchor": {
-        "x": 1.1888139091593497,
-        "y": 5.56
+        "x": 1.1148562837666214,
+        "y": 6.240174642511447
       },
       "prevControl": {
-        "x": 2.0393266011757247,
-        "y": 5.528332498106438
+        "x": 1.9838583821311786,
+        "y": 6.665430988519635
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BlueCenterShootPt"
+      "linkedName": "Blue Left Shoot"
     }
   ],
   "rotationTargets": [],
@@ -39,13 +39,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0,
+    "rotation": 38.047042531826165,
     "rotateFast": false
   },
   "reversed": false,
   "folder": "Blue",
   "previewStartingState": {
-    "rotation": 51.14662565964651,
+    "rotation": 0,
     "velocity": 0
   },
   "useDefaultConstraints": true

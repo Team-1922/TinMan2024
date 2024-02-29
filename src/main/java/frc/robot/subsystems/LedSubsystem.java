@@ -7,14 +7,17 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix.led.StrobeAnimation;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LedConstants;
 
 public class LedSubsystem extends SubsystemBase {
 
   CANdle m_CaNdle = new CANdle(LedConstants.kCandleID); 
- 
-  RainbowAnimation m_rainbow = new RainbowAnimation(0.1, 0.1, LedConstants.kTotalLedCount);
+  
+  RainbowAnimation m_rainbow = new RainbowAnimation(1, 1, LedConstants.kTotalLedCount,false,8);
+
   /** Creates a new LedSubsystem. */
   public LedSubsystem() {
  
@@ -42,6 +45,7 @@ public class LedSubsystem extends SubsystemBase {
   public void AnimateLEDs( Animation animation,int AnimationSlot){// animates the LEDs
 
     m_CaNdle.animate(animation, 0);
+    
   }
 
 /** runs a rainbow animation for testing reasons */
@@ -49,6 +53,11 @@ public class LedSubsystem extends SubsystemBase {
 
     m_CaNdle.animate(m_rainbow);
   }
+
+  public void DisabledAnimation(){
+    m_CaNdle.animate(m_rainbow);
+  }
+
 
 
 

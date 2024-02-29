@@ -94,12 +94,12 @@ public void ReverseMotor(double RPM) {
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
-            m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
+            m_LED.SetColor(0, 255, 0, 0, 0, 8);
         } else {
-            m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount);
+            m_LED.SetColor(255, 0, 0, 0, 0, 8);
         }
     
-        return InTarget; // the LEDs are just there to help with testing, can be removed later. 
+        return InTarget; 
     }
 
 

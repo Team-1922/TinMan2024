@@ -51,6 +51,12 @@
                 "data": {
                   "pathName": "red from center note"
                 }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
+                }
               }
             ]
           }
@@ -94,6 +100,12 @@
                 "type": "path",
                 "data": {
                   "pathName": "Red From right note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
                 }
               }
             ]

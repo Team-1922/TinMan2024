@@ -76,7 +76,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.5);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.6);
 
     private final XboxController driver = new XboxController(0);
  
@@ -104,7 +104,7 @@ public class RobotContainer {
 
    NamedCommands.registerCommand("Shoot",m_AutoShoot);
    NamedCommands.registerCommand("Collect", m_CollectNote);
-   NamedCommands.registerCommand("Shoot-Start", m_ShootStart);
+   NamedCommands.registerCommand("ShootStart", m_ShootStart);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -164,7 +164,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
     m_operatorController.button(1).whileTrue(m_shoot);
     m_operatorController.button(2).whileTrue(m_CollectNote);
     m_operatorController.button(3).whileTrue(m_CollectReverse);
-    m_operatorController.button(4).whileTrue(m_ShootStart);
+    m_operatorController.button(5).whileTrue(m_ShootStart);
   }
 
   /**

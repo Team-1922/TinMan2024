@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.Team364.robot.CTREConfigs;
+import frc.robot.subsystems.LedSubsystem;
 
 
 /**
@@ -20,8 +21,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static CTREConfigs ctreConfigs;
   private RobotContainer m_robotContainer;
- 
-  //private StrobeAnimation mAnimation = new StrobeAnimation(255, 0, 0,0,0,8);
+  private LedSubsystem m_LedSubsystem = new LedSubsystem();
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -54,7 +55,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-
+    m_LedSubsystem.DisabledAnimation();
   }
 
   @Override

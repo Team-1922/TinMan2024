@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.1888139091593497,
-      "y": 5.56
+      "x": 1.1148562837666214,
+      "y": 6.240174642511447
     },
-    "rotation": 0
+    "rotation": 40.0
   },
   "command": {
     "type": "sequential",
@@ -22,59 +22,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue to Center Note"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Collect"
                 }
-              }
-            ]
-          }
-        },
-        {
-          "type": "deadline",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootStart"
-                }
               },
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue from center note"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue To Right Note"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Collect"
+                  "pathName": "Blue Left to Left"
                 }
               }
             ]
@@ -87,7 +43,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue From Right Note"
+                  "pathName": "Blue Left From Left"
                 }
               },
               {
@@ -110,15 +66,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Collect"
+                  "pathName": "Blue left to center note"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Blue to Left Note"
+                  "name": "Collect"
                 }
               }
             ]
@@ -129,15 +85,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue From Left Note"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "ShootStart"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue Left From center"
                 }
               }
             ]
