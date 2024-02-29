@@ -26,7 +26,7 @@ public class Collector extends SubsystemBase {
     public Collector() {
 
         m_slot0.kP = 0;
-m_slot0.kV = .0005;
+        m_slot0.kV = .0005;
         m_CollectorTalon.setInverted(false);
         m_CollectorTalon2.setInverted(false); 
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 

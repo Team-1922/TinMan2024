@@ -8,9 +8,9 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class CollectReverse extends Command {
-  /** Creates a new CollectNote. */
-  Collector m_Collector;
 
+  Collector m_Collector;
+/** Reverses the collector */
   public CollectReverse(Collector Collector) {
     m_Collector = Collector;
  
