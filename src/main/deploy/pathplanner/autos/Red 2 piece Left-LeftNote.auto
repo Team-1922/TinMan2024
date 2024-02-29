@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 11.353431937633108,
-      "y": 3.905355503018699
+      "x": 15.527348532174543,
+      "y": 4.71
     },
-    "rotation": 180.0
+    "rotation": -149.6208739886318
   },
   "command": {
     "type": "sequential",
@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BlueCorner path"
+            "pathName": "Red Left To Left Note"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "Red",
   "choreoAuto": false
 }

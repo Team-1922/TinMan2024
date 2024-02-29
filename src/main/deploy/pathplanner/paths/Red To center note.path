@@ -3,33 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 13.669163194182245,
+        "x": 15.370188578214995,
         "y": 5.565311310802802
       },
       "prevControl": null,
       "nextControl": {
-        "x": 13.280775620473339,
+        "x": 14.981801004506089,
         "y": 5.565311310802802
       },
       "isLocked": false,
-      "linkedName": "RedmidNote"
+      "linkedName": "redCenterShoot"
     },
     {
       "anchor": {
-        "x": 15.370188578214995,
+        "x": 13.669163194182245,
         "y": 5.565311310802802
       },
       "prevControl": {
-        "x": 14.963316598672112,
-        "y": 5.565311310802802
+        "x": 14.085174837016341,
+        "y": 5.546821904454621
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "redCenterShoot"
+      "linkedName": "RedmidNote"
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [],
+  "constraintZones": [
+    {
+      "name": "New Constraints Zone",
+      "minWaypointRelativePos": 0.7,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 0.5,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 540.0,
+        "maxAngularAcceleration": 720.0
+      }
+    }
+  ],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
@@ -43,7 +55,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Red",
   "previewStartingState": {
     "rotation": 180.0,
     "velocity": 0

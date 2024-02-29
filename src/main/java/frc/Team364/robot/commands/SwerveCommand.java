@@ -91,7 +91,7 @@ public class SwerveCommand extends Command {
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
             rotationVal,
             !robotCentricSup.getAsBoolean(), 
-            true
+            false
         );
     }
 }

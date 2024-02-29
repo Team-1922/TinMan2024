@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.25,
-      "y": 5.56
+      "x": 1.1148562837666214,
+      "y": 6.240174642511447
     },
-    "rotation": 0.0
+    "rotation": 40.0
   },
   "command": {
     "type": "sequential",
@@ -22,24 +22,37 @@
           "data": {
             "commands": [
               {
-                "type": "named",
+                "type": "path",
                 "data": {
-                  "name": "Collect"
+                  "pathName": "Blue Left to Left"
                 }
               },
               {
-                "type": "path",
+                "type": "named",
                 "data": {
-                  "pathName": "Blue to Center Note"
+                  "name": "Collect"
                 }
               }
             ]
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "Blue from center note"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Blue Left From Left"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
+                }
+              }
+            ]
           }
         },
         {
