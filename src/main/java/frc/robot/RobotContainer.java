@@ -9,6 +9,8 @@ import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Amp;
+import frc.robot.commands.Auto_timer;
 import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.ExampleCommand;
@@ -44,6 +46,7 @@ public class RobotContainer {
 
   private final Collector m_Collector = new Collector();
    private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
+   private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
@@ -63,7 +66,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.6);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 2.5);
 
     private final XboxController driver = new XboxController(0);
  
@@ -74,6 +77,7 @@ public class RobotContainer {
 
   private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.7));
   private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.7));
+  private final Auto_timer mAuto_timer = new Auto_timer(3);
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
@@ -92,6 +96,7 @@ public class RobotContainer {
    NamedCommands.registerCommand("Shoot",m_AutoShoot);
    NamedCommands.registerCommand("Collect", m_CollectNote);
    NamedCommands.registerCommand("ShootStart", m_ShootStart);
+   NamedCommands.registerCommand("timer", mAuto_timer);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -138,6 +143,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
   
       // OPERATOR CONTROLLS
     m_operatorController.button(1).whileTrue(m_shoot); // A
+  //  m_operatorController.button(4).whileTrue(m_Amp); // Y
     m_operatorController.button(2).whileTrue(m_CollectNote); // B
     m_operatorController.button(3).whileTrue(m_CollectReverse); // X
     m_operatorController.button(5).whileTrue(m_ShootStart); // LB
@@ -146,7 +152,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
-   * @return the command to run in autonomous
+   * @return the command to run in autonomous7
    */
   public Command getAutonomousCommand() {
 return AutoSelector.getSelected();

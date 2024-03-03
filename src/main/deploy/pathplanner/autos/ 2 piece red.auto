@@ -43,9 +43,22 @@
           }
         },
         {
-          "type": "path",
+          "type": "deadline",
           "data": {
-            "pathName": "red from center note"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "red from center note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
+                }
+              }
+            ]
           }
         },
         {

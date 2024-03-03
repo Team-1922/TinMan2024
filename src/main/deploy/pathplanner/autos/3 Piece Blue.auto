@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.1888139091593497,
+      "x": 1.204397837367104,
       "y": 5.56
     },
     "rotation": 0
@@ -12,6 +12,12 @@
     "data": {
       "commands": [
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
           "type": "parallel",
           "data": {
             "commands": [
@@ -19,6 +25,12 @@
                 "type": "path",
                 "data": {
                   "pathName": "Blue to Center Note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Collect"
                 }
               }
             ]
@@ -31,6 +43,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
+          }
+        },
+        {
           "type": "sequential",
           "data": {
             "commands": [
@@ -38,6 +56,12 @@
                 "type": "path",
                 "data": {
                   "pathName": "Blue To Right Note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "Collect"
                 }
               }
             ]
@@ -47,6 +71,12 @@
           "type": "path",
           "data": {
             "pathName": "Blue From Right Note"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Shoot"
           }
         }
       ]

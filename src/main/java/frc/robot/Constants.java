@@ -28,7 +28,9 @@ public final class Constants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
     public static final int kLeftShooterRPM = 3000;
+    public static final int kLeftShooterAmpRPM = 900;
     public static final int kRightShooterRPM = 1000; // 5676 is max
+    public static final int kRightShooterAmpRPM = 900;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
 

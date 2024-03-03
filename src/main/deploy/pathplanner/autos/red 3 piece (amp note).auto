@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.1888139091593497,
-      "y": 5.56
+      "x": 15.370188578214995,
+      "y": 5.565311310802802
     },
-    "rotation": 0
+    "rotation": -178.00081155014792
   },
   "command": {
     "type": "sequential",
@@ -22,15 +22,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue to Center Note"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "Collect"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Red To center note"
                 }
               }
             ]
@@ -49,13 +49,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue from center note"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.0
+                  "pathName": "red from center note"
                 }
               }
             ]
@@ -74,7 +68,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue To Right Note"
+                  "pathName": "red to left note"
                 }
               },
               {
@@ -91,71 +85,15 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue From Right Note"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "ShootStart"
                 }
               },
               {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.0
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "Shoot"
-          }
-        },
-        {
-          "type": "parallel",
-          "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Collect"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue to Left Note"
-                }
-              }
-            ]
-          }
-        },
-        {
-          "type": "deadline",
-          "data": {
-            "commands": [
-              {
-                "type": "path",
-                "data": {
-                  "pathName": "Blue From Left Note"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "ShootStart"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 4.0
+                  "pathName": "red from left note"
                 }
               }
             ]
@@ -170,6 +108,6 @@
       ]
     }
   },
-  "folder": "Blue",
+  "folder": "Red",
   "choreoAuto": false
 }

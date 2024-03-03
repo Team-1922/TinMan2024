@@ -24,6 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
     m_Left.setIdleMode(IdleMode.kCoast);
     m_Right.setIdleMode(IdleMode.kCoast);
+    m_Left.setSmartCurrentLimit(69);
+    m_Right.setSmartCurrentLimit(69);
   //  m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless); 
   // m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
     m_Left.setInverted(true);
@@ -37,21 +39,25 @@ public class ShooterSubsystem extends SubsystemBase {
   }
 public boolean TargetRpmReached(double LeftTargetRPM, double RightTargetRPM){
 
-boolean Left =  m_Left.getEncoder().getVelocity() >= (LeftTargetRPM*0.5);
-boolean Right =  m_Right.getEncoder().getVelocity() >= (RightTargetRPM*0.5);
+boolean Left =  m_Left.getEncoder().getVelocity() >= (LeftTargetRPM*0.85);
+boolean Right =  m_Right.getEncoder().getVelocity() >= (RightTargetRPM*0.85);
 if(Left&&Right){
   SmartDashboard.putBoolean("Up to Speed", true);
-  m_LedSubsystem.AnimateLEDs(m_StrobeAnimation, 0);
+  m_LedSubsystem.SetColor(0, 255, 0, 255, 9, 24);
 }else{
   SmartDashboard.putBoolean("Up to Speed", false);
-  m_LedSubsystem.AnimateLEDs(null, 0);
+  m_LedSubsystem.SetColor(0, 0, 0, 0, 9, 24);
   
 }
 
   return Left && Right;
 }
 
+public void AmpShoot(double RightTargetRPM, double LeftTargetRPM){
+m_Left.set(LeftTargetRPM/5676);
+m_Right.set(RightTargetRPM/5676);
 
+}
 
 //max rpm = 5676 free 
 /**

@@ -33,8 +33,9 @@ public class LedSubsystem extends SubsystemBase {
  * @param Count number of leds
  */
   public void SetColor(int Red, int Green, int Blue, int White, int Start,int Count){// sets the leds to a specified color 
-     
+    m_CaNdle.clearAnimation(0);
     m_CaNdle.setLEDs(Red, Green, Blue, White, Start, Count);
+    
   }
 
   /**
