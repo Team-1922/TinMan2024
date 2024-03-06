@@ -5,7 +5,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.ctre.phoenix.led.StrobeAnimation;
+
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -16,7 +16,7 @@ import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-    StrobeAnimation m_StrobeAnimation = new StrobeAnimation(0, 255, 255, 255, 0,Constants.LedConstants.kTotalLedCount,0) ;
+  //  StrobeAnimation m_StrobeAnimation = new StrobeAnimation(0, 255, 255, 255, 0,Constants.LedConstants.kTotalLedCount,0) ;
   CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
   CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
   LedSubsystem m_LedSubsystem = new LedSubsystem();
@@ -24,8 +24,8 @@ public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
     m_Left.setIdleMode(IdleMode.kCoast);
     m_Right.setIdleMode(IdleMode.kCoast);
-    m_Left.setSmartCurrentLimit(69);
-    m_Right.setSmartCurrentLimit(69);
+    m_Left.setSmartCurrentLimit(80);
+    m_Right.setSmartCurrentLimit(80);
   //  m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless); 
   // m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
     m_Left.setInverted(true);
@@ -89,11 +89,7 @@ m_Right.set(RightTargetRPM/5676);
 
 
   }  
-  @Override
-  public void periodic() {
-  TargetRpmReached(Constants.ShooterConstants.kLeftShooterRPM,Constants.ShooterConstants.kRightShooterRPM);
 
-  }
   
 
 }

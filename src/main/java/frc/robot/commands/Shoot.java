@@ -64,7 +64,7 @@ public class Shoot extends Command {
     
       m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
     } 
-    // SmartDashboard.putBoolean("IT HAS REACHED THE TARGET", m_test);
+
   }
 
   // Called once the command ends or is interrupted.
