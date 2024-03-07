@@ -22,6 +22,8 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -114,13 +116,12 @@ AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
 
 SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
+SmartDashboard.putNumber("brownout voltage", RobotController.getBrownoutVoltage());
+
 
   }
 
  
-
-
-
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
