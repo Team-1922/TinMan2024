@@ -116,7 +116,7 @@ AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
 
 SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
-SmartDashboard.putNumber("brownout voltage", RobotController.getBrownoutVoltage());
+//SmartDashboard.putNumber("brownout voltage", RobotController.getBrownoutVoltage());
 
 
   }
@@ -142,9 +142,8 @@ SmartDashboard.putNumber("brownout voltage", RobotController.getBrownoutVoltage(
         // DRIVER CONTROLLS
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
   
-      // OPERATOR CONTROLLS
+    // OPERATOR CONTROLLS
     m_operatorController.button(1).whileTrue(m_shoot); // A
-  //  m_operatorController.button(4).whileTrue(m_Amp); // Y
     m_operatorController.button(2).whileTrue(m_CollectNote); // B
     m_operatorController.button(3).whileTrue(m_CollectReverse); // X
     m_operatorController.button(5).whileTrue(m_ShootStart); // LB
