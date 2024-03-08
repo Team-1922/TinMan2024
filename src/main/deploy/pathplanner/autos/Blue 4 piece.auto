@@ -41,21 +41,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "ShootStart"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "Blue from center note"
                 }
               },
               {
-                "type": "wait",
+                "type": "named",
                 "data": {
-                  "waitTime": 3.0
+                  "name": "ShootStart"
                 }
               }
             ]
@@ -101,12 +95,6 @@
                 "data": {
                   "name": "ShootStart"
                 }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 3.0
-                }
               }
             ]
           }
@@ -150,12 +138,6 @@
                 "type": "named",
                 "data": {
                   "name": "ShootStart"
-                }
-              },
-              {
-                "type": "wait",
-                "data": {
-                  "waitTime": 4.0
                 }
               }
             ]

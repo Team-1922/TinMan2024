@@ -41,15 +41,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "ShootStart"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "Red Right from Right"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
                 }
               }
             ]
