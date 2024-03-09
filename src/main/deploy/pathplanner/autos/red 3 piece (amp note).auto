@@ -85,15 +85,15 @@
           "data": {
             "commands": [
               {
-                "type": "named",
-                "data": {
-                  "name": "ShootStart"
-                }
-              },
-              {
                 "type": "path",
                 "data": {
                   "pathName": "red from left note"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
                 }
               }
             ]
