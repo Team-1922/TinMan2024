@@ -11,6 +11,7 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
+import com.playingwithfusion.TimeOfFlight.RangingMode;
 
 
 public class Collector extends SubsystemBase {
@@ -22,9 +23,12 @@ public class Collector extends SubsystemBase {
     CurrentLimitsConfigs m_Configs = new CurrentLimitsConfigs();
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
+  public boolean m_IsTriggered;
     /**  Makes a new Collector subsystem */
     public Collector() {
 
+m_Tof.setRangingMode(RangingMode.Short, 24);
+SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
         m_slot0.kP = 0;
         m_slot0.kV = .0005;
         m_CollectorTalon.setInverted(false);
@@ -94,12 +98,15 @@ public void ReverseMotor(double RPM) {
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
             m_LED.SetColor(0, 255, 0, 0, 0, 8);
+           
         } else {
             m_LED.SetColor(255, 0, 0, 0, 0, 8);
+            
         }
-    
+        m_IsTriggered = InTarget;
         return InTarget; 
     }
+
 
 
     public double TofcheckDistance(){

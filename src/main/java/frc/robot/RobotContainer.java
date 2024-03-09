@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -44,12 +45,13 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();
-
+  public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();  
   private final Collector m_Collector = new Collector();
+private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
    private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
    private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
-  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+  
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
  
@@ -88,9 +90,11 @@ public class RobotContainer {
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
+    private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    
     // Configure the trigger bindings
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
@@ -143,10 +147,12 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
   
     // OPERATOR CONTROLLS
-    m_operatorController.button(1).whileTrue(m_shoot); // A
-    m_operatorController.button(2).whileTrue(m_CollectNote); // B
-    m_operatorController.button(3).whileTrue(m_CollectReverse); // X
-    m_operatorController.button(5).whileTrue(m_ShootStart); // LB
+  //m_operatorController.button(1).whileTrue(m_shoot);
+    
+    m_driverController.button(1).toggleOnTrue(m_shootGroup); // A
+    m_driverController.button(2).whileTrue(m_CollectNote2); // B
+    m_driverController.button(3).whileTrue(m_CollectReverse); // X
+    m_driverController.button(5).onTrue(m_ShootStart); // LB
   }
 
   /**

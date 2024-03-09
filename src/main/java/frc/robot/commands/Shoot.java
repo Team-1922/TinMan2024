@@ -4,9 +4,11 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -34,7 +36,8 @@ public class Shoot extends Command {
     m_AutoTime = AutoTime;
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
-    addRequirements(ShootSubsystem, collectorSubsystem);
+    addRequirements( collectorSubsystem);
+   
     m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPM;
     m_RPMRight = Constants.ShooterConstants.kRightShooterRPM;
     m_CollectVoltage = Constants.CollectorConstants.kCollectRPM;
@@ -51,7 +54,7 @@ public class Shoot extends Command {
     }
     m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight);
 
-    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
+//    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
 
   }
 
@@ -59,22 +62,25 @@ public class Shoot extends Command {
   @Override
   public void execute() {
    // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight);
-    if ( m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)) {
- 
-    
+    if ( m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
     } 
+    if(!m_Collector.m_IsTriggered){
+m_AutoTimer.start();
+    }
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    
+    
 
     m_Collector.StopMotor();
-    m_ShootSubsystem.StopShoot();
+   // m_ShootSubsystem.StopShoot();
     m_AutoTimer.stop();
+
   }
 
   // Returns true when the command should end.

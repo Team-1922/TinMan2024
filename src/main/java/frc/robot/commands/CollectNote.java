@@ -33,7 +33,7 @@ public class CollectNote extends Command {
   public void initialize() {
     if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
     
-    m_ReverseCheck = false;
+    m_ReverseCheck = true;
     m_HasNote = false;
   } else {
     m_ReverseCheck = true; 
@@ -105,7 +105,7 @@ public class CollectNote extends Command {
   @Override
   public void end(boolean interrupted) {
 
-    m_Collector.StopMotor();
+   m_Collector.StopMotor();
     m_Timer.stop();
     m_DelayTimer.stop();
   }
@@ -114,6 +114,6 @@ public class CollectNote extends Command {
   @Override
   public boolean isFinished() {
 
-    return m_EndCheck;
+    return  m_EndCheck;
   }
 }
