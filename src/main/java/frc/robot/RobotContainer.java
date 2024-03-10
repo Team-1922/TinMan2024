@@ -52,6 +52,7 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
    private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
    private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
   
+   
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
  
@@ -70,7 +71,7 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 2.5);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.5);
 
     private final XboxController driver = new XboxController(0);
  
@@ -91,6 +92,7 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
     private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
+   // private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_AutoShoot,m);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -100,9 +102,10 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
    NamedCommands.registerCommand("Shoot",m_AutoShoot);
-   NamedCommands.registerCommand("Collect", m_CollectNote);
+   NamedCommands.registerCommand("Collect", m_CollectNote2);
    NamedCommands.registerCommand("ShootStart", m_ShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
+   NamedCommands.registerCommand("shoot + collect", m_shootGroup);
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(

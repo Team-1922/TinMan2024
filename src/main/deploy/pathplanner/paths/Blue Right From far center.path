@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.29957545629377,
-        "y": 2.4481294676875076
+        "x": 8.501374119865357,
+        "y": 2.4960698570045796
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.338126326188302,
-        "y": 1.5791273693229506
+        "x": 7.539924989759889,
+        "y": 1.6270677586400226
       },
       "isLocked": false,
       "linkedName": "Blue Far center note "
@@ -54,7 +54,7 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
@@ -65,7 +65,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Blue",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

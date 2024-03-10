@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.234397837367104,
-        "y": 5.56
+        "x": 1.8636772408679951,
+        "y": 5.556066607628711
       },
       "isLocked": false,
       "linkedName": "BlueCenterShootPt"
     },
     {
       "anchor": {
-        "x": 2.904894952647049,
+        "x": 2.8528604804957354,
         "y": 5.56
       },
       "prevControl": {
-        "x": 1.904894952647049,
-        "y": 5.56
+        "x": 2.320101443291688,
+        "y": 5.556066607628711
       },
       "nextControl": null,
       "isLocked": false,
@@ -32,7 +32,7 @@
   "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
+    "maxVelocity": 5.0,
     "maxAcceleration": 3.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "Blue",
+  "folder": null,
   "previewStartingState": {
     "rotation": 0.0,
     "velocity": 0

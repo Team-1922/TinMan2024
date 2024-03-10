@@ -12,7 +12,7 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
+
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -20,6 +20,7 @@ public class ShooterSubsystem extends SubsystemBase {
   //  StrobeAnimation m_StrobeAnimation = new StrobeAnimation(0, 255, 255, 255, 0,Constants.LedConstants.kTotalLedCount,0) ;
   CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
   CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
+
   RelativeEncoder m_LeftEncoder = m_Left.getEncoder();
   RelativeEncoder m_RightEncoder = m_Right.getEncoder();
   LedSubsystem m_LedSubsystem = new LedSubsystem();
@@ -79,9 +80,9 @@ m_Right.set(RightTargetRPM/5676);
     }
 
     if( m_RightEncoder.getVelocity() < RightTargetRPM){
-      m_Right.set(.33);
+      m_Right.set(.5);
     } else{
-      m_Right.set(.26);
+      m_Right.set(.33);
     }
   }
 
