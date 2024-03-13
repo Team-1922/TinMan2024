@@ -74,7 +74,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3);
 
     private final XboxController driver = new XboxController(0);
  
