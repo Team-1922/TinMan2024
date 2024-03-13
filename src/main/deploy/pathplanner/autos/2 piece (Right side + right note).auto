@@ -26,15 +26,22 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "wait",
+                      "type": "deadline",
                       "data": {
-                        "waitTime": 0.25
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot End Delay"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     },
                     {

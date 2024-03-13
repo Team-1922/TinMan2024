@@ -63,9 +63,22 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot End Delay"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     },
                     {
@@ -94,9 +107,22 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot End Delay"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     },
                     {
