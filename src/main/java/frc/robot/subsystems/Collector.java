@@ -63,7 +63,7 @@ SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
 
     }
 /**
- * @param RPM what RPM you want to set the motors to
+ * @param RPM what RPS you want to set the motors to (rotations per second )
  */
     public void ActivateMotor(double RPM) {
             VelocityDutyCycle m_Output = new VelocityDutyCycle(RPM);

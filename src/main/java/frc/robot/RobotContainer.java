@@ -13,9 +13,11 @@ import frc.robot.commands.Amp;
 import frc.robot.commands.Auto_timer;
 import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
+import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.shootStart;
+import frc.robot.commands.AutoCommands.AutoCollectCheck;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -47,12 +49,12 @@ public class RobotContainer {
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();  
   private final Collector m_Collector = new Collector();
-private final CollectNote m_CollectNote = new CollectNote(m_Collector);
-private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
-   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
-   private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
-  
-   
+  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+  private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
+  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
+  //private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
+  private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
+  private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
  
@@ -71,7 +73,7 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1.5);
+   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 1);
 
     private final XboxController driver = new XboxController(0);
  
@@ -92,6 +94,7 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
     private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
+    private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_shoot,m_CollectNoteAuto);
    // private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_AutoShoot,m);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -101,11 +104,14 @@ private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
+    // the commands that are used in pathplanner
    NamedCommands.registerCommand("Shoot",m_AutoShoot);
-   NamedCommands.registerCommand("Collect", m_CollectNote2);
+   NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
    NamedCommands.registerCommand("ShootStart", m_ShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
-   NamedCommands.registerCommand("shoot + collect", m_shootGroup);
+   NamedCommands.registerCommand("shoot + collect", m_AutoShootGroup);
+   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
+   
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(

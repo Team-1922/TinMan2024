@@ -43,7 +43,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue right to far center"
+                  "pathName": "right to far center"
                 }
               }
             ]
@@ -56,7 +56,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue Right From far center"
+                  "pathName": "Right From far center"
                 }
               },
               {

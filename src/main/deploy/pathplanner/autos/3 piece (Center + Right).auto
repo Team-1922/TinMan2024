@@ -50,7 +50,7 @@
                           {
                             "type": "path",
                             "data": {
-                              "pathName": "Blue to Center Note"
+                              "pathName": "to Center Note"
                             }
                           }
                         ]
@@ -59,7 +59,7 @@
                     {
                       "type": "path",
                       "data": {
-                        "pathName": "Blue from center note"
+                        "pathName": "from center note"
                       }
                     },
                     {

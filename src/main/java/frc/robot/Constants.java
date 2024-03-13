@@ -33,10 +33,13 @@ public final class Constants {
     public static final int kRightShooterAmpRPM = 1100;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
-    public static final double kRightTargetRPM =1500;
+    public static final double kRightTargetRPM = 1500;
     public static final double kLeftTargetRPM = 2500; 
 
     // CONFIGS 
+    public static final double kShooterForwardVoltageLimit = 5; // volts
+    public static final double kShooterReverseVoltageLimit = -5; // volts
+
     public static final double kLeftCurrentLimit = 40; // amps (not used)
     public static final double kRightCurrentLimit = 40; // amps (not used)
     public static final double kOpenLoopRamp = 0.2; // seconds

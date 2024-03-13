@@ -4,11 +4,10 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
+import com.ctre.phoenix6.configs.VoltageConfigs;
+import com.ctre.phoenix6.controls.CoastOut;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
+import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,22 +16,23 @@ import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  //  StrobeAnimation m_StrobeAnimation = new StrobeAnimation(0, 255, 255, 255, 0,Constants.LedConstants.kTotalLedCount,0) ;
-  CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
-  CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
+  
+ // CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
+ // CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
 
-  RelativeEncoder m_LeftEncoder = m_Left.getEncoder();
-  RelativeEncoder m_RightEncoder = m_Right.getEncoder();
+  private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
+  private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
+
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-    
-    m_Left.setIdleMode(IdleMode.kCoast);
-    m_Right.setIdleMode(IdleMode.kCoast);
-    m_Left.setSmartCurrentLimit(80);
-    m_Right.setSmartCurrentLimit(80);
-  //  m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless); 
-  // m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
+  
+  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
+  m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardVoltageLimit;
+  m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseVoltageLimit;
+
+  m_Left.getConfigurator().apply(m_VoltageConfigs);
+
     m_Left.setInverted(true);
     m_Right.setInverted(false);// could be the left one is supposed to be inverted, just putting this here for now
   //  m_Left.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
@@ -42,10 +42,16 @@ public class ShooterSubsystem extends SubsystemBase {
     
  
   }
+  /**
+   * 
+   * @param LeftTargetRPM 
+   * @param RightTargetRPM
+   * @return
+   */
 public boolean TargetRpmReached(double LeftTargetRPM, double RightTargetRPM){
 
-boolean Left =  m_LeftEncoder.getVelocity() >= (LeftTargetRPM*0.85);
-boolean Right =  m_RightEncoder.getVelocity() >= (RightTargetRPM*0.85);
+boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPM/60);// divided by 60 to convert units
+boolean Right = (m_Right.getVelocity().getValueAsDouble()) >= (RightTargetRPM/60);
 if(Left&&Right){
   SmartDashboard.putBoolean("Up to Speed", true);
   m_LedSubsystem.SetColor(0, 255, 0, 255, 9, 24);
@@ -58,6 +64,7 @@ if(Left&&Right){
   return Left && Right;
 }
 
+/** this has not been tested */
 public void AmpShoot(double RightTargetRPM, double LeftTargetRPM){
 m_Left.set(LeftTargetRPM/5676);
 m_Right.set(RightTargetRPM/5676);
@@ -71,26 +78,31 @@ m_Right.set(RightTargetRPM/5676);
  * @param LeftTargetRPM Target RPM for the left shooter motor
  */
   public void Shoot(double RightTargetRPM,double LeftTargetRPM ){
-   
-   
-    if( m_LeftEncoder.getVelocity() < LeftTargetRPM){
+  
+
+    m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM/60));
+    m_Right.setControl(new VelocityDutyCycle(LeftTargetRPM/60));
+   /* 
+    if( m_Left.getVelocity().getValueAsDouble() < LeftTargetRPM/60){
       m_Left.set(1);
+      m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM/60));
     } else{
      m_Left.set(.6);
     }
 
-    if( m_RightEncoder.getVelocity() < RightTargetRPM){
+    if( m_Right.getVelocity().getValueAsDouble() < (RightTargetRPM/60)){
       m_Right.set(.5);
     } else{
       m_Right.set(.33);
-    }
+    }*/
   }
 
   /** Stops the shooter motors */
   public void StopShoot(){
 
-   m_Left.set(0);
-    m_Right.set(0);
+    m_Left.setControl(new CoastOut());
+    m_Right.setControl(new CoastOut());
+ 
 
 
   }  
@@ -98,10 +110,10 @@ m_Right.set(RightTargetRPM/5676);
  @Override
  public void periodic(){
   
- SmartDashboard.putNumber("left rpm", m_LeftEncoder.getVelocity());
-SmartDashboard.putNumber( "Right rpm", m_RightEncoder.getVelocity());
-  SmartDashboard.putNumber("left shooter motor temperature", m_Left.getMotorTemperature());
-  SmartDashboard.putNumber(" right shooter motor temperature", m_Right.getMotorTemperature());
+ SmartDashboard.putNumber("left rpm", m_Left.getVelocity().getValueAsDouble()*60);
+SmartDashboard.putNumber( "Right rpm", m_Right.getVelocity().getValueAsDouble()*60);
+//  SmartDashboard.putNumber("left shooter motor temperature", m_Left.getMotorTemperature());
+ // SmartDashboard.putNumber(" right shooter motor temperature", m_Right.getMotorTemperature());
  }
 
 }
