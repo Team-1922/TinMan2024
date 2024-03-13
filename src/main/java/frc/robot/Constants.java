@@ -46,7 +46,7 @@ public final class Constants {
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
     
-    
+    public static final double AutoShootEndDelay = 1; // seconds
   }
 
   public final class CollectorConstants {
