@@ -27,14 +27,14 @@ public final class Constants {
   public static class ShooterConstants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
-    public static final int kLeftShooterRPM = 3000;
+    public static final int kLeftShooterRPM = 1000;
     public static final int kLeftShooterAmpRPM = 900;
-    public static final int kRightShooterRPM = 2000; // 5676 is max
+    public static final int kRightShooterRPM = 1000; // 5676 is max
     public static final int kRightShooterAmpRPM = 1100;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
-    public static final double kRightTargetRPM = 1500;
-    public static final double kLeftTargetRPM = 2500; 
+    public static final double kRightTargetRPM = 750;
+    public static final double kLeftTargetRPM = 1500; 
 
     // CONFIGS 
     public static final double kShooterForwardVoltageLimit = 5; // volts

@@ -4,6 +4,10 @@ import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+import com.ctre.phoenix.led.LarsonAnimation;
+import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix.led.RgbFadeAnimation;
+import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
@@ -24,6 +28,9 @@ public class Collector extends SubsystemBase {
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
+  LarsonAnimation m_LarsonAnimation = new LarsonAnimation(255, 255, 0, 0, .1, 96, BounceMode.Center, 10);
+  RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.1,96);
+  RgbFadeAnimation m_fade = new RgbFadeAnimation(1,.1, 96);
     /**  Makes a new Collector subsystem */
     public Collector() {
 
@@ -97,10 +104,12 @@ public void ReverseMotor(double RPM) {
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
-            m_LED.SetColor(0, 255, 0, 0, 0, 8);
+            m_LED.AnimateLEDs(m_fade, 0);
+        //    m_LED.SetColor(255, 255, 255, 255, 0, 96);
            
         } else {
-            m_LED.SetColor(255, 0, 0, 0, 0, 8);
+            m_LED.AnimateLEDs(m_LarsonAnimation, 0);
+        //    m_LED.SetColor(255, 255, 255, 255, 0, 96);
             
         }
         m_IsTriggered = InTarget;

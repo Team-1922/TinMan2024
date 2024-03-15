@@ -62,7 +62,9 @@ public class Shoot extends Command {
   @Override
   public void execute() {
    // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight);
-    if ( m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)) {   
+    if (true
+      // m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)
+       ) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
     } 
     if(!m_Collector.m_IsTriggered){

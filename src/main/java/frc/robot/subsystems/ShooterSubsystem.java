@@ -46,7 +46,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * 
    * @param LeftTargetRPM 
    * @param RightTargetRPM
-   * @return
+   * 
    */
 public boolean TargetRpmReached(double LeftTargetRPM, double RightTargetRPM){
 
@@ -110,8 +110,8 @@ m_Right.set(RightTargetRPM/5676);
  @Override
  public void periodic(){
   
- SmartDashboard.putNumber("left rpm", m_Left.getVelocity().getValueAsDouble()*60);
-SmartDashboard.putNumber( "Right rpm", m_Right.getVelocity().getValueAsDouble()*60);
+ SmartDashboard.putNumber("left rpm", m_Left.getVelocity().getValueAsDouble()/60);
+SmartDashboard.putNumber( "Right rpm", m_Right.getVelocity().getValueAsDouble()/60);
 //  SmartDashboard.putNumber("left shooter motor temperature", m_Left.getMotorTemperature());
  // SmartDashboard.putNumber(" right shooter motor temperature", m_Right.getMotorTemperature());
  }

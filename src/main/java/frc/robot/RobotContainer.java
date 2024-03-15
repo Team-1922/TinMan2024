@@ -52,7 +52,7 @@ public class RobotContainer {
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
-  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
+  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,5 );
   //private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
@@ -95,7 +95,7 @@ public class RobotContainer {
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
     private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
-    private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_shoot,m_CollectNoteAuto);
+    //private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_shoot,m_CollectNoteAuto);
    // private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_AutoShoot,m);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -110,7 +110,7 @@ public class RobotContainer {
    NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
    NamedCommands.registerCommand("ShootStart", m_ShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
-   NamedCommands.registerCommand("shoot + collect", m_AutoShootGroup);
+   NamedCommands.registerCommand("shoot + collect", m_shootGroup);
    NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
    NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck);
    
@@ -160,10 +160,11 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
     // OPERATOR CONTROLLS
   //m_operatorController.button(1).whileTrue(m_shoot);
     
-    m_driverController.button(1).toggleOnTrue(m_shootGroup); // A
-    m_driverController.button(2).whileTrue(m_CollectNote2); // B
-    m_driverController.button(3).whileTrue(m_CollectReverse); // X
-    m_driverController.button(5).onTrue(m_ShootStart); // LB
+    m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
+    m_operatorController.button(2).whileTrue(m_CollectNote2); // B
+    m_operatorController.button(3).whileTrue(m_CollectReverse); // X
+    m_operatorController.button(5).onTrue(m_ShootStart); // LB
+    
   }
 
   /**
