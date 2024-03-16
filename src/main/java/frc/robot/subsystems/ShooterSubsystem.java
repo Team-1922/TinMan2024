@@ -4,11 +4,15 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.CoastOut;
+import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,6 +31,8 @@ public class ShooterSubsystem extends SubsystemBase {
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
+  m_Left.setNeutralMode(NeutralModeValue.Brake);
+  m_Right.setNeutralMode(NeutralModeValue.Brake);
   
   VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
   m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardVoltageLimit;
@@ -50,8 +56,8 @@ m_Right.getConfigurator().apply(m_Slot0Configs);
   }
   /**
    * 
-   * @param LeftTargetRPM 
-   * @param RightTargetRPM
+   * @param LeftTargetRPS
+   * @param RightTargetRPS
    * 
    */
 public boolean TargetRpmReached(double LeftTargetRPS, double RightTargetRPS){
@@ -105,10 +111,9 @@ m_Right.set(RightTargetRPM/5676);
 
   /** Stops the shooter motors */
   public void StopShoot(){
-
-    m_Left.setControl(new CoastOut());
-    m_Right.setControl(new CoastOut());
- 
+    
+m_Left.set(0);
+ m_Right.set(0);
 
 
   }  
@@ -119,8 +124,7 @@ m_Right.set(RightTargetRPM/5676);
   SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
  SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
 SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
-//  SmartDashboard.putNumber("left shooter motor temperature", m_Left.getMotorTemperature());
- // SmartDashboard.putNumber(" right shooter motor temperature", m_Right.getMotorTemperature());
+
  }
 
 }

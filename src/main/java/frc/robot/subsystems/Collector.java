@@ -25,6 +25,7 @@ import com.playingwithfusion.TimeOfFlight.RangingMode;
 
 public class Collector extends SubsystemBase {
     double CollectVoltage;
+    ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
    //public boolean m_TofIsTriggered;
     private static TalonFX m_CollectorTalon = new TalonFX(CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
@@ -33,7 +34,7 @@ public class Collector extends SubsystemBase {
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
-  //SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 0, .75, 96, 0);
+  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
   //LarsonAnimation m_LarsonAnimation = new LarsonAnimation(255, 255, 0, 0, .2, 96, BounceMode.Center, 10);
   RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
   //RgbFadeAnimation m_fade = new RgbFadeAnimation(1,.1, 96);
@@ -44,7 +45,7 @@ public class Collector extends SubsystemBase {
     public Collector() {
 
 m_Tof.setRangingMode(RangingMode.Short, 24);
-SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
+//SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
         m_slot0.kP = 0;
         m_slot0.kV = .0005;
         m_CollectorTalon.setInverted(false);
@@ -113,9 +114,12 @@ public void ReverseMotor(double RPM) {
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
-          //  m_LED.AnimateLEDs(m_FireAnimation, 0);
+            if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
+            {
+                m_LED.AnimateLEDs(m_SingleFade, 0);
+            }else{
            m_LED.SetColor(255, 255, 255, 255, 0, 96);
-           
+           }
         } else {
            // m_LED.SetColor(0, 0, 0, 0, 0, 96);
          if ( RobotController.isSysActive()){

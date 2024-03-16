@@ -22,7 +22,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static CTREConfigs ctreConfigs;
   private RobotContainer m_robotContainer;
-  private LedSubsystem m_LedSubsystem = new LedSubsystem();
+
 
 
   /**
@@ -57,8 +57,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-   // m_ShooterSubsystem.StopShoot();
-  //  m_LedSubsystem.DisabledAnimation();
+
   }
 
   @Override

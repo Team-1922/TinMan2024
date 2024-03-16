@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.204397837367104,
-      "y": 5.56
+      "x": 1.1333456901148034,
+      "y": 5.574556013976893
     },
     "rotation": 0
   },
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 2.0
                       }
                     },
                     {
@@ -51,7 +51,7 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "parallel",
                       "data": {
                         "commands": [
                           {
@@ -61,18 +61,38 @@
                             }
                           },
                           {
-                            "type": "path",
+                            "type": "sequential",
                             "data": {
-                              "pathName": "to Center Note"
+                              "commands": [
+                                {
+                                  "type": "deadline",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "NoteCheck"
+                                        }
+                                      },
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "to Center Note"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "from center note"
+                                  }
+                                }
+                              ]
                             }
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "from center note"
                       }
                     },
                     {
@@ -95,7 +115,7 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "parallel",
                       "data": {
                         "commands": [
                           {
@@ -105,18 +125,38 @@
                             }
                           },
                           {
-                            "type": "path",
+                            "type": "sequential",
                             "data": {
-                              "pathName": "To Right note"
+                              "commands": [
+                                {
+                                  "type": "deadline",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "NoteCheck"
+                                        }
+                                      },
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "To Right note"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "From Right Note"
+                                  }
+                                }
+                              ]
                             }
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "From Right Note"
                       }
                     },
                     {

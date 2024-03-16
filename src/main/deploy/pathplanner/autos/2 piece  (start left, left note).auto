@@ -28,13 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 0.5
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
+                        "waitTime": 2.0
                       }
                     },
                     {
@@ -44,22 +38,61 @@
                           {
                             "type": "named",
                             "data": {
-                              "name": "Collect"
+                              "name": "Shoot End Delay"
                             }
                           },
                           {
-                            "type": "path",
+                            "type": "named",
                             "data": {
-                              "pathName": " To Left Note (Left Side)"
+                              "name": "Shoot"
                             }
                           }
                         ]
                       }
                     },
                     {
-                      "type": "path",
+                      "type": "parallel",
                       "data": {
-                        "pathName": "From Left note (Left side)"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Collect"
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "deadline",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "NoteCheck"
+                                        }
+                                      },
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": " To Left Note (Left Side)"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "From Left note (Left side)"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
                       }
                     },
                     {
