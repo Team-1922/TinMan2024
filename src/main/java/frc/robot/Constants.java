@@ -27,18 +27,18 @@ public final class Constants {
   public static class ShooterConstants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
-    public static final int kLeftShooterRPM = 1000;
-    public static final int kLeftShooterAmpRPM = 900;
-    public static final int kRightShooterRPM = 1000; // 5676 is max
-    public static final int kRightShooterAmpRPM = 1100;
+    public static final int kLeftShooterRPS = 10;
+    public static final int kLeftShooterAmpRPS = 0;
+    public static final int kRightShooterRPS = 50; // 5676 is max
+    public static final int kRightShooterAmpRPS = 00;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
-    public static final double kRightTargetRPM = 750;
-    public static final double kLeftTargetRPM = 1500; 
+    public static final double kRightTargetRPS = 2;
+    public static final double kLeftTargetRPS =1; 
 
     // CONFIGS 
-    public static final double kShooterForwardVoltageLimit = 5; // volts
-    public static final double kShooterReverseVoltageLimit = -5; // volts
+    public static final double kShooterForwardVoltageLimit = 3; // volts
+    public static final double kShooterReverseVoltageLimit = -3; // volts
 
     public static final double kLeftCurrentLimit = 40; // amps (not used)
     public static final double kRightCurrentLimit = 40; // amps (not used)
@@ -59,7 +59,7 @@ public final class Constants {
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
     public static final double kCollectRPM = 900; //(700/600)*2048;
     public static final double kSecondCollectRPM = 450; //(600/600)*2048;
-    public static final double kReverseCollectRPM = 750;//(600/600)*2048; // x/600*2048
+    public static final double kReverseCollectRPM = 650;//(600/600)*2048; // x/600*2048
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds

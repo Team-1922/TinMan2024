@@ -36,8 +36,8 @@ public class Amp extends Command {
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
     addRequirements(ShootSubsystem, collectorSubsystem);
-    m_RPMLeft = ShooterConstants.kLeftShooterAmpRPM;
-    m_RPMRight = ShooterConstants.kRightShooterAmpRPM;
+   // m_RPMLeft = ShooterConstants.kLeftShooterAmpRPM;
+  //  m_RPMRight = ShooterConstants.kRightShooterAmpRPM;
     m_CollectVoltage = Constants.CollectorConstants.kCollectRPM;
   
     // Use addRequirements() here to declare subsystem dependencies.
@@ -52,7 +52,7 @@ public class Amp extends Command {
     }
     //m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight);
 
-    m_ShootSubsystem.AmpShoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
+   // m_ShootSubsystem.AmpShoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
     m_Timer.reset();
     m_Timer.start();
   }

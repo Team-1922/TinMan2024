@@ -16,6 +16,7 @@ import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.StopCollector_shooter;
 import frc.robot.commands.shootStart;
 import frc.robot.commands.AutoCollectCheck;
 import frc.robot.commands.AutoShootNoteCheck;
@@ -36,6 +37,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -58,6 +60,7 @@ public class RobotContainer {
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
+  private final XboxController m_Controller = new XboxController(1);
  
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
@@ -95,6 +98,7 @@ public class RobotContainer {
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
     private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
+    private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
     //private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_shoot,m_CollectNoteAuto);
    // private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_AutoShoot,m);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
@@ -153,7 +157,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
 
   
-  
+
         // DRIVER CONTROLLS
     zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
   
@@ -164,7 +168,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
     m_operatorController.button(2).whileTrue(m_CollectNote2); // B
     m_operatorController.button(3).whileTrue(m_CollectReverse); // X
     m_operatorController.button(5).onTrue(m_ShootStart); // LB
-    
+    m_operatorController.pov(180).whileTrue(m_stopCollector_shooter); // D-pad down
   }
 
   /**
