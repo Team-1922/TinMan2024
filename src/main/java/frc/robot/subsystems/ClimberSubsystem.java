@@ -63,24 +63,12 @@ public void StopLeftClimber(){
 }
 
 public double getLeftVelocity(){
-  double startPos = m_Encoder1.getPosition();
-  double newPos = 0;
-  m_VelocityTimer.reset();
-  while (!m_VelocityTimer.hasElapsed(0.1)) {
-    newPos = m_Encoder1.getPosition();
-  }
-  double motorVelocity = ((newPos - startPos)/0.1)*(0.5*2*Math.PI); //inches per second
+  double motorVelocity = m_Encoder1.getVelocity();
   return motorVelocity;
 }
 
 public double getRightVelocity(){
-  double startPos = m_Encoder2.getPosition();
-  double newPos = 0;
-  m_VelocityTimer.reset();
-  while (!m_VelocityTimer.hasElapsed(0.1)) {
-    newPos = m_Encoder2.getPosition();
-  }
-  double motorVelocity = ((newPos - startPos)/0.1)*(0.5*2*Math.PI); //inches per second
+    double motorVelocity = m_Encoder2.getVelocity();
   return motorVelocity;
 }
 
