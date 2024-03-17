@@ -13,20 +13,18 @@ public class TorqueLimitClimb extends Command {
   
   ClimberSubsystem m_ClimberSubsystem; 
   CommandXboxController m_Controller;
-  int m_LeftAxis;
   int m_RightAxis;
   double m_Deadband;
-  double m_MotorTorqueConst; //0.097
+  //Motor-Torque constant for the NEO550s is 0.097 keep this in mind for calculations
   /** Creates a new Climb.
    * 
    * @param LeftAxis the axis used for controlling the left climber motor
    * @param RightAxis the axis used for controlling the right climber motor
    * @param Deadband the deadband to apply to the controller
    */
-  public TorqueLimitClimb(ClimberSubsystem climberSubsystem, CommandXboxController controller, int LeftAxis, int RightAxis, double Deadband) {
+  public TorqueLimitClimb(ClimberSubsystem climberSubsystem, CommandXboxController controller, int RightAxis, double Deadband) {
     m_Controller = controller;
     m_ClimberSubsystem = climberSubsystem;
-    m_LeftAxis = LeftAxis;
     m_RightAxis = RightAxis;
     m_Deadband = Deadband;
     addRequirements(climberSubsystem);
@@ -37,16 +35,21 @@ public class TorqueLimitClimb extends Command {
   @Override
   public void initialize() {
     //Limit amps to lower torque
+    m_ClimberSubsystem.SetTorque(1);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
     m_ClimberSubsystem.LeftClimb(
-    MathUtil.applyDeadband(-m_Controller.getRawAxis(m_RightAxis), m_Deadband));
-     m_ClimberSubsystem.RightClimb(
-    MathUtil.applyDeadband(m_Controller.getRawAxis(m_LeftAxis), m_Deadband));
+      MathUtil.applyDeadband(-m_Controller.getRawAxis(m_RightAxis), m_Deadband));
+      m_ClimberSubsystem.RightClimb(
+        MathUtil.applyDeadband(m_Controller.getRawAxis(m_RightAxis), m_Deadband));
+        if(m_ClimberSubsystem.GetRightVelocity() <= 10 && m_ClimberSubsystem.GetLeftVelocity() <= 10) {
+          if(m_ClimberSubsystem.GetRightVelocity() >= 0 && m_ClimberSubsystem.GetLeftVelocity() >= 0) {
+            m_ClimberSubsystem.SetTorque(30);
+          }
+        }
     //Check velocity: Once it reaches a threshold (stalling against the chain), unlimit the torque and pull it up
   }
 
@@ -54,8 +57,8 @@ public class TorqueLimitClimb extends Command {
   @Override
   public void end(boolean interrupted) {
     
-m_ClimberSubsystem.StopLeftClimber();
-m_ClimberSubsystem.StopRightClimber();
+    m_ClimberSubsystem.StopLeftClimber();
+    m_ClimberSubsystem.StopRightClimber();
 
   }
 

@@ -62,14 +62,19 @@ public void StopLeftClimber(){
   m_ClimberMotor1.stopMotor();
 }
 
-public double getLeftVelocity(){
+public double GetLeftVelocity(){
   double motorVelocity = m_Encoder1.getVelocity();
   return motorVelocity;
 }
 
-public double getRightVelocity(){
+public double GetRightVelocity(){
     double motorVelocity = m_Encoder2.getVelocity();
   return motorVelocity;
+}
+
+public void SetTorque(int max) {
+  m_ClimberMotor1.setSmartCurrentLimit(max);
+  m_ClimberMotor2.setSmartCurrentLimit(max);
 }
 
 
