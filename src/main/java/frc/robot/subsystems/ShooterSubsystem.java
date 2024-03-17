@@ -91,23 +91,9 @@ m_Right.set(RightTargetRPM/5676);
  * @param LeftTargetRPM Target RPM for the left shooter motor
  */
   public void Shoot(double RightTargetRPM,double LeftTargetRPM ){
-  
 
     m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM));
-    m_Right.setControl(new VelocityDutyCycle(LeftTargetRPM));
-   /* 
-    if( m_Left.getVelocity().getValueAsDouble() < LeftTargetRPM/60){
-      m_Left.set(1);
-      m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM/60));
-    } else{
-     m_Left.set(.6);
-    }
-
-    if( m_Right.getVelocity().getValueAsDouble() < (RightTargetRPM/60)){
-      m_Right.set(.5);
-    } else{
-      m_Right.set(.33);
-    }*/
+    m_Right.setControl(new VelocityDutyCycle(LeftTargetRPM));  
   }
 
   /** Stops the shooter motors */

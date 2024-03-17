@@ -19,7 +19,6 @@ CANSparkMax m_ClimberMotor2 = new CANSparkMax(Constants.ClimberConstants.Climber
   
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
-
 m_ClimberMotor1.setIdleMode(IdleMode.kBrake);
 m_ClimberMotor2.setIdleMode(IdleMode.kBrake);
 m_ClimberMotor1.setInverted(false);

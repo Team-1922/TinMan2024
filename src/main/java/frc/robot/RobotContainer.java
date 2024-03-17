@@ -14,6 +14,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.StopCollector_shooter;
 import frc.robot.commands.shootStart;
@@ -26,6 +27,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -56,6 +58,7 @@ public class RobotContainer {
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
+  private final Rumble m_Rumble = new Rumble();
  
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
@@ -155,7 +158,8 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
     // DRIVER CONTROLLS
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
-  
+      m_driverController.button(2).whileTrue(m_Rumble) ;
+
     
     // OPERATOR CONTROLLS    
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A

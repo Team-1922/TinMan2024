@@ -115,7 +115,8 @@ public void ReverseMotor(double RPM) {
         } else {
            // m_LED.SetColor(0, 0, 0, 0, 0, 96);
          if ( RobotController.isSysActive()){
-          m_LED.AnimateLEDs(m_FireAnimation, 0);} else m_LED.AnimateLEDs(m_RAINBOW, 0);
+          m_LED.AnimateLEDs(m_FireAnimation, 0);} 
+          else m_LED.AnimateLEDs(m_RAINBOW, 0);
           // m_LED.SetColor(255, 0, 255, 0, 0, 96);
             
         }
