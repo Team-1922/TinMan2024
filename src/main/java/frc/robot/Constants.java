@@ -37,11 +37,11 @@ public final class Constants {
     public static final double kLeftTargetRPS =1.2; // gets up to ~2
 
     // CONFIGS 
-    public static final double kShooterForwardVoltageLimit = 9; // volts
-    public static final double kShooterReverseVoltageLimit = -9; // volts
+    public static final double kShooterForwardVoltageLimit = 3; // volts
+    public static final double kShooterReverseVoltageLimit = -3; // volts
 
-    public static final double kLeftCurrentLimit = 40; // amps (not used)
-    public static final double kRightCurrentLimit = 40; // amps (not used)
+   
+    public static final double kCurrentLimit = 60; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)

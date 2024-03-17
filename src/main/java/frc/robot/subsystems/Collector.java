@@ -1,18 +1,14 @@
 package frc.robot.subsystems;
-import frc.Team364.robot.Robot;
+
 import frc.robot.Constants;
 import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.ctre.phoenix.led.FireAnimation;
-import com.ctre.phoenix.led.LarsonAnimation;
 import com.ctre.phoenix.led.RainbowAnimation;
-import com.ctre.phoenix.led.RgbFadeAnimation;
 import com.ctre.phoenix.led.SingleFadeAnimation;
-import com.ctre.phoenix.led.StrobeAnimation;
-import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
+
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
@@ -22,11 +18,9 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
 import com.playingwithfusion.TimeOfFlight.RangingMode;
 
-
 public class Collector extends SubsystemBase {
     double CollectVoltage;
     ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
-   //public boolean m_TofIsTriggered;
     private static TalonFX m_CollectorTalon = new TalonFX(CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
@@ -34,11 +28,9 @@ public class Collector extends SubsystemBase {
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
+
   SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
-  //LarsonAnimation m_LarsonAnimation = new LarsonAnimation(255, 255, 0, 0, .2, 96, BounceMode.Center, 10);
   RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
-  //RgbFadeAnimation m_fade = new RgbFadeAnimation(1,.1, 96);
-  //StrobeAnimation m_StrobeAnimation = new StrobeAnimation(255, 255, 0, 0,.01, 96);
   FireAnimation m_FireAnimation = new FireAnimation(.5, .5, 96, .5, 0, true, 0);
   
     /**  Makes a new Collector subsystem */

@@ -4,19 +4,15 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.NeutralMode;
+
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.VoltageConfigs;
-import com.ctre.phoenix6.controls.CoastOut;
-import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -35,19 +31,24 @@ public class ShooterSubsystem extends SubsystemBase {
   m_Right.setNeutralMode(NeutralModeValue.Brake);
   
   VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
-  m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardVoltageLimit;
-  m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseVoltageLimit;
+    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardVoltageLimit;
+    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseVoltageLimit;
+  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
+    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
 
+
+  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
   m_Left.getConfigurator().apply(m_VoltageConfigs);
-m_Right.getConfigurator().apply(m_VoltageConfigs);
-    m_Left.setInverted(true);
-    m_Right.setInverted(false);// could be the left one is supposed to be inverted, just putting this here for now
-  //  m_Left.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
- //   m_Right.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
-  //  m_Left.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
-  //  m_Right.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
-Slot0Configs m_Slot0Configs = new Slot0Configs();
-m_Slot0Configs.kP = .5;    
+  m_Right.getConfigurator().apply(m_VoltageConfigs);
+  m_Left.setInverted(true);
+  m_Right.setInverted(false);
+
+
+
+  Slot0Configs m_Slot0Configs = new Slot0Configs();
+    m_Slot0Configs.kP = .5;    
  
 m_Left.getConfigurator().apply(m_Slot0Configs);
 m_Right.getConfigurator().apply(m_Slot0Configs);

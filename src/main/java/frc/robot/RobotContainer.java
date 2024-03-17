@@ -9,7 +9,6 @@ import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
-
 import frc.robot.commands.Auto_timer;
 import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
@@ -26,8 +25,6 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -37,7 +34,6 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -55,7 +51,6 @@ public class RobotContainer {
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,5 );
-  //private final Amp m_Amp = new Amp(m_shooterSubsystem, m_Collector, false, 2);
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
@@ -158,17 +153,16 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
   
 
-        // DRIVER CONTROLLS
-    zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
+    // DRIVER CONTROLLS
+      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
   
-    // OPERATOR CONTROLLS
-  //m_operatorController.button(1).whileTrue(m_shoot);
     
-    m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
-    m_operatorController.button(2).whileTrue(m_CollectNote2); // B
-    m_operatorController.button(3).whileTrue(m_CollectReverse); // X
-    m_operatorController.button(5).onTrue(m_ShootStart); // LB
-    m_operatorController.pov(180).whileTrue(m_stopCollector_shooter); // D-pad down
+    // OPERATOR CONTROLLS    
+      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
+      m_operatorController.button(2).whileTrue(m_CollectNote2); // B
+      m_operatorController.button(3).whileTrue(m_CollectReverse); // X
+      m_operatorController.button(5).onTrue(m_ShootStart); // LB
+      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter); // D-pad down
   }
 
   /**

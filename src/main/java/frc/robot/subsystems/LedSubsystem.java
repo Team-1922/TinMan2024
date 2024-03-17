@@ -6,9 +6,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
-import com.ctre.phoenix.led.RainbowAnimation;
-
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.LedConstants;
 
@@ -16,15 +13,12 @@ public class LedSubsystem extends SubsystemBase {
 
   CANdle m_CaNdle = new CANdle(LedConstants.kCandleID); 
   
-  RainbowAnimation m_rainbow = new RainbowAnimation(1, 1, LedConstants.kTotalLedCount,false,8);
-
-  /** Creates a new LedSubsystem. */
-  public LedSubsystem() {
  
-  }
+  /** Creates a new LedSubsystem. */
+  public LedSubsystem(){}
   
 /**
- * 
+ * sets the color of the LEDS, also clears the animation in slot 0
  * @param Red 0-255
  * @param Green 0-255
  * @param Blue 0-255
@@ -39,9 +33,8 @@ public class LedSubsystem extends SubsystemBase {
   }
 
   /**
-   * 
-   * @param animation
-   * @param AnimationSlot
+   * @param animation the animation to run
+   * @param AnimationSlot what slot it to put it in (do 0 unless running multiple at once)
    */
   public void AnimateLEDs( Animation animation,int AnimationSlot){// animates the LEDs
 
@@ -49,15 +42,7 @@ public class LedSubsystem extends SubsystemBase {
     
   }
 
-/** runs a rainbow animation for testing reasons */
-  public void TestAnimation(){
 
-    m_CaNdle.animate(m_rainbow);
-  }
-
-  public void DisabledAnimation(){
-    m_CaNdle.animate(m_rainbow);
-  }
 
 
 
