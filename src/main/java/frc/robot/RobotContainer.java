@@ -16,6 +16,7 @@ import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
+import frc.robot.commands.TorqueLimitClimb;
 import frc.robot.commands.StopCollector_shooter;
 import frc.robot.commands.shootStart;
 import frc.robot.commands.AutoCollectCheck;
@@ -62,6 +63,7 @@ public class RobotContainer {
  
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
+  private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
@@ -105,7 +107,7 @@ public class RobotContainer {
     
     // Configure the trigger bindings
     configureBindings();
-    m_ClimberSubsystem.setDefaultCommand(m_Climb);
+    m_ClimberSubsystem.setDefaultCommand(m_TClimb);
 
     // the commands that are used in pathplanner
    NamedCommands.registerCommand("Shoot",m_AutoShoot);

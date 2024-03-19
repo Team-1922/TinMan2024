@@ -5,7 +5,11 @@
 package frc.robot.subsystems;
 
 
+import edu.wpi.first.wpilibj.Timer;
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.SparkRelativeEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
@@ -16,6 +20,9 @@ import frc.robot.Constants;
 public class ClimberSubsystem extends SubsystemBase {
 CANSparkMax m_ClimberMotor1 = new CANSparkMax(Constants.ClimberConstants.ClimberMotorID, MotorType.kBrushless);
 CANSparkMax m_ClimberMotor2 = new CANSparkMax(Constants.ClimberConstants.ClimberMotorID2,MotorType.kBrushless);
+SparkAbsoluteEncoder m_Encoder1 = m_ClimberMotor1.getAbsoluteEncoder();
+SparkAbsoluteEncoder m_Encoder2 = m_ClimberMotor2.getAbsoluteEncoder();
+Timer m_VelocityTimer = new Timer();
   
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
@@ -52,6 +59,21 @@ public void StopRightClimber(){
 public void StopLeftClimber(){
 
   m_ClimberMotor1.stopMotor();
+}
+
+public double GetLeftVelocity(){
+  double motorVelocity = m_Encoder1.getVelocity();
+  return motorVelocity;
+}
+
+public double GetRightVelocity(){
+    double motorVelocity = m_Encoder2.getVelocity();
+  return motorVelocity;
+}
+
+public void SetTorque(int max) {
+  m_ClimberMotor1.setSmartCurrentLimit(max);
+  m_ClimberMotor2.setSmartCurrentLimit(max);
 }
 
 
