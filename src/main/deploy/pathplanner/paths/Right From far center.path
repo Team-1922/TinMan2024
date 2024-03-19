@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.031466315184882,
-        "y": 1.5715995395954763
+        "x": 5.949836043816232,
+        "y": 1.2480349285022903
       },
       "isLocked": false,
       "linkedName": "Blue Far center note "
     },
     {
       "anchor": {
-        "x": 2.699662542182228,
-        "y": 2.8879132043978375
+        "x": 2.520051166228458,
+        "y": 2.6070062950936714
       },
       "prevControl": {
-        "x": 4.215793862733163,
-        "y": 2.2315392790373734
+        "x": 3.5739473280748357,
+        "y": 1.9228982602109355
       },
       "nextControl": {
-        "x": 0.9181076545638325,
-        "y": 3.6591961130619004
+        "x": 1.415510051435562,
+        "y": 3.323989123994323
       },
       "isLocked": false,
       "linkedName": null
@@ -46,7 +46,7 @@
   ],
   "rotationTargets": [
     {
-      "waypointRelativePos": 1.5,
+      "waypointRelativePos": 0.85,
       "rotationDegrees": -32.00538320808356,
       "rotateFast": false
     }

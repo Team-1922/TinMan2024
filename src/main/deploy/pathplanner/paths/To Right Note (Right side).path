@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.595580848819355,
-        "y": 3.9474882553368706
+        "x": 1.5493573329488999,
+        "y": 4.030690583903691
       },
       "isLocked": false,
       "linkedName": "Right Shoot"
@@ -20,8 +20,8 @@
         "y": 4.104648209296419
       },
       "prevControl": {
-        "x": 1.6510490678639018,
-        "y": 4.178605834689148
+        "x": 1.5216232234266267,
+        "y": 4.021445880729599
       },
       "nextControl": null,
       "isLocked": false,
@@ -51,7 +51,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -12.994616791916336,
+    "rotation": -0.9877603996398286,
     "rotateFast": false
   },
   "reversed": false,

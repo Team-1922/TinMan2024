@@ -45,7 +45,7 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "parallel",
                       "data": {
                         "commands": [
                           {
@@ -55,18 +55,38 @@
                             }
                           },
                           {
-                            "type": "path",
+                            "type": "sequential",
                             "data": {
-                              "pathName": "To Right Note (Right side)"
+                              "commands": [
+                                {
+                                  "type": "deadline",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "NoteCheck"
+                                        }
+                                      },
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "To Right Note (Right side)"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "From Right Note (Right side)"
+                                  }
+                                }
+                              ]
                             }
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "path",
-                      "data": {
-                        "pathName": "From Right Note (Right side)"
                       }
                     },
                     {
