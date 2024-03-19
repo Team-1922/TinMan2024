@@ -2,15 +2,22 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.28283299809842855,
-      "y": 2.5792721855713987
+      "x": 0.5231952806247954,
+      "y": 2.6902086236604914
     },
     "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
-      "commands": []
+      "commands": [
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        }
+      ]
     }
   },
   "folder": null,

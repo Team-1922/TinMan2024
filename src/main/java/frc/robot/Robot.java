@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.Team364.robot.CTREConfigs;
-import frc.robot.subsystems.LedSubsystem;
 
 
 
@@ -22,7 +21,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static CTREConfigs ctreConfigs;
   private RobotContainer m_robotContainer;
-  private LedSubsystem m_LedSubsystem = new LedSubsystem();
+
 
 
   /**
@@ -57,8 +56,7 @@ public class Robot extends TimedRobot {
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
   public void disabledInit() {
-   // m_ShooterSubsystem.StopShoot();
-  //  m_LedSubsystem.DisabledAnimation();
+
   }
 
   @Override
@@ -88,7 +86,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-   // m_ShooterSubsystem.Shoot(Constants.ShooterConstants., kDefaultPeriod);
   }
 
   /** This function is called periodically during operator control. */
@@ -112,4 +109,5 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
+
 }

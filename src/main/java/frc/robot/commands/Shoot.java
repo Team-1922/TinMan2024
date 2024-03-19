@@ -6,10 +6,11 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj.Timer;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.Constants;
+import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -38,9 +39,10 @@ public class Shoot extends Command {
     m_Collector = collectorSubsystem;
     addRequirements( collectorSubsystem);
    
-    m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPM;
-    m_RPMRight = Constants.ShooterConstants.kRightShooterRPM;
+    m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPS;
+    m_RPMRight = Constants.ShooterConstants.kRightShooterRPS;
     m_CollectVoltage = Constants.CollectorConstants.kCollectRPM;
+    
   
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -52,9 +54,9 @@ public class Shoot extends Command {
     if(m_IsAuto){
       m_AutoTimer.start();
     }
-    m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight);
+    m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
 
-//    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
+    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
 
   }
 
@@ -62,8 +64,9 @@ public class Shoot extends Command {
   @Override
   public void execute() {
    // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight);
-    if (true
-      // m_ShootSubsystem.TargetRpmReached(m_RPMLeft, m_RPMRight)
+    if (
+      SmartDashboard.getBoolean("Up to Speed", false)
+      //m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS)
        ) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
     } 
@@ -79,8 +82,11 @@ m_AutoTimer.start();
     
     
 
+
     m_Collector.StopMotor();
-   // m_ShootSubsystem.StopShoot();
+if(!m_IsAuto){
+    m_ShootSubsystem.StopShoot();
+  }
     m_AutoTimer.stop();
 
   }

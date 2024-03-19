@@ -26,7 +26,6 @@ Timer m_VelocityTimer = new Timer();
   
   /** Creates a new ClimberSubsystem. */
   public ClimberSubsystem() {
-
 m_ClimberMotor1.setIdleMode(IdleMode.kBrake);
 m_ClimberMotor2.setIdleMode(IdleMode.kBrake);
 m_ClimberMotor1.setInverted(false);

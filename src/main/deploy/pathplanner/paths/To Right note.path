@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.204397837367104,
+        "x": 1.308995050422533,
         "y": 5.56
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.586336145645264,
-        "y": 5.306459621928253
+        "x": 1.4846444107302625,
+        "y": 4.866647261943172
       },
       "isLocked": false,
       "linkedName": "BlueCenterShootPt"
     },
     {
       "anchor": {
-        "x": 2.649477010665733,
-        "y": 4.141627021992783
+        "x": 2.4276041344875483,
+        "y": 4.104648209296419
       },
       "prevControl": {
-        "x": 2.399870024965275,
-        "y": 4.271052866430058
+        "x": 1.7804749123011758,
+        "y": 4.252563460081876
       },
       "nextControl": null,
       "isLocked": false,
@@ -39,7 +39,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -6.5819446552783125,
+    "rotation": 0.0,
     "rotateFast": false
   },
   "reversed": false,
