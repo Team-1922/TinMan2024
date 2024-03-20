@@ -1,8 +1,13 @@
 package frc.robot.subsystems;
+
 import frc.robot.Constants;
 import frc.robot.Constants.CollectorConstants;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.led.FireAnimation;
+import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix.led.SingleFadeAnimation;
 
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -11,20 +16,28 @@ import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
-
+import com.playingwithfusion.TimeOfFlight.RangingMode;
 
 public class Collector extends SubsystemBase {
     double CollectVoltage;
-   //public boolean m_TofIsTriggered;
+    ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
     private static TalonFX m_CollectorTalon = new TalonFX(CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
       TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
     CurrentLimitsConfigs m_Configs = new CurrentLimitsConfigs();
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
+  public boolean m_IsTriggered;
+
+  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
+  RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
+  FireAnimation m_FireAnimation = new FireAnimation(.5, .5, 96, .5, 0, true, 0);
+  
     /**  Makes a new Collector subsystem */
     public Collector() {
 
+m_Tof.setRangingMode(RangingMode.Short, 24);
+//SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
         m_slot0.kP = 0;
         m_slot0.kV = .0005;
         m_CollectorTalon.setInverted(false);
@@ -59,7 +72,7 @@ public class Collector extends SubsystemBase {
 
     }
 /**
- * @param RPM what RPM you want to set the motors to
+ * @param RPM what RPS you want to set the motors to (rotations per second )
  */
     public void ActivateMotor(double RPM) {
             VelocityDutyCycle m_Output = new VelocityDutyCycle(RPM);
@@ -87,19 +100,30 @@ public void ReverseMotor(double RPM) {
  * @return if the Tof detects something within the target range
 */
     public boolean TofcheckTarget(){
-        
+       
         boolean InTarget =
                 m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
-            m_LED.SetColor(0, 255, 0, 0, 0, 8);
+            if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
+            {
+                m_LED.AnimateLEDs(m_SingleFade, 0);
+            }else{
+           m_LED.SetColor(255, 255, 255, 255, 0, 96);
+           }
         } else {
-            m_LED.SetColor(255, 0, 0, 0, 0, 8);
+        
+         if ( RobotController.isSysActive()){
+          m_LED.AnimateLEDs(m_FireAnimation, 0);} 
+          else m_LED.AnimateLEDs(m_RAINBOW, 0);
+       
+            
         }
-    
+        m_IsTriggered = InTarget;
         return InTarget; 
     }
+
 
 
     public double TofcheckDistance(){

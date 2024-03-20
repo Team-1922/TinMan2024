@@ -4,32 +4,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class Auto_timer extends Command {
-  Timer m_timer = new Timer();
-  double m_TimeToWait;
-  /** Creates a new Auto_timer.
-   * this is just a timer, but as a standalone command, in case we need it
-   *<p> ends after the specified amount in seconds
+public class AutoCollectCheck extends Command {
+  boolean Check = false;
+  /** Creates a new AutoNoteCheck.
+   * will only work with the {@code CollectNoteAuto} command, otherwise this won't do anything
    */
-  public Auto_timer(double seconds) {
-   m_TimeToWait = seconds; 
+  public AutoCollectCheck() {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-    m_timer.reset();
-    m_timer.start();
-  }
-
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    Check = SmartDashboard.getBoolean("AutoNoteCheck", false);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -38,6 +33,6 @@ public class Auto_timer extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_timer.hasElapsed(m_TimeToWait);
+    return Check;
   }
 }

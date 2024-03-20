@@ -4,55 +4,80 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
 
-import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.VoltageConfigs;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
+import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
 
 public class ShooterSubsystem extends SubsystemBase {
 
-  //  StrobeAnimation m_StrobeAnimation = new StrobeAnimation(0, 255, 255, 255, 0,Constants.LedConstants.kTotalLedCount,0) ;
-  CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
-  CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
+  // kp of motors is ~.05
+ // CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
+ // CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
+
+  private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
+  private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
+
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-    m_Left.setIdleMode(IdleMode.kCoast);
-    m_Right.setIdleMode(IdleMode.kCoast);
-    m_Left.setSmartCurrentLimit(80);
-    m_Right.setSmartCurrentLimit(80);
-  //  m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless); 
-  // m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
-    m_Left.setInverted(true);
-    m_Right.setInverted(false);// could be the left one is supposed to be inverted, just putting this here for now
-  //  m_Left.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
- //   m_Right.setOpenLoopRampRate(ShooterConstants.kOpenLoopRamp);
-  //  m_Left.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
-  //  m_Right.setClosedLoopRampRate(ShooterConstants.kClosedLoopRamp);
-    
- 
-  }
-public boolean TargetRpmReached(double LeftTargetRPM, double RightTargetRPM){
+  m_Left.setNeutralMode(NeutralModeValue.Brake);
+  m_Right.setNeutralMode(NeutralModeValue.Brake);
+  
+  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
+    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardVoltageLimit;
+    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseVoltageLimit;
+  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
+    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
 
-boolean Left =  m_Left.getEncoder().getVelocity() >= (LeftTargetRPM*0.85);
-boolean Right =  m_Right.getEncoder().getVelocity() >= (RightTargetRPM*0.85);
+
+  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
+  m_Left.getConfigurator().apply(m_VoltageConfigs);
+  m_Right.getConfigurator().apply(m_VoltageConfigs);
+  m_Left.setInverted(true);
+  m_Right.setInverted(false);
+
+
+
+  Slot0Configs m_Slot0Configs = new Slot0Configs();
+    m_Slot0Configs.kP = .5;    
+ 
+m_Left.getConfigurator().apply(m_Slot0Configs);
+m_Right.getConfigurator().apply(m_Slot0Configs);
+
+
+  }
+  /**
+   * 
+   * @param LeftTargetRPS
+   * @param RightTargetRPS
+   * 
+   */
+public boolean TargetRpmReached(double LeftTargetRPS, double RightTargetRPS){
+
+boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);// divided by 60 to convert units
+boolean Right = (m_Right.getVelocity().getValueAsDouble()) >= (RightTargetRPS);
 if(Left&&Right){
   SmartDashboard.putBoolean("Up to Speed", true);
-  m_LedSubsystem.SetColor(0, 255, 0, 255, 9, 24);
+
 }else{
   SmartDashboard.putBoolean("Up to Speed", false);
-  m_LedSubsystem.SetColor(0, 0, 0, 0, 9, 24);
+
   
 }
 
   return Left && Right;
 }
 
+/** this has not been tested */
 public void AmpShoot(double RightTargetRPM, double LeftTargetRPM){
 m_Left.set(LeftTargetRPM/5676);
 m_Right.set(RightTargetRPM/5676);
@@ -66,30 +91,27 @@ m_Right.set(RightTargetRPM/5676);
  * @param LeftTargetRPM Target RPM for the left shooter motor
  */
   public void Shoot(double RightTargetRPM,double LeftTargetRPM ){
-   
-   
-    if( m_Left.getEncoder().getVelocity() < LeftTargetRPM){
-      m_Left.set(1);
-    } else{
-     // m_Left.set(.0);
-    }
 
-    if( m_Right.getEncoder().getVelocity() < RightTargetRPM){
-      m_Right.set(.33);
-    } else{
-     // m_Right.set(0);
-    }
+    m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM));
+    m_Right.setControl(new VelocityDutyCycle(LeftTargetRPM));  
   }
 
   /** Stops the shooter motors */
   public void StopShoot(){
-
-   m_Left.set(0);
-    m_Right.set(0);
+    
+m_Left.set(0);
+ m_Right.set(0);
 
 
   }  
 
-  
+ @Override
+ public void periodic(){
+  SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
+  SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
+ SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
+SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
+
+ }
 
 }
