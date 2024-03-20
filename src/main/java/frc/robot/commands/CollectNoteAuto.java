@@ -7,14 +7,15 @@ package frc.robot.commands;
 import frc.robot.subsystems.Collector;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class CollectNote extends Command {
+public class CollectNoteAuto extends Command {
  
   Collector m_Collector;
   Timer m_Timer = new Timer();// used to run reverse for .5 seconds  
   Timer m_DelayTimer = new Timer();
-  boolean m_ReverseCheck; // false if it needs to reverse to see if there is a note in the collector currently 
+  
   boolean m_HasNote; // true if there is a note in the robot
   boolean m_NoteCollected; // true if the note is all the way in the robot 
   boolean m_EndCheck; // true if command should end
@@ -22,7 +23,7 @@ public class CollectNote extends Command {
   double m_ReverseDuration = Constants.CollectorConstants.kReverseDuration;
 
  /** Creates a new CollectNote. */
-  public CollectNote(Collector Collector) {
+  public CollectNoteAuto(Collector Collector) {
 
     m_Collector = Collector;
     addRequirements(Collector);
@@ -31,12 +32,13 @@ public class CollectNote extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    SmartDashboard.putBoolean("AutoNoteCheck", false);
+
     if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
-    
-    m_ReverseCheck = true;
+
     m_HasNote = false;
   } else {
-    m_ReverseCheck = true; 
+
     m_HasNote = true;
   }
   m_NoteCollected = false;
@@ -50,24 +52,15 @@ public class CollectNote extends Command {
   public void execute() {
    
  if (!m_HasNote) {
-      if (!m_ReverseCheck) {// Reverses collector to check if there is a note already in the robot
-        if (m_Collector.TofcheckTarget() || m_Timer.hasElapsed(m_ReverseDuration)) {
-          m_Collector.StopMotor();
-          m_ReverseCheck = true;
-        } 
-        else {
-          m_Collector.ReverseMotor(Constants.CollectorConstants.kReverseCollectRPM);
-        }
-        return;
-      }
       m_DelayTimer.start();
-      if (!m_Collector.TofcheckTarget()  ) {
+      if (!m_Collector.TofcheckTarget()) {
       if (m_DelayTimer.hasElapsed(.2)){
         m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
         m_DelayTimer.stop();
       }
       } else {
         m_HasNote = true;
+        SmartDashboard.putBoolean("AutoNoteCheck", true);
           m_DelayTimer.reset();
       } 
       return;
@@ -108,6 +101,7 @@ public class CollectNote extends Command {
    m_Collector.StopMotor();
     m_Timer.stop();
     m_DelayTimer.stop();
+    SmartDashboard.putBoolean("AutoNoteCheck", false);
   }
 
   // Returns true when the command should end.

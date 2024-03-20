@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.Team364.robot.CTREConfigs;
 
 
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -20,8 +21,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static CTREConfigs ctreConfigs;
   private RobotContainer m_robotContainer;
- 
-  //private StrobeAnimation mAnimation = new StrobeAnimation(255, 0, 0,0,0,8);
+
+
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -84,7 +86,6 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-
   }
 
   /** This function is called periodically during operator control. */
@@ -108,4 +109,5 @@ public class Robot extends TimedRobot {
   /** This function is called periodically whilst in simulation. */
   @Override
   public void simulationPeriodic() {}
+
 }

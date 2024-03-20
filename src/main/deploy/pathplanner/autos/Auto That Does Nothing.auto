@@ -2,25 +2,19 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.25,
-      "y": 5.56
+      "x": 0.5231952806247954,
+      "y": 2.6902086236604914
     },
-    "rotation": 0.0
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "2 piece blue pt1"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "2 piece blue pt2"
+            "waitTime": 1.0
           }
         }
       ]

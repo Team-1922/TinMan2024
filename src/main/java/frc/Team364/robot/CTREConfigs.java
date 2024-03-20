@@ -22,14 +22,16 @@ public final class CTREConfigs {
         swerveAngleFXConfig.ClosedLoopGeneral.ContinuousWrap = true;
         
         /* Current Limiting */
+        swerveAngleFXConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        swerveAngleFXConfig.CurrentLimits.StatorCurrentLimit = 60;
         swerveAngleFXConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.angleEnableCurrentLimit;
         swerveAngleFXConfig.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.angleCurrentLimit;
         swerveAngleFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.angleCurrentThreshold;
         swerveAngleFXConfig.CurrentLimits.SupplyTimeThreshold = Constants.Swerve.angleCurrentThresholdTime;
 
         /* Voltage Limiting */
-        swerveAngleFXConfig.Voltage.PeakReverseVoltage = -8;
-        swerveAngleFXConfig.Voltage.PeakForwardVoltage= 8;
+        swerveAngleFXConfig.Voltage.PeakReverseVoltage = -6;
+        swerveAngleFXConfig.Voltage.PeakForwardVoltage= 6;
 
         /* PID Config */
         swerveAngleFXConfig.Slot0.kP = Constants.Swerve.angleKP;
@@ -47,6 +49,8 @@ public final class CTREConfigs {
         swerveDriveFXConfig.Feedback.SensorToMechanismRatio = Constants.Swerve.driveGearRatio;
 
         /* Current Limiting */
+        swerveDriveFXConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        swerveDriveFXConfig.CurrentLimits.StatorCurrentLimit = 60;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentLimitEnable = Constants.Swerve.driveEnableCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentLimit = Constants.Swerve.driveCurrentLimit;
         swerveDriveFXConfig.CurrentLimits.SupplyCurrentThreshold = Constants.Swerve.driveCurrentThreshold;
@@ -54,8 +58,8 @@ public final class CTREConfigs {
 
         /* Voltage Limiting */
      
-        swerveDriveFXConfig.Voltage.PeakForwardVoltage = 12;
-        swerveDriveFXConfig.Voltage.PeakReverseVoltage = -12;
+        swerveDriveFXConfig.Voltage.PeakForwardVoltage = 10;
+        swerveDriveFXConfig.Voltage.PeakReverseVoltage = -10;
         /* PID Config */
         swerveDriveFXConfig.Slot0.kP = Constants.Swerve.driveKP;
         swerveDriveFXConfig.Slot0.kI = Constants.Swerve.driveKI;
