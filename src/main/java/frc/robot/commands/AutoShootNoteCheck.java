@@ -5,20 +5,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-
+import frc.robot.subsystems.Collector;
 import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AutoShootNoteCheck extends Command {
   Timer m_Timer = new Timer();
   double m_seconds;
-  
+  Collector m_Collector;
+  boolean m_check = true;
   /** Creates a new AutoShootNoteCheck.
    * @param seconds ends command after that amount of time after no longer seeing a note
    *  don't put Seconds to 0 or command will end instantly
    */
-  public AutoShootNoteCheck(double seconds) {
+  public AutoShootNoteCheck(double seconds, Collector collector) {
     m_seconds = seconds;
+    m_Collector = collector;
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -27,14 +29,15 @@ public class AutoShootNoteCheck extends Command {
   public void initialize( ) {
     m_Timer.stop();
     m_Timer.reset();
-    SmartDashboard.getBoolean("Has Note?", true);
+
+   m_check =  m_Collector.m_IsTriggered;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
   
-  if(  !SmartDashboard.getBoolean("Has Note?", true)){
+  if(  m_Collector.m_IsTriggered){
     m_Timer.start();
   }
   }

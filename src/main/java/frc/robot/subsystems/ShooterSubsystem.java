@@ -67,10 +67,10 @@ boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);// d
 boolean Right = (m_Right.getVelocity().getValueAsDouble()) >= (RightTargetRPS);
 if(Left&&Right){
   SmartDashboard.putBoolean("Up to Speed", true);
- // m_LedSubsystem.SetColor(0, 255, 0, 255, 9, 24);
+
 }else{
   SmartDashboard.putBoolean("Up to Speed", false);
-//  m_LedSubsystem.SetColor(0, 0, 0, 0, 9, 24);
+
   
 }
 

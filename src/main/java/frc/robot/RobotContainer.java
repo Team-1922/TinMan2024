@@ -67,7 +67,7 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
+  private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay,m_Collector);
   //private final XboxController m_operatorController = new XboxController(0);
  // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
@@ -160,7 +160,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
     // DRIVER CONTROLLS
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
-      m_driverController.button(2).whileTrue(m_Rumble) ;
+      m_driverController.button(2).whileTrue(m_Rumble);
 
     
     // OPERATOR CONTROLLS    
