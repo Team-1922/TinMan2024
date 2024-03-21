@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.1575604052109,
-      "y": 5.620779529847348
+      "x": 1.3367291599448063,
+      "y": 5.593045420325076
     },
-    "rotation": 180.0
+    "rotation": 0.5787255656077175
   },
   "command": {
     "type": "sequential",
@@ -22,19 +22,32 @@
                 }
               },
               {
-                "type": "deadline",
+                "type": "sequential",
                 "data": {
                   "commands": [
                     {
-                      "type": "named",
+                      "type": "wait",
                       "data": {
-                        "name": "Shoot End Delay"
+                        "waitTime": 1.75
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot End Delay"
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "ShootStart"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]
