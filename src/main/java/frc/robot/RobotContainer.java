@@ -25,11 +25,6 @@ import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Limelight;
-
-
-
-
-
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
