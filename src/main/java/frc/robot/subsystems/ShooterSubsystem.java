@@ -36,6 +36,8 @@ public class ShooterSubsystem extends SubsystemBase {
   CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
     m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
     m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
+    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 40; 
 
 
   m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
@@ -63,7 +65,7 @@ m_Right.getConfigurator().apply(m_Slot0Configs);
    */
 public boolean TargetRpmReached(double LeftTargetRPS, double RightTargetRPS){
 
-boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);// divided by 60 to convert units
+boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);
 boolean Right = (m_Right.getVelocity().getValueAsDouble()) >= (RightTargetRPS);
 if(Left&&Right){
   SmartDashboard.putBoolean("Up to Speed", true);

@@ -84,9 +84,9 @@ m_AutoTimer.start();
 
 
     m_Collector.StopMotor();
-if(!m_IsAuto){
+
     m_ShootSubsystem.StopShoot();
-  }
+  
     m_AutoTimer.stop();
 
   }

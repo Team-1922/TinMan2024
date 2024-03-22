@@ -115,7 +115,7 @@ public class RobotContainer {
    NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
    NamedCommands.registerCommand("ShootStart", m_ShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
-   NamedCommands.registerCommand("shoot + collect", m_shootGroup);
+   //NamedCommands.registerCommand("shoot + collect", m_shootGroup);
    NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
    NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck);
    
@@ -165,7 +165,8 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
     
     // OPERATOR CONTROLLS    
-      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
+      //m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
+      m_operatorController.button(1).whileTrue(m_shoot); // A
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X
       m_operatorController.button(5).onTrue(m_ShootStart); // LB
