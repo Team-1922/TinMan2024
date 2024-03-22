@@ -20,6 +20,7 @@ import frc.robot.commands.TorqueLimitClimb;
 import frc.robot.commands.StopCollector_shooter;
 import frc.robot.commands.shootStart;
 import frc.robot.commands.AutoCollectCheck;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoShootNoteCheck;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
@@ -67,7 +68,8 @@ public class RobotContainer {
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay,m_Collector);
+  private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
+  private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 3);
   //private final XboxController m_operatorController = new XboxController(0);
  // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
@@ -77,8 +79,7 @@ public class RobotContainer {
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3);
-
+   
     private final XboxController driver = new XboxController(0);
  
    /* Driver Controls */
@@ -110,7 +111,7 @@ public class RobotContainer {
     m_ClimberSubsystem.setDefaultCommand(m_TClimb);
 
     // the commands that are used in pathplanner
-   NamedCommands.registerCommand("Shoot",m_AutoShoot);
+   NamedCommands.registerCommand("Shoot",m_AutoShoot2);
    NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
    NamedCommands.registerCommand("ShootStart", m_ShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
