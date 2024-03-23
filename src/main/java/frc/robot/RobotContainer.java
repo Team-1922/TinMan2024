@@ -54,7 +54,7 @@ public class RobotContainer {
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
-  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,5 );
+  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
@@ -165,8 +165,8 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
     
     // OPERATOR CONTROLLS    
-      //m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
-      m_operatorController.button(1).whileTrue(m_shoot); // A
+      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
+      //m_operatorController.button(1).whileTrue(m_shoot); // A
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X
       m_operatorController.button(5).onTrue(m_ShootStart); // LB
