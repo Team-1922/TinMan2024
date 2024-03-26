@@ -59,6 +59,7 @@ public void StopRightClimber(){
 public void StopLeftClimber(){
 
   m_ClimberMotor1.stopMotor();
+  
 }
 
 public double GetLeftVelocity(){
@@ -75,7 +76,6 @@ public void SetTorque(int max) {
   m_ClimberMotor1.setSmartCurrentLimit(max);
   m_ClimberMotor2.setSmartCurrentLimit(max);
 }
-
 
 
   @Override

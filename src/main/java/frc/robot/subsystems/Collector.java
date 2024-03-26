@@ -29,7 +29,7 @@ public class Collector extends SubsystemBase {
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
 
-  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
+//  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
   RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
   FireAnimation m_FireAnimation = new FireAnimation(.5, .5, 96, .5, 0, true, 0);
   
@@ -108,7 +108,7 @@ public void ReverseMotor(double RPM) {
         if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
-                m_LED.AnimateLEDs(m_SingleFade, 0);
+               m_LED.SetColor(0, 255, 0, 0, 0, 96);
             }else{
            m_LED.SetColor(255, 255, 255, 255, 0, 96);
            }

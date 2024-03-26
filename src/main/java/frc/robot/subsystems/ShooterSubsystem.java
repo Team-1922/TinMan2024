@@ -37,7 +37,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
     m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
     m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
-    m_CurrentLimitsConfigs.StatorCurrentLimit = 40; 
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
 
 
   m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);

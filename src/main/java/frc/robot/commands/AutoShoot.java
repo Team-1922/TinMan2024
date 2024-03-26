@@ -63,9 +63,7 @@ public class AutoShoot extends Command {
        ) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
     } 
-    if(!m_Collector.m_IsTriggered){
-m_AutoTimer.start();
-    }
+
 
   }
 
