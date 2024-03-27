@@ -97,7 +97,8 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
+    private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
+     private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
     private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
 
     private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
@@ -114,11 +115,12 @@ public class RobotContainer {
     // the commands that are used in pathplanner
    NamedCommands.registerCommand("Shoot",m_AutoShoot2);
    NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
-   NamedCommands.registerCommand("ShootStart", m_ShootStart);
+   NamedCommands.registerCommand("ShootStart", m_AutoShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
    //NamedCommands.registerCommand("shoot + collect", m_shootGroup);
    NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
    NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck);
+   NamedCommands.registerCommand("CollectReverse", m_CollectReverse);
    
   
       s_Swerve.setDefaultCommand(

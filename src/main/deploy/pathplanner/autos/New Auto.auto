@@ -1,0 +1,49 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 1.4696007573833327,
+      "y": 2.015009120927333
+    },
+    "rotation": 180.0
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right to far center (drop note)"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Far center note 5 to disrupt 4"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right From far center"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Right To dropped note"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "right from dropped note"
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
