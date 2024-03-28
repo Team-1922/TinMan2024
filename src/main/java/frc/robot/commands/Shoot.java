@@ -37,7 +37,7 @@ public class Shoot extends Command {
     m_AutoTime = AutoTime;
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
-    addRequirements( collectorSubsystem);
+    addRequirements(collectorSubsystem);
    
     m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPS;
     m_RPMRight = Constants.ShooterConstants.kRightShooterRPS;
@@ -68,7 +68,7 @@ public class Shoot extends Command {
       SmartDashboard.getBoolean("Up to Speed", false)
   
        ) {   
-      m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
+      m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
     if(!m_Collector.m_IsTriggered){
 m_AutoTimer.start();

@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.9929154452903495,
-        "y": 2.4406016379600333
+        "x": 8.224033024642626,
+        "y": 2.3666440125673045
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.949836043816232,
-        "y": 1.2480349285022903
+        "x": 6.1809536231685085,
+        "y": 1.1740773031095615
       },
       "isLocked": false,
       "linkedName": "Blue Far center note "
@@ -52,7 +52,25 @@
     }
   ],
   "constraintZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "New Event Marker",
+      "waypointRelativePos": 0.4,
+      "command": {
+        "type": "parallel",
+        "data": {
+          "commands": [
+            {
+              "type": "named",
+              "data": {
+                "name": "ShootStart"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 5.0,
     "maxAcceleration": 3.0,

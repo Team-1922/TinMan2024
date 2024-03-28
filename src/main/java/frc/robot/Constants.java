@@ -46,7 +46,7 @@ public final class Constants {
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
     
-    public static final double AutoShootEndDelay = .5; // seconds TODO: test this 
+    public static final double AutoShootEndDelay = .25; // seconds TODO: test this 
   }
 
   public final class CollectorConstants {
@@ -60,6 +60,7 @@ public final class Constants {
     public static final double kCollectRPM = 900; //(700/600)*2048;
     public static final double kSecondCollectRPM = 450; //(600/600)*2048;
     public static final double kReverseCollectRPM = 550;//(600/600)*2048; // x/600*2048
+    public static final double kShootRPM = 1200;
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
@@ -67,6 +68,7 @@ public final class Constants {
     public static final double kCurrentHardLimit = 45; // amps
     public static final boolean kCurrentLimitEnable = true; 
     public static final double kCurrentLimitTime = 0.1; // seconds
+    
   }
   
   public final class ClimberConstants {

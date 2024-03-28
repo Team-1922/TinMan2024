@@ -29,7 +29,7 @@ public class AutoShoot extends Command {
   /** Creates a new Shoot.
    * @param IsAuto True if the command is being used for Auto
    * @param AutoTime how long the command will run for, only used if {@code IsAuto} is True
-   *  <p> DO NOT PUT {@code AutoTime} AT 0 OR THE COMMAND WILL INSTANTLY END
+   *  <p>  DO NOT PUT {@code AutoTime} AT 0 OR THE COMMAND WILL INSTANTLY END
    */ 
   public AutoShoot( Collector collectorSubsystem, boolean IsAuto, double AutoTime ) {
 
@@ -61,7 +61,7 @@ public class AutoShoot extends Command {
       SmartDashboard.getBoolean("Up to Speed", false)
   
        ) {   
-      m_Collector.ActivateMotor(Constants.CollectorConstants.kCollectRPM);
+      m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
 
 
