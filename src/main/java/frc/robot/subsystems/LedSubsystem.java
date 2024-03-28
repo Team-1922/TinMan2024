@@ -38,7 +38,7 @@ public class LedSubsystem extends SubsystemBase {
    */
   public void AnimateLEDs( Animation animation,int AnimationSlot){// animates the LEDs
 
-    m_CaNdle.animate(animation, 0);
+    m_CaNdle.animate(animation, AnimationSlot);
     
   }
 
