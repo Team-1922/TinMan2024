@@ -16,16 +16,21 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry m_tx;
   private NetworkTableEntry m_ty;
   private NetworkTableEntry m_ta;
+  private NetworkTableEntry m_tID;
   private double tx;
   private double ty;
   private double ta;
   private double mOffset = Math.PI/18;
-
+  
+  public double tID;
+  
   public Limelight(String LimelightName) {
     LimelightTable = NetworkTableInstance.getDefault().getTable(LimelightName);
     m_tx = LimelightTable.getEntry("tx");
     m_ty = LimelightTable.getEntry("ty");
     m_ta = LimelightTable.getEntry("ta");
+
+    tID = LimelightHelpers.getFiducialID(LimelightName);
   }
   
   /**
