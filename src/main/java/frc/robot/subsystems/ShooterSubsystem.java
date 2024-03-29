@@ -18,9 +18,6 @@ import frc.robot.Constants.ShooterConstants;
 public class ShooterSubsystem extends SubsystemBase {
 
   // kp of motors is ~.05
- // CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
- // CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
-
   private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
   private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
 
@@ -79,12 +76,7 @@ if(Left&&Right){
   return Left && Right;
 }
 
-/** this has not been tested */
-public void AmpShoot(double RightTargetRPM, double LeftTargetRPM){
-m_Left.set(LeftTargetRPM/5676);
-m_Right.set(RightTargetRPM/5676);
 
-}
 
 //max rpm = 5676 free 
 /**
@@ -101,19 +93,34 @@ m_Right.set(RightTargetRPM/5676);
   /** Stops the shooter motors */
   public void StopShoot(){
     
-m_Left.set(0);
- m_Right.set(0);
-
-
+  m_Left.set(0);
+  m_Right.set(0);
   }  
+
+/**
+ * will throw an error if the motor temperature goes past a certain error.
+ */
+  public void TempOverheatLog(){
+   
+    if(m_Left.getDeviceTemp().getValueAsDouble() >=70){
+throw new Error("Left shooter motor is at or above 70(c)");
+    }
+
+    if(m_Right.getDeviceTemp().getValueAsDouble() >= 70){
+throw new Error("Right shooter motor is at or above 70(c)");
+    }
+
+    
+  }
+
 
  @Override
  public void periodic(){
   SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
   SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
- SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
-SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
-
+  SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
+  SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
+  TempOverheatLog();
  }
 
 }

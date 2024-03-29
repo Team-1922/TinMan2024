@@ -4,13 +4,11 @@
 
 package frc.robot;
 
-
 import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Auto_timer;
-import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
@@ -29,7 +27,6 @@ import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -61,27 +58,18 @@ public class RobotContainer {
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
   private final Rumble m_Rumble = new Rumble();
- 
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
-//  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
   private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
   private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
-  //private final XboxController m_operatorController = new XboxController(0);
- // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
-
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
-
-
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   
-    private final XboxController driver = new XboxController(0);
- 
+  private final XboxController driver = new XboxController(0);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -93,18 +81,13 @@ public class RobotContainer {
     /* Driver Buttons */
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
     private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
      private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
     private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
-
     private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
-    //private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_shoot,m_CollectNoteAuto);
-   // private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_AutoShoot,m);
-  // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     
@@ -113,13 +96,12 @@ public class RobotContainer {
     m_ClimberSubsystem.setDefaultCommand(m_TClimb);
 
     // the commands that are used in pathplanner
-   NamedCommands.registerCommand("Shoot",m_AutoShoot2);
-   NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
-   NamedCommands.registerCommand("ShootStart", m_AutoShootStart);
-   NamedCommands.registerCommand("timer", mAuto_timer);
-   //NamedCommands.registerCommand("shoot + collect", m_shootGroup);
-   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
-   NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck);
+   NamedCommands.registerCommand("Shoot",m_AutoShoot2); // 
+   NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command
+   NamedCommands.registerCommand("ShootStart", m_AutoShootStart); // starts shooter motors
+   NamedCommands.registerCommand("timer", mAuto_timer); // not used, just a timer
+   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note
+   NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
    NamedCommands.registerCommand("CollectReverse", m_CollectReverse);
    
   
@@ -165,17 +147,15 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
     // DRIVER CONTROLLS
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
       m_driverController.button(2).whileTrue(m_Rumble); // B
-      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // LB
+     
     
     // OPERATOR CONTROLLS    
-   
-      //m_operatorController.button(1).whileTrue(m_shoot); // A
+      m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X
       m_operatorController.button(5).onTrue(m_ShootStart); // LB
-      
-      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD DOWN
-   //   m_operatorController.button(6).whileTrue(mAuto_timer)
+      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down
+
   }
 
   /**

@@ -32,16 +32,20 @@ public class LedSubsystem extends SubsystemBase {
     
   }
 
+
+
   /**
    * @param animation the animation to run
    * @param AnimationSlot what slot it to put it in (do 0 unless running multiple at once)
    */
   public void AnimateLEDs( Animation animation,int AnimationSlot){// animates the LEDs
-
-    m_CaNdle.animate(animation, AnimationSlot);
-    
+    m_CaNdle.animate(null,AnimationSlot);
+    m_CaNdle.animate(animation, AnimationSlot);    
   }
 
+  public void clearAnimation(int AnimationSlot){
+    m_CaNdle.clearAnimation(AnimationSlot);
+  }
 
 
 

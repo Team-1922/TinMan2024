@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.led.ColorFlowAnimation;
 import com.ctre.phoenix.led.FireAnimation;
 import com.ctre.phoenix.led.RainbowAnimation;
-import com.ctre.phoenix.led.SingleFadeAnimation;
+import com.ctre.phoenix.led.RgbFadeAnimation;
 import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
@@ -30,6 +30,7 @@ public class Collector extends SubsystemBase {
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
+
 
 //  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
   RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
@@ -94,7 +95,7 @@ public void ReverseMotor(double RPM) {
       VelocityDutyCycle m_Output = new VelocityDutyCycle(-RPM);
         m_CollectorTalon.setControl(m_Output);   
         m_CollectorTalon2.setControl(m_Output);
-    
+   
     }
   
 
@@ -119,7 +120,17 @@ public void ReverseMotor(double RPM) {
         
          if ( RobotController.isSysActive()){
           m_LED.AnimateLEDs(m_FireAnimation, 0);} 
-          else m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
+          else {
+            for (int i = 0 ; i < 98; i++){
+      
+                m_LED.SetColor(255,255,0,0, i, 2);
+                i += 2;
+     
+                m_LED.SetColor(0,0,0,0,i,1);
+            }
+          
+
+          }
        
             
         }
@@ -138,8 +149,7 @@ public void ReverseMotor(double RPM) {
 
     @Override
     public void periodic() {
-   
-    TofcheckTarget();
+            TofcheckTarget();
     }
     
 }
