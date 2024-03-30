@@ -35,7 +35,7 @@ public class Collector extends SubsystemBase {
 //  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
   RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
   FireAnimation m_FireAnimation = new FireAnimation(.5, .5, 96, .5, 0, true, 0);
-  ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .2, 98, Direction.Forward);
+ // ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .2, 98, Direction.);
   
     /**  Makes a new Collector subsystem */
     public Collector() {
@@ -121,13 +121,16 @@ public void ReverseMotor(double RPM) {
          if ( RobotController.isSysActive()){
           m_LED.AnimateLEDs(m_FireAnimation, 0);} 
           else {
-            for (int i = 0 ; i < 98; i++){
+            m_LED.SetColor(255, 255, 0, 0, 0, 98);
+           // m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
+      /*     
+        for (int i = 0 ; i < 98; i++){
       
                 m_LED.SetColor(255,255,0,0, i, 2);
                 i += 2;
      
-                m_LED.SetColor(0,0,0,0,i,1);
-            }
+                m_LED.SetColor(0,0,0,0,i,1);*/
+            
           
 
           }

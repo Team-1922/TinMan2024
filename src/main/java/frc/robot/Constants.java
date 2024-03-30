@@ -60,7 +60,7 @@ public final class Constants {
     public static final double kCollectRPM = 900; //(700/600)*2048;
     public static final double kSecondCollectRPM = 450; //(600/600)*2048;
     public static final double kReverseCollectRPM = 550;//(600/600)*2048; // x/600*2048
-    public static final double kShootRPM = 2500;
+    public static final double kShootRPM = 1000;
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds

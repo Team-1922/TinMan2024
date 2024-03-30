@@ -120,7 +120,7 @@ throw new Error("Right shooter motor is at or above 70(c)");
   SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
   SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
   SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
-  TempOverheatLog();
+//  TempOverheatLog();
  }
 
 }
