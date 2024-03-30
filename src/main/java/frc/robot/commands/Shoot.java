@@ -80,13 +80,8 @@ m_AutoTimer.start();
   @Override
   public void end(boolean interrupted) {
     
-    
-
-
     m_Collector.StopMotor();
-
     m_ShootSubsystem.StopShoot();
-  
     m_AutoTimer.stop();
 
   }

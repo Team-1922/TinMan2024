@@ -77,8 +77,6 @@ if(Left&&Right){
 }
 
 
-
-//max rpm = 5676 free 
 /**
  * 
  * @param RightTargetRPM target RPM for the right shooter motor
@@ -97,30 +95,13 @@ if(Left&&Right){
   m_Right.set(0);
   }  
 
-/**
- * will throw an error if the motor temperature goes past a certain error.
- */
-  public void TempOverheatLog(){
-   
-    if(m_Left.getDeviceTemp().getValueAsDouble() >=70){
-throw new Error("Left shooter motor is at or above 70(c)");
-    }
-
-    if(m_Right.getDeviceTemp().getValueAsDouble() >= 70){
-throw new Error("Right shooter motor is at or above 70(c)");
-    }
-
-    
-  }
-
-
  @Override
  public void periodic(){
   SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
   SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
   SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
   SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
-//  TempOverheatLog();
+
  }
 
 }

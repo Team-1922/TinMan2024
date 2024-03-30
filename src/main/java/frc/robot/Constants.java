@@ -18,9 +18,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
 
-    public static final double AngleSlewRate = 1.5; // unused
-    public static final double DriveSlewRate = 2; // unused
-    public static final double StraifeSlewRate = 2; // usused
+
   }
   
   
@@ -28,25 +26,23 @@ public final class Constants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
     public static final int kLeftShooterRPS = 5;
-    public static final int kLeftShooterAmpRPS = 0;
+   // public static final int kLeftShooterAmpRPS = 0;
     public static final int kRightShooterRPS = 15; 
-    public static final int kRightShooterAmpRPS = 00;
+ //   public static final int kRightShooterAmpRPS = 00;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
-    public static final double kRightTargetRPS = 3; // gets to ~8
+    public static final double kRightTargetRPS = 5; // gets to ~8
     public static final double kLeftTargetRPS =1.2; // gets up to ~2
 
     // CONFIGS 
     public static final double kShooterForwardVoltageLimit = 3; // volts
     public static final double kShooterReverseVoltageLimit = -3; // volts
-
-   
     public static final double kCurrentLimit = 40; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
     
-    public static final double AutoShootEndDelay = .25; // seconds TODO: test this 
+    public static final double AutoShootEndDelay = .3; // seconds 
   }
 
   public final class CollectorConstants {
@@ -75,7 +71,7 @@ public final class Constants {
 
     public static final int ClimberMotorID = 9;
     public static final int ClimberMotorID2 = 10;
-    public static final double kClimbVoltage = 10; //TODO test this
+    public static final double kClimbVoltage = 10; 
 
   }
 
@@ -90,8 +86,8 @@ public final class Constants {
 
   public static class LedConstants {
 
-    public static final int kCandleID = 10 ; 
-    public static final int kTotalLedCount = 32; //8 on candle + 24 on strip
+    public static final int kCandleID = 10; 
+    public static final int kTotalLedCount = 98; //8 on candle + ~90 on strips
   }
 
 }

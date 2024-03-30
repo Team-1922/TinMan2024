@@ -20,7 +20,7 @@ public class Rumble extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_Controller.setRumble(RumbleType.kBothRumble, 1);
+    m_Controller.setRumble(RumbleType.kBothRumble, .5);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

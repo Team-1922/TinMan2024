@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.8725610178493084,
-      "y": 4.496455538365622
+      "x": 0.8375151885438905,
+      "y": 4.465191633085969
     },
     "rotation": -44.99999999999992
   },
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.8
+                        "waitTime": 2.5
                       }
                     },
                     {
@@ -59,22 +59,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "right to far center"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "right to far center"
                                   }
                                 },
                                 {
@@ -84,6 +71,12 @@
                                   }
                                 }
                               ]
+                            }
+                          },
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Collect"
                             }
                           }
                         ]

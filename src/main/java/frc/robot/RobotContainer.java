@@ -60,7 +60,7 @@ public class RobotContainer {
   private final Rumble m_Rumble = new Rumble();
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
-  // Replace with CommandPS4Controller or CommandJoystick if needed
+
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
@@ -68,7 +68,6 @@ public class RobotContainer {
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
   private final SendableChooser<Command> AutoSelector;
-  // AUTO COMMANDS
   private final XboxController driver = new XboxController(0);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -90,20 +89,18 @@ public class RobotContainer {
     private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    
     // Configure the trigger bindings
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_TClimb);
 
     // the commands that are used in pathplanner
-   NamedCommands.registerCommand("Shoot",m_AutoShoot2); // 
+   NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command
    NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command
    NamedCommands.registerCommand("ShootStart", m_AutoShootStart); // starts shooter motors
    NamedCommands.registerCommand("timer", mAuto_timer); // not used, just a timer
    NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note
    NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
-   NamedCommands.registerCommand("CollectReverse", m_CollectReverse);
-   
+   NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
@@ -118,15 +115,9 @@ public class RobotContainer {
         ); 
         
 AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
-
 SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
-
-//SmartDashboard.putNumber("brownout voltage", RobotController.getBrownoutVoltage());
-
-
   }
 
- 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -142,12 +133,9 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
         .onTrue(new ExampleCommand(m_exampleSubsystem));
 
 
-  
-
     // DRIVER CONTROLLS
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
-      m_driverController.button(2).whileTrue(m_Rumble); // B
-     
+      m_driverController.button(2).whileTrue(m_Rumble); // B    
     
     // OPERATOR CONTROLLS    
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A
@@ -160,8 +148,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous7
+   * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
 return AutoSelector.getSelected();

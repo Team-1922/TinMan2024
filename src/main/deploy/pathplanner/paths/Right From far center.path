@@ -3,45 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.224033024642626,
-        "y": 2.3666440125673045
+        "x": 8.334969462731719,
+        "y": 2.4406016379600333
       },
       "prevControl": null,
       "nextControl": {
-        "x": 6.1809536231685085,
-        "y": 1.1740773031095615
+        "x": 6.291890061257601,
+        "y": 1.2480349285022903
       },
       "isLocked": false,
       "linkedName": "Blue Far center note "
     },
     {
       "anchor": {
-        "x": 2.520051166228458,
-        "y": 2.6070062950936714
+        "x": 3.352074451896651,
+        "y": 1.211056115805926
       },
       "prevControl": {
-        "x": 3.5739473280748357,
-        "y": 1.9228982602109355
+        "x": 4.405970613743028,
+        "y": 0.5269480809231901
       },
       "nextControl": {
-        "x": 1.415510051435562,
-        "y": 3.323989123994323
+        "x": 2.247533337103755,
+        "y": 1.9280389447065762
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 0.8725610178493084,
-        "y": 4.496455538365622
+        "x": 0.75,
+        "y": 4.6
       },
       "prevControl": {
-        "x": 1.0777934283141293,
-        "y": 4.020689495924446
+        "x": 0.8375151885438905,
+        "y": 3.540721315676866
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue Right Shoot"
+      "linkedName": null
     }
   ],
   "rotationTargets": [
@@ -67,7 +67,7 @@
   "reversed": false,
   "folder": null,
   "previewStartingState": {
-    "rotation": 0,
+    "rotation": 0.0,
     "velocity": 0
   },
   "useDefaultConstraints": true

@@ -5,11 +5,7 @@ import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import com.ctre.phoenix.led.ColorFlowAnimation;
-import com.ctre.phoenix.led.FireAnimation;
-import com.ctre.phoenix.led.RainbowAnimation;
-import com.ctre.phoenix.led.RgbFadeAnimation;
 import com.ctre.phoenix.led.SingleFadeAnimation;
 import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
@@ -33,9 +29,8 @@ public class Collector extends SubsystemBase {
   public boolean m_IsTriggered;
 
 
-  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, 96, 0);
-  RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
-  FireAnimation m_FireAnimation = new FireAnimation(.5, .5, 96, .5, 0, true, 0);
+  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, 98, 0);
+  
   ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .5, 98, Direction.Forward);
   
     /**  Makes a new Collector subsystem */
@@ -132,7 +127,7 @@ public void ReverseMotor(double RPM) {
        
             
         }
-        //m_IsTriggered = InTarget;
+      
         return InTarget; 
     }
 
