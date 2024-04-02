@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.Timer;
-
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkAbsoluteEncoder;
 import com.revrobotics.CANSparkBase.IdleMode;

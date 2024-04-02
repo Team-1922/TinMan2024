@@ -99,8 +99,8 @@ if(Left&&Right){
  public void periodic(){
   SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
   SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
-  SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
-  SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
+  //SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
+  //SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
 
  }
 

@@ -81,6 +81,7 @@ public class RobotContainer {
     private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
     private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+
     private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
     private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
@@ -134,15 +135,15 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
 
     // DRIVER CONTROLLS
-      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
-      m_driverController.button(2).whileTrue(m_Rumble); // B    
+      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro
+      m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrate operator controller
     
     // OPERATOR CONTROLLS    
-      m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A
-      m_operatorController.button(2).whileTrue(m_CollectNote2); // B
-      m_operatorController.button(3).whileTrue(m_CollectReverse); // X
-      m_operatorController.button(5).onTrue(m_ShootStart); // LB
-      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down
+      m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A                          | shoot + collect
+      m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
+      m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
+      m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
+      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate)
 
   }
 

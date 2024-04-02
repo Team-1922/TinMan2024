@@ -117,17 +117,9 @@ public void ReverseMotor(double RPM) {
          if ( RobotController.isSysActive()){
          m_LED.SetColor(255, 0, 0, 0, 0, 98);} 
           else {
-        
             m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
- 
-            
-          
-
-          }
-       
-            
+          } 
         }
-      
         return InTarget; 
     }
 
@@ -141,7 +133,7 @@ public void ReverseMotor(double RPM) {
     }
 
     @Override
-    public void periodic() {
+    public void periodic(){
             TofcheckTarget();
     }
     

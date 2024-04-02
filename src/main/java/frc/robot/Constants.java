@@ -26,13 +26,13 @@ public final class Constants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
     public static final int kLeftShooterRPS = 5;
-   // public static final int kLeftShooterAmpRPS = 0;
     public static final int kRightShooterRPS = 15; 
- //   public static final int kRightShooterAmpRPS = 00;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
     public static final double kRightTargetRPS = 5; // gets to ~8
     public static final double kLeftTargetRPS =1.2; // gets up to ~2
+    public static final double AutoShootEndDelay = .3; // seconds 
+
 
     // CONFIGS 
     public static final double kShooterForwardVoltageLimit = 3; // volts
@@ -42,7 +42,7 @@ public final class Constants {
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
     
-    public static final double AutoShootEndDelay = .3; // seconds 
+ 
   }
 
   public final class CollectorConstants {
@@ -57,6 +57,7 @@ public final class Constants {
     public static final double kSecondCollectRPM = 450; //(600/600)*2048;
     public static final double kReverseCollectRPM = 550;//(600/600)*2048; // x/600*2048
     public static final double kShootRPM = 1000;
+    
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds

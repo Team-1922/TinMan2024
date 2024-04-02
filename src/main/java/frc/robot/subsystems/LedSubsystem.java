@@ -13,7 +13,6 @@ public class LedSubsystem extends SubsystemBase {
 
   CANdle m_CaNdle = new CANdle(LedConstants.kCandleID); 
   
- 
   /** Creates a new LedSubsystem. */
   public LedSubsystem(){}
   
@@ -26,7 +25,7 @@ public class LedSubsystem extends SubsystemBase {
  * @param Start offset from first led (do 8 to ignore CANdle)
  * @param Count number of leds
  */
-  public void SetColor(int Red, int Green, int Blue, int White, int Start,int Count){// sets the leds to a specified color 
+  public void SetColor(int Red, int Green, int Blue, int White, int Start,int Count){
     m_CaNdle.clearAnimation(0);
     m_CaNdle.setLEDs(Red, Green, Blue, White, Start, Count);
     
