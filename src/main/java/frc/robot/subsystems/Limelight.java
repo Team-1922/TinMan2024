@@ -4,6 +4,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -43,10 +45,17 @@ public class Limelight extends SubsystemBase {
     limelightData[slot] = x;
   }
 
-  public double[] returnData() {
-    targetApriltag(0);
-    targetApriltag(1);
-    return limelightData;
+  public ArrayList<Double> returnData() {
+    targetApriltag(0); //The left
+    targetApriltag(1); //The right
+    ArrayList<Double> packagedData = new ArrayList<Double>();
+    packagedData.add(limelightData[0]);
+    packagedData.add(limelightData[1]);
+    return packagedData;
+  }
+
+  public double cot(double theta) {
+    return (1/Math.tan(theta));
   }
 
   /**
