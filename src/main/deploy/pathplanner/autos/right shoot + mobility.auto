@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.1148562837666214,
-      "y": 4.640840993393699
+      "x": 0.919204747500404,
+      "y": 4.4871267924354035
     },
     "rotation": -43.93908830973575
   },
@@ -29,12 +29,6 @@
                       "type": "deadline",
                       "data": {
                         "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot End Delay"
-                            }
-                          },
                           {
                             "type": "named",
                             "data": {

@@ -38,12 +38,6 @@
                           {
                             "type": "named",
                             "data": {
-                              "name": "Shoot End Delay"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
                               "name": "Shoot"
                             }
                           }
@@ -65,22 +59,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "to Center Note"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "to Center Note"
                                   }
                                 },
                                 {
@@ -102,12 +83,6 @@
                           {
                             "type": "named",
                             "data": {
-                              "name": "Shoot End Delay"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
                               "name": "Shoot"
                             }
                           }
@@ -129,22 +104,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "To Right note"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "To Right note"
                                   }
                                 },
                                 {

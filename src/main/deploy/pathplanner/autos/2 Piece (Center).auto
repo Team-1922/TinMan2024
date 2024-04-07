@@ -38,12 +38,6 @@
                           {
                             "type": "named",
                             "data": {
-                              "name": "Shoot End Delay"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
                               "name": "Shoot"
                             }
                           }
@@ -68,12 +62,6 @@
                                   "type": "deadline",
                                   "data": {
                                     "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
                                       {
                                         "type": "path",
                                         "data": {

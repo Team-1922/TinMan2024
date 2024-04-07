@@ -25,6 +25,9 @@ public class AutoShoot extends Command {
   double m_CollectVoltage;
   boolean m_IsAuto;
   double m_AutoTime; // used for auto
+  Timer m_backuptimer = new Timer();
+  boolean m_check;
+  Timer m_EndDelay = new Timer();
 
   /** Creates a new Shoot.
    * @param IsAuto True if the command is being used for Auto
@@ -35,6 +38,7 @@ public class AutoShoot extends Command {
 
     m_IsAuto = IsAuto;
     m_AutoTime = AutoTime;
+
    
     m_Collector = collectorSubsystem;
     addRequirements( collectorSubsystem);
@@ -47,10 +51,13 @@ public class AutoShoot extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_EndDelay.reset();
+    m_check = SmartDashboard.getBoolean("Has Note?", false);
     m_AutoTimer.reset();
     if(m_IsAuto){
       m_AutoTimer.start();
     }
+    m_backuptimer.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -64,6 +71,15 @@ public class AutoShoot extends Command {
       m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
 
+    if(!SmartDashboard.getBoolean("Has Note?", m_IsAuto)){
+
+    m_backuptimer.start();
+
+    }
+     if(m_check == true && !SmartDashboard.getBoolean("Has Note?", true)){
+      m_EndDelay.start();
+     }
+
 
   }
 
@@ -75,8 +91,9 @@ public class AutoShoot extends Command {
 
 
     m_Collector.StopMotor();
-
+    m_backuptimer.stop();
     m_AutoTimer.stop();
+    m_EndDelay.stop();
 
   }
 
@@ -84,6 +101,6 @@ public class AutoShoot extends Command {
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime); // Because the timer won't start if it's not auto
+    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(4) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
   }
 }
