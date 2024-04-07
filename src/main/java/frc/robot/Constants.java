@@ -29,14 +29,16 @@ public final class Constants {
     public static final int kRightShooterRPS = 15; 
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
-    public static final double kRightTargetRPS = 5; // gets to ~8
+    public static final double kRightTargetRPS = 3.4; // gets to ~8
     public static final double kLeftTargetRPS =1.2; // gets up to ~2
     public static final double AutoShootEndDelay = .3; // seconds 
 
 
     // CONFIGS 
-    public static final double kShooterForwardVoltageLimit = 3; // volts
-    public static final double kShooterReverseVoltageLimit = -3; // volts
+    public static final double kShooterForwardTeleopVoltageLimit = 3; // volts
+    public static final double kShooterReverseTeleopVoltageLimit = -3; // volts
+    public static final double kShooterForwardAutoVoltageLimit = 5; // volts
+    public static final double kShooterReverseAutoVoltageLimit = -5; // volts
     public static final double kCurrentLimit = 40; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds

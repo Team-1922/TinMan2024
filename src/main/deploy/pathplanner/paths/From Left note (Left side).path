@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.55,
-        "y": 6.99
+        "x": 2.792497034010169,
+        "y": 7.0050704681015805
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.6994873079855344,
-        "y": 6.943776484131115
+        "x": 1.9419843419957035,
+        "y": 6.958846952232696
       },
       "isLocked": false,
       "linkedName": "Blue Left Note"

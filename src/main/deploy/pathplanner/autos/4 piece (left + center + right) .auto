@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.8
+                        "waitTime": 2.75
                       }
                     },
                     {
@@ -68,12 +68,6 @@
                                   "type": "deadline",
                                   "data": {
                                     "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
                                       {
                                         "type": "path",
                                         "data": {
@@ -133,12 +127,6 @@
                                   "data": {
                                     "commands": [
                                       {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
                                         "type": "path",
                                         "data": {
                                           "pathName": "to Center Note"
@@ -196,12 +184,6 @@
                                   "type": "deadline",
                                   "data": {
                                     "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
                                       {
                                         "type": "path",
                                         "data": {

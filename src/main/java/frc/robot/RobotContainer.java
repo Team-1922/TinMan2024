@@ -9,6 +9,8 @@ import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Auto_timer;
+import frc.robot.commands.AutoshootStart;
+import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
@@ -60,7 +62,7 @@ public class RobotContainer {
   private final Rumble m_Rumble = new Rumble();
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
-
+  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, .2);
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
@@ -92,7 +94,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the trigger bindings
     configureBindings();
-    m_ClimberSubsystem.setDefaultCommand(m_TClimb);
+    m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
     // the commands that are used in pathplanner
    NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command
@@ -118,6 +120,19 @@ public class RobotContainer {
 AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
 SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
   }
+
+
+  public void configShooterSubsystemForAuto(){
+
+    m_shooterSubsystem.configShooterForAuto();
+    SmartDashboard.putBoolean("auto_configs",true);
+  }
+
+  public void configShooterSubsystemForTeleop(){
+    m_shooterSubsystem.configShooterForTeleop();
+    SmartDashboard.putBoolean("auto_configs", false);
+  }
+    
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the

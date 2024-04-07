@@ -59,9 +59,22 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "path",
+                                  "type": "deadline",
                                   "data": {
-                                    "pathName": "right to far center"
+                                    "commands": [
+                                      {
+                                        "type": "named",
+                                        "data": {
+                                          "name": "NoteCheck"
+                                        }
+                                      },
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "right to far center"
+                                        }
+                                      }
+                                    ]
                                   }
                                 },
                                 {

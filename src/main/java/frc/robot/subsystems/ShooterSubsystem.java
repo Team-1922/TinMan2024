@@ -24,7 +24,10 @@ public class ShooterSubsystem extends SubsystemBase {
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-  m_Left.setNeutralMode(NeutralModeValue.Brake);
+  
+    configShooterForTeleop();
+
+  /* m_Left.setNeutralMode(NeutralModeValue.Brake);
   m_Right.setNeutralMode(NeutralModeValue.Brake);
   
   VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
@@ -49,11 +52,76 @@ public class ShooterSubsystem extends SubsystemBase {
   Slot0Configs m_Slot0Configs = new Slot0Configs();
     m_Slot0Configs.kP = .5;    
  
-m_Left.getConfigurator().apply(m_Slot0Configs);
-m_Right.getConfigurator().apply(m_Slot0Configs);
-
+  m_Left.getConfigurator().apply(m_Slot0Configs);
+  m_Right.getConfigurator().apply(m_Slot0Configs);
+*/
 
   }
+ 
+ public void configShooterForTeleop()
+ {
+   m_Right.setNeutralMode(NeutralModeValue.Brake);
+  
+  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
+    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardTeleopVoltageLimit;
+    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseTeleopVoltageLimit;
+  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
+    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
+    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
+
+
+  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
+  m_Left.getConfigurator().apply(m_VoltageConfigs);
+  m_Right.getConfigurator().apply(m_VoltageConfigs);
+  m_Left.setInverted(true);
+  m_Right.setInverted(false);
+
+
+
+  Slot0Configs m_Slot0Configs = new Slot0Configs();
+    m_Slot0Configs.kP = .5;    
+ 
+  m_Left.getConfigurator().apply(m_Slot0Configs);
+  m_Right.getConfigurator().apply(m_Slot0Configs);
+ }
+ 
+ 
+ 
+ public void configShooterForAuto()
+ {
+   m_Right.setNeutralMode(NeutralModeValue.Brake);
+  
+  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
+    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardAutoVoltageLimit;
+    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseAutoVoltageLimit;
+  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
+    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
+    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
+
+
+  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
+  m_Left.getConfigurator().apply(m_VoltageConfigs);
+  m_Right.getConfigurator().apply(m_VoltageConfigs);
+  m_Left.setInverted(true);
+  m_Right.setInverted(false);
+
+
+
+  Slot0Configs m_Slot0Configs = new Slot0Configs();
+    m_Slot0Configs.kP = .5;    
+ 
+  m_Left.getConfigurator().apply(m_Slot0Configs);
+  m_Right.getConfigurator().apply(m_Slot0Configs);
+ }
+ 
+ 
+ 
   /**
    * 
    * @param LeftTargetRPS
