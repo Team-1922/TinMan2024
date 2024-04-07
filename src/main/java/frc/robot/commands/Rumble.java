@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 public class Rumble extends Command {
   XboxController m_Controller
    = new XboxController(1);
-  /** Creates a new Rumble. */
+  /** Creates a new Rumble.
+   * <p> activates the rumble feature of the operator controller
+   */
   public Rumble() {
     // Use addRequirements() here to declare subsystem dependencies.
   }

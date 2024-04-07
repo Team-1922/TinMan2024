@@ -55,9 +55,9 @@ public final class Constants {
     public static final double kReverseRollerVoltage = 2.5;  // unused volts
     public static final double kReverseDuration = 0.5; // seconds
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
-    public static final double kCollectRPM = 900; //(700/600)*2048;
+    public static final double kCollectRPM = 950; //(700/600)*2048;
     public static final double kSecondCollectRPM = 450; //(600/600)*2048;
-    public static final double kReverseCollectRPM = 550;//(600/600)*2048; // x/600*2048
+    public static final double kReverseCollectRPM = 525;//(600/600)*2048; // x/600*2048
     public static final double kShootRPM = 1000;
     
     // CONFIGS

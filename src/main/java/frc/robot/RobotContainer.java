@@ -9,7 +9,6 @@ import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Auto_timer;
-import frc.robot.commands.AutoshootStart;
 import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;

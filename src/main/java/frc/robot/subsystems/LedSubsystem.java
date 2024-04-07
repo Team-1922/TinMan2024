@@ -18,12 +18,12 @@ public class LedSubsystem extends SubsystemBase {
   
 /**
  * sets the color of the LEDS, also clears the animation in slot 0
- * @param Red 0-255
- * @param Green 0-255
- * @param Blue 0-255
- * @param White 0-255
+ * @param Red [0-255]
+ * @param Green [0-255] 
+ * @param Blue [0-255]
+ * @param White [0-255] only works if the LED strip supports it
  * @param Start offset from first led (do 8 to ignore CANdle)
- * @param Count number of leds
+ * @param Count number of LEDs
  */
   public void SetColor(int Red, int Green, int Blue, int White, int Start,int Count){
     m_CaNdle.clearAnimation(0);

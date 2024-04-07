@@ -52,18 +52,18 @@ public void StopRightClimber(){
 
   m_ClimberMotor2.stopMotor();  
 }
-/** stops Left climber motor  */
+/** Stops Left climber motor  */
 public void StopLeftClimber(){
 
   m_ClimberMotor1.stopMotor();
   
 }
-
+/** @return Rotations per second */
 public double GetLeftVelocity(){
   double motorVelocity = m_Encoder1.getVelocity();
   return motorVelocity;
 }
-
+/**@return Rotations per second*/
 public double GetRightVelocity(){
     double motorVelocity = m_Encoder2.getVelocity();
   return motorVelocity;

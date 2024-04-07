@@ -108,14 +108,20 @@ public void ReverseMotor(double RPM) {
         if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
-               m_LED.SetColor(0, 255, 0, 0, 0, 96);
+               m_LED.SetColor(0, 255, 0, 0, 0, 96); // green
             }else{
-           m_LED.SetColor(255, 255, 255, 255, 0, 96);
+           m_LED.SetColor(255, 255, 255, 255, 0, 96); // white
            }
         } else {
         
          if ( RobotController.isSysActive()){
-         m_LED.SetColor(255, 0, 0, 0, 0, 98);} 
+            if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS)){
+                m_LED.SetColor(255, 165, 0, 0, 0, 98); // orange
+            }
+            else{
+                m_LED.SetColor(255, 0, 0, 0, 0, 98); // red
+            }
+         } 
           else {
             m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
           } 
