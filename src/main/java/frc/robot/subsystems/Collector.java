@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import frc.Team364.lib.util.Limelight;
 import frc.robot.Constants;
 import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.RobotController;
@@ -12,6 +13,7 @@ import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.playingwithfusion.TimeOfFlight;
@@ -137,6 +139,23 @@ public void ReverseMotor(double RPM) {
         SmartDashboard.putNumber("Tof target distance", target);
         return target;
     }
+
+    /**
+     * <h1><b> THIS WILL MAKE THE COLLECTOR STOP, AND CHANGE CONFIGS TO NOT ALLOW IT TO DRAW ANY POWER </b></h1>
+     * <p><i> note that the configs will have to be reset to use the collector again</p></i>
+     */
+    public void CollectorEmergencyStop(){
+
+        m_CollectorTalon.stopMotor();
+        m_CollectorTalon.disable();
+        m_CollectorTalon.getConfigurator().apply(new VoltageConfigs().withPeakForwardVoltage(0).withPeakReverseVoltage(0) );
+
+        m_CollectorTalon2.stopMotor();
+        m_CollectorTalon2.disable();
+        m_CollectorTalon2.getConfigurator().apply(new VoltageConfigs().withPeakForwardVoltage(0).withPeakReverseVoltage(0) );
+
+    }
+
 
     @Override
     public void periodic(){
