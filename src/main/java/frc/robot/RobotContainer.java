@@ -14,6 +14,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.GetFieldPosition;
 import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.TorqueLimitClimb;
@@ -24,7 +25,8 @@ import frc.robot.commands.AutoShootNoteCheck;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.PositionHandler;
+import frc.robot.subsystems.Vision;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -61,6 +63,8 @@ public class RobotContainer {
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
   private final Rumble m_Rumble = new Rumble();
+  private final Vision m_Limelight = new Vision("limelight-shooter");
+  private final PositionHandler m_PosHandler = new PositionHandler(m_Limelight);
  
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
@@ -74,6 +78,7 @@ public class RobotContainer {
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
 
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
+  public final GetFieldPosition m_Adjust = new GetFieldPosition(m_PosHandler, m_Limelight, s_Swerve);
 
 
   private final SendableChooser<Command> AutoSelector;
@@ -170,6 +175,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X
       m_operatorController.button(5).onTrue(m_ShootStart); // LB
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter); // D-pad down
+      m_operatorController.button(4).onTrue(m_Adjust);
   }
 
   /**

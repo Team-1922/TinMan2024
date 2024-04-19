@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.limelightlib.LimelightHelpers;
 import frc.robot.commands.GetApriltagData;
 
-public class Limelight extends SubsystemBase {
+public class Vision extends SubsystemBase {
   /** Creates a new Limelight. */
   private GetApriltagData getData;
 
@@ -24,10 +24,10 @@ public class Limelight extends SubsystemBase {
   private NetworkTableEntry m_ta;
   private NetworkTableEntry m_tID;
   private NetworkTableEntry m_Pipieline;
-  private double[] limelightData = new double[2];
+  public double[] limelightData = new double[2];
   
-  public Limelight() {
-    LimelightTable = NetworkTableInstance.getDefault().getTable("goofball");
+  public Vision(String name) {
+    LimelightTable = NetworkTableInstance.getDefault().getTable(name);
     m_tx = LimelightTable.getEntry("tx");
     m_ty = LimelightTable.getEntry("ty");
     m_ta = LimelightTable.getEntry("ta");
@@ -35,23 +35,12 @@ public class Limelight extends SubsystemBase {
     m_Pipieline = LimelightTable.getEntry("pipeline");
   }
 
-  Limelight reference = new Limelight();
-
   public void setPipeline(int pipelineID) {
     m_Pipieline.setNumber(pipelineID);
   }
 
   public void retrieveData(int slot, double x) {
     limelightData[slot] = x;
-  }
-
-  public ArrayList<Double> returnData() {
-    targetApriltag(0); //The left
-    targetApriltag(1); //The right
-    ArrayList<Double> packagedData = new ArrayList<Double>();
-    packagedData.add(limelightData[0]);
-    packagedData.add(limelightData[1]);
-    return packagedData;
   }
 
   public double cot(double theta) {
@@ -89,11 +78,6 @@ public class Limelight extends SubsystemBase {
 
   public double getYPos() {
     return 0.0;
-  }
-
-  public Command targetApriltag(int slot) {
-    getData = new GetApriltagData(reference, slot);
-    return runOnce(() -> getData.initialize());
   }
 
   @Override

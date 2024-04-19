@@ -7,14 +7,14 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Vision;
 import frc.robot.limelightlib.LimelightHelpers;
 
 public class GetApriltagData extends Command {
-  private Limelight m_Limelight;
+  private Vision m_Limelight;
   private int m_ID;
   /** Creates a new SpeakerApriltag. */
-  public GetApriltagData(Limelight firstLimelight, int pipelineID) {
+  public GetApriltagData(Vision firstLimelight, int pipelineID) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_Limelight = firstLimelight;
     m_ID = pipelineID;
