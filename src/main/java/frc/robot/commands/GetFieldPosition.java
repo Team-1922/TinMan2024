@@ -63,6 +63,7 @@ public class GetFieldPosition extends Command {
     //Robot is not getting values from the limelight
     coolTranslation = new Translation2d(-mRobotX + 0.1, -mRobotY + 0.1);
     m_Swerve.drive(coolTranslation, 0 /* May or may not actually be zero */, false, true);
+    // Teddy suggested having the shooting motors rev up here
   }
 
   // Returns true when the command should end.

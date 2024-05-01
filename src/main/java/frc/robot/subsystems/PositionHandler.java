@@ -28,9 +28,10 @@ public class PositionHandler extends SubsystemBase {
     return packagedData;
   }
 
-  public Command targetApriltag(int slot) {
+  public /*Command*/void targetApriltag(int slot) {
     GetApriltagData getData = new GetApriltagData(m_Limelight, slot);
-    return runOnce(() -> getData.initialize());
+    //return runOnce(() -> getData.initialize());
+    getData.initialize();
   }
 
   @Override

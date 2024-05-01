@@ -26,6 +26,8 @@ public class GetApriltagData extends Command {
   public void initialize() {
     m_Limelight.setPipeline(m_ID);
     m_Limelight.retrieveData(m_ID, m_Limelight.getTx());
+    //This could probably all go in Vision with an updated getTx method
+   // 20ms refresh rate too slow? 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
