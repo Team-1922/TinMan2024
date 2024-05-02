@@ -12,18 +12,16 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.limelightlib.LimelightHelpers;
-import frc.robot.commands.GetApriltagData;
 
 public class Vision extends SubsystemBase {
   /** Creates a new Limelight. */
-  private GetApriltagData getData;
 
   private NetworkTable LimelightTable;
   private NetworkTableEntry m_tx;
   private NetworkTableEntry m_ty;
   private NetworkTableEntry m_ta;
   private NetworkTableEntry m_tID;
-  private NetworkTableEntry m_Pipieline;
+  private NetworkTableEntry m_Pipeline;
   public double[] limelightData = new double[2];
   
   public Vision(String name) {
@@ -32,14 +30,21 @@ public class Vision extends SubsystemBase {
     m_ty = LimelightTable.getEntry("ty");
     m_ta = LimelightTable.getEntry("ta");
     m_tID = LimelightTable.getEntry("tid");
-    m_Pipieline = LimelightTable.getEntry("pipeline");
+    m_Pipeline = LimelightTable.getEntry("pipeline");
   }
 
   public void setPipeline(int pipelineID) {
-    m_Pipieline.setNumber(pipelineID);
+    if(pipelineID == 0)
+    m_Pipeline.setString("Right_Target");
+    else {
+      m_Pipeline.setString("Left_Target");
+    }
+    System.out.println(m_Pipeline.getString("crazy"));
   }
 
-  public void retrieveData(int slot, double x) {
+  public void retrieveData(int slot) {
+    setPipeline(slot);
+    double x = getTx();
     limelightData[slot] = x;
   }
 

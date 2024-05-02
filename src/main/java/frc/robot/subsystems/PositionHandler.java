@@ -8,7 +8,6 @@ import java.util.ArrayList;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.GetApriltagData;
 import frc.robot.subsystems.Vision;
 
 public class PositionHandler extends SubsystemBase {
@@ -28,10 +27,9 @@ public class PositionHandler extends SubsystemBase {
     return packagedData;
   }
 
-  public /*Command*/void targetApriltag(int slot) {
-    GetApriltagData getData = new GetApriltagData(m_Limelight, slot);
-    //return runOnce(() -> getData.initialize());
-    getData.initialize();
+  public Command targetApriltag(int slot) {
+    return runOnce(() -> m_Limelight.retrieveData(slot)); //Not running this. Why?
+    //getData.initialize();
   }
 
   @Override
