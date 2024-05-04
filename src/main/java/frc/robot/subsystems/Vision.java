@@ -24,8 +24,8 @@ public class Vision extends SubsystemBase {
   private NetworkTableEntry m_Pipeline;
   public double[] limelightData = new double[2];
   
-  public Vision(String name) {
-    LimelightTable = NetworkTableInstance.getDefault().getTable(name);
+  public Vision() {
+    LimelightTable = NetworkTableInstance.getDefault().getTable("limelight-shooter");
     m_tx = LimelightTable.getEntry("tx");
     m_ty = LimelightTable.getEntry("ty");
     m_ta = LimelightTable.getEntry("ta");
@@ -34,18 +34,24 @@ public class Vision extends SubsystemBase {
   }
 
   public void setPipeline(int pipelineID) {
+    /*
     if(pipelineID == 0)
     m_Pipeline.setString("Right_Target");
     else {
       m_Pipeline.setString("Left_Target");
     }
-    System.out.println(m_Pipeline.getString("crazy"));
+    LimelightHelpers.setPipelineIndex("limelight-shooter", pipelineID);
+    */
+    //System.out.println(LimelightHelpers.getCurrentPipelineIndex("crazy"));
+    LimelightTable.getEntry("pipeline").setNumber(pipelineID);
   }
-
-  public void retrieveData(int slot) {
+  
+  public double retrieveData(int slot) {
     setPipeline(slot);
     double x = getTx();
     limelightData[slot] = x;
+    System.out.println(x);
+    return limelightData[slot];
   }
 
   public double cot(double theta) {

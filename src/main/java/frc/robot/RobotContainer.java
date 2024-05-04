@@ -63,7 +63,7 @@ public class RobotContainer {
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
   private final Rumble m_Rumble = new Rumble();
-  private final Vision m_Limelight = new Vision("limelight-shooter");
+  private final Vision m_Limelight = new Vision();
   private final PositionHandler m_PosHandler = new PositionHandler(m_Limelight);
  
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);

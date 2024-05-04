@@ -19,19 +19,20 @@ public class PositionHandler extends SubsystemBase {
   }
   
   public ArrayList<Double> returnData() {
-    targetApriltag(0); //The left
-    targetApriltag(1); //The right
+    Double right = Double.valueOf(m_Limelight.retrieveData(1)); //The left
+    Double left = Double.valueOf(m_Limelight.retrieveData(0)); //The right
     ArrayList<Double> packagedData = new ArrayList<Double>();
-    packagedData.add(m_Limelight.limelightData[0]);
-    packagedData.add(m_Limelight.limelightData[1]);
+    packagedData.add(left);
+    packagedData.add(right);
     return packagedData;
   }
 
+  /*
   public Command targetApriltag(int slot) {
     return runOnce(() -> m_Limelight.retrieveData(slot)); //Not running this. Why?
     //getData.initialize();
   }
-
+  */
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

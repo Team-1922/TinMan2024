@@ -58,8 +58,8 @@ public class GetFieldPosition extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println(mRobotX);
-    System.out.println(mRobotY);
+    //System.out.println(mRobotX);
+    //System.out.println(mRobotY);
     //Robot is not getting values from the limelight
     coolTranslation = new Translation2d(-mRobotX + 0.1, -mRobotY + 0.1);
     //m_Swerve.drive(coolTranslation, 0 /* May or may not actually be zero */, false, true);
