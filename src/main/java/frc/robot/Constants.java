@@ -25,8 +25,8 @@ public final class Constants {
   public static class ShooterConstants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
-    public static final int kLeftShooterRPS = 5;
-    public static final int kRightShooterRPS = 15; 
+    public static final int kLeftShooterRPS = 3; // 5 is normal 
+    public static final int kRightShooterRPS = 5; 
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
     public static final double kRightTargetRPS = 3.4; // gets to ~8

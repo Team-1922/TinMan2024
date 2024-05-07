@@ -153,7 +153,7 @@ if(Left&&Right){
   public void Shoot(double RightTargetRPM,double LeftTargetRPM ){
 
     m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM));
-    m_Right.setControl(new VelocityDutyCycle(LeftTargetRPM));  
+    m_Right.setControl(new VelocityDutyCycle(RightTargetRPM));  
   }
 
   /** Stops the shooter motors */
