@@ -24,6 +24,7 @@ import frc.robot.commands.AutoShootNoteCheck;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LedSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -53,6 +54,7 @@ public class RobotContainer {
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
+  private final LedSubsystem m_led = new LedSubsystem(m_Collector, m_shooterSubsystem);
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);

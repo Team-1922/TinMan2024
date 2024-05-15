@@ -6,15 +6,29 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
+import com.ctre.phoenix.led.ColorFlowAnimation;
+import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
+
+import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.LedConstants;
 
 public class LedSubsystem extends SubsystemBase {
 
   CANdle m_CaNdle = new CANdle(LedConstants.kCandleID); 
+  private Collector m_Collector;
+  private ShooterSubsystem m_shooter;
+
+    ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .5, 98, Direction.Forward);
+
   
   /** Creates a new LedSubsystem. */
-  public LedSubsystem(){}
+  public LedSubsystem(Collector collector, ShooterSubsystem shooter){
+    m_Collector = collector;
+    m_shooter = shooter;
+  }
   
 /**
  * sets the color of the LEDS, also clears the animation in slot 0
@@ -44,6 +58,32 @@ public class LedSubsystem extends SubsystemBase {
 
   public void clearAnimation(int AnimationSlot){
     m_CaNdle.clearAnimation(AnimationSlot);
+  }
+
+  @Override 
+  public void periodic() {
+    boolean InTarget = m_Collector.TofcheckTarget();
+        SmartDashboard.putBoolean("Has Note?", InTarget);
+        if (InTarget) {
+            if (m_shooter.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS,
+                    Constants.ShooterConstants.kRightTargetRPS)) {
+                SetColor(0, 255, 0, 0, 0, 96); // green
+            } else {
+                SetColor(255, 255, 255, 255, 0, 96); // white
+            }
+        } else {
+
+            if (RobotController.isSysActive()) {
+                if (m_shooter.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS,
+                        Constants.ShooterConstants.kRightTargetRPS)) {
+                    SetColor(255, 165, 0, 0, 0, 98); // orange
+                } else {
+                    SetColor(255, 0, 0, 0, 0, 98); // red
+                }
+            } else {
+                AnimateLEDs(m_ColorFlowAnimation, 0);
+            }
+        }
   }
 
 
