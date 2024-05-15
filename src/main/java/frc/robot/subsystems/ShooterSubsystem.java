@@ -21,7 +21,6 @@ public class ShooterSubsystem extends SubsystemBase {
   private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
   private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
 
-  LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
   
