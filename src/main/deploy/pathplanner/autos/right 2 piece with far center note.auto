@@ -53,16 +53,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "right to far center"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "right to far center"
                                   }
                                 },
                                 {

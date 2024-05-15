@@ -96,13 +96,12 @@ public class RobotContainer {
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
     // the commands that are used in pathplanner
-   NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command
-   NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command
-   NamedCommands.registerCommand("ShootStart", m_AutoShootStart); // starts shooter motors
-   NamedCommands.registerCommand("timer", mAuto_timer); // not used, just a timer
-   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note
-   NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
-   NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
+   NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command    |  collector
+   NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command   | collector 
+   NamedCommands.registerCommand("ShootStart", m_AutoShootStart); // starts shooter motors   |  shooter 
+   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note | none
+   NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note  | none
+   NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector | collector 
   
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
