@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.TalonFXConfigurator;
+import com.ctre.phoenix6.configs.VoltageConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -92,5 +96,26 @@ public final class Constants {
     public static final int kCandleID = 10; 
     public static final int kTotalLedCount = 98; //8 on candle + ~90 on strips
   }
+
+  //using RAP so RackAndPinion doesn't have to be typed as much
+  public static class RackAndPinionConstants {
+
+    public static final int LeftRAPmotorID = 13; 
+    public static final int RightRAPmotorID = 14;
+
+    public static final double RAPmaxAngle = 60; // placeholder
+    public static final double RAPminAngle = 20; // placeholder
+    public static final double RAPampAngle = 50; //placeholder 
+    
+    public static final double RAPdefaultAngle = 40; // placeholder, this would be whatever angle you would have the robot start in 
+
+
+    // VOLTAGE CONFIGS
+
+    public static final double kVoltageLimit = 2;// placeholder 
+   
+    
+  }
+
 
 }

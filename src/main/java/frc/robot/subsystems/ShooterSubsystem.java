@@ -20,42 +20,13 @@ public class ShooterSubsystem extends SubsystemBase {
   // kp of motors is ~.05
   private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
   private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
+  
 
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
   
     configShooterForTeleop();
-
-  /* m_Left.setNeutralMode(NeutralModeValue.Brake);
-  m_Right.setNeutralMode(NeutralModeValue.Brake);
-  
-  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
-    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardVoltageLimit;
-    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseVoltageLimit;
-  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
-    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
-    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
-    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
-    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
-
-
-  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
-  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
-  m_Left.getConfigurator().apply(m_VoltageConfigs);
-  m_Right.getConfigurator().apply(m_VoltageConfigs);
-  m_Left.setInverted(true);
-  m_Right.setInverted(false);
-
-
-
-  Slot0Configs m_Slot0Configs = new Slot0Configs();
-    m_Slot0Configs.kP = .5;    
- 
-  m_Left.getConfigurator().apply(m_Slot0Configs);
-  m_Right.getConfigurator().apply(m_Slot0Configs);
-*/
-
   }
  
  public void configShooterForTeleop()
@@ -71,15 +42,12 @@ public class ShooterSubsystem extends SubsystemBase {
     m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
     m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
 
-
   m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
   m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
   m_Left.getConfigurator().apply(m_VoltageConfigs);
   m_Right.getConfigurator().apply(m_VoltageConfigs);
   m_Left.setInverted(true);
   m_Right.setInverted(false);
-
-
 
   Slot0Configs m_Slot0Configs = new Slot0Configs();
     m_Slot0Configs.kP = .5;    
@@ -162,6 +130,13 @@ if(Left&&Right){
   m_Left.set(0);
   m_Right.set(0);
   }  
+
+
+
+
+
+
+
 
  @Override
  public void periodic(){
