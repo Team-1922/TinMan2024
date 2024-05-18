@@ -117,7 +117,7 @@ public class RobotContainer {
                 () -> 0 // Dynamic heading placeholder
             )
         ); 
-    */
+
         
 AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
 SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
