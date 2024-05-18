@@ -52,38 +52,38 @@ public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-  public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();  
-  private final Collector m_Collector = new Collector();
-  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
-  private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
-  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,5 );
-  private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
-  private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
-  private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
-  private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
+  //public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();  
+  //private final Collector m_Collector = new Collector();
+  //private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+  //private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
+  //private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,5 );
+  //private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
+  //private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
+  //private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
+  //private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
   private final Rumble m_Rumble = new Rumble();
   private final Vision m_Limelight = new Vision();
   private final PositionHandler m_PosHandler = new PositionHandler(m_Limelight);
  
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
-  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
-  private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2);
+  //private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, 0.2);
+  //private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2);
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
-  private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay,m_Collector);
+  //private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay,m_Collector);
   //private final XboxController m_operatorController = new XboxController(0);
  // private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
 
-  public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
-  public final GetFieldPosition m_Adjust = new GetFieldPosition(m_PosHandler, m_Limelight, s_Swerve);
+  //public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
+  //public final GetFieldPosition m_Adjust = new GetFieldPosition(m_PosHandler, m_Limelight, s_Swerve);
 
 
   private final SendableChooser<Command> AutoSelector;
   // AUTO COMMANDS
-   private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3);
+  // private final Shoot m_AutoShoot = new Shoot(m_shooterSubsystem, m_Collector, true, 3);
 
     private final XboxController driver = new XboxController(0);
  
@@ -102,9 +102,9 @@ public class RobotContainer {
     private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
     private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
-    private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
-    private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+    //private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem);
+    //private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_CollectNote);
+    //private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
     //private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_shoot,m_CollectNoteAuto);
    // private final SequentialCommandGroup m_AutoShootGroup = new SequentialCommandGroup(m_AutoShoot,m);
   // private final SequentialCommandGroup ShootAuto = Autos.Shoot;
@@ -113,18 +113,18 @@ public class RobotContainer {
     
     // Configure the trigger bindings
     configureBindings();
-    m_ClimberSubsystem.setDefaultCommand(m_TClimb);
+    //m_ClimberSubsystem.setDefaultCommand(m_TClimb);
 
     // the commands that are used in pathplanner
-   NamedCommands.registerCommand("Shoot",m_AutoShoot);
-   NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
-   NamedCommands.registerCommand("ShootStart", m_ShootStart);
+   //NamedCommands.registerCommand("Shoot",m_AutoShoot);
+   //NamedCommands.registerCommand("Collect", m_CollectNoteAuto);
+   //NamedCommands.registerCommand("ShootStart", m_ShootStart);
    NamedCommands.registerCommand("timer", mAuto_timer);
-   NamedCommands.registerCommand("shoot + collect", m_shootGroup);
-   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
-   NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck);
+   //NamedCommands.registerCommand("shoot + collect", m_shootGroup);
+   //NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck);
+   //NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck);
    
-  
+    /*
       s_Swerve.setDefaultCommand(
             new SwerveCommand(
                 s_Swerve, 
@@ -136,6 +136,7 @@ public class RobotContainer {
                 () -> 0 // Dynamic heading placeholder
             )
         ); 
+    */
         
 AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
 
@@ -165,17 +166,17 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
   
 
     // DRIVER CONTROLLS
-      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
+      //zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y
       m_driverController.button(2).whileTrue(m_Rumble);
 
     
     // OPERATOR CONTROLLS    
-      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
-      m_operatorController.button(2).whileTrue(m_CollectNote2); // B
-      m_operatorController.button(3).whileTrue(m_CollectReverse); // X
-      m_operatorController.button(5).onTrue(m_ShootStart); // LB
-      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter); // D-pad down
-      m_operatorController.button(4).onTrue(m_Adjust);
+      //m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A
+      //m_operatorController.button(2).whileTrue(m_CollectNote2); // B
+      //m_operatorController.button(3).whileTrue(m_CollectReverse); // X
+      //m_operatorController.button(5).onTrue(m_ShootStart); // LB
+      //m_operatorController.pov(180).whileTrue(m_stopCollector_shooter); // D-pad down
+      //m_operatorController.button(4).onTrue(m_Adjust);
   }
 
   /**
