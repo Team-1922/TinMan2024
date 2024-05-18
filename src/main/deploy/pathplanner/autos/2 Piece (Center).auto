@@ -28,19 +28,13 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 1.0
+                        "waitTime": 2.75
                       }
                     },
                     {
                       "type": "deadline",
                       "data": {
                         "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot End Delay"
-                            }
-                          },
                           {
                             "type": "named",
                             "data": {
@@ -68,12 +62,6 @@
                                   "type": "deadline",
                                   "data": {
                                     "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
                                       {
                                         "type": "path",
                                         "data": {

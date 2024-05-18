@@ -18,16 +18,16 @@ import frc.robot.Constants.ShooterConstants;
 public class ShooterSubsystem extends SubsystemBase {
 
   // kp of motors is ~.05
- // CANSparkMax m_Left = new CANSparkMax(ShooterConstants.kLeftShooterMotorID, MotorType.kBrushless);
- // CANSparkMax m_Right = new CANSparkMax(ShooterConstants.kRightShooterMotorID, MotorType.kBrushless);
-
   private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
   private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
 
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
-  m_Left.setNeutralMode(NeutralModeValue.Brake);
+  
+    configShooterForTeleop();
+
+  /* m_Left.setNeutralMode(NeutralModeValue.Brake);
   m_Right.setNeutralMode(NeutralModeValue.Brake);
   
   VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
@@ -36,6 +36,8 @@ public class ShooterSubsystem extends SubsystemBase {
   CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
     m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
     m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
+    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
 
 
   m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
@@ -50,11 +52,76 @@ public class ShooterSubsystem extends SubsystemBase {
   Slot0Configs m_Slot0Configs = new Slot0Configs();
     m_Slot0Configs.kP = .5;    
  
-m_Left.getConfigurator().apply(m_Slot0Configs);
-m_Right.getConfigurator().apply(m_Slot0Configs);
-
+  m_Left.getConfigurator().apply(m_Slot0Configs);
+  m_Right.getConfigurator().apply(m_Slot0Configs);
+*/
 
   }
+ 
+ public void configShooterForTeleop()
+ {
+   m_Right.setNeutralMode(NeutralModeValue.Brake);
+  
+  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
+    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardTeleopVoltageLimit;
+    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseTeleopVoltageLimit;
+  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
+    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
+    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
+
+
+  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
+  m_Left.getConfigurator().apply(m_VoltageConfigs);
+  m_Right.getConfigurator().apply(m_VoltageConfigs);
+  m_Left.setInverted(true);
+  m_Right.setInverted(false);
+
+
+
+  Slot0Configs m_Slot0Configs = new Slot0Configs();
+    m_Slot0Configs.kP = .5;    
+ 
+  m_Left.getConfigurator().apply(m_Slot0Configs);
+  m_Right.getConfigurator().apply(m_Slot0Configs);
+ }
+ 
+ 
+ 
+ public void configShooterForAuto()
+ {
+   m_Right.setNeutralMode(NeutralModeValue.Brake);
+  
+  VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
+    m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardAutoVoltageLimit;
+    m_VoltageConfigs.PeakReverseVoltage = ShooterConstants.kShooterReverseAutoVoltageLimit;
+  CurrentLimitsConfigs m_CurrentLimitsConfigs = new CurrentLimitsConfigs();
+    m_CurrentLimitsConfigs.SupplyCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
+    m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
+    m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
+
+
+  m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
+  m_Left.getConfigurator().apply(m_VoltageConfigs);
+  m_Right.getConfigurator().apply(m_VoltageConfigs);
+  m_Left.setInverted(true);
+  m_Right.setInverted(false);
+
+
+
+  Slot0Configs m_Slot0Configs = new Slot0Configs();
+    m_Slot0Configs.kP = .5;    
+ 
+  m_Left.getConfigurator().apply(m_Slot0Configs);
+  m_Right.getConfigurator().apply(m_Slot0Configs);
+ }
+ 
+ 
+ 
   /**
    * 
    * @param LeftTargetRPS
@@ -63,7 +130,7 @@ m_Right.getConfigurator().apply(m_Slot0Configs);
    */
 public boolean TargetRpmReached(double LeftTargetRPS, double RightTargetRPS){
 
-boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);// divided by 60 to convert units
+boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);
 boolean Right = (m_Right.getVelocity().getValueAsDouble()) >= (RightTargetRPS);
 if(Left&&Right){
   SmartDashboard.putBoolean("Up to Speed", true);
@@ -77,14 +144,7 @@ if(Left&&Right){
   return Left && Right;
 }
 
-/** this has not been tested */
-public void AmpShoot(double RightTargetRPM, double LeftTargetRPM){
-m_Left.set(LeftTargetRPM/5676);
-m_Right.set(RightTargetRPM/5676);
 
-}
-
-//max rpm = 5676 free 
 /**
  * 
  * @param RightTargetRPM target RPM for the right shooter motor
@@ -99,18 +159,16 @@ m_Right.set(RightTargetRPM/5676);
   /** Stops the shooter motors */
   public void StopShoot(){
     
-m_Left.set(0);
- m_Right.set(0);
-
-
+  m_Left.set(0);
+  m_Right.set(0);
   }  
 
  @Override
  public void periodic(){
   SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
   SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
- SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
-SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
+  //SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
+  //SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
 
  }
 

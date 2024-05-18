@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.7820469694993443,
-      "y": 6.600718066300997
+      "x": 0.769944812616898,
+      "y": 6.6047521185951465
     },
-    "rotation": 59.858614447924644
+    "rotation": 55.61965527615516
   },
   "command": {
     "type": "sequential",
@@ -38,12 +38,6 @@
                           {
                             "type": "named",
                             "data": {
-                              "name": "Shoot End Delay"
-                            }
-                          },
-                          {
-                            "type": "named",
-                            "data": {
                               "name": "Shoot"
                             }
                           }
@@ -68,12 +62,6 @@
                                   "type": "deadline",
                                   "data": {
                                     "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
                                       {
                                         "type": "path",
                                         "data": {

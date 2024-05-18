@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.844574780058651,
-      "y": 4.4871267924354035
+      "x": 0.8190257821957083,
+      "y": 4.483681039434152
     },
-    "rotation": -50.48518886329011
+    "rotation": -44.99999999999992
   },
   "command": {
     "type": "sequential",
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.75
+                        "waitTime": 2.5
                       }
                     },
                     {
@@ -49,9 +49,22 @@
                       "data": {
                         "commands": [
                           {
-                            "type": "named",
+                            "type": "sequential",
                             "data": {
-                              "name": "Collect"
+                              "commands": [
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "right to far center"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "Right From far center"
+                                  }
+                                }
+                              ]
                             }
                           },
                           {
@@ -59,28 +72,15 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "wait",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "To Right Note (Right side)"
-                                        }
-                                      }
-                                    ]
+                                    "waitTime": 2.5
                                   }
                                 },
                                 {
-                                  "type": "path",
+                                  "type": "named",
                                   "data": {
-                                    "pathName": "From Right Note (Right side)"
+                                    "name": "Collect"
                                   }
                                 }
                               ]
@@ -90,9 +90,16 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]

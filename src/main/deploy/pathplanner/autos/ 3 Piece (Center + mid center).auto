@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.844574780058651,
-      "y": 4.4871267924354035
+      "x": 1.308995050422533,
+      "y": 5.56
     },
-    "rotation": -50.48518886329011
+    "rotation": 0
   },
   "command": {
     "type": "sequential",
@@ -32,16 +32,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
@@ -59,28 +52,66 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "To Right Note (Right side)"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "to Center Note"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "From Right Note (Right side)"
+                                    "pathName": "from center note"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shoot"
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 1.5
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Collect"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "center to far center note"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "center from mid center note"
                                   }
                                 }
                               ]

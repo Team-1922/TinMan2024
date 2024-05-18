@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.844574780058651,
-      "y": 4.4871267924354035
+      "x": 0.769944812616898,
+      "y": 6.6047521185951465
     },
-    "rotation": -50.48518886329011
+    "rotation": 57.380756928807216
   },
   "command": {
     "type": "sequential",
@@ -32,16 +32,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
@@ -59,28 +52,66 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "To Right Note (Right side)"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": " To Left Note (Left Side)"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "From Right Note (Right side)"
+                                    "pathName": "From Left note (Left side)"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shoot"
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 2.0
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Collect"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "left to far center note"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "Left from far center note"
                                   }
                                 }
                               ]

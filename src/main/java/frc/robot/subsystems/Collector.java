@@ -5,10 +5,9 @@ import frc.robot.Constants.CollectorConstants;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.led.FireAnimation;
-import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix.led.ColorFlowAnimation;
 import com.ctre.phoenix.led.SingleFadeAnimation;
-
+import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
 import com.ctre.phoenix6.configs.ClosedLoopRampsConfigs;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.OpenLoopRampsConfigs;
@@ -29,9 +28,10 @@ public class Collector extends SubsystemBase {
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
 
-  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 255, 255, .9, 96, 0);
-  RainbowAnimation m_RAINBOW = new RainbowAnimation(1,.5,96);
-  FireAnimation m_FireAnimation = new FireAnimation(.5, .5, 96, .5, 0, true, 0);
+
+  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, 98, 0);
+  
+  ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .5, 98, Direction.Forward);
   
     /**  Makes a new Collector subsystem */
     public Collector() {
@@ -91,7 +91,7 @@ public void ReverseMotor(double RPM) {
       VelocityDutyCycle m_Output = new VelocityDutyCycle(-RPM);
         m_CollectorTalon.setControl(m_Output);   
         m_CollectorTalon2.setControl(m_Output);
-    
+   
     }
   
 
@@ -108,19 +108,24 @@ public void ReverseMotor(double RPM) {
         if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
-                m_LED.AnimateLEDs(m_SingleFade, 0);
+               m_LED.SetColor(0, 255, 0, 0, 0, 96); // green
             }else{
-           m_LED.SetColor(255, 255, 255, 255, 0, 96);
+           m_LED.SetColor(255, 255, 255, 255, 0, 96); // white
            }
         } else {
         
          if ( RobotController.isSysActive()){
-          m_LED.AnimateLEDs(m_FireAnimation, 0);} 
-          else m_LED.AnimateLEDs(m_RAINBOW, 0);
-       
-            
+            if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS)){
+                m_LED.SetColor(255, 165, 0, 0, 0, 98); // orange
+            }
+            else{
+                m_LED.SetColor(255, 0, 0, 0, 0, 98); // red
+            }
+         } 
+          else {
+            m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
+          } 
         }
-        m_IsTriggered = InTarget;
         return InTarget; 
     }
 
@@ -134,9 +139,8 @@ public void ReverseMotor(double RPM) {
     }
 
     @Override
-    public void periodic() {
-   
-    TofcheckTarget();
+    public void periodic(){
+            TofcheckTarget();
     }
     
 }

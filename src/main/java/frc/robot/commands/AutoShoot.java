@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 
 import frc.robot.Constants;
-import frc.robot.Constants.ShooterConstants;
-import frc.robot.subsystems.Collector;
-import frc.robot.subsystems.ShooterSubsystem;
 
-public class Shoot extends Command {
-  ShooterSubsystem m_ShootSubsystem;
+import frc.robot.subsystems.Collector;
+
+
+public class AutoShoot extends Command {
+
   Collector m_Collector;
   Timer m_Timer = new Timer();
   Timer m_AutoTimer = new Timer(); // used for auto
@@ -25,24 +25,25 @@ public class Shoot extends Command {
   double m_CollectVoltage;
   boolean m_IsAuto;
   double m_AutoTime; // used for auto
+  Timer m_backuptimer = new Timer();
+  boolean m_check;
+  Timer m_EndDelay = new Timer();
 
   /** Creates a new Shoot.
    * @param IsAuto True if the command is being used for Auto
    * @param AutoTime how long the command will run for, only used if {@code IsAuto} is True
-   *  <p> DO NOT PUT {@code AutoTime} AT 0 OR THE COMMAND WILL INSTANTLY END
+   *  <p>  DO NOT PUT {@code AutoTime} AT 0 OR THE COMMAND WILL INSTANTLY END
    */ 
-  public Shoot( ShooterSubsystem ShootSubsystem, Collector collectorSubsystem, boolean IsAuto, double AutoTime ) {
+  public AutoShoot( Collector collectorSubsystem, boolean IsAuto, double AutoTime ) {
 
     m_IsAuto = IsAuto;
     m_AutoTime = AutoTime;
-    m_ShootSubsystem = ShootSubsystem;
-    m_Collector = collectorSubsystem;
-    addRequirements(collectorSubsystem);
+
    
-    m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPS;
-    m_RPMRight = Constants.ShooterConstants.kRightShooterRPS;
-    m_CollectVoltage = Constants.CollectorConstants.kCollectRPM;
-    
+    m_Collector = collectorSubsystem;
+    addRequirements( collectorSubsystem);
+   
+
   
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -50,14 +51,13 @@ public class Shoot extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_EndDelay.reset();
+    m_check = SmartDashboard.getBoolean("Has Note?", false);
     m_AutoTimer.reset();
     if(m_IsAuto){
       m_AutoTimer.start();
     }
-    m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
-
-    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
-
+    m_backuptimer.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -70,9 +70,16 @@ public class Shoot extends Command {
        ) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
-    if(!m_Collector.m_IsTriggered){
-m_AutoTimer.start();
+
+    if(!SmartDashboard.getBoolean("Has Note?", m_IsAuto)){
+
+    m_backuptimer.start();
+
     }
+     if(m_check == true && !SmartDashboard.getBoolean("Has Note?", true)){
+      m_EndDelay.start();
+     }
+
 
   }
 
@@ -80,9 +87,13 @@ m_AutoTimer.start();
   @Override
   public void end(boolean interrupted) {
     
+    
+
+
     m_Collector.StopMotor();
-    m_ShootSubsystem.StopShoot();
+    m_backuptimer.stop();
     m_AutoTimer.stop();
+    m_EndDelay.stop();
 
   }
 
@@ -90,6 +101,6 @@ m_AutoTimer.start();
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime); // Because the timer won't start if it's not auto
+    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(4) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
   }
 }

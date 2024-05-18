@@ -10,11 +10,14 @@ import frc.robot.subsystems.ShooterSubsystem;
 
 public class shootStart extends Command {
   ShooterSubsystem m_ShooterSubsystem;
+  double m_SpeedIncrease;
   /** Creates a new shootStart. 
    * runs shooter motors, does not run collector motors
+   * @param SpeedIncrease 
   */
-  public shootStart(ShooterSubsystem shooterSubsystem) {
+  public shootStart(ShooterSubsystem shooterSubsystem, double SpeedIncrease) {
     m_ShooterSubsystem = shooterSubsystem;
+    m_SpeedIncrease = SpeedIncrease;
     addRequirements(shooterSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -29,7 +32,7 @@ public class shootStart extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-     m_ShooterSubsystem.Shoot(ShooterConstants.kRightShooterRPS, ShooterConstants.kLeftShooterRPS);
+    m_ShooterSubsystem.Shoot(ShooterConstants.kRightShooterRPS*m_SpeedIncrease, ShooterConstants.kLeftShooterRPS*m_SpeedIncrease);
     m_ShooterSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
   }
 

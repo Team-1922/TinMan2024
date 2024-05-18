@@ -32,50 +32,19 @@
                       }
                     },
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
-                      }
-                    },
-                    {
-                      "type": "parallel",
+                      "type": "deadline",
                       "data": {
                         "commands": [
                           {
                             "type": "named",
                             "data": {
-                              "name": "Collect"
-                            }
-                          },
-                          {
-                            "type": "sequential",
-                            "data": {
-                              "commands": [
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "to Center Note"
-                                  }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "from center note"
-                                  }
-                                }
-                              ]
+                              "name": "Shoot"
                             }
                           }
                         ]
                       }
                     },
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
-                      }
-                    },
-                    {
                       "type": "parallel",
                       "data": {
                         "commands": [
@@ -90,9 +59,16 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "path",
+                                  "type": "deadline",
                                   "data": {
-                                    "pathName": "To Left Note"
+                                    "commands": [
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "To Left Note"
+                                        }
+                                      }
+                                    ]
                                   }
                                 },
                                 {
@@ -108,9 +84,16 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     },
                     {
@@ -128,9 +111,68 @@
                             "data": {
                               "commands": [
                                 {
+                                  "type": "deadline",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "to Center Note"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "To Right note"
+                                    "pathName": "from center note"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "deadline",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Collect"
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "deadline",
+                                  "data": {
+                                    "commands": [
+                                      {
+                                        "type": "path",
+                                        "data": {
+                                          "pathName": "To Right note"
+                                        }
+                                      }
+                                    ]
                                   }
                                 },
                                 {
@@ -146,9 +188,16 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     }
                   ]

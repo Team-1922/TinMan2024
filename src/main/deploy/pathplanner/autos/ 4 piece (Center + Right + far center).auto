@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.31,
+      "x": 1.308995050422533,
       "y": 5.56
     },
     "rotation": 0
@@ -32,9 +32,16 @@
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
                       }
                     },
                     {
@@ -70,47 +77,16 @@
                       }
                     },
                     {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
-                      }
-                    },
-                    {
-                      "type": "parallel",
+                      "type": "deadline",
                       "data": {
                         "commands": [
                           {
                             "type": "named",
                             "data": {
-                              "name": "Collect"
-                            }
-                          },
-                          {
-                            "type": "sequential",
-                            "data": {
-                              "commands": [
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "To Left Note"
-                                  }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "From Left Note"
-                                  }
-                                }
-                              ]
+                              "name": "Shoot"
                             }
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
                       }
                     },
                     {
@@ -137,6 +113,38 @@
                                   "type": "path",
                                   "data": {
                                     "pathName": "From Right Note"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shoot"
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "center to far center note"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "center from mid center note"
                                   }
                                 }
                               ]

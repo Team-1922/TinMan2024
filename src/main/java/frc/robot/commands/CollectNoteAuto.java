@@ -15,7 +15,7 @@ public class CollectNoteAuto extends Command {
   Collector m_Collector;
   Timer m_Timer = new Timer();// used to run reverse for .5 seconds  
   Timer m_DelayTimer = new Timer();
-  
+  Timer m_failsafe = new Timer();
   boolean m_HasNote; // true if there is a note in the robot
   boolean m_NoteCollected; // true if the note is all the way in the robot 
   boolean m_EndCheck; // true if command should end
@@ -32,6 +32,8 @@ public class CollectNoteAuto extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_failsafe.reset();
+    m_failsafe.start();
     SmartDashboard.putBoolean("AutoNoteCheck", false);
 
     if (!m_Collector.TofcheckTarget()) {// if it doesn't have a note, run reverse 
@@ -108,6 +110,6 @@ public class CollectNoteAuto extends Command {
   @Override
   public boolean isFinished() {
 
-    return  m_EndCheck;
+    return  m_EndCheck || m_failsafe.hasElapsed(5); // failsafe is so if it doesn't collect the note, it will just move on
   }
 }

@@ -18,9 +18,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
 
-    public static final double AngleSlewRate = 1.5; // unused
-    public static final double DriveSlewRate = 2; // unused
-    public static final double StraifeSlewRate = 2; // usused
+
   }
   
   
@@ -28,25 +26,25 @@ public final class Constants {
 
     public static final double kCollectorActivateDelay = 0.25; // seconds
     public static final int kLeftShooterRPS = 5;
-    public static final int kLeftShooterAmpRPS = 0;
     public static final int kRightShooterRPS = 15; 
-    public static final int kRightShooterAmpRPS = 00;
     public static final int kLeftShooterMotorID = 8;
     public static final int kRightShooterMotorID = 7;
-    public static final double kRightTargetRPS = 3; // gets to ~8
+    public static final double kRightTargetRPS = 3.4; // gets to ~8
     public static final double kLeftTargetRPS =1.2; // gets up to ~2
+    public static final double AutoShootEndDelay = .3; // seconds 
+
 
     // CONFIGS 
-    public static final double kShooterForwardVoltageLimit = 3; // volts
-    public static final double kShooterReverseVoltageLimit = -3; // volts
-
-   
-    public static final double kCurrentLimit = 60; // amps 
+    public static final double kShooterForwardTeleopVoltageLimit = 3; // volts
+    public static final double kShooterReverseTeleopVoltageLimit = -3; // volts
+    public static final double kShooterForwardAutoVoltageLimit = 5; // volts
+    public static final double kShooterReverseAutoVoltageLimit = -5; // volts
+    public static final double kCurrentLimit = 40; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
     
-    public static final double AutoShootEndDelay = .5; // seconds TODO: test this 
+ 
   }
 
   public final class CollectorConstants {
@@ -57,9 +55,11 @@ public final class Constants {
     public static final double kReverseRollerVoltage = 2.5;  // unused volts
     public static final double kReverseDuration = 0.5; // seconds
     public static final double kRollerSecondVoltage = 6; // only used in collect command so note doesn't go out of the robot
-    public static final double kCollectRPM = 900; //(700/600)*2048;
+    public static final double kCollectRPM = 950; //(700/600)*2048;
     public static final double kSecondCollectRPM = 450; //(600/600)*2048;
-    public static final double kReverseCollectRPM = 650;//(600/600)*2048; // x/600*2048
+    public static final double kReverseCollectRPM = 525;//(600/600)*2048; // x/600*2048
+    public static final double kShootRPM = 1000;
+    
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
@@ -67,13 +67,14 @@ public final class Constants {
     public static final double kCurrentHardLimit = 45; // amps
     public static final boolean kCurrentLimitEnable = true; 
     public static final double kCurrentLimitTime = 0.1; // seconds
+    
   }
   
   public final class ClimberConstants {
 
     public static final int ClimberMotorID = 9;
     public static final int ClimberMotorID2 = 10;
-    public static final double kClimbVoltage = 10; //TODO test this
+    public static final double kClimbVoltage = 10; 
 
   }
 
@@ -88,8 +89,8 @@ public final class Constants {
 
   public static class LedConstants {
 
-    public static final int kCandleID = 10 ; 
-    public static final int kTotalLedCount = 32; //8 on candle + 24 on strip
+    public static final int kCandleID = 10; 
+    public static final int kTotalLedCount = 98; //8 on candle + ~90 on strips
   }
 
 }

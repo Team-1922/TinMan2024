@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.1575604052109,
-      "y": 5.620779529847348
+      "x": 0.919204747500404,
+      "y": 4.4871267924354035
     },
-    "rotation": 180.0
+    "rotation": -43.93908830973575
   },
   "command": {
     "type": "sequential",
@@ -28,13 +28,26 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.75
+                        "waitTime": 2.25
                       }
                     },
                     {
-                      "type": "named",
+                      "type": "deadline",
                       "data": {
-                        "name": "Shoot"
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Shoot"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "path",
+                      "data": {
+                        "pathName": "right shoot to mobility"
                       }
                     }
                   ]
