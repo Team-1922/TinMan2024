@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.586336145645264,
-        "y": 6.0922593917259915
+        "x": 1.5493573329488999,
+        "y": 6.609962769475088
       },
       "isLocked": false,
       "linkedName": "BlueCenterShootPt"
@@ -20,8 +20,8 @@
         "y": 7.0050704681015805
       },
       "prevControl": {
-        "x": 1.9931030853052696,
-        "y": 6.998240302786913
+        "x": 1.5770914424711733,
+        "y": 7.15540025674646
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,19 +29,7 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.45,
-      "constraints": {
-        "maxVelocity": 5.0,
-        "maxAcceleration": 5.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
@@ -51,7 +39,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 0.0,
+    "rotation": 0.2694862318693004,
     "rotateFast": false
   },
   "reversed": false,

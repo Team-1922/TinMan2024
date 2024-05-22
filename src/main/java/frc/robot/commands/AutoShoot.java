@@ -52,11 +52,14 @@ public class AutoShoot extends Command {
   @Override
   public void initialize() {
     m_EndDelay.reset();
-    m_check = SmartDashboard.getBoolean("Has Note?", false);
-    m_AutoTimer.reset();
-    if(m_IsAuto){
+    m_check = SmartDashboard.getBoolean("Has Note?", true);
+
+     if(m_check == false){// this is so if it misses the note it won't have to wait so long before moving
+      m_EndDelay.start();
+     }
+
       m_AutoTimer.start();
-    }
+    
     m_backuptimer.reset();
   }
 
@@ -80,6 +83,7 @@ public class AutoShoot extends Command {
       m_EndDelay.start();
      }
 
+    
 
   }
 
@@ -101,6 +105,6 @@ public class AutoShoot extends Command {
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(4) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
+    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(3) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
   }
 }
