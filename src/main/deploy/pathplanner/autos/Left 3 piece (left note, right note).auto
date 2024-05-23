@@ -1,0 +1,133 @@
+{
+  "version": 1.0,
+  "startingPose": {
+    "position": {
+      "x": 0.769944812616898,
+      "y": 6.6047521185951465
+    },
+    "rotation": 58.30575570526232
+  },
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "ShootStart"
+                }
+              },
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 2.75
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shoot"
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Collect"
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": " To Left Note (Left Side)"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "From Left Note"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "return to speaker center"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shoot"
+                      }
+                    },
+                    {
+                      "type": "parallel",
+                      "data": {
+                        "commands": [
+                          {
+                            "type": "named",
+                            "data": {
+                              "name": "Collect"
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "To Right note"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "From Right Note"
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "Shoot"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "folder": null,
+  "choreoAuto": false
+}
