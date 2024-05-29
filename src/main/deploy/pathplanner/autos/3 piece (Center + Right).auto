@@ -114,6 +114,12 @@
                                   "data": {
                                     "pathName": "From Right Note"
                                   }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "return to speaker center"
+                                  }
                                 }
                               ]
                             }

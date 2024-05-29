@@ -4,12 +4,12 @@
     {
       "anchor": {
         "x": 2.792497034010169,
-        "y": 7.0050704681015805
+        "y": 7.03
       },
       "prevControl": null,
       "nextControl": {
         "x": 1.9419843419957035,
-        "y": 6.958846952232696
+        "y": 6.983776484131115
       },
       "isLocked": false,
       "linkedName": "Blue Left Note"
