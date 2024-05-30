@@ -32,16 +32,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
@@ -69,6 +62,12 @@
                                   "data": {
                                     "pathName": "from center note"
                                   }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "return to speaker center"
+                                  }
                                 }
                               ]
                             }
@@ -77,16 +76,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
@@ -114,6 +106,12 @@
                                   "data": {
                                     "pathName": "From Right Note"
                                   }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "return to speaker center"
+                                  }
                                 }
                               ]
                             }
@@ -136,6 +134,25 @@
                             "data": {
                               "commands": [
                                 {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 1.5
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Collect"
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          {
+                            "type": "sequential",
+                            "data": {
+                              "commands": [
+                                {
                                   "type": "path",
                                   "data": {
                                     "pathName": "center to far center note"
@@ -145,6 +162,12 @@
                                   "type": "path",
                                   "data": {
                                     "pathName": "center from mid center note"
+                                  }
+                                },
+                                {
+                                  "type": "path",
+                                  "data": {
+                                    "pathName": "return to speaker center"
                                   }
                                 }
                               ]

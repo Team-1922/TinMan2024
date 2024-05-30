@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.919204747500404,
-      "y": 4.4871267924354035
+      "x": 0.8097810790216173,
+      "y": 4.4744363362600605
     },
-    "rotation": -43.93908830973575
+    "rotation": -57.7243556854224
   },
   "command": {
     "type": "sequential",
@@ -32,16 +32,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
