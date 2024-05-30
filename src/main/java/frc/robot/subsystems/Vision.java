@@ -10,7 +10,9 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.limelightlib.LimelightHelpers;
 
 public class Vision extends SubsystemBase {
@@ -25,33 +27,37 @@ public class Vision extends SubsystemBase {
   public double[] limelightData = new double[2];
   
   public Vision() {
-    LimelightTable = NetworkTableInstance.getDefault().getTable("limelight-collect");
+    LimelightTable = NetworkTableInstance.getDefault().getTable("limelight");
     m_tx = LimelightTable.getEntry("tx");
     m_ty = LimelightTable.getEntry("ty");
     m_ta = LimelightTable.getEntry("ta");
     m_tID = LimelightTable.getEntry("tid");
-    m_Pipeline = LimelightTable.getEntry("PipelineName");
+    m_Pipeline = LimelightTable.getEntry("pipeline");
+  }
+
+  public void wait(double time) {
+    WaitCommand wait = new WaitCommand(time);
   }
 
   public void setPipeline(double pipelineID) {
     if((int) pipelineID == 0) {
-    LimelightTable.getEntry("PipelineName").setString("Right_Target");
-    //m_Pipeline.setString("Right_Target");
+      NetworkTableInstance.getDefault().getTable("limelight-collect").getEntry("pipeline").setNumber(0.0);
     }
-    else if ((int) pipelineID == 1) {
-      LimelightTable.getEntry("PipelineName").setString("Left_Target");
-      //m_Pipeline.setString("Left_Target");
+    else /*if ((int) pipelineID == 1)*/ {
+      NetworkTableInstance.getDefault().getTable("limelight-collect").getEntry("pipeline").setNumber(1.0);
     }
-    System.out.println(LimelightHelpers.getCurrentPipelineIndex("crazy"));
     //LimelightHelpers.setPipelineIndex("limelight-shooter", pipelineID);
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("pipeline").setNumber(pipelineID);
+    
+    //System.out.println("pipeline Index " + LimelightHelpers.getCurrentPipelineIndex("limelight"));
+    System.out.println("Pipeline index: " + NetworkTableInstance.getDefault().getTable("limelight-collect").getEntry("pipeline").getDouble(0.0));
   }
   
   public double retrieveData(double slot) {
     setPipeline(slot);
+    RunCommand run = new RunCommand(() -> wait(0.25));
     double x = getTx();
     limelightData[(int) slot] = x;
-    System.out.println(x);
+    System.out.println(x + " Value");
     return limelightData[(int) slot];
   }
 
@@ -63,7 +69,7 @@ public class Vision extends SubsystemBase {
    * @return Target X
    */
   public double getTx(){
-    return m_tx.getDouble(0.0);  
+    return NetworkTableInstance.getDefault().getTable("limelight-collect").getEntry("tx").getDouble(0);
   }
 
   /**
