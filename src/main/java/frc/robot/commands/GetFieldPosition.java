@@ -49,8 +49,8 @@ public class GetFieldPosition extends Command {
   @Override
   public void execute() {
     //get robot x and y
-    double alpha = m_LL.cot(data.get(0));
-    double beta = m_LL.cot(data.get(1));
+    double alpha = m_LL.cot(Math.toRadians(data.get(0)));
+    double beta = m_LL.cot(Math.toRadians(data.get(1)));
     mRobotX = (mXRight*beta + mXLeft*alpha - mYRight + mYLeft)/(alpha + beta);
     mRobotY = (mYRight*alpha + mYLeft*beta - mXRight + mXLeft)/(alpha + beta);
   }
@@ -58,11 +58,12 @@ public class GetFieldPosition extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    //System.out.println(mRobotX);
-    //System.out.println(mRobotY);
+    System.out.println(mRobotX);
+    System.out.println(mRobotY);
     //Robot is not getting values from the limelight
-    coolTranslation = new Translation2d(-mRobotX + 0.1, -mRobotY + 0.1);
-    //m_Swerve.drive(coolTranslation, 0 /* May or may not actually be zero */, false, true);
+    coolTranslation = new Translation2d(-mRobotX + 0.1, -mRobotY + 0.1); //Weird translation; looking into this post-event
+    System.out.println(coolTranslation);
+    m_Swerve.drive(coolTranslation, 0 /* May or may not actually be zero */, false, true);
     // Teddy suggested having the shooting motors rev up here
   }
 

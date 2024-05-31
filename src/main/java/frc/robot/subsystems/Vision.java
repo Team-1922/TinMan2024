@@ -49,7 +49,7 @@ public class Vision extends SubsystemBase {
     //LimelightHelpers.setPipelineIndex("limelight-shooter", pipelineID);
     
     //System.out.println("pipeline Index " + LimelightHelpers.getCurrentPipelineIndex("limelight"));
-    System.out.println("Pipeline index: " + NetworkTableInstance.getDefault().getTable("limelight-shooter").getEntry("pipeline").getDouble(0.0));
+    //System.out.println("Pipeline index: " + NetworkTableInstance.getDefault().getTable("limelight-shooter").getEntry("pipeline").getDouble(0.0));
   }
   
   public double retrieveData(double slot) {
@@ -57,7 +57,7 @@ public class Vision extends SubsystemBase {
     RunCommand run = new RunCommand(() -> wait(0.25));
     double x = getTx();
     limelightData[(int) slot] = x;
-    System.out.println(x + " Value");
+    //System.out.println(x + " Value");
     return limelightData[(int) slot];
   }
 
