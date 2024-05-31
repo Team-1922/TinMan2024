@@ -26,7 +26,7 @@ public class PositionHandler extends SubsystemBase {
     Double right = Double.valueOf(m_Limelight.retrieveData(1)); //The left
     Timer m_T = new Timer();
     m_T.start();
-    while (!(m_T.hasElapsed(0.05))) {
+    while (!(m_T.hasElapsed(0.1))) {
     }
     //RunCommand run = new RunCommand(() -> wait(0.25));
     Double left = Double.valueOf(m_Limelight.retrieveData(0)); //The right

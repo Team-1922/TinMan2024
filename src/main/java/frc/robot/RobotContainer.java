@@ -50,6 +50,10 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
   
   // The robot's subsystems and commands are defined here...
+  private final PoseEstimator s_PoseEstimator = new PoseEstimator();
+  public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
+  private final Vision m_Vision = new Vision();
+  private final PositionHandler m_PosHandler = new PositionHandler(m_Vision);
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();  
   private final Collector m_Collector = new Collector();
@@ -66,12 +70,11 @@ public class RobotContainer {
   private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
   private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, .2);
   private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
   private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
-  private final PoseEstimator s_PoseEstimator = new PoseEstimator();
-  public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
   private final SendableChooser<Command> AutoSelector;
+  private final GetFieldPosition m_GetFieldPosition = new GetFieldPosition(m_PosHandler, m_Vision, s_Swerve);
   private final XboxController driver = new XboxController(0);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -159,6 +162,7 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A                          | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
+      m_operatorController.button(4).onTrue(m_GetFieldPosition);
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate)
 
