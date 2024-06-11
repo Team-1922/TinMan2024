@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.31,
+        "x": 1.3,
         "y": 5.56
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.28126094090026,
-        "y": 4.899692682268248
+        "x": 1.6133149583416282,
+        "y": 4.409723414041423
       },
       "isLocked": false,
       "linkedName": "BlueCenterShootPt"
     },
     {
       "anchor": {
-        "x": 2.7337543047179125,
-        "y": 4.097305368134887
+        "x": 2.65,
+        "y": 4.1
       },
       "prevControl": {
-        "x": 1.9746136789570874,
-        "y": 3.9937117712073262
+        "x": 1.746879569434814,
+        "y": 4.146914099774145
       },
       "nextControl": null,
       "isLocked": false,
@@ -29,23 +29,11 @@
     }
   ],
   "rotationTargets": [],
-  "constraintZones": [
-    {
-      "name": "New Constraints Zone",
-      "minWaypointRelativePos": 0,
-      "maxWaypointRelativePos": 0.5,
-      "constraints": {
-        "maxVelocity": 5.0,
-        "maxAcceleration": 5.0,
-        "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
-      }
-    }
-  ],
+  "constraintZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 4.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 2.5,
+    "maxAcceleration": 2.25,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

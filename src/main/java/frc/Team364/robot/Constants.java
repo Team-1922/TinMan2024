@@ -92,7 +92,7 @@ public final class Constants {
 
         /* Swerve Profiling Values */
         /** Meters per Second */
-        public static final double maxSpeed = 1.5; //TODO: This must be tuned to specific robot
+        public static final double maxSpeed = 2.5; //TODO: This must be tuned to specific robot
         /** Radians per Second */
         public static final double maxAngularVelocity = 5; //TODO: This must be tuned to specific robot
 
@@ -106,7 +106,7 @@ public final class Constants {
             public static final int driveMotorID = 22;
             public static final int angleMotorID = 21;
             public static final int canCoderID = 2;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-7);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(-10);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }
@@ -116,7 +116,7 @@ public final class Constants {
             public static final int driveMotorID = 32;
             public static final int angleMotorID = 31;
             public static final int canCoderID = 3;
-            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(47);
+            public static final Rotation2d angleOffset = Rotation2d.fromDegrees(49);
             public static final SwerveModuleConstants constants = 
                 new SwerveModuleConstants(driveMotorID, angleMotorID, canCoderID, angleOffset);
         }

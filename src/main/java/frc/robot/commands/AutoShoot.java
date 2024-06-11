@@ -54,7 +54,9 @@ public class AutoShoot extends Command {
     m_EndDelay.reset();
     m_check = SmartDashboard.getBoolean("Has Note?", true);
 
-
+     if(m_check == false){// this is so if it misses the note it won't have to wait so long before moving
+      m_EndDelay.start();
+     }
 
       m_AutoTimer.start();
     
@@ -81,9 +83,7 @@ public class AutoShoot extends Command {
       m_EndDelay.start();
      }
 
-     if(m_check == false){// this is so if it misses the note it won't have to wait so long before moving
-      m_EndDelay.start();
-     }
+    
 
   }
 
