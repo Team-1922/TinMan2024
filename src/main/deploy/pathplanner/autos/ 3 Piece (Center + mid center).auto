@@ -62,12 +62,6 @@
                                   "data": {
                                     "pathName": "from center note"
                                   }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "return to speaker center"
-                                  }
                                 }
                               ]
                             }
@@ -118,12 +112,6 @@
                                   "type": "path",
                                   "data": {
                                     "pathName": "center from mid center note"
-                                  }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "return to speaker center"
                                   }
                                 }
                               ]

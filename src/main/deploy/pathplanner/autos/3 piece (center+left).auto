@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.308995050422533,
+      "x": 1.3,
       "y": 5.56
     },
     "rotation": 0
@@ -62,12 +62,6 @@
                                   "data": {
                                     "pathName": "from center note"
                                   }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "return to speaker center"
-                                  }
                                 }
                               ]
                             }
@@ -96,16 +90,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "To Left Note"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "To Left Note"
                                   }
                                 },
                                 {

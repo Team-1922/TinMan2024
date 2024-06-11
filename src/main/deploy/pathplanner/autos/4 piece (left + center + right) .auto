@@ -62,12 +62,6 @@
                                   "data": {
                                     "pathName": "From Left Note"
                                   }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "return to speaker center"
-                                  }
                                 }
                               ]
                             }
@@ -106,12 +100,6 @@
                                   "data": {
                                     "pathName": "from center note"
                                   }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "return to speaker center"
-                                  }
                                 }
                               ]
                             }
@@ -149,12 +137,6 @@
                                   "type": "path",
                                   "data": {
                                     "pathName": "From Right Note"
-                                  }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "return to speaker center"
                                   }
                                 }
                               ]
