@@ -100,6 +100,12 @@ public final class Constants {
   //using RAP so RackAndPinion doesn't have to be typed as much
   public static class RackAndPinionConstants {
 
+    public static VoltageConfigs RAPVoltageConfigs = new VoltageConfigs()
+      .withPeakForwardVoltage(2)
+      .withPeakReverseVoltage(2);
+    
+
+
     public static final int LeftRAPmotorID = 13; 
     public static final int RightRAPmotorID = 14;
 
@@ -112,7 +118,7 @@ public final class Constants {
 
     // VOLTAGE CONFIGS
 
-    public static final double kVoltageLimit = 2;// placeholder 
+    
    
     
   }

@@ -5,9 +5,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.Team364.robot.Constants;
 import frc.robot.Constants.RackAndPinionConstants;
 public class RackAndPinionSubsystem extends SubsystemBase {
 
@@ -15,40 +18,47 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   private static TalonFX m_Right = new TalonFX(RackAndPinionConstants.RightRAPmotorID); 
   private double m_LeftStartingAngle;
   private double m_RightStartingAngle; 
+
   // they might be a different type of motor
    TalonFXConfiguration m_RAPConfigs = new TalonFXConfiguration();
   /** Creates a new RackAndPinionSubsystem. */
   public RackAndPinionSubsystem() {
 
-  m_RAPConfigs.Voltage.PeakForwardVoltage = RackAndPinionConstants.kVoltageLimit;
-  m_RAPConfigs.Voltage.PeakReverseVoltage = RackAndPinionConstants.kVoltageLimit;
-  //TODO: add a limit switch so it can't try and go too far. 
-  m_Left.getConfigurator().apply(m_RAPConfigs);
-  m_Right.getConfigurator().apply(m_RAPConfigs);
+  //TODO: add a limit switch so it can't try and go too far.
+  m_Left.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
+  m_Right.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
 
   
   }
 
   /** sets the position that the motors are currently at as the default, used as a reference angle  */
-  public void SetAngleAsDefault(){
+  public void SetCurrentAngleAsDefault(){
      // TODO: this is in rotations, please fix this when we know whatever the conversion ends up being 
    m_LeftStartingAngle =  m_Left.getPosition().getValueAsDouble();
    m_RightStartingAngle = m_Right.getPosition().getValueAsDouble(); 
-
+    
   }
 
+
+
+/**
+ * Gets the shooter angle
+ * @return the current shooter angle
+ */
   public double GetShooterAngle(){
 
-    m_Left.getPosition();
-    m_Right.getPosition();
-    return 0.0; // update this later
+  double Angle1 =  m_Left.getPosition().getValueAsDouble();
+  double Angle2 =   m_Right.getPosition().getValueAsDouble();
+    return 
+    ((m_RightStartingAngle-Angle2) + (m_LeftStartingAngle -Angle1))/2
+    ; //TODO: update this later, this is a placeholder
   
   }
 
 
 
   /** sets shooter angle 
- * @param Deg the angle in degrees to set the shooter to
+ * @param Deg the angle in degrees to set the shooter to, might need a conversion factor later
   */
   public void SetShooterAngle(double Deg){
 
@@ -56,7 +66,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
       throw new Error("The angle you are attempting to go to is outside the possible range!");
     }
     else {
-      // put stuff here
+      m_Left.setControl(new PositionVoltage(Deg)); //TODO: make sure this won't go backwards 
+      m_Right.setControl(new PositionVoltage(Deg));
     }
     
   } 
