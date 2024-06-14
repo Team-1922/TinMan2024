@@ -74,7 +74,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  * 
  * @param Velocity the speed to set the motor
  */
-public void SetRAPspeed(double Velocity){
+public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, then set that as a reference
 
   m_Left.setControl(new VelocityVoltage(Velocity));
 }
