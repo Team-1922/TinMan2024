@@ -4,11 +4,14 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.Team364.robot.Constants;
 import frc.robot.Constants.RackAndPinionConstants;
@@ -27,16 +30,28 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   //TODO: add a limit switch so it can't try and go too far.
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
-
+  m_Right.setControl(new Follower(13, true));
   
   }
+
+
+
+  
 
   /** sets the position that the motors are currently at as the default, used as a reference angle  */
   public void SetCurrentAngleAsDefault(){
      // TODO: this is in rotations, please fix this when we know whatever the conversion ends up being 
    m_LeftStartingAngle =  m_Left.getPosition().getValueAsDouble();
-   m_RightStartingAngle = m_Right.getPosition().getValueAsDouble(); 
+
+
+  }
+
+
+  public void GoToReference(){
     
+  
+
+
   }
 
 
@@ -48,12 +63,22 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   public double GetShooterAngle(){
 
   double Angle1 =  m_Left.getPosition().getValueAsDouble();
-  double Angle2 =   m_Right.getPosition().getValueAsDouble();
+
     return 
-    ((m_RightStartingAngle-Angle2) + (m_LeftStartingAngle -Angle1))/2
-    ; //TODO: update this later, this is a placeholder
+ Angle1;
+  //TODO: update this later, this is a placeholder
   
   }
+
+/**
+ * 
+ * @param Velocity the speed to set the motor
+ */
+public void SetRAPspeed(double Velocity){
+
+  m_Left.setControl(new VelocityVoltage(Velocity));
+}
+  
 
 
 
@@ -62,13 +87,10 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   */
   public void SetShooterAngle(double Deg){
 
-    if( Deg > RackAndPinionConstants.RAPmaxAngle || Deg < RackAndPinionConstants.RAPminAngle ){
-      throw new Error("The angle you are attempting to go to is outside the possible range!");
-    }
-    else {
+    if( !(Deg > RackAndPinionConstants.RAPmaxAngle) || !(Deg < RackAndPinionConstants.RAPminAngle) ){
       m_Left.setControl(new PositionVoltage(Deg)); //TODO: make sure this won't go backwards 
-      m_Right.setControl(new PositionVoltage(Deg));
     }
+
     
   } 
 
