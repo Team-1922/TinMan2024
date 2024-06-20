@@ -15,14 +15,17 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.TorqueLimitClimb;
+import frc.robot.commands.resetRAPangle;
 import frc.robot.commands.StopCollector_shooter;
 import frc.robot.commands.shootStart;
+import frc.robot.commands.AngleAdjust;
 import frc.robot.commands.AutoCollectCheck;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoShootNoteCheck;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.RackAndPinionSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
@@ -72,6 +75,9 @@ public class RobotContainer {
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
   private final SendableChooser<Command> AutoSelector;
   private final XboxController driver = new XboxController(0);
+  private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
+  private final AngleAdjust m_AngleAdjust = new AngleAdjust(m_RAP, m_operatorController);
+  private final resetRAPangle m_ResetRAPangle = new resetRAPangle(m_RAP);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -95,6 +101,7 @@ public class RobotContainer {
     // Configure the trigger bindings
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
+    m_RAP.setDefaultCommand(m_AngleAdjust);
 
     // the commands that are used in pathplanner
     NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command   
@@ -159,6 +166,9 @@ public class RobotContainer {
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
+      // right trigger                                                                               | moves RAP down
+      //left trigger                                                                                 | moves RAP up
+      m_operatorController.button(8).whileTrue(m_ResetRAPangle); //the button with 3 lines    | figures out what the reference angle should be      
 
   }
 
