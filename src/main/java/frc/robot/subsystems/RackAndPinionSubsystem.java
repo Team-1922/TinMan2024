@@ -20,7 +20,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   private static TalonFX m_Left = new TalonFX(RackAndPinionConstants.LeftRAPmotorID); 
   private static TalonFX m_Right = new TalonFX(RackAndPinionConstants.RightRAPmotorID); 
   private double m_LeftStartingAngle;
-  private double m_RightStartingAngle; 
+
 
   // they might be a different type of motor
    TalonFXConfiguration m_RAPConfigs = new TalonFXConfiguration();
@@ -46,12 +46,23 @@ public class RackAndPinionSubsystem extends SubsystemBase {
 
   }
 
-
-  public void GoToReference(){
-    
-  
-
-
+/**
+ * goes down at a speed, until it slows down because it hits something, setting it as the default angle
+ * @param MinSpeed the speed that will stop the motor if it goes below it
+ * @param TargetSpeed the initial speed to go 
+ */
+  public void GoToReference(double MinSpeed, double TargetSpeed){
+    boolean m_StartCheck=false;
+    if (m_Left.getVelocity().getValueAsDouble() <= TargetSpeed && m_StartCheck ==false){ 
+      m_Left.setControl(new VelocityVoltage(TargetSpeed));
+    }
+    if (m_Left.getVelocity().getValueAsDouble()>= TargetSpeed){
+      m_StartCheck=true;
+    }
+    if (m_StartCheck==true && m_Left.getVelocity().getValueAsDouble() <=MinSpeed){
+      m_Left.setControl(new VelocityVoltage(0)); 
+      SetCurrentAngleAsDefault();
+    }
   }
 
 
@@ -62,10 +73,9 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  */
   public double GetShooterAngle(){
 
-  double Angle1 =  m_Left.getPosition().getValueAsDouble();
+    double Angle1 =  m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle;
 
-    return 
- Angle1;
+    return Angle1;
   //TODO: update this later, this is a placeholder
   
   }
@@ -74,10 +84,10 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  * 
  * @param Velocity the speed to set the motor
  */
-public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, then set that as a reference
+  public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, then set that as a reference
 
-  m_Left.setControl(new VelocityVoltage(Velocity));
-}
+    m_Left.setControl(new VelocityVoltage(Velocity));
+  }
   
 
 
@@ -90,8 +100,6 @@ public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, t
     if( !(Deg > RackAndPinionConstants.RAPmaxAngle) || !(Deg < RackAndPinionConstants.RAPminAngle) ){
       m_Left.setControl(new PositionVoltage(Deg)); //TODO: make sure this won't go backwards 
     }
-
-    
   } 
 
 

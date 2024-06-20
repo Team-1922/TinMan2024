@@ -100,10 +100,6 @@ public final class Constants {
   //using RAP so RackAndPinion doesn't have to be typed as much
   public static class RackAndPinionConstants {
 
-    public static VoltageConfigs RAPVoltageConfigs = new VoltageConfigs()
-      .withPeakForwardVoltage(2)
-      .withPeakReverseVoltage(2);
-    
 
 
     public static final int LeftRAPmotorID = 13; 
@@ -114,11 +110,16 @@ public final class Constants {
     public static final double RAPampAngle = 50; //placeholder 
     
     public static final double RAPdefaultAngle = 40; // placeholder, this would be whatever angle you would have the robot start in 
+    public static final double RAPMinSpeed = 20; // (velocity) minimum speed that the motor can go that will still move the RAP
 
 
     // VOLTAGE CONFIGS
 
+        public static VoltageConfigs RAPVoltageConfigs = new VoltageConfigs()
+      .withPeakForwardVoltage(2)
+      .withPeakReverseVoltage(2);
     
+
    
     
   }
