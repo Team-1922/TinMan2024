@@ -30,8 +30,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.RobotController;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -160,6 +159,7 @@ public class RobotContainer {
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro/field-oriented drive
       m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrates operator controller
     
+
     // OPERATOR CONTROLLS    
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
@@ -168,7 +168,7 @@ public class RobotContainer {
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
       // right trigger                                                                               | moves RAP down
       //left trigger                                                                                 | moves RAP up
-      m_operatorController.button(8).whileTrue(m_ResetRAPangle); //the button with 3 lines    | figures out what the reference angle should be      
+      m_operatorController.button(8).whileTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
 
   }
 

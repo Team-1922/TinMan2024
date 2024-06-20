@@ -4,9 +4,9 @@
 
 package frc.robot;
 
-import com.ctre.phoenix6.configs.TalonFXConfigurator;
+
 import com.ctre.phoenix6.configs.VoltageConfigs;
-import com.ctre.phoenix6.configs.TalonFXConfiguration;
+
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
