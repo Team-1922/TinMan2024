@@ -80,16 +80,16 @@ public class RobotContainer {
   private final Trigger forwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kLeftTrigger.value) > 0.7));
   private final Trigger backwardHold = new Trigger(() -> (driver.getRawAxis(XboxController.Axis.kRightTrigger.value) > 0.7));
     /* Driver Buttons */
-    private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
-    private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
-    private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
+  private final JoystickButton zeroGyro = new JoystickButton(driver, XboxController.Button.kY.value);
+  private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
+  private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
-    private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
-    private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
-    private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
-     private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
-    private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
-    private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+  private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+  private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
+  private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
+  private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
+  private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
+  private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -97,27 +97,28 @@ public class RobotContainer {
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
     // the commands that are used in pathplanner
-   NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command    |  collector
-   NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command   | collector 
-   NamedCommands.registerCommand("ShootStart", m_AutoShootStart); // starts shooter motors   |  shooter 
-   NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note | none
-   NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note  | none
-   NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector | collector 
+    NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command   
+    NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command   
+    NamedCommands.registerCommand("ShootStart", m_AutoShootStart); // starts shooter motors   
+    NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note 
+    NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
+    NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
   
-      s_Swerve.setDefaultCommand(
-            new SwerveCommand(
-                s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
-                () -> -driver.getRawAxis(strafeAxis), 
-                () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean(),
-                () -> dampen.getAsBoolean(),
-                () -> 0 // Dynamic heading placeholder
-            )
-        ); 
+    s_Swerve.setDefaultCommand(
+          new SwerveCommand(
+              s_Swerve, 
+              () -> -driver.getRawAxis(translationAxis), 
+              () -> -driver.getRawAxis(strafeAxis), 
+              () -> -driver.getRawAxis(rotationAxis), 
+              () -> robotCentric.getAsBoolean(),
+              () -> dampen.getAsBoolean(),
+              () -> 0 // Dynamic heading placeholder
+          )
+      ); 
+      
         
-AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
-SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+  AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
+  SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
   }
 
 
@@ -149,15 +150,15 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
 
 
     // DRIVER CONTROLLS
-      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro
-      m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrate operator controller
+      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro/field-oriented drive
+      m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrates operator controller
     
     // OPERATOR CONTROLLS    
-      m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A                          | shoot + collect
+      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
-      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate)
+      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
 
   }
 
@@ -166,6 +167,6 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-return AutoSelector.getSelected();
+    return AutoSelector.getSelected();
   }
 }

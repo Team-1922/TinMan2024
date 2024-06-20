@@ -14,11 +14,15 @@ public class StopCollector_shooter extends Command {
   ShooterSubsystem m_ShooterSubsystem;
   Collector m_Collector;
   XboxController m_XboxController;
-  /** Creates a new StopCollector_shooter. */
-  public StopCollector_shooter(Collector collector, ShooterSubsystem shooterSubsystem, XboxController operatorcontController) {
+  /** Creates a new StopCollector_shooter. 
+   * 
+   * Stops both the collector and shooter. Will vibrate the '<b>operatorController</b>' when held.
+   * 
+  */
+  public StopCollector_shooter(Collector collector, ShooterSubsystem shooterSubsystem, XboxController operatorController) {
     m_Collector = collector;
     m_ShooterSubsystem = shooterSubsystem;
-    m_XboxController = operatorcontController;
+    m_XboxController = operatorController;
     addRequirements( collector, shooterSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }

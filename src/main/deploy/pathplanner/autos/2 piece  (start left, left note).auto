@@ -32,16 +32,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
@@ -59,16 +52,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": " To Left Note (Left Side)"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": " To Left Note (Left Side)"
                                   }
                                 },
                                 {

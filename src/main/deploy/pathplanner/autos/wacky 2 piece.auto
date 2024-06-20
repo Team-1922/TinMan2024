@@ -12,15 +12,34 @@
     "data": {
       "commands": [
         {
-          "type": "named",
+          "type": "deadline",
           "data": {
-            "name": "CollectReverse"
+            "commands": [
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 2.0
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "CollectReverse"
+                }
+              }
+            ]
           }
         },
         {
           "type": "path",
           "data": {
             "pathName": "Right to far center (drop note)"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ShootStart"
           }
         },
         {
@@ -38,22 +57,9 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "deadline",
+                      "type": "path",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "NoteCheck"
-                            }
-                          },
-                          {
-                            "type": "path",
-                            "data": {
-                              "pathName": "Far center note 5 to disrupt 4"
-                            }
-                          }
-                        ]
+                        "pathName": "Far center note 5 to disrupt 4"
                       }
                     },
                     {
@@ -69,22 +75,9 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shoot End Delay"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shoot"
-                }
-              }
-            ]
+            "name": "Shoot"
           }
         },
         {
@@ -102,22 +95,9 @@
                 "data": {
                   "commands": [
                     {
-                      "type": "deadline",
+                      "type": "path",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "NoteCheck"
-                            }
-                          },
-                          {
-                            "type": "path",
-                            "data": {
-                              "pathName": "Right To dropped note"
-                            }
-                          }
-                        ]
+                        "pathName": "Right To dropped note"
                       }
                     },
                     {
@@ -133,22 +113,9 @@
           }
         },
         {
-          "type": "deadline",
+          "type": "named",
           "data": {
-            "commands": [
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shoot End Delay"
-                }
-              },
-              {
-                "type": "named",
-                "data": {
-                  "name": "Shoot"
-                }
-              }
-            ]
+            "name": "Shoot"
           }
         }
       ]
