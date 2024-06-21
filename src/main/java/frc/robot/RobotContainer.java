@@ -163,11 +163,11 @@ public class RobotContainer {
     // OPERATOR CONTROLLS    
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
-      m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
+      m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
-      // right trigger                                                                               | moves RAP down
-      //left trigger                                                                                 | moves RAP up
+      // right trigger                                                                               | moves RAP up
+      //left trigger                                                                                 | moves RAP down
       m_operatorController.button(8).whileTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
 
   }
