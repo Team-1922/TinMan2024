@@ -8,6 +8,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
@@ -21,6 +22,11 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   private static TalonFX m_Right = new TalonFX(RackAndPinionConstants.RightRAPmotorID); 
   private double m_LeftStartingAngle;
   private LedSubsystem m_LED = new LedSubsystem();
+  public double m_Position;
+  public double[] m_StartingVector = new double[2];
+  public double[] m_TargetVector = new double[2];
+  public double [] m_MidVector = new double[2];
+  public double m_CalculatedVoltage;
 
 
   // they might be a different type of motor
@@ -77,10 +83,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  * @return the current shooter angle
  */
   public double GetShooterAngle(){
-
-    double Angle1 =  m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle;
-
-    return Angle1;
+    return (m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle);
   //TODO: update this later, this is a placeholder
   
   }
@@ -91,7 +94,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  */
   public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, then set that as a reference
 
-    m_Left.setControl(new VelocityVoltage(Velocity));
+    m_Left.setControl(
+      new VelocityDutyCycle(Velocity));
   }
   
 
@@ -101,13 +105,33 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  * @param Deg the angle in degrees to set the shooter to, might need a conversion factor later
   */
   public void SetShooterAngle(double Deg){
-
     if( (Deg < RackAndPinionConstants.RAPmaxAngle) || (Deg > RackAndPinionConstants.RAPminAngle) ){
       m_Left.setControl(new PositionVoltage(Deg)); //TODO: make sure this won't go backwards 
     }
-  } 
+  }
+  
+  public double[][] calculateVoltage(double finalAngle, double voltageDialation, double[][] combinedVectors) {
+    m_Position = m_Left.getPosition().getValueAsDouble();
+    m_StartingVector[0] = m_Position;
+    m_StartingVector[1] = 0.5;
+    m_MidVector[0] = (finalAngle-m_Position)/2;
+    m_MidVector[1] = (12*voltageDialation);
+    m_TargetVector[0] = finalAngle;
+    m_TargetVector[1] = 0.5;
+    combinedVectors[0][0] = m_StartingVector[0];
+    combinedVectors[0][1] = m_StartingVector[1];
+    combinedVectors[1][0] = m_MidVector[0];
+    combinedVectors[1][1] = m_MidVector[1];
+    combinedVectors[2][0] = m_TargetVector[0];
+    combinedVectors[2][1] = m_TargetVector[1];
+    //May consider removing the matrix in the future if it saves resources.
+    
+    return combinedVectors;
+  }
 
-
+  public void setVoltage(double Voltage) {
+    m_Left.setVoltage(Voltage);
+  }
 
   public void StopRAPmotors(){
     m_Left.stopMotor();
