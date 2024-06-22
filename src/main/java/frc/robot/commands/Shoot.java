@@ -63,14 +63,8 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   
-    if (
-       m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS)
- 
-      )
-  {   
-      m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
-    } 
+    m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
+
     if(!m_Collector.m_IsTriggered){
       m_AutoTimer.start();
     }

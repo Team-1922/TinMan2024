@@ -123,7 +123,7 @@ public void ReverseMotor(double RPM) {
             }
          } 
           else {
-            m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
+            m_LED.AnimateLEDs(m_ColorFlowAnimation, 0); // disabled animation
           } 
         }
         return InTarget; 
