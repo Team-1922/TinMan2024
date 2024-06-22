@@ -19,10 +19,10 @@ public class GetFieldPosition extends Command {
   private Vision m_LL;
   private PositionHandler m_pos;
   private Swerve m_Swerve;
-  private double mXLeft = 0; //Field position: -1.5
-  private double mYLeft = -22.25; //Field position: 196.17
-  private double mXRight = 0; //Field position: -1.5
-  private double mYRight = 0; //Field position: 218.42
+  private double mXLeft = -1.5; // Field position: -1.5         | Relative position: 0
+  private double mYLeft = 196.17; // Field position: 196.17  | Relative position: -22.25
+  private double mXRight = -1.5; // Field position: -1.5        | Relative position: 0
+  private double mYRight = 218.42; // Field position: 218.42      | Relative position: 0
   private double mRobotX;
   private double mRobotY;
   private ArrayList<Double> data;
@@ -58,12 +58,12 @@ public class GetFieldPosition extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println(mRobotX);
-    System.out.println(mRobotY);
+    System.out.println(mRobotX); // 0 is set to the wall
+    System.out.println(mRobotY); // 0 is set to the center apriltag
     //Robot is not getting values from the limelight
-    coolTranslation = new Translation2d(-mRobotX + 0.1, -mRobotY + 0.1); //Weird translation; looking into this post-event
+    coolTranslation = new Translation2d((-mRobotX + 0.5), (-mRobotY)); //Weird translation; looking into this post-event
     System.out.println(coolTranslation);
-    m_Swerve.drive(coolTranslation, 0 /* May or may not actually be zero */, false, true);
+    //m_Swerve.drive(coolTranslation, 0 /* May or may not actually be zero */, false, true);
     // Teddy suggested having the shooting motors rev up here
   }
 

@@ -157,12 +157,12 @@ SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
     // DRIVER CONTROLS
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro
       m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrate operator controller
+      m_driverController.button(3).onTrue(m_GetFieldPosition); // X                           | (still testing limelight functionality)
     
     // OPERATOR CONTROLS    
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A                          | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
-      m_operatorController.button(4).onTrue(m_GetFieldPosition);
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate)
 
