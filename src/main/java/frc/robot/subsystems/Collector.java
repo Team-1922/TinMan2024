@@ -105,7 +105,7 @@ public void ReverseMotor(double RPM) {
                 m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
-        if (InTarget) {
+      /*   if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
                m_LED.SetColor(0, 255, 0, 0, 0, 96); // green
@@ -125,7 +125,7 @@ public void ReverseMotor(double RPM) {
           else {
             m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
           } 
-        }
+        } */
         return InTarget; 
     }
 

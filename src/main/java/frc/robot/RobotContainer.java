@@ -18,6 +18,7 @@ import frc.robot.commands.TorqueLimitClimb;
 import frc.robot.commands.resetRAPangle;
 import frc.robot.commands.StopCollector_shooter;
 import frc.robot.commands.shootStart;
+import frc.robot.commands.stopRAP;
 import frc.robot.commands.AngleAdjust;
 import frc.robot.commands.AutoCollectCheck;
 import frc.robot.commands.AutoShoot;
@@ -77,6 +78,7 @@ public class RobotContainer {
   private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
   private final AngleAdjust m_AngleAdjust = new AngleAdjust(m_RAP, m_operatorController);
   private final resetRAPangle m_ResetRAPangle = new resetRAPangle(m_RAP);
+  private final stopRAP m_StopRAP = new stopRAP(m_RAP);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -166,10 +168,10 @@ public class RobotContainer {
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
-      // right trigger                                                                               | moves RAP up
+      //right trigger                                                                                | moves RAP up
       //left trigger                                                                                 | moves RAP down
       m_operatorController.button(8).whileTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
-
+      m_operatorController.button(7).onTrue(m_StopRAP); // the button with two rectangles     | stops RAP motors
   }
 
   /**

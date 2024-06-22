@@ -20,6 +20,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   private static TalonFX m_Left = new TalonFX(RackAndPinionConstants.LeftRAPmotorID); 
   private static TalonFX m_Right = new TalonFX(RackAndPinionConstants.RightRAPmotorID); 
   private double m_LeftStartingAngle;
+  private LedSubsystem m_LED = new LedSubsystem();
 
 
   // they might be a different type of motor
@@ -53,15 +54,19 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  */
   public void GoToReference(double MinSpeed, double TargetSpeed){
     boolean m_StartCheck=false;
+    
     if (m_Left.getVelocity().getValueAsDouble() <= TargetSpeed && m_StartCheck ==false){ 
       m_Left.setControl(new VelocityVoltage(TargetSpeed));
+      m_LED.SetColor(255, 0, 0, 0, 0, 8);
     }
     if (m_Left.getVelocity().getValueAsDouble()>= TargetSpeed){
       m_StartCheck=true;
+      m_LED.SetColor(255, 255, 0, 0, 0, 8);
     }
     if (m_StartCheck==true && m_Left.getVelocity().getValueAsDouble() <=MinSpeed){
       m_Left.setControl(new VelocityVoltage(0)); 
       SetCurrentAngleAsDefault();
+      m_LED.SetColor(0, 255, 0, 0, 0, 8);
     }
   }
 
@@ -97,7 +102,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   */
   public void SetShooterAngle(double Deg){
 
-    if( !(Deg > RackAndPinionConstants.RAPmaxAngle) || !(Deg < RackAndPinionConstants.RAPminAngle) ){
+    if( (Deg < RackAndPinionConstants.RAPmaxAngle) || (Deg > RackAndPinionConstants.RAPminAngle) ){
       m_Left.setControl(new PositionVoltage(Deg)); //TODO: make sure this won't go backwards 
     }
   } 
