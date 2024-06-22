@@ -68,18 +68,18 @@ public class AutoShoot extends Command {
   public void execute() {
    // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight);
     if (
-      SmartDashboard.getBoolean("Up to Speed", false)
+   m_Collector.HasNote()
   
        ) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
 
-    if(!SmartDashboard.getBoolean("Has Note?", m_IsAuto)){
+    if(! m_Collector.HasNote()){
 
     m_backuptimer.start();
 
     }
-     if(m_check == true && !SmartDashboard.getBoolean("Has Note?", true)){
+     if(m_check == true && ! m_Collector.HasNote()){
       m_EndDelay.start();
      }
 

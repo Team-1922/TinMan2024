@@ -65,7 +65,9 @@ public class Shoot extends Command {
   public void execute() {
    
     if (
-      SmartDashboard.getBoolean("Up to Speed", false))
+       m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS)
+ 
+      )
   {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 

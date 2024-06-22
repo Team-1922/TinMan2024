@@ -129,6 +129,14 @@ public void ReverseMotor(double RPM) {
         return InTarget; 
     }
 
+    /**
+     * 
+     * @return if it has a note
+     */
+    public boolean HasNote(){
+        return  m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
+                && m_Tof.getRange() > Constants.TofConstants.TofminRange;
+    }
 
 
     public double TofcheckDistance(){
