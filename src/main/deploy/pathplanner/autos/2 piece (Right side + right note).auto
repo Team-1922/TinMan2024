@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 0.844574780058651,
-      "y": 4.4871267924354035
+      "x": 0.7912916726734353,
+      "y": 4.492925742608242
     },
     "rotation": -50.48518886329011
   },
@@ -32,16 +32,9 @@
                       }
                     },
                     {
-                      "type": "deadline",
+                      "type": "named",
                       "data": {
-                        "commands": [
-                          {
-                            "type": "named",
-                            "data": {
-                              "name": "Shoot"
-                            }
-                          }
-                        ]
+                        "name": "Shoot"
                       }
                     },
                     {
@@ -59,22 +52,9 @@
                             "data": {
                               "commands": [
                                 {
-                                  "type": "deadline",
+                                  "type": "path",
                                   "data": {
-                                    "commands": [
-                                      {
-                                        "type": "named",
-                                        "data": {
-                                          "name": "NoteCheck"
-                                        }
-                                      },
-                                      {
-                                        "type": "path",
-                                        "data": {
-                                          "pathName": "To Right Note (Right side)"
-                                        }
-                                      }
-                                    ]
+                                    "pathName": "To Right Note (Right side)"
                                   }
                                 },
                                 {

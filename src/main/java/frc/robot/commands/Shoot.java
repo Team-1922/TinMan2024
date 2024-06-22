@@ -63,15 +63,10 @@ public class Shoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-   // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight);
-    if (
-      SmartDashboard.getBoolean("Up to Speed", false)
-  
-       ) {   
-      m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
-    } 
+    m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
+
     if(!m_Collector.m_IsTriggered){
-m_AutoTimer.start();
+      m_AutoTimer.start();
     }
 
   }
@@ -90,6 +85,6 @@ m_AutoTimer.start();
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime); // Because the timer won't start if it's not auto
+    return m_AutoTimer.hasElapsed(m_AutoTime); 
   }
 }

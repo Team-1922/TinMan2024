@@ -52,11 +52,14 @@ public class AutoShoot extends Command {
   @Override
   public void initialize() {
     m_EndDelay.reset();
-    m_check = SmartDashboard.getBoolean("Has Note?", false);
-    m_AutoTimer.reset();
-    if(m_IsAuto){
+    m_check = SmartDashboard.getBoolean("Has Note?", true);
+
+     if(m_check == false){// this is so if it misses the note it won't have to wait so long before moving
+      m_EndDelay.start();
+     }
+
       m_AutoTimer.start();
-    }
+    
     m_backuptimer.reset();
   }
 
@@ -65,21 +68,22 @@ public class AutoShoot extends Command {
   public void execute() {
    // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight);
     if (
-      SmartDashboard.getBoolean("Up to Speed", false)
+   m_Collector.HasNote()
   
        ) {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
 
-    if(!SmartDashboard.getBoolean("Has Note?", m_IsAuto)){
+    if(! m_Collector.HasNote()){
 
     m_backuptimer.start();
 
     }
-     if(m_check == true && !SmartDashboard.getBoolean("Has Note?", true)){
+     if(m_check == true && ! m_Collector.HasNote()){
       m_EndDelay.start();
      }
 
+    
 
   }
 
@@ -101,6 +105,6 @@ public class AutoShoot extends Command {
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(4) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
+    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(3) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
   }
 }

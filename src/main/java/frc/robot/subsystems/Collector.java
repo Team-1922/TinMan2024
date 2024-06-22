@@ -123,12 +123,20 @@ public void ReverseMotor(double RPM) {
             }
          } 
           else {
-            m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
+            m_LED.AnimateLEDs(m_ColorFlowAnimation, 0); // disabled animation
           } 
         }
         return InTarget; 
     }
 
+    /**
+     * 
+     * @return if it has a note
+     */
+    public boolean HasNote(){
+        return  m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
+                && m_Tof.getRange() > Constants.TofConstants.TofminRange;
+    }
 
 
     public double TofcheckDistance(){
