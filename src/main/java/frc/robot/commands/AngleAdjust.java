@@ -42,7 +42,7 @@ public class AngleAdjust extends Command {
  // );
    m_RackAndPinionSubsystem.SetRAPspeed(Constants.RackAndPinionConstants.RAPMaxSpeed*(
    MathUtil.applyDeadband(m_XboxController.getRightTriggerAxis(),.1)
-   -MathUtil.applyDeadband(-m_XboxController.getLeftTriggerAxis(),.1))); 
+   -MathUtil.applyDeadband(m_XboxController.getLeftTriggerAxis(),.1))); 
   }
 
   // Called once the command ends or is interrupted.

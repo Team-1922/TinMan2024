@@ -63,16 +63,16 @@ public class RackAndPinionSubsystem extends SubsystemBase {
     
     if (m_Left.getVelocity().getValueAsDouble() <= TargetSpeed && m_StartCheck ==false){ 
       m_Left.setControl(new VelocityVoltage(TargetSpeed));
-      m_LED.SetColor(255, 0, 0, 0, 0, 8);
+ 
     }
     if (m_Left.getVelocity().getValueAsDouble()>= TargetSpeed){
       m_StartCheck=true;
-      m_LED.SetColor(255, 255, 0, 0, 0, 8);
+   
     }
     if (m_StartCheck==true && m_Left.getVelocity().getValueAsDouble() <=MinSpeed){
       m_Left.setControl(new VelocityVoltage(0)); 
       SetCurrentAngleAsDefault();
-      m_LED.SetColor(0, 255, 0, 0, 0, 8);
+   
     }
   }
 
