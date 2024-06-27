@@ -7,12 +7,13 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants.RackAndPinionConstants;
@@ -43,14 +44,14 @@ public class RackAndPinionSubsystem extends SubsystemBase {
 
 
 
-  
+
 
   /** sets the position that the motors are currently at as the default, used as a reference angle  */
   public void SetCurrentAngleAsDefault(){
      // TODO: this is in rotations, please fix this when we know whatever the conversion ends up being 
    m_LeftStartingAngle =  m_Left.getPosition().getValueAsDouble();
 
-
+    SmartDashboard.putNumber("reference in rotations", m_LeftStartingAngle);
   }
 
 /**
@@ -61,22 +62,31 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   public void GoToReference(double MinSpeed, double TargetSpeed){
     boolean m_StartCheck=false;
     
-    if (m_Left.getVelocity().getValueAsDouble() <= TargetSpeed && m_StartCheck ==false){ 
-      m_Left.setControl(new VelocityVoltage(TargetSpeed));
- 
+    
+    if ( m_StartCheck ==false && m_Left.getVelocity().getValueAsDouble()< MinSpeed){ 
+      m_Left.setControl(new VelocityDutyCycle(TargetSpeed));
+      SmartDashboard.putBoolean("STARTCHECK", false);
     }
-    if (m_Left.getVelocity().getValueAsDouble()>= TargetSpeed){
+    if (m_Left.getVelocity().getValueAsDouble()>= MinSpeed && m_StartCheck==false){
       m_StartCheck=true;
+      SmartDashboard.putBoolean("STARTCHECK", true);
    
     }
     if (m_StartCheck==true && m_Left.getVelocity().getValueAsDouble() <=MinSpeed){
-      m_Left.setControl(new VelocityVoltage(0)); 
+      m_Left.setControl(new VelocityDutyCycle(0)); 
       SetCurrentAngleAsDefault();
+      SmartDashboard.putNumber("testnumber", m_Left.getPosition().getValueAsDouble());
    
     }
   }
 
-
+/**
+ * 
+ * @return the speed of the RAP
+ */
+public double GetRAPspeed(){
+  return m_Left.getVelocity().getValueAsDouble();
+}
 
 /**
  * Gets the shooter angle
@@ -84,6 +94,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
  */
   public double GetShooterAngle(){
     return (m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle);
+   
   //TODO: update this later, this is a placeholder
   
   }
@@ -102,12 +113,12 @@ public class RackAndPinionSubsystem extends SubsystemBase {
 
 
   /** sets shooter angle 
- * @param Deg the angle in degrees to set the shooter to, might need a conversion factor later
+ * @param Rot position in rotations to set motor to
   */
-  public void SetShooterAngle(double Deg){
-    if( (Deg < RackAndPinionConstants.RAPmaxAngle) || (Deg > RackAndPinionConstants.RAPminAngle) ){
-      m_Left.setControl(new PositionVoltage(Deg)); //TODO: make sure this won't go backwards 
-    }
+  public void SetShooterAngle(double Rot){
+   // if( (Deg < RackAndPinionConstants.RAPmaxAngle) && (Deg > RackAndPinionConstants.RAPminAngle) ){
+      m_Left.setControl(new PositionDutyCycle(Rot)); //TODO: make sure this won't go backwards 
+    //}
   }
   
   public double[][] calculateVoltage(double finalAngle, double voltageDialation, double[][] combinedVectors) {
@@ -141,6 +152,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("current position in rotations", m_Left.getPosition().getValueAsDouble());
     // This method will be called once per scheduler run
   }
 }

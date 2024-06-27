@@ -109,7 +109,7 @@ public final class Constants {
     
     public static final double RAPdefaultAngle = 40; // placeholder, this would be whatever angle you would have the robot start in 
     public static final double RAPMinSpeed = .18; // (velocity) minimum speed that the motor can go that will still move the RAP
-    public static final double RAPMaxSpeed = .3; // test this
+    public static final double RAPMaxSpeed = .35; // be careful when raising this, or it might not work well...
 
     // VOLTAGE CONFIGS
 
