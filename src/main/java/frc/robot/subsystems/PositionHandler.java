@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 
 import java.util.ArrayList;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.Vision;
+import frc.robot.limelightlib.LimelightHelpers;
 
 public class PositionHandler extends SubsystemBase {
   /** Creates a new PositionHandler. */
@@ -36,7 +38,9 @@ public class PositionHandler extends SubsystemBase {
     return packagedData;
   }
 
-  
+  public Pose2d getPose() {
+    return LimelightHelpers.getBotPose2d("limelight-shooter");
+  }
 
   /*
   public Command targetApriltag(int slot) {

@@ -157,7 +157,7 @@ public class RobotContainer {
     // DRIVER CONTROLS
       zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro
       m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrate operator controller
-      m_driverController.button(3).onTrue(m_GetFieldPosition); // X                           | (still testing limelight functionality)
+      m_driverController.button(3).onTrue(new GetFieldPosition(m_PosHandler, m_Vision, s_Swerve)); // X                           | (still testing limelight functionality)
     
     // OPERATOR CONTROLS    
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); //A                          | shoot + collect

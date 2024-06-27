@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.PositionHandler;
@@ -29,16 +30,21 @@ public class GetFieldPosition extends Command {
   private double mRobotY;
   private ArrayList<Double> data;
   private Timer m_Timer;
+  private Pose2d currentPose;
+  private Rotation2d targetRotation;
   Translation2d coolTranslation;
   
   public GetFieldPosition(PositionHandler pos, Vision limelight, Swerve zoom) {
     m_LL = limelight;
     m_pos = pos;
     m_Swerve = zoom;
+    m_Timer = new Timer();
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(limelight);
     addRequirements(pos);
     addRequirements(zoom);
+
+    final Pose2d idealPose = new Pose2d(new Translation2d(-1.5, 218.42), /* null */ new Rotation2d(0));
   }
   
   // Called when the command is initially scheduled.
@@ -49,22 +55,22 @@ public class GetFieldPosition extends Command {
     m_Timer.start();
     data = m_pos.returnData();
     double offset = m_Swerve.getGyroYaw().getRadians(); //May get more innacurate with time. Robot pose may be used instead
-    double alpha = m_LL.cot(Math.toRadians(data.get(0))-offset);
-    double beta = m_LL.cot(Math.toRadians(data.get(1))-offset);
+    double alpha = Math.cos(Math.toRadians(data.get(0))-offset);
+    double beta = Math.cos(Math.toRadians(data.get(1))-offset);
     mRobotX = (mXRight*beta + mXLeft*alpha - mYRight + mYLeft)/(alpha + beta);
     mRobotY = (mYRight*alpha + mYLeft*beta - mXRight + mXLeft)/(alpha + beta);
-    System.out.println(mRobotX); // 0 is set to the wall
-    System.out.println(mRobotY); // 0 is set to the center apriltag
-  }
-  
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    coolTranslation = new Translation2d((-mRobotX + 1.5), (-mRobotY + 218.42)); //Weird translation; looking into this post-event
+    System.out.println(m_pos.getPose());
+    coolTranslation = new Translation2d((mRobotX + 1.5), (mRobotY - 218.42)); //Weird translation; looking into this post-event
+    targetRotation = new Rotation2d(-m_Swerve.getGyroYaw().getDegrees()+Math.PI/2);
     System.out.println(coolTranslation);
-    m_Swerve.drive(coolTranslation.times(0.0254), -m_Swerve.getGyroYaw().getRadians(), false, true);
-    // Teddy suggested having the shooting motors rev up here
+    m_Swerve.drive(coolTranslation.times(0.0254), (-Math.toRadians(data.get(1))), false, true);
   }
+    // Teddy suggested having the shooting motors rev up here
+    
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+    }
   
   // Called once the command ends or is interrupted.
   @Override
