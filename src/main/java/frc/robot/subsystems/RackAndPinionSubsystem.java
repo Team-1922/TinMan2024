@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
+import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
@@ -39,6 +40,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
   m_Right.setControl(new Follower(13, true));
+  m_Left.getConfigurator().apply(RackAndPinionConstants.RAPmotionMagicConfigs);
   
   }
 
@@ -110,15 +112,18 @@ public double GetRAPspeed(){
   }
   
 
-
+ public double getRAPreference(){
+  return m_LeftStartingAngle;
+ }
 
   /** sets shooter angle 
  * @param Rot position in rotations to set motor to
   */
   public void SetShooterAngle(double Rot){
-   // if( (Deg < RackAndPinionConstants.RAPmaxAngle) && (Deg > RackAndPinionConstants.RAPminAngle) ){
-      m_Left.setControl(new PositionDutyCycle(Rot)); //TODO: make sure this won't go backwards 
-    //}
+  
+
+      m_Left.setControl(new MotionMagicDutyCycle(Rot)); //TODO: make sure this won't go backwards 
+    SmartDashboard.putNumber("current target", Rot);
   }
   
   public double[][] calculateVoltage(double finalAngle, double voltageDialation, double[][] combinedVectors) {

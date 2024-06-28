@@ -5,6 +5,7 @@
 package frc.robot;
 
 
+import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.VoltageConfigs;
 
 
@@ -97,7 +98,7 @@ public final class Constants {
     public static final int kTotalLedCount = 98; //8 on candle + ~90 on strips
   }
 
-  //using RAP so RackAndPinion doesn't have to be typed as much
+  /**using RAP so RackAndPinion doesn't have to be typed as much*/
   public static class RackAndPinionConstants {
 
     public static final int LeftRAPmotorID = 13; 
@@ -109,7 +110,7 @@ public final class Constants {
     
     public static final double RAPdefaultAngle = 40; // placeholder, this would be whatever angle you would have the robot start in 
     public static final double RAPMinSpeed = .18; // (velocity) minimum speed that the motor can go that will still move the RAP
-    public static final double RAPMaxSpeed = .35; // be careful when raising this, or it might not work well...
+    public static final double RAPMaxSpeed = 1; // be careful when raising this, or it might not work well...
 
     // VOLTAGE CONFIGS
 
@@ -118,7 +119,9 @@ public final class Constants {
       .withPeakReverseVoltage(2);
     
 
-   
+    public static MotionMagicConfigs RAPmotionMagicConfigs = new MotionMagicConfigs()
+    .withMotionMagicCruiseVelocity(2)
+    .withMotionMagicAcceleration(.25);
     
   }
 

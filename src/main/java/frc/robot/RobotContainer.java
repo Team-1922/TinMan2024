@@ -12,6 +12,7 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.RAPgoToAngle;
 import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.TorqueLimitClimb;
@@ -79,6 +80,9 @@ public class RobotContainer {
   private final AngleAdjust m_AngleAdjust = new AngleAdjust(m_RAP, m_operatorController);
   private final resetRAPangle m_ResetRAPangle = new resetRAPangle(m_RAP);
   private final stopRAP m_StopRAP = new stopRAP(m_RAP);
+  private final RAPgoToAngle m_Angle1 = new RAPgoToAngle(1, m_RAP);
+  private final RAPgoToAngle m_Angle2 = new RAPgoToAngle(3, m_RAP); 
+  private final RAPgoToAngle m_Angle3 = new RAPgoToAngle(0, m_RAP);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -169,9 +173,12 @@ public class RobotContainer {
      // m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
      // m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
       //right trigger                                                                                | moves RAP up
-      //left trigger                                                                                 | moves RAP down
+      //left trigger                                                                                | moves RAP down
       m_operatorController.button(8).onTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
       m_operatorController.button(7).onTrue(m_StopRAP); // the button with two rectangles     | stops RAP motors
+      m_operatorController.button(1).onTrue(m_Angle1);//a
+      m_operatorController.button(2).onTrue(m_Angle2);// b
+          m_operatorController.button(3).onTrue(m_Angle3); //x
   }
 
   /**
