@@ -58,12 +58,14 @@ public class RobotContainer {
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
-  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1 );
+    private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
+  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1,m_RAP );
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
   private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
+
   private final Rumble m_Rumble = new Rumble();
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
   private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
@@ -76,12 +78,12 @@ public class RobotContainer {
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
   private final SendableChooser<Command> AutoSelector;
   private final XboxController driver = new XboxController(0);
-  private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
+
   private final AngleAdjust m_AngleAdjust = new AngleAdjust(m_RAP, m_operatorController);
   private final resetRAPangle m_ResetRAPangle = new resetRAPangle(m_RAP);
   private final stopRAP m_StopRAP = new stopRAP(m_RAP);
-  private final RAPgoToAngle m_Angle1 = new RAPgoToAngle(1, m_RAP);
-  private final RAPgoToAngle m_Angle2 = new RAPgoToAngle(3, m_RAP); 
+  private final RAPgoToAngle m_Angle1 = new RAPgoToAngle(3, m_RAP);
+  private final RAPgoToAngle m_Angle2 = new RAPgoToAngle(5, m_RAP); 
   private final RAPgoToAngle m_Angle3 = new RAPgoToAngle(0, m_RAP);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -115,6 +117,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note 
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
+    NamedCommands.registerCommand("RAPmove", m_Angle1);
   
     s_Swerve.setDefaultCommand(
           new SwerveCommand(
@@ -133,6 +136,9 @@ public class RobotContainer {
   SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
   }
 
+  public void ResetRAPforAuto(){
+    m_RAP.SetCurrentAngleAsDefault();
+  };
 
   public void configShooterSubsystemForAuto(){
 

@@ -14,9 +14,10 @@ import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.Team364.robot.Constants;
 import frc.robot.Constants.RackAndPinionConstants;
 public class RackAndPinionSubsystem extends SubsystemBase {
 
@@ -30,6 +31,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   public double [] m_MidVector = new double[2];
   public double m_CalculatedVoltage;
 
+  public double m_RAPtarget;
 
   // they might be a different type of motor
    TalonFXConfiguration m_RAPConfigs = new TalonFXConfiguration();
@@ -48,7 +50,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
 
 
 
-  /** sets the position that the motors are currently at as the default, used as a reference angle  */
+  /** sets the position that the motors are currently at as the default, used as a reference angle
+    */
   public void SetCurrentAngleAsDefault(){
      // TODO: this is in rotations, please fix this when we know whatever the conversion ends up being 
    m_LeftStartingAngle =  m_Left.getPosition().getValueAsDouble();
@@ -97,8 +100,6 @@ public double GetRAPspeed(){
   public double GetShooterAngle(){
     return (m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle);
    
-  //TODO: update this later, this is a placeholder
-  
   }
 
 /**
@@ -124,6 +125,8 @@ public double GetRAPspeed(){
 
       m_Left.setControl(new MotionMagicDutyCycle(Rot)); //TODO: make sure this won't go backwards 
     SmartDashboard.putNumber("current target", Rot);
+    m_RAPtarget = Rot;
+    
   }
   
   public double[][] calculateVoltage(double finalAngle, double voltageDialation, double[][] combinedVectors) {
@@ -152,6 +155,13 @@ public double GetRAPspeed(){
   public void StopRAPmotors(){
     m_Left.stopMotor();
     m_Right.stopMotor();
+  }
+
+
+
+  public boolean isRAPmoving(){
+  
+  return (Math.abs(GetRAPspeed()) >RackAndPinionConstants.RAPMinSpeed);
   }
 
 

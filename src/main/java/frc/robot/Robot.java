@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.Team364.robot.CTREConfigs;
+import frc.robot.subsystems.RackAndPinionSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
@@ -22,6 +23,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   public static CTREConfigs ctreConfigs;
   private RobotContainer m_robotContainer;
+  private RackAndPinionSubsystem m_RAP;
 
 
 
@@ -68,6 +70,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     
     m_robotContainer.configShooterSubsystemForAuto();
+    m_robotContainer.ResetRAPforAuto();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)

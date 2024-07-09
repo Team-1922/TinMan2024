@@ -32,11 +32,14 @@ public class RAPgoToAngle extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+    m_RackAndPinionSubsystem.StopRAPmotors();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(m_Rot - m_RackAndPinionSubsystem.GetShooterAngle())) <.05;
+    return (Math.abs(m_Rot - m_RackAndPinionSubsystem.GetShooterAngle())) <.25;
   }
 }

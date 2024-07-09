@@ -12,11 +12,13 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.subsystems.Collector;
+import frc.robot.subsystems.RackAndPinionSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 public class Shoot extends Command {
   ShooterSubsystem m_ShootSubsystem;
   Collector m_Collector;
+  RackAndPinionSubsystem m_RAP;
   Timer m_Timer = new Timer();
   Timer m_AutoTimer = new Timer(); // used for auto
   double m_RPMLeft;
@@ -31,12 +33,13 @@ public class Shoot extends Command {
    * @param AutoTime how long the command will run for, only used if {@code IsAuto} is True
    *  <p> DO NOT PUT {@code AutoTime} AT 0 OR THE COMMAND WILL INSTANTLY END
    */ 
-  public Shoot( ShooterSubsystem ShootSubsystem, Collector collectorSubsystem, boolean IsAuto, double AutoTime ) {
+  public Shoot( ShooterSubsystem ShootSubsystem, Collector collectorSubsystem, boolean IsAuto, double AutoTime, RackAndPinionSubsystem RAP ) {
 
     m_IsAuto = IsAuto;
     m_AutoTime = AutoTime;
     m_ShootSubsystem = ShootSubsystem;
     m_Collector = collectorSubsystem;
+    m_RAP = RAP;
     addRequirements(collectorSubsystem);
    
     m_RPMLeft = Constants.ShooterConstants.kLeftShooterRPS;
@@ -65,7 +68,7 @@ public class Shoot extends Command {
   public void execute() {
    
     if (
-      SmartDashboard.getBoolean("Up to Speed", false))
+      SmartDashboard.getBoolean("Up to Speed", false)&& !m_RAP.isRAPmoving() )
   {   
       m_Collector.ActivateMotor(Constants.CollectorConstants.kShootRPM);
     } 
