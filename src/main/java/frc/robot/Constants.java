@@ -6,6 +6,7 @@ package frc.robot;
 
 
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.VoltageConfigs;
 
 
@@ -111,8 +112,10 @@ public final class Constants {
     public static final double RAPdefaultAngle = 40; // placeholder, this would be whatever angle you would have the robot start in 
     public static final double RAPMinSpeed = .18; // (velocity) minimum speed that the motor can go that will still move the RAP
     public static final double RAPMaxSpeed = 1; // be careful when raising this, or it might not work well...
-
-    // VOLTAGE CONFIGS
+  
+    public static final double RAPkP = 0.05; 
+    
+    // MOTOR CONFIGS
 
     public static VoltageConfigs RAPVoltageConfigs = new VoltageConfigs()
       .withPeakForwardVoltage(2)
@@ -122,6 +125,9 @@ public final class Constants {
     public static MotionMagicConfigs RAPmotionMagicConfigs = new MotionMagicConfigs()
     .withMotionMagicCruiseVelocity(2)
     .withMotionMagicAcceleration(.25);
+
+    public static Slot0Configs RAPslot0Configs = new Slot0Configs()
+    .withKP(RAPkP);
     
   }
 

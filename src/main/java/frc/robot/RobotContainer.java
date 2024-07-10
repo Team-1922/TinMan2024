@@ -117,7 +117,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note 
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
-    NamedCommands.registerCommand("RAPmove", m_Angle1);
+    NamedCommands.registerCommand("RAPmove", m_Angle1); // for testing the rap moving in auto, replace this later
   
     s_Swerve.setDefaultCommand(
           new SwerveCommand(

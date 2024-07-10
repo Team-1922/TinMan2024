@@ -43,6 +43,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
   m_Right.setControl(new Follower(13, true));
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPmotionMagicConfigs);
+  m_Left.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
+  m_Right.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   
   }
 
@@ -123,7 +125,7 @@ public double GetRAPspeed(){
   public void SetShooterAngle(double Rot){
   
 
-      m_Left.setControl(new MotionMagicDutyCycle(Rot)); //TODO: make sure this won't go backwards 
+      m_Left.setControl(new MotionMagicDutyCycle(Rot)); 
     SmartDashboard.putNumber("current target", Rot);
     m_RAPtarget = Rot;
     
@@ -152,13 +154,19 @@ public double GetRAPspeed(){
     m_Left.setVoltage(Voltage);
   }
 
+  /**
+   * stops the RAP
+   */
   public void StopRAPmotors(){
     m_Left.stopMotor();
     m_Right.stopMotor();
   }
 
 
-
+/**
+ * checks if the RAP is moving, used in the shoot command so we don't shoot while its moving.
+ * @return if the RAP is moving
+ */
   public boolean isRAPmoving(){
   
   return (Math.abs(GetRAPspeed()) >RackAndPinionConstants.RAPMinSpeed);
