@@ -15,6 +15,7 @@ import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.Team364.robot.Constants;
@@ -171,6 +172,8 @@ public double GetRAPspeed(){
   
   return (Math.abs(GetRAPspeed()) >RackAndPinionConstants.RAPMinSpeed);
   }
+
+
 
 
   @Override
