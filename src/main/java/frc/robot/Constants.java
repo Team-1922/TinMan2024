@@ -133,7 +133,7 @@ public final class Constants {
 
   public static class LimelightConstants {
 
-    public static final double MaxTy = 50; // the highest ty value that we will target
-    public static final double MinTy = -20; //the lowest ty value that we will target
+    public static final double MaxTy = 50; //(deg) the highest ty value that we will target
+    public static final double MinTy = -20; //(deg) the lowest ty value that we will target
   }
 }

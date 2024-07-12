@@ -14,6 +14,7 @@ public class LimelightSubsystem extends SubsystemBase {
 
   NetworkTable m_Limelight = NetworkTableInstance.getDefault().getTable("limelight"); //TODO: make sure that table name is correct
   NetworkTableEntry ty = m_Limelight.getEntry("ty");
+  NetworkTableEntry tv = m_Limelight.getEntry("tv"); // 0 if it doesn't have a target, 1 if it does
   /** Creates a new LimelightSubsystem. */
   public LimelightSubsystem() {
 
@@ -31,7 +32,18 @@ public class LimelightSubsystem extends SubsystemBase {
  
   }
 
-
+  /**
+   * 
+   * @return true/false if the limelight sees a valid target
+   */
+ public boolean HasValidTarget(){
+  if(tv.getDouble(0)==0){
+    return false;
+  }
+    else{
+      return true;}
+  
+ }
   
 
   @Override

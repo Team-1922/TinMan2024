@@ -5,7 +5,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.Constants;
+import frc.robot.Constants.RackAndPinionConstants;
+import frc.robot.Constants.LimelightConstants;
 import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.RackAndPinionSubsystem;
 
@@ -27,19 +28,22 @@ public class RapLimelightAim extends Command {
   @Override
   public void initialize() {
 
-// how far up/down the target is in the targeted area,  multiplied by the RAP range, then added to the min angle we can target the RAP 
+
+
     m_target =
-      (((m_LimelightSubsystem.GetTy()-Constants.LimelightConstants.MinTy)/(Constants.LimelightConstants.MaxTy-Constants.LimelightConstants.MinTy))
-     *(Constants.RackAndPinionConstants.RAPmaxAngle -Constants.RackAndPinionConstants.RAPminAngle))
-     +Constants.RackAndPinionConstants.RAPminAngle;
+      (((m_LimelightSubsystem.GetTy()-LimelightConstants.MinTy)/(LimelightConstants.MaxTy-LimelightConstants.MinTy)) // converts the ty into a 0-1 scale 
+     *(RackAndPinionConstants.RAPmaxAngle -RackAndPinionConstants.RAPminAngle)) // multiplies by the range the RAP can go
+     +RackAndPinionConstants.RAPminAngle; // adds the min angle the rap can be at. (THIS MIGHT HAVE TO BE CHANGED TO BE THE REFERENCE POINT)
 
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-m_RAP.SetShooterAngle(m_target);
   
+    // only sets the RAP to move if it sees something
+  if (m_LimelightSubsystem.HasValidTarget())
+    {m_RAP.SetShooterAngle(m_target);}
 
   }
 
