@@ -26,22 +26,17 @@ public class LimelightSubsystem extends SubsystemBase {
     /**
    * gets the ty value from the limelight
    */
-  public double GetTy(){
+  public double GetVerticalLimelightAngle(){
     
    return ty.getDouble(0.0);
  
   }
 
   /**
-   * 
    * @return true/false if the limelight sees a valid target
    */
  public boolean HasValidTarget(){
-  if(tv.getDouble(0)==0){
-    return false;
-  }
-    else{
-      return true;}
+  return tv.getDouble(0)!=0;
   
  }
   

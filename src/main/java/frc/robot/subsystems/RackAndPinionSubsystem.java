@@ -156,7 +156,7 @@ public double GetRAPspeed(){
   }
 
   /**
-   * stops the RAP
+   * stops the Rack and pinion motors
    */
   public void StopRAPmotors(){
     m_Left.stopMotor();

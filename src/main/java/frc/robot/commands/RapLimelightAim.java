@@ -31,7 +31,7 @@ public class RapLimelightAim extends Command {
 
 
     m_target =
-      (((m_LimelightSubsystem.GetTy()-LimelightConstants.MinTy)/(LimelightConstants.MaxTy-LimelightConstants.MinTy)) // converts the ty into a 0-1 scale 
+      (((m_LimelightSubsystem.GetVerticalLimelightAngle()-LimelightConstants.MinVerticalAngle)/(LimelightConstants.MaxVerticalAngle-LimelightConstants.MinVerticalAngle)) // converts the ty into a 0-1 scale 
      *(RackAndPinionConstants.RAPmaxAngle -RackAndPinionConstants.RAPminAngle)) // multiplies by the range the RAP can go
      +RackAndPinionConstants.RAPminAngle; // adds the min angle the rap can be at. (THIS MIGHT HAVE TO BE CHANGED TO BE THE REFERENCE POINT)
 
@@ -49,7 +49,9 @@ public class RapLimelightAim extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_RAP.StopRAPmotors();
+  }
 
   // Returns true when the command should end.
   @Override
