@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.RackAndPinionConstants;
 import frc.robot.Constants.LimelightConstants;
@@ -21,6 +22,7 @@ public class RapLimelightAim extends Command {
   public RapLimelightAim(RackAndPinionSubsystem RAP, LimelightSubsystem limelightSubsystem) {
     m_RAP = RAP;
     m_LimelightSubsystem = limelightSubsystem;
+    addRequirements(m_RAP);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
@@ -34,28 +36,25 @@ public class RapLimelightAim extends Command {
       (((m_LimelightSubsystem.GetVerticalLimelightAngle()-LimelightConstants.MinVerticalAngle)/(LimelightConstants.MaxVerticalAngle-LimelightConstants.MinVerticalAngle)) // converts the ty into a 0-1 scale 
      *(RackAndPinionConstants.RAPmaxAngle -RackAndPinionConstants.RAPminAngle)) // multiplies by the range the RAP can go
      +RackAndPinionConstants.RAPminAngle; // adds the min angle the rap can be at. (THIS MIGHT HAVE TO BE CHANGED TO BE THE REFERENCE POINT)
-
+  SmartDashboard.putNumber("aim target", m_target+m_RAP.getRAPreference());
+     m_RAP.SetShooterAngle(m_target+m_RAP.getRAPreference());
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
   
-    // only sets the RAP to move if it sees something
-  if (m_LimelightSubsystem.HasValidTarget())
-    {m_RAP.SetShooterAngle(m_target);}
-
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_RAP.StopRAPmotors();
+   
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (Math.abs(m_target -m_RAP.GetShooterAngle())<0.3);
   }
 }

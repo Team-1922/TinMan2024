@@ -12,7 +12,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 
 public class LimelightSubsystem extends SubsystemBase {
 
-  NetworkTable m_Limelight = NetworkTableInstance.getDefault().getTable("limelight"); //TODO: make sure that table name is correct
+  NetworkTable m_Limelight = NetworkTableInstance.getDefault().getTable("limelight-testbed"); //TODO: make sure that table name is correct
   NetworkTableEntry ty = m_Limelight.getEntry("ty");
   NetworkTableEntry tv = m_Limelight.getEntry("tv"); // 0 if it doesn't have a target, 1 if it does
   /** Creates a new LimelightSubsystem. */

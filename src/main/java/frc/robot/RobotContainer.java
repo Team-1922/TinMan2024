@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import frc.Team364.lib.util.Limelight;
 import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
@@ -13,6 +14,7 @@ import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RAPgoToAngle;
+import frc.robot.commands.RapLimelightAim;
 import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.TorqueLimitClimb;
@@ -27,6 +29,7 @@ import frc.robot.commands.AutoShootNoteCheck;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.LimelightSubsystem;
 import frc.robot.subsystems.RackAndPinionSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -85,6 +88,7 @@ public class RobotContainer {
   private final RAPgoToAngle m_Angle1 = new RAPgoToAngle(3, m_RAP);
   private final RAPgoToAngle m_Angle2 = new RAPgoToAngle(5, m_RAP); 
   private final RAPgoToAngle m_Angle3 = new RAPgoToAngle(0, m_RAP);
+  private final LimelightSubsystem m_LimelightSubsystem = new LimelightSubsystem();
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
 	private final int strafeAxis = XboxController.Axis.kLeftX.value;
@@ -103,6 +107,7 @@ public class RobotContainer {
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+  private final RapLimelightAim m_RapLimelightAim = new RapLimelightAim(m_RAP, m_LimelightSubsystem);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -184,7 +189,8 @@ public class RobotContainer {
       m_operatorController.button(7).onTrue(m_StopRAP); // the button with two rectangles     | stops RAP motors
       m_operatorController.button(1).onTrue(m_Angle1);//a
       m_operatorController.button(2).onTrue(m_Angle2);// b
-          m_operatorController.button(3).onTrue(m_Angle3); //x
+      m_operatorController.button(3).onTrue(m_Angle3); //x
+      m_operatorController.button(4).onTrue(m_RapLimelightAim); // Y
   }
 
   /**

@@ -132,7 +132,7 @@ public final class Constants {
 
   public static class LimelightConstants {
 
-    public static final double MaxVerticalAngle = 50; //(deg) the highest ty value that we will target
+    public static final double MaxVerticalAngle = 17; //(deg) the highest ty value that we will target (between -20 and 20)
     public static final double MinVerticalAngle = -20; //(deg) the lowest ty value that we will target
   }
 }
