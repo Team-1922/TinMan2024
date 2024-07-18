@@ -5,8 +5,10 @@
 package frc.robot;
 
 
+import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.VoltageConfigs;
 
 
@@ -105,6 +107,7 @@ public final class Constants {
     public static final int LeftRAPmotorID = 13; 
     public static final int RightRAPmotorID = 14;
 
+    public static final double RAPgearRatio = 1;
     public static final double RAPmaxAngle = 10; // highest angle in rotations, relitive to reference point
     public static final double RAPminAngle = 2; // the lowest angle that it can go, in motor rotations relitive to the reference point
     public static final double RAPampAngle = 5; //placeholder 
@@ -122,11 +125,15 @@ public final class Constants {
     
 
     public static MotionMagicConfigs RAPmotionMagicConfigs = new MotionMagicConfigs()
-    .withMotionMagicCruiseVelocity(2)
-    .withMotionMagicAcceleration(.25);
+    .withMotionMagicCruiseVelocity(2) // the config is totaly the best place to put this
+    .withMotionMagicAcceleration(.25)
+    ;
 
     public static Slot0Configs RAPslot0Configs = new Slot0Configs()
     .withKP(RAPkP);
+
+    public static TalonFXConfiguration RAPTalonFXConfiguration = new TalonFXConfiguration()
+    .withFeedback(new FeedbackConfigs().withSensorToMechanismRatio(RAPgearRatio)); 
     
   }
 

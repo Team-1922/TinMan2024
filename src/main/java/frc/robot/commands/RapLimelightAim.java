@@ -32,18 +32,23 @@ public class RapLimelightAim extends Command {
 
 
 
-    m_target =
-      (((m_LimelightSubsystem.GetVerticalLimelightAngle()-LimelightConstants.MinVerticalAngle)/(LimelightConstants.MaxVerticalAngle-LimelightConstants.MinVerticalAngle)) // converts the ty into a 0-1 scale 
-     *(RackAndPinionConstants.RAPmaxAngle -RackAndPinionConstants.RAPminAngle)) // multiplies by the range the RAP can go
-     +RackAndPinionConstants.RAPminAngle; // adds the min angle the rap can be at. (THIS MIGHT HAVE TO BE CHANGED TO BE THE REFERENCE POINT)
-  SmartDashboard.putNumber("aim target", m_target+m_RAP.getRAPreference());
-     m_RAP.SetShooterAngle(m_target+m_RAP.getRAPreference());
+   
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
   
+   if (m_LimelightSubsystem.HasValidTarget()){
+    m_target =
+      (((m_LimelightSubsystem.GetVerticalLimelightAngle()-LimelightConstants.MinVerticalAngle)/(LimelightConstants.MaxVerticalAngle-LimelightConstants.MinVerticalAngle)) // converts the ty into a 0-1 scale 
+      *(RackAndPinionConstants.RAPmaxAngle -RackAndPinionConstants.RAPminAngle)) // multiplies by the range the RAP can go
+      +RackAndPinionConstants.RAPminAngle; // adds the min angle the rap can be at. (THIS MIGHT HAVE TO BE CHANGED TO BE THE REFERENCE POINT)
+    
+      SmartDashboard.putNumber("aim target", m_target+m_RAP.getRAPreference());
+    m_RAP.GoToPositonWithoutMotionMagic(m_target);
+      // m_RAP.SetShooterAngle(m_target+m_RAP.getRAPreference());
+   }
   }
 
   // Called once the command ends or is interrupted.
@@ -55,6 +60,7 @@ public class RapLimelightAim extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return (Math.abs(m_target -m_RAP.GetShooterAngle())<0.3);
+    return false;
+    //(Math.abs(m_target -m_RAP.GetShooterAngle())<0.3);
   }
 }

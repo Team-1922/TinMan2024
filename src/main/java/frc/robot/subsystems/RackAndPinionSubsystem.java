@@ -46,7 +46,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPmotionMagicConfigs);
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
-  
+  m_Left.getConfigurator().apply(RackAndPinionConstants.RAPTalonFXConfiguration);
+
   }
 
 
@@ -114,7 +115,15 @@ public double GetRAPspeed(){
     m_Left.setControl(
       new VelocityDutyCycle(Velocity));
   }
-  
+
+  /**
+   *  it goes to a position, but without motion magic
+   * @param Pos rotations to go to. 
+   */
+  public void GoToPositonWithoutMotionMagic( double Pos){
+
+    m_Left.setControl(new PositionDutyCycle(Pos));
+  }
 
  public double getRAPreference(){
   return m_LeftStartingAngle;
