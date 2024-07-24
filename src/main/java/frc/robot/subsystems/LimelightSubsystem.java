@@ -16,20 +16,13 @@ public class LimelightSubsystem extends SubsystemBase {
   NetworkTableEntry ty = m_Limelight.getEntry("ty");
   NetworkTableEntry tv = m_Limelight.getEntry("tv"); // 0 if it doesn't have a target, 1 if it does
   /** Creates a new LimelightSubsystem. */
-  public LimelightSubsystem() {
-
-  }
-
-
-
+  public LimelightSubsystem(){}
 
     /**
    * gets the ty value from the limelight
    */
-  public double GetVerticalLimelightAngle(){
-    
+  public double GetVerticalLimelightAngle(){    
    return ty.getDouble(0.0);
- 
   }
 
   /**
@@ -37,14 +30,11 @@ public class LimelightSubsystem extends SubsystemBase {
    */
  public boolean HasValidTarget(){
   return tv.getDouble(0)!=0;
-  
  }
   
 
   @Override
   public void periodic() {
-
-  
     // This method will be called once per scheduler run
   }
 }

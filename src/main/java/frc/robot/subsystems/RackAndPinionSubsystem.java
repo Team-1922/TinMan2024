@@ -71,7 +71,6 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   public void GoToReference(double MinSpeed, double TargetSpeed){
     boolean m_StartCheck=false;
     
-    
     if ( m_StartCheck ==false && m_Left.getVelocity().getValueAsDouble()< MinSpeed){ 
       m_Left.setControl(new VelocityDutyCycle(TargetSpeed));
       SmartDashboard.putBoolean("STARTCHECK", false);
@@ -79,13 +78,11 @@ public class RackAndPinionSubsystem extends SubsystemBase {
     if (m_Left.getVelocity().getValueAsDouble()>= MinSpeed && m_StartCheck==false){
       m_StartCheck=true;
       SmartDashboard.putBoolean("STARTCHECK", true);
-   
     }
     if (m_StartCheck==true && m_Left.getVelocity().getValueAsDouble() <=MinSpeed){
       m_Left.setControl(new VelocityDutyCycle(0)); 
       SetCurrentAngleAsDefault();
       SmartDashboard.putNumber("testnumber", m_Left.getPosition().getValueAsDouble());
-   
     }
   }
 
@@ -103,7 +100,6 @@ public double GetRAPspeed(){
  */
   public double GetShooterAngle(){
     return (m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle);
-   
   }
 
 /**
@@ -111,7 +107,6 @@ public double GetRAPspeed(){
  * @param Velocity the speed to set the motor
  */
   public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, then set that as a reference
-
     m_Left.setControl(
       new VelocityDutyCycle(Velocity));
   }
@@ -121,7 +116,6 @@ public double GetRAPspeed(){
    * @param Pos rotations to go to. 
    */
   public void GoToPositonWithoutMotionMagic( double Pos){
-
     m_Left.setControl(new PositionDutyCycle(Pos));
   }
 
@@ -133,12 +127,9 @@ public double GetRAPspeed(){
  * @param Rot position in rotations to set motor to
   */
   public void SetShooterAngle(double Rot){
-  
-
       m_Left.setControl(new MotionMagicDutyCycle(Rot)); 
     SmartDashboard.putNumber("current target", Rot);
     m_RAPtarget = Rot;
-    
   }
   
   public double[][] calculateVoltage(double finalAngle, double voltageDialation, double[][] combinedVectors) {

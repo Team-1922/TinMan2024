@@ -126,8 +126,7 @@ public final class Constants {
 
     public static MotionMagicConfigs RAPmotionMagicConfigs = new MotionMagicConfigs()
     .withMotionMagicCruiseVelocity(2) // the config is totaly the best place to put this
-    .withMotionMagicAcceleration(.25)
-    ;
+    .withMotionMagicAcceleration(.25);
 
     public static Slot0Configs RAPslot0Configs = new Slot0Configs()
     .withKP(RAPkP);
