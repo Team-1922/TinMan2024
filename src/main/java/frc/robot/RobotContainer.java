@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import frc.Team364.lib.util.Limelight;
+
 import frc.Team364.robot.commands.SwerveCommand;
 import frc.Team364.robot.subsystems.PoseEstimator;
 import frc.Team364.robot.subsystems.Swerve;
@@ -61,7 +61,7 @@ public class RobotContainer {
   private final Collector m_Collector = new Collector();
   private final CollectNote m_CollectNote = new CollectNote(m_Collector);
   private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
-    private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
+  private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
   private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1,m_RAP );
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
   private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
@@ -107,7 +107,7 @@ public class RobotContainer {
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
-  private final RapLimelightAim m_RapLimelightAim = new RapLimelightAim(m_RAP, m_LimelightSubsystem);
+  private final RapLimelightAim m_RapLimelightAim = new RapLimelightAim(m_RAP, m_LimelightSubsystem,m_Rumble);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -178,18 +178,15 @@ public class RobotContainer {
     
 
     // OPERATOR CONTROLLS    
-    //  m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
-     // m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
-     // m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
-     // m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
-     // m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
-      //right trigger                                                                                | moves RAP up
-      //left trigger                                                                                | moves RAP down
+      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
+      m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
+      m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
+      m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
+      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
+      //right trigger                                                                                | moves RAP up (remove after initial testing)
+      //left trigger                                                                                | moves RAP down (remove after initial testing)
       m_operatorController.button(8).onTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
       m_operatorController.button(7).onTrue(m_StopRAP); // the button with two rectangles     | stops RAP motors
-      m_operatorController.button(1).onTrue(m_Angle1);//a
-      m_operatorController.button(2).onTrue(m_Angle2);// b
-      m_operatorController.button(3).onTrue(m_Angle3); //x
       m_operatorController.button(4).onTrue(m_RapLimelightAim); // Y
   }
 

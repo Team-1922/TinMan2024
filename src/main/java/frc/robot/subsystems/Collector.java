@@ -29,15 +29,15 @@ public class Collector extends SubsystemBase {
   public boolean m_IsTriggered;
 
 
-  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, 98, 0);
+  SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, Constants.LedConstants.kTotalLedCount, 0);
   
-  ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .5, 98, Direction.Forward);
+  ColorFlowAnimation m_ColorFlowAnimation = new ColorFlowAnimation(255, 255, 0, 0, .5, Constants.LedConstants.kTotalLedCount, Direction.Forward);
   
     /**  Makes a new Collector subsystem */
     public Collector() {
 
-m_Tof.setRangingMode(RangingMode.Short, 24);
-//SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
+        m_Tof.setRangingMode(RangingMode.Short, 24);
+
         m_slot0.kP = 0;
         m_slot0.kV = .0005;
         m_CollectorTalon.setInverted(false);
@@ -105,27 +105,27 @@ public void ReverseMotor(double RPM) {
                 m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
-      /*   if (InTarget) {
+         if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
-               m_LED.SetColor(0, 255, 0, 0, 0, 96); // green
+               m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // green
             }else{
-           m_LED.SetColor(255, 255, 255, 255, 0, 96); // white
+           m_LED.SetColor(255, 255, 255, 255, 0, Constants.LedConstants.kTotalLedCount); // white
            }
         } else {
         
          if ( RobotController.isSysActive()){
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS)){
-                m_LED.SetColor(255, 165, 0, 0, 0, 98); // orange
+                m_LED.SetColor(255, 165, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // orange
             }
             else{
-                m_LED.SetColor(255, 0, 0, 0, 0, 98); // red
+                m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // red
             }
          } 
           else {
             m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
           } 
-        } */
+        } 
         return InTarget; 
     }
 

@@ -9,16 +9,17 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
-import com.ctre.phoenix6.controls.PositionVoltage;
+
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
-import com.ctre.phoenix6.controls.VelocityVoltage;
+
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.networktables.NetworkTableInstance;
+
+
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.Team364.robot.Constants;
+
 import frc.robot.Constants.RackAndPinionConstants;
 public class RackAndPinionSubsystem extends SubsystemBase {
 
@@ -47,6 +48,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPTalonFXConfiguration);
+  m_Left.getConfigurator().apply(RackAndPinionConstants.RAPCurrentLimitsConfigs);
+  m_Right.getConfigurator().apply(RackAndPinionConstants.RAPCurrentLimitsConfigs);
 
   }
 
@@ -117,10 +120,12 @@ public double GetRAPspeed(){
    */
   public void GoToPositonWithoutMotionMagic( double Pos){
     m_Left.setControl(new PositionDutyCycle(Pos));
+    m_RAPtarget = Pos;
   }
 
  public double getRAPreference(){
   return m_LeftStartingAngle;
+
  }
 
   /** sets shooter angle 
@@ -128,7 +133,7 @@ public double GetRAPspeed(){
   */
   public void SetShooterAngle(double Rot){
       m_Left.setControl(new MotionMagicDutyCycle(Rot)); 
-    SmartDashboard.putNumber("current target", Rot);
+
     m_RAPtarget = Rot;
   }
   
@@ -178,7 +183,21 @@ public double GetRAPspeed(){
 
   @Override
   public void periodic() {
+
+    
     SmartDashboard.putNumber("current position in rotations", m_Left.getPosition().getValueAsDouble());
+    SmartDashboard.putNumber("current target", m_RAPtarget);
+
+
+    if(RobotController.isSysActive()){
+      if(isRAPmoving()){
+        m_LED.SetColor(255, 0, 0, 0, 0, 0);
+      }
+      else{
+        m_LED.SetColor(0, 255, 0, 0, 0, 0); //TODO:sort out what leds this controls
+      }
+
+    }
     // This method will be called once per scheduler run
   }
 }

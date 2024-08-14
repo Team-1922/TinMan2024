@@ -5,6 +5,7 @@
 package frc.robot;
 
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
@@ -45,8 +46,8 @@ public final class Constants {
     // CONFIGS 
     public static final double kShooterForwardTeleopVoltageLimit = 3; // volts
     public static final double kShooterReverseTeleopVoltageLimit = -3; // volts
-    public static final double kShooterForwardAutoVoltageLimit = 5; // volts
-    public static final double kShooterReverseAutoVoltageLimit = -5; // volts
+    public static final double kShooterForwardAutoVoltageLimit = 4; // volts
+    public static final double kShooterReverseAutoVoltageLimit = -4; // volts
     public static final double kCurrentLimit = 40; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
@@ -123,6 +124,9 @@ public final class Constants {
       .withPeakForwardVoltage(2)
       .withPeakReverseVoltage(2);
     
+    public static CurrentLimitsConfigs RAPCurrentLimitsConfigs = new CurrentLimitsConfigs()
+    .withSupplyCurrentLimit(40)
+    .withSupplyCurrentLimitEnable(true);
 
     public static MotionMagicConfigs RAPmotionMagicConfigs = new MotionMagicConfigs()
     .withMotionMagicCruiseVelocity(2) // the config is totaly the best place to put this
