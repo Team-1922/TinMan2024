@@ -48,7 +48,7 @@ public final class Constants {
     public static final double kShooterReverseTeleopVoltageLimit = -3; // volts
     public static final double kShooterForwardAutoVoltageLimit = 4; // volts
     public static final double kShooterReverseAutoVoltageLimit = -4; // volts
-    public static final double kCurrentLimit = 40; // amps 
+    public static final double kCurrentLimit = 30; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
@@ -72,8 +72,8 @@ public final class Constants {
     // CONFIGS
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
-    public static final double kCurrentSoftLimit = 40; // amps
-    public static final double kCurrentHardLimit = 45; // amps
+    public static final double kCurrentSoftLimit = 30; // amps
+    public static final double kCurrentHardLimit = 40; // amps
     public static final boolean kCurrentLimitEnable = true; 
     public static final double kCurrentLimitTime = 0.1; // seconds
     
@@ -125,7 +125,7 @@ public final class Constants {
       .withPeakReverseVoltage(2);
     
     public static CurrentLimitsConfigs RAPCurrentLimitsConfigs = new CurrentLimitsConfigs()
-    .withSupplyCurrentLimit(40)
+    .withSupplyCurrentLimit(30)
     .withSupplyCurrentLimitEnable(true);
 
     public static MotionMagicConfigs RAPmotionMagicConfigs = new MotionMagicConfigs()
