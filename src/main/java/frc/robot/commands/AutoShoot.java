@@ -105,6 +105,6 @@ public class AutoShoot extends Command {
   @Override
   public boolean isFinished() {
 
-    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(3) || m_EndDelay.hasElapsed(.25); // Because the timer won't start if it's not auto
+    return m_AutoTimer.hasElapsed(m_AutoTime) || m_backuptimer.hasElapsed(3) || m_EndDelay.hasElapsed(.35); // Because the timer won't start if it's not auto
   }
 }
