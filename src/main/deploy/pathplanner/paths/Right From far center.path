@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 9.283568620804505,
-        "y": 3.4364496635970023
+        "x": 8.343684952128402,
+        "y": 2.4231375833055786
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.240489219330388,
-        "y": 2.2438829541392593
+        "x": 6.449231932453132,
+        "y": 2.4231375833055786
       },
       "isLocked": false,
       "linkedName": "Blue Far center note "
@@ -55,7 +55,7 @@
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 2.5,
-    "maxAcceleration": 2.5,
+    "maxAcceleration": 3.65,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0
   },

@@ -39,7 +39,7 @@ public final class Constants {
     public static final double kShooterReverseTeleopVoltageLimit = -3; // volts
     public static final double kShooterForwardAutoVoltageLimit = 5; // volts
     public static final double kShooterReverseAutoVoltageLimit = -5; // volts
-    public static final double kCurrentLimit = 40; // amps 
+    public static final double kCurrentLimit = 35; // amps 
     public static final double kOpenLoopRamp = 0.2; // seconds
     public static final double kClosedLoopRamp = 0.2; // seconds
     public static final double kCurrentDisableThreshold = 100; // amps (not used)
