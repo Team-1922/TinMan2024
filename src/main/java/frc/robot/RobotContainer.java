@@ -27,6 +27,8 @@ import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.path.PathPlannerPath;
+
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -102,7 +104,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note 
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
-  
+   // PathPlannerPath testPath = PathPlannerPath.fromChoreoTrajectory("Chor Test Path");
+
     s_Swerve.setDefaultCommand(
           new SwerveCommand(
               s_Swerve, 
