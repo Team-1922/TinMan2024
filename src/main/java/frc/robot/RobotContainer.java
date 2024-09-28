@@ -33,13 +33,15 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.CollectReverse;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-
+import com.choreo.lib.Choreo;
+import com.choreo.lib.ChoreoTrajectory;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -104,9 +106,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note 
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
-   // PathPlannerPath testPath = PathPlannerPath.fromChoreoTrajectory("Chor Test Path");
+    PathPlannerPath testPath = PathPlannerPath.fromChoreoTrajectory("Chor Test Path");
 
-    s_Swerve.setDefaultCommand(
+    s_Swerve.setDefaultCommand( 
           new SwerveCommand(
               s_Swerve, 
               () -> -driver.getRawAxis(translationAxis), 
@@ -135,7 +137,13 @@ public class RobotContainer {
     SmartDashboard.putBoolean("auto_configs", false);
   }
     
-
+public Command TestAuto( ){
+    
+  return Commands.sequence(
+    
+   // .runchor
+  );
+}
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
