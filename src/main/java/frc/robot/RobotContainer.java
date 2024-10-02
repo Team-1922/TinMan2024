@@ -29,6 +29,9 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.path.PathPlannerPath;
 
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -93,6 +96,7 @@ public class RobotContainer {
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+  ChoreoTrajectory traj;
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -107,6 +111,10 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
     PathPlannerPath testPath = PathPlannerPath.fromChoreoTrajectory("Chor Test Path");
+
+    traj = Choreo.getTrajectory("center to center note");
+
+
 
     s_Swerve.setDefaultCommand( 
           new SwerveCommand(
@@ -177,6 +185,27 @@ public Command TestAuto( ){
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    var thetaController = new PIDController(0, 0, 0);
+    thetaController.enableContinuousInput(-Math.PI, Math.PI);    
+    s_Swerve.resetOdometry(traj.getInitialPose());
+    Command SwerveCommand = Choreo.choreoSwerveCommand(
+    traj,
+    s_Swerve.getPose(),
+    new PIDController(0, 0, 0),
+    new PIDController(0, 0, 0),
+    thetaController,
+    (ChassisSpeeds Speeds) -> s_Swerve.drive(
+    new Translation2d(Speeds.vxMetersPerSecond, Speeds.vyMetersPerSecond),
+    Speeds.omegaRadiansPerSecond,
+    true,
+    true
+    ),
+    true,
+    s_Swerve
+
+    );
+
+    
     return AutoSelector.getSelected();
   }
 }
