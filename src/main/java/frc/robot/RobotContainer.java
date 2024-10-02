@@ -190,7 +190,7 @@ public Command TestAuto( ){
     s_Swerve.resetOdometry(traj.getInitialPose());
     Command SwerveCommand = Choreo.choreoSwerveCommand(
     traj,
-    s_Swerve.getPose(),
+    s_Swerve::getPose,
     new PIDController(0, 0, 0),
     new PIDController(0, 0, 0),
     thetaController,
