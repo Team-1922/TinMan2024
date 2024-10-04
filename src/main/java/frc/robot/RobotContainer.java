@@ -96,7 +96,8 @@ public class RobotContainer {
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
-  ChoreoTrajectory traj;
+  private ChoreoTrajectory traj;
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -185,12 +186,12 @@ public Command TestAuto( ){
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    var thetaController = new PIDController(0, 0, 0);
+   /*  var thetaController = new PIDController(0, 0, 0);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);    
     s_Swerve.resetOdometry(traj.getInitialPose());
     Command SwerveCommand = Choreo.choreoSwerveCommand(
     traj,
-    s_Swerve.getPose(),
+    s_Swerve::getPose,
     new PIDController(0, 0, 0),
     new PIDController(0, 0, 0),
     thetaController,
@@ -200,10 +201,10 @@ public Command TestAuto( ){
     true,
     true
     ),
-    true,
+    () -> true,
     s_Swerve
 
-    );
+    ); */
 
     
     return AutoSelector.getSelected();
