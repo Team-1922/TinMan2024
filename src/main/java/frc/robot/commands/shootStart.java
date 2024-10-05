@@ -13,7 +13,7 @@ public class shootStart extends Command {
   double m_SpeedIncrease;
   /** Creates a new shootStart. 
    * runs shooter motors, does not run collector motors
-   * @param SpeedIncrease 
+   * @param SpeedIncrease put this as 1 if you don't want it to change
   */
   public shootStart(ShooterSubsystem shooterSubsystem, double SpeedIncrease) {
     m_ShooterSubsystem = shooterSubsystem;

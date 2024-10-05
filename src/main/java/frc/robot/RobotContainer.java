@@ -153,6 +153,19 @@ public class RobotContainer {
     
   public void ChoreoAutoChooser(){
     m_ChoreoAutoChooser.setDefaultOption("test",Autos.m_TrajectoryTest );
+    m_ChoreoAutoChooser.addOption("just shoot", Autos.m_ShootTest);
+    m_ChoreoAutoChooser.addOption("2 piece", Autos.m_2Piece);
+    m_ChoreoAutoChooser.addOption("4 piece, center, amp, stage", Autos.m_4PieceCAS);
+    m_ChoreoAutoChooser.addOption("4 piece, center, stage, amp", Autos.m_4PieceCSA);
+    m_ChoreoAutoChooser.addOption("4 piece, amp, center, stage", Autos.m_4PieceACS);
+    m_ChoreoAutoChooser.addOption("4 piece, stage, center, amp", Autos.m_4PieceSCA);
+    m_ChoreoAutoChooser.addOption("3 piece, center, stage", Autos.m_3PieceCS);
+    m_ChoreoAutoChooser.addOption("3 piece, center, amp", Autos.m_3PieceCA);
+    m_ChoreoAutoChooser.addOption("5 piece, center, amp, stage, far center", Autos.m_5PieceCASFc);
+    m_ChoreoAutoChooser.addOption("4 piece, center, amp, far center", Autos.m_4PieceCAFc);
+    m_ChoreoAutoChooser.addOption("4 piece, center, stage, far center", Autos.m_4PieceCSFc);
+    m_ChoreoAutoChooser.addOption("2 piece amp start", Autos.m_Amp2Piece);
+    m_ChoreoAutoChooser.addOption("2 piece stage side, far center", Autos.m_Stage2Piece);
     SmartDashboard.putData("ChoreoAutoChooser", m_ChoreoAutoChooser);
   }
 
@@ -191,7 +204,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
 
-    
-    return AutoSelector.getSelected();
+   // return m_ChoreoAutoChooser.getSelected(); // uses choreo without pathplanner
+    return AutoSelector.getSelected();// uses pathplanner and choreo
   }
 }
