@@ -28,21 +28,21 @@ public final class Autos  {
 
 
 
-// this should run a single trajectory the pids will probably have to be tuned
-public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
-    var thetaController = new PIDController(0, 0, 0);
+// this should run a single trajectory, the pids will probably have to be tuned
+public static Command ChoreoTrajectoryCommand(ChoreoTrajectory traj){
+    var thetaController = new PIDController(2.5, 0, 0);
     thetaController.enableContinuousInput(-Math.PI, Math.PI);    
     s_Swerve.resetOdometry(traj.getInitialPose());
     Command SwerveCommand = Choreo.choreoSwerveCommand(
     traj,
     s_Swerve::getPose,
-    new PIDController(0, 0, 0),
-    new PIDController(0, 0, 0),
+    new PIDController(2.5, 0, 0),
+    new PIDController(2.5, 0, 0),
     thetaController,
     (ChassisSpeeds Speeds) -> s_Swerve.drive(
-    new Translation2d(Speeds.vxMetersPerSecond, Speeds.vyMetersPerSecond),
+    new Translation2d(Speeds.vxMetersPerSecond, Speeds.vyMetersPerSecond).times(3),// i shouldn't have to multiply it so much...
     Speeds.omegaRadiansPerSecond,
-    true,
+    false,
     true
     ),
     () -> true,
@@ -76,31 +76,33 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
 // this should, if it works, make the robot go forwards, then backwards
   public static final SequentialCommandGroup m_TrajectoryTest = 
   new SequentialCommandGroup( 
-    ChoreoTrajectoryCommand(Choreo.getTrajectory("center to center note")), 
+    ChoreoTrajectoryCommand(Choreo.getTrajectory("center to center note")),
     ChoreoTrajectoryCommand(Choreo.getTrajectory("center from center note")));
 
   public static final SequentialCommandGroup m_ShootTest = new SequentialCommandGroup(AutoShootStart(),new WaitCommand(1.25), m_autoShoot());
  
   public static final ParallelCommandGroup m_2Piece = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(new WaitCommand(1.25),m_autoShoot(),
       new ParallelCommandGroup(Collect(),
         new SequentialCommandGroup(ChoreoTrajectoryCommand(Choreo.getTrajectory("center to center note")), ChoreoTrajectoryCommand(Choreo.getTrajectory("center from center note")))),m_autoShoot()));
 
 
-/* for the auto names
+/* 
+ *for the auto names
  * C = center note
  * A = amp note
  * S = stage note
  * Fc = a note in the center of the field
+ * so CA means it gets the center note, then the amp side note
  */
 
 
 
   public static final ParallelCommandGroup m_4PieceCAS = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
-      new WaitCommand(1.25),
+      new WaitCommand(1.25), // these wait commands could possibly be shorter, but at risk of failing to shoot the preloaded note
       m_autoShoot(),
       new ParallelCommandGroup(
         Collect(),
@@ -123,7 +125,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));      
 
   public static final ParallelCommandGroup m_4PieceCSA = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -148,7 +150,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));        
 
   public static final ParallelCommandGroup m_4PieceACS = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -173,7 +175,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));    
 
   public static final ParallelCommandGroup m_4PieceSCA = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -198,7 +200,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));
 
   public static final ParallelCommandGroup m_3PieceCA = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -217,7 +219,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
       ));
 
   public static final ParallelCommandGroup m_3PieceCS = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -236,7 +238,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         )); 
 
   public static final ParallelCommandGroup m_5PieceCASFc = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -267,7 +269,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));  
               
  public static final ParallelCommandGroup m_4PieceCAFc = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -292,7 +294,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));
 
  public static final ParallelCommandGroup m_4PieceCSFc = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -317,7 +319,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));                       
  
  public static final ParallelCommandGroup m_Amp2Piece = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -330,7 +332,7 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
         ));
       
  public static final ParallelCommandGroup m_Stage2Piece = 
-  new ParallelCommandGroup(m_autoShoot(),
+  new ParallelCommandGroup(AutoShootStart(),
     new SequentialCommandGroup(
       new WaitCommand(1.25),
       m_autoShoot(),
@@ -341,5 +343,34 @@ public static Command ChoreoTrajectoryCommand( ChoreoTrajectory traj){
           ChoreoTrajectoryCommand(Choreo.getTrajectory("stage side from center field note")))),
       m_autoShoot()
         ));
-        
+
+        // this is supposed to shoot the preload, then pass 3 of the midfield notes into the amp area
+  public static final ParallelCommandGroup m_PassAuto = 
+  new ParallelCommandGroup(AutoShootStart(),
+    new SequentialCommandGroup(
+      new WaitCommand(1.25),
+      m_autoShoot(),
+      new ParallelCommandGroup(
+        Collect(),
+        ChoreoTrajectoryCommand(Choreo.getTrajectory("triple pass.1"))),
+      m_autoShoot(),
+      new ParallelCommandGroup(
+        Collect(),
+        ChoreoTrajectoryCommand(Choreo.getTrajectory("triple pass.2"))),
+      m_autoShoot(),
+      new ParallelCommandGroup(
+        Collect(),
+        ChoreoTrajectoryCommand(Choreo.getTrajectory("triple pass.3"))),
+      m_autoShoot()
+        ));   
+
+        // meant to push all the notes at midfield
+  public static final ParallelCommandGroup m_DisruptAuto =
+  new ParallelCommandGroup(AutoShootStart(),
+    new SequentialCommandGroup(
+      new WaitCommand(1.25),
+      m_autoShoot(),
+      ChoreoTrajectoryCommand(Choreo.getTrajectory("disrupt"))
+    ));
+
 }

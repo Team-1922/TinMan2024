@@ -76,7 +76,7 @@ public class RobotContainer {
   private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
-  private final SendableChooser<Command> AutoSelector;
+ // private final SendableChooser<Command> AutoSelector;
   private final XboxController driver = new XboxController(0);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -97,7 +97,7 @@ public class RobotContainer {
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
-  private ChoreoTrajectory traj;
+ // private ChoreoTrajectory traj;
 
   
   
@@ -109,6 +109,7 @@ public class RobotContainer {
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
 
+
     // the commands that are used in pathplanner
     NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command   
     NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command   
@@ -116,9 +117,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("NoteCheck", m_AutoCollectCheck); // checks for when the tof first sees a note 
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
-    PathPlannerPath testPath = PathPlannerPath.fromChoreoTrajectory("Chor Test Path");
+    //PathPlannerPath testPath = PathPlannerPath.fromChoreoTrajectory("Chor Test Path");
 
-    traj = Choreo.getTrajectory("center to center note");
+   // traj = Choreo.getTrajectory("center to center note");
 
 
 
@@ -135,8 +136,9 @@ public class RobotContainer {
       ); 
       
         
-  AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
-  SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+ // AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
+ // SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+  ChoreoAutoChooser();
   }
 
 
@@ -164,8 +166,10 @@ public class RobotContainer {
     m_ChoreoAutoChooser.addOption("5 piece, center, amp, stage, far center", Autos.m_5PieceCASFc);
     m_ChoreoAutoChooser.addOption("4 piece, center, amp, far center", Autos.m_4PieceCAFc);
     m_ChoreoAutoChooser.addOption("4 piece, center, stage, far center", Autos.m_4PieceCSFc);
-    m_ChoreoAutoChooser.addOption("2 piece amp start", Autos.m_Amp2Piece);
+    m_ChoreoAutoChooser.addOption("2 piece, amp start", Autos.m_Amp2Piece);
     m_ChoreoAutoChooser.addOption("2 piece stage side, far center", Autos.m_Stage2Piece);
+    m_ChoreoAutoChooser.addOption("triple pass", Autos.m_PassAuto);
+    m_ChoreoAutoChooser.addOption("disrupt", Autos.m_DisruptAuto);
     SmartDashboard.putData("ChoreoAutoChooser", m_ChoreoAutoChooser);
   }
 
@@ -204,7 +208,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
 
-   // return m_ChoreoAutoChooser.getSelected(); // uses choreo without pathplanner
-    return AutoSelector.getSelected();// uses pathplanner and choreo
+    return m_ChoreoAutoChooser.getSelected(); // uses choreo without pathplanner
+//    return AutoSelector.getSelected();// uses pathplanner and choreo
   }
 }

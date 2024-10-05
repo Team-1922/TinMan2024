@@ -56,6 +56,7 @@ public class Swerve extends SubsystemBase {
 
 
         // Configure the AutoBuilder last
+      /*   
         AutoBuilder.configureHolonomic(
             this::getPose, // Robot pose supplier
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -67,7 +68,7 @@ public class Swerve extends SubsystemBase {
                 4.5, // Max module speed, in m/s
                 0.282575, // Drive base radius in meters. Distance from robot center to furthest module.
                 new ReplanningConfig() // Default path replanning config. See the API for the options here
-            ),
+            ), 
             () -> {
                 // Boolean supplier that controls when the path will be mirrored for the red alliance
                 // This will flip the path being followed to the red side of the field.
@@ -80,7 +81,7 @@ public class Swerve extends SubsystemBase {
                 return false;
             },
             this // Reference to this subsystem to set requirements
-        );
+        );*/
     
         // Set up custom logging to add the current path to a field 2d widget
         PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));
