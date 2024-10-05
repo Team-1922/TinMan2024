@@ -21,6 +21,7 @@ import frc.robot.commands.shootStart;
 import frc.robot.commands.AutoCollectCheck;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoShootNoteCheck;
+import frc.robot.commands.Autos;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.Collector;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -97,7 +98,11 @@ public class RobotContainer {
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   private ChoreoTrajectory traj;
+
   
+  
+  private final SendableChooser<Command> m_ChoreoAutoChooser = new SendableChooser<Command>();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -146,13 +151,11 @@ public class RobotContainer {
     SmartDashboard.putBoolean("auto_configs", false);
   }
     
-public Command TestAuto( ){
-    
-  return Commands.sequence(
-    
-   // .runchor
-  );
-}
+  public void ChoreoAutoChooser(){
+    m_ChoreoAutoChooser.setDefaultOption("test",Autos.m_TrajectoryTest );
+    SmartDashboard.putData("ChoreoAutoChooser", m_ChoreoAutoChooser);
+  }
+
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
    * {@link Trigger#Trigger(java.util.function.BooleanSupplier)} constructor with an arbitrary
@@ -186,25 +189,7 @@ public Command TestAuto( ){
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   /*  var thetaController = new PIDController(0, 0, 0);
-    thetaController.enableContinuousInput(-Math.PI, Math.PI);    
-    s_Swerve.resetOdometry(traj.getInitialPose());
-    Command SwerveCommand = Choreo.choreoSwerveCommand(
-    traj,
-    s_Swerve::getPose,
-    new PIDController(0, 0, 0),
-    new PIDController(0, 0, 0),
-    thetaController,
-    (ChassisSpeeds Speeds) -> s_Swerve.drive(
-    new Translation2d(Speeds.vxMetersPerSecond, Speeds.vyMetersPerSecond),
-    Speeds.omegaRadiansPerSecond,
-    true,
-    true
-    ),
-    () -> true,
-    s_Swerve
 
-    ); */
 
     
     return AutoSelector.getSelected();
