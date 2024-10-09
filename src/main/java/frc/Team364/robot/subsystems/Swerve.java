@@ -56,7 +56,7 @@ public class Swerve extends SubsystemBase {
 
 
         // Configure the AutoBuilder last
-      /*   
+       
         AutoBuilder.configureHolonomic(
             this::getPose, // Robot pose supplier
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -81,7 +81,7 @@ public class Swerve extends SubsystemBase {
                 return false;
             },
             this // Reference to this subsystem to set requirements
-        );*/
+        );
     
         // Set up custom logging to add the current path to a field 2d widget
         PathPlannerLogging.setLogActivePathCallback((poses) -> field.getObject("path").setPoses(poses));

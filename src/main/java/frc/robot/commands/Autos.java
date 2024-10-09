@@ -5,9 +5,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -48,7 +51,12 @@ public static Command ChoreoTrajectoryCommand(ChoreoTrajectory traj){
     () -> true,
     s_Swerve
     );
-   return SwerveCommand;
+
+   return Commands.sequence(
+    Commands.runOnce(()  -> s_Swerve.resetOdometry(traj.getInitialPose())),
+    SwerveCommand,
+    s_Swerve.run(() -> s_Swerve.drive(new Translation2d(0,0), 0, false, true))
+   );
   }
 
   public static shootStart AutoShootStart(){
@@ -77,7 +85,8 @@ public static Command ChoreoTrajectoryCommand(ChoreoTrajectory traj){
   public static final SequentialCommandGroup m_TrajectoryTest = 
   new SequentialCommandGroup( 
     ChoreoTrajectoryCommand(Choreo.getTrajectory("center to center note")),
-    ChoreoTrajectoryCommand(Choreo.getTrajectory("center from center note")));
+    ChoreoTrajectoryCommand(Choreo.getTrajectory("center from center note"))
+    );
 
   public static final SequentialCommandGroup m_ShootTest = new SequentialCommandGroup(AutoShootStart(),new WaitCommand(1.25), m_autoShoot());
  

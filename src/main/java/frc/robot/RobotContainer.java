@@ -76,7 +76,7 @@ public class RobotContainer {
   private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
- // private final SendableChooser<Command> AutoSelector;
+  private final SendableChooser<Command> AutoSelector;
   private final XboxController driver = new XboxController(0);
    /* Driver Controls */
 	private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -101,7 +101,7 @@ public class RobotContainer {
 
   
   
-  private final SendableChooser<Command> m_ChoreoAutoChooser = new SendableChooser<Command>();
+ // private final SendableChooser<Command> m_ChoreoAutoChooser = new SendableChooser<Command>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -136,9 +136,9 @@ public class RobotContainer {
       ); 
       
         
- // AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
- // SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
-  ChoreoAutoChooser();
+  AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
+  SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+  //ChoreoAutoChooser();
   }
 
 
@@ -152,7 +152,7 @@ public class RobotContainer {
     m_shooterSubsystem.configShooterForTeleop();
     SmartDashboard.putBoolean("auto_configs", false);
   }
-    
+    /* 
   public void ChoreoAutoChooser(){
     m_ChoreoAutoChooser.setDefaultOption("test",Autos.m_TrajectoryTest );
     m_ChoreoAutoChooser.addOption("just shoot", Autos.m_ShootTest);
@@ -171,7 +171,7 @@ public class RobotContainer {
     m_ChoreoAutoChooser.addOption("triple pass", Autos.m_PassAuto);
     m_ChoreoAutoChooser.addOption("disrupt", Autos.m_DisruptAuto);
     SmartDashboard.putData("ChoreoAutoChooser", m_ChoreoAutoChooser);
-  }
+  }*/
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -208,7 +208,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
 
 
-    return m_ChoreoAutoChooser.getSelected(); // uses choreo without pathplanner
-//    return AutoSelector.getSelected();// uses pathplanner and choreo
+   // return m_ChoreoAutoChooser.getSelected(); // uses choreo without pathplanner
+    return AutoSelector.getSelected();// uses pathplanner and choreo
   }
 }
