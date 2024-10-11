@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.31,
-      "y": 5.55
+      "x": 0.8318735957145691,
+      "y": 4.489677906036377
     },
-    "rotation": 1.2210726456982623e-25
+    "rotation": -52.76518169184764
   },
   "command": {
     "type": "sequential",
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.5
+                        "waitTime": 1.25
                       }
                     },
                     {
@@ -42,9 +42,22 @@
                       "data": {
                         "commands": [
                           {
-                            "type": "named",
+                            "type": "sequential",
                             "data": {
-                              "name": "Collect"
+                              "commands": [
+                                {
+                                  "type": "wait",
+                                  "data": {
+                                    "waitTime": 1.0
+                                  }
+                                },
+                                {
+                                  "type": "named",
+                                  "data": {
+                                    "name": "Collect"
+                                  }
+                                }
+                              ]
                             }
                           },
                           {
@@ -54,13 +67,13 @@
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center to center note"
+                                    "pathName": "stage side to center field note"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center from center note"
+                                    "pathName": "stage side from center field note"
                                   }
                                 }
                               ]

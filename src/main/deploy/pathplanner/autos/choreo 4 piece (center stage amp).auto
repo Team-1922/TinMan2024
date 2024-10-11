@@ -92,13 +92,13 @@
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center to amp note"
+                                    "pathName": "center to stage note"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center from amp note"
+                                    "pathName": "center from stage note"
                                   }
                                 }
                               ]
@@ -130,13 +130,13 @@
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center to stage note"
+                                    "pathName": "center to amp note"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center from stage note"
+                                    "pathName": "center from amp note"
                                   }
                                 }
                               ]

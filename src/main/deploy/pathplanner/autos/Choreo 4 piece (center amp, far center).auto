@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.5
+                        "waitTime": 1.25
                       }
                     },
                     {
@@ -92,13 +92,13 @@
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center to amp note"
+                                    "pathName": "center to stage note"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center from amp note"
+                                    "pathName": "center from stage note"
                                   }
                                 }
                               ]
@@ -130,13 +130,13 @@
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center to stage note"
+                                    "pathName": "center to center field note"
                                   }
                                 },
                                 {
                                   "type": "path",
                                   "data": {
-                                    "pathName": "center from stage note"
+                                    "pathName": "center from center field note"
                                   }
                                 }
                               ]

@@ -2,10 +2,10 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 1.31,
-      "y": 5.55
+      "x": 0.8203049898147582,
+      "y": 4.51206111907959
     },
-    "rotation": 1.2210726456982623e-25
+    "rotation": -55.36941613202297
   },
   "command": {
     "type": "sequential",
@@ -28,7 +28,7 @@
                     {
                       "type": "wait",
                       "data": {
-                        "waitTime": 2.5
+                        "waitTime": 1.25
                       }
                     },
                     {
@@ -42,28 +42,28 @@
                       "data": {
                         "commands": [
                           {
-                            "type": "named",
-                            "data": {
-                              "name": "Collect"
-                            }
-                          },
-                          {
                             "type": "sequential",
                             "data": {
                               "commands": [
                                 {
-                                  "type": "path",
+                                  "type": "wait",
                                   "data": {
-                                    "pathName": "center to center note"
+                                    "waitTime": 0.5
                                   }
                                 },
                                 {
-                                  "type": "path",
+                                  "type": "named",
                                   "data": {
-                                    "pathName": "center from center note"
+                                    "name": "Collect"
                                   }
                                 }
                               ]
+                            }
+                          },
+                          {
+                            "type": "path",
+                            "data": {
+                              "pathName": "triple pass.1"
                             }
                           }
                         ]
@@ -86,22 +86,9 @@
                             }
                           },
                           {
-                            "type": "sequential",
+                            "type": "path",
                             "data": {
-                              "commands": [
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "center to amp note"
-                                  }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "center from amp note"
-                                  }
-                                }
-                              ]
+                              "pathName": "triple pass.2"
                             }
                           }
                         ]
@@ -124,22 +111,9 @@
                             }
                           },
                           {
-                            "type": "sequential",
+                            "type": "path",
                             "data": {
-                              "commands": [
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "center to stage note"
-                                  }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "center from stage note"
-                                  }
-                                }
-                              ]
+                              "pathName": "triple pass.3"
                             }
                           }
                         ]
