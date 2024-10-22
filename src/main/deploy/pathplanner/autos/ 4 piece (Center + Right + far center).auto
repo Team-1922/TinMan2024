@@ -145,12 +145,6 @@
                                   "data": {
                                     "pathName": "center to far center note"
                                   }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "center from mid center note"
-                                  }
                                 }
                               ]
                             }
