@@ -50,12 +50,6 @@
                                   "data": {
                                     "pathName": "right to far center"
                                   }
-                                },
-                                {
-                                  "type": "path",
-                                  "data": {
-                                    "pathName": "Right From far center"
-                                  }
                                 }
                               ]
                             }
@@ -80,12 +74,6 @@
                             }
                           }
                         ]
-                      }
-                    },
-                    {
-                      "type": "named",
-                      "data": {
-                        "name": "Shoot"
                       }
                     }
                   ]

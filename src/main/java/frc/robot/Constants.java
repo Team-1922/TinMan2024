@@ -83,7 +83,7 @@ public final class Constants {
     public static final int TofRangeOfIntrest = 8; // don't change this 
     public static final int Tofid = 0; 
     public static final int TofminRange = 0; // mm
-    public static final int TofmaxRange = 500; // mm
+    public static final int TofmaxRange = 425; // mm
 
   }
 

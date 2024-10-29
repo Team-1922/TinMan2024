@@ -12,6 +12,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
+import frc.robot.commands.CollectNoteOverride;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
@@ -87,6 +88,7 @@ public class RobotContainer {
   private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
   private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
+  private final CollectNoteOverride m_CollectNoteOverride = new CollectNoteOverride(m_Collector);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -156,6 +158,7 @@ public class RobotContainer {
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
+      m_operatorController.button(4).whileTrue(m_CollectNoteOverride); // Y
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
 
