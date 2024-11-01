@@ -29,7 +29,7 @@ public class Collector extends SubsystemBase {
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
-    public boolean m_Tof1 = false;
+    public boolean m_Tof1 = true;
 
   SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, 98, 0);
   
