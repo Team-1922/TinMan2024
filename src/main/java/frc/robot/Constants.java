@@ -80,8 +80,10 @@ public final class Constants {
 
   public static class TofConstants{
 
+
     public static final int TofRangeOfIntrest = 8; // don't change this 
     public static final int Tofid = 0; 
+    public static final int Tof2id = 1;
     public static final int TofminRange = 0; // mm
     public static final int TofmaxRange = 425; // mm
 

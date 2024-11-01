@@ -18,6 +18,7 @@ import frc.robot.commands.Rumble;
 import frc.robot.commands.Shoot;
 import frc.robot.commands.TorqueLimitClimb;
 import frc.robot.commands.StopCollector_shooter;
+import frc.robot.commands.ToggleActiveTOF;
 import frc.robot.commands.shootStart;
 import frc.robot.commands.AutoCollectCheck;
 import frc.robot.commands.AutoShoot;
@@ -91,6 +92,7 @@ public class RobotContainer {
   private final CollectNoteOverride m_CollectNoteOverride = new CollectNoteOverride(m_Collector);
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+  private final ToggleActiveTOF m_ToggleActiveTOF = new ToggleActiveTOF(m_Collector);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -158,10 +160,10 @@ public class RobotContainer {
       m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
       m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
       m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collect
-      m_operatorController.button(4).whileTrue(m_CollectNoteOverride); // Y
+      m_operatorController.button(4).whileTrue(m_CollectNoteOverride); // Y                   | collect, will keep running until you release the button
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
-
+      m_operatorController.pov(90).onTrue(m_ToggleActiveTOF);
   }
 
   /**

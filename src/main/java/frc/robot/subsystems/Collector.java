@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.Constants.CollectorConstants;
+import frc.robot.Constants.TofConstants;
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -22,12 +23,13 @@ public class Collector extends SubsystemBase {
     ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
     private static TalonFX m_CollectorTalon = new TalonFX(CollectorConstants.kCollectorMotorID); 
     private static TalonFX m_CollectorTalon2 = new TalonFX(CollectorConstants.kCollectorSecondMotorID);
-      TimeOfFlight m_Tof = new TimeOfFlight(Constants.TofConstants.Tofid);
+      TimeOfFlight m_Tof = new TimeOfFlight(TofConstants.Tofid);
+      TimeOfFlight m_Tof2 = new TimeOfFlight(TofConstants.Tof2id);
     CurrentLimitsConfigs m_Configs = new CurrentLimitsConfigs();
      Slot0Configs m_slot0 = new Slot0Configs();
    private LedSubsystem m_LED = new LedSubsystem();
   public boolean m_IsTriggered;
-
+    public boolean m_Tof1 = false;
 
   SingleFadeAnimation m_SingleFade = new SingleFadeAnimation(255, 255, 0, 255, .9, 98, 0);
   
@@ -37,12 +39,14 @@ public class Collector extends SubsystemBase {
     public Collector() {
 
 m_Tof.setRangingMode(RangingMode.Short, 24);
+m_Tof2.setRangingMode(RangingMode.Short, 24);
 //SmartDashboard.putNumber( "TOf sample time",m_Tof.getSampleTime());
         m_slot0.kP = 0;
         m_slot0.kV = .0005;
         m_CollectorTalon.setInverted(false);
         m_CollectorTalon2.setInverted(false); 
         m_Tof.setRangeOfInterest(8, 8, 8, 8); //this is the smallest area it can target 
+        m_Tof2.setRangeOfInterest(8, 8, 8, 8);
         m_CollectorTalon.getConfigurator().apply(m_slot0);
         m_CollectorTalon2.getConfigurator().apply(m_slot0);
 
@@ -94,6 +98,28 @@ public void ReverseMotor(double RPM) {
    
     }
   
+    // this probably isn't the best solution
+public void ToggleTOF(){
+
+    if(m_Tof1){
+        m_Tof1 = false;
+    }
+    else{
+        m_Tof1 = true;}
+}
+
+/**
+ * 
+ * @return the <b>TOF</b> sensor currently in use
+ */
+public TimeOfFlight getActiveTof(){
+    if(m_Tof1){
+        return m_Tof;
+    }else{
+        return m_Tof2;
+    }
+}
+
 
 
 /** checks if there is something in the Tof target range 
@@ -101,9 +127,10 @@ public void ReverseMotor(double RPM) {
 */
     public boolean TofcheckTarget(){
        
+        
         boolean InTarget =
-                m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
-                && m_Tof.getRange() > Constants.TofConstants.TofminRange;
+                getActiveTof().getRange() < Constants.TofConstants.TofmaxRange 
+                && getActiveTof().getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
         if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
@@ -134,20 +161,21 @@ public void ReverseMotor(double RPM) {
      * @return if it has a note
      */
     public boolean HasNote(){
-        return  m_Tof.getRange() < Constants.TofConstants.TofmaxRange 
-                && m_Tof.getRange() > Constants.TofConstants.TofminRange;
+        return  getActiveTof().getRange() < Constants.TofConstants.TofmaxRange 
+                && getActiveTof().getRange() > Constants.TofConstants.TofminRange;
     }
 
 
     public double TofcheckDistance(){
 
-        double target = m_Tof.getRange();
+        double target = getActiveTof().getRange();
         SmartDashboard.putNumber("Tof target distance", target);
         return target;
     }
 
     @Override
     public void periodic(){
+            TofcheckDistance();
             TofcheckTarget();
     }
     
