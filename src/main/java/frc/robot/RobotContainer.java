@@ -163,7 +163,7 @@ public class RobotContainer {
       m_operatorController.button(4).whileTrue(m_CollectNoteOverride); // Y                   | collect, will keep running until you release the button
       m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
-      m_operatorController.pov(90).onTrue(m_ToggleActiveTOF);
+   //   m_operatorController.pov(90).onTrue(m_ToggleActiveTOF);
   }
 
   /**
