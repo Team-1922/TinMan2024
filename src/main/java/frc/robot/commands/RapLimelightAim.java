@@ -46,7 +46,8 @@ public class RapLimelightAim extends Command {
   
    if (m_LimelightSubsystem.HasValidTarget()){
     m_target =
-      (((m_LimelightSubsystem.GetVerticalLimelightAngle()-LimelightConstants.MinVerticalAngle)
+     
+    (((m_LimelightSubsystem.GetVerticalLimelightAngle()-LimelightConstants.MinVerticalAngle)
       /(LimelightConstants.MaxVerticalAngle-LimelightConstants.MinVerticalAngle)) // converts the ty into a 0-1 scale 
       *(RackAndPinionConstants.RAPmaxAngle -RackAndPinionConstants.RAPminAngle)) // multiplies by the range the RAP can go
       +RackAndPinionConstants.RAPminAngle; // adds the min angle the rap can be at. (THIS MIGHT HAVE TO BE CHANGED TO BE THE REFERENCE POINT)

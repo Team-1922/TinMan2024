@@ -106,7 +106,7 @@ public final class Constants {
   public static class RackAndPinionConstants {
 
     public static final int LeftRAPmotorID = 13; 
-    public static final int RightRAPmotorID = 14;
+    public static final int RightRAPmotorID = 21;
 
     public static final double RAPgearRatio = 1;
     public static final double RAPmaxAngle = 10; // highest angle in rotations, relitive to reference point
@@ -114,7 +114,7 @@ public final class Constants {
     public static final double RAPampAngle = 5; //placeholder 
     public static final double RAPdefaultAngle = 5; // placeholder, this would be whatever angle you would have the robot start in 
     public static final double RAPMinSpeed = .18; // (velocity) minimum speed that the motor can go that will still move the RAP
-    public static final double RAPMaxSpeed = 1; // be careful when raising this, or it might not work well...
+    public static final double RAPMaxSpeed = 500; // be careful when raising this, or it might not work well...
   
     public static final double RAPkP = 0.05; 
     

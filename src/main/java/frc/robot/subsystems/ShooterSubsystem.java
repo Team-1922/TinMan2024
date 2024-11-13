@@ -11,6 +11,11 @@ import com.ctre.phoenix6.configs.VoltageConfigs;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.playingwithfusion.CANVenom.BrakeCoastMode;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ShooterConstants;
@@ -20,8 +25,8 @@ public class ShooterSubsystem extends SubsystemBase {
   // kp of motors is ~.05
   private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
   private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
-  
-
+  private static CANSparkMax m_LeftSpark = new CANSparkMax(1, MotorType.kBrushless );
+  private static CANSparkMax m_RightSpark = new CANSparkMax(2, MotorType.kBrushless);
   LedSubsystem m_LedSubsystem = new LedSubsystem();
   /** Creates a new ShooterSubsystem. */
   public ShooterSubsystem() {
@@ -54,6 +59,8 @@ public class ShooterSubsystem extends SubsystemBase {
  
   m_Left.getConfigurator().apply(m_Slot0Configs);
   m_Right.getConfigurator().apply(m_Slot0Configs);
+  m_LeftSpark.setIdleMode(IdleMode.kCoast);
+  m_RightSpark.setIdleMode(IdleMode.kCoast);
  }
  
  

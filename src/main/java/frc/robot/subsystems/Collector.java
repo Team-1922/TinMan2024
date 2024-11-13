@@ -108,22 +108,22 @@ public void ReverseMotor(double RPM) {
          if (InTarget) {
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
-               m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // green
+           //    m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // green
             }else{
-           m_LED.SetColor(255, 255, 255, 255, 0, Constants.LedConstants.kTotalLedCount); // white
+           //m_LED.SetColor(255, 255, 255, 255, 0, Constants.LedConstants.kTotalLedCount); // white
            }
         } else {
         
          if ( RobotController.isSysActive()){
             if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS)){
-                m_LED.SetColor(255, 165, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // orange
+                //m_LED.SetColor(255, 165, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // orange
             }
             else{
-                m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // red
+                //m_LED.SetColor(255, 0, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // red
             }
          } 
           else {
-            m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
+            //m_LED.AnimateLEDs(m_ColorFlowAnimation, 0);
           } 
         } 
         return InTarget; 

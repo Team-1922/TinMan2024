@@ -191,10 +191,10 @@ public double GetRAPspeed(){
 
     if(RobotController.isSysActive()){
       if(isRAPmoving()){
-        m_LED.SetColor(255, 0, 0, 0, 0, 0);
+        m_LED.SetColor(255, 0, 0, 0, 0, 8);
       }
       else{
-        m_LED.SetColor(0, 255, 0, 0, 0, 0); //TODO:sort out what leds this controls
+        m_LED.SetColor(0, 255, 0, 0, 0, 8); //TODO:sort out what leds this controls
       }
 
     }
