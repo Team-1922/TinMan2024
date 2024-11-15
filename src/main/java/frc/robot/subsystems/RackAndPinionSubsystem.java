@@ -43,7 +43,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   //TODO: add a limit switch so it can't try and go too far.
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
-  m_Right.setControl(new Follower(13, true));
+ // m_Right.setControl(new Follower(13, true));
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPmotionMagicConfigs);
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
@@ -112,6 +112,9 @@ public double GetRAPspeed(){
   public void SetRAPspeed(double Velocity){ // TODO make it go down all the way, then set that as a reference
     m_Left.setControl(
       new VelocityDutyCycle(Velocity));
+    m_Right.setControl(
+      new VelocityDutyCycle(Velocity)
+    );
   }
 
   /**
