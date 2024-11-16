@@ -13,6 +13,8 @@ import frc.robot.commands.Climb;
 import frc.robot.commands.CollectNote;
 import frc.robot.commands.CollectNoteAuto;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.NeoShoot;
+import frc.robot.commands.NeoStop;
 import frc.robot.commands.RAPgoToAngle;
 import frc.robot.commands.RapLimelightAim;
 import frc.robot.commands.Rumble;
@@ -108,6 +110,9 @@ public class RobotContainer {
   private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
   private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   private final RapLimelightAim m_RapLimelightAim = new RapLimelightAim(m_RAP, m_LimelightSubsystem,m_Rumble);
+  private final NeoShoot m_NeoShoot = new NeoShoot(m_shooterSubsystem);
+  private final NeoStop m_NeoStop = new NeoStop(m_shooterSubsystem);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the trigger bindings
@@ -178,16 +183,19 @@ public class RobotContainer {
     
 
     // OPERATOR CONTROLLS    
-      m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
-      m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
-      m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
-      m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
+      //m_operatorController.button(1).toggleOnTrue(m_shootGroup); // A                         | shoot + collect
+      //m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
+      //m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
+      //m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
       m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
       //right trigger                                                                                | moves RAP up (remove after initial testing)
       //left trigger                                                                                | moves RAP down (remove after initial testing)
       m_operatorController.button(8).onTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
       m_operatorController.button(7).onTrue(m_StopRAP); // the button with two rectangles     | stops RAP motors
       m_operatorController.button(4).onTrue(m_RapLimelightAim); // Y
+      m_operatorController.button(1).whileTrue(m_NeoShoot);  // a
+      m_operatorController.button(2).onTrue(m_NeoStop);  //b
+
   }
 
   /**

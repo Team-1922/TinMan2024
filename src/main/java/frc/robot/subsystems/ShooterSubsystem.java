@@ -102,6 +102,14 @@ public class ShooterSubsystem extends SubsystemBase {
 
  }
  
+ public void StopNeo(){
+
+  m_LeftSpark.stopMotor();
+  m_RightSpark.stopMotor();
+  
+
+ }
+
   /**
    * 
    * @param LeftTargetRPS
