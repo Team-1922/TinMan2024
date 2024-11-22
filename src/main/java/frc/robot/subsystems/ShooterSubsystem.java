@@ -32,6 +32,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {
   
     configShooterForTeleop();
+   
   }
  
  public void configShooterForTeleop()
@@ -97,7 +98,7 @@ public class ShooterSubsystem extends SubsystemBase {
  
  public void NeoShoot(double Voltage){
 
-  m_LeftSpark.setVoltage(Voltage);
+  m_LeftSpark.setVoltage(-Voltage);
   m_RightSpark.setVoltage(Voltage);
 
  }

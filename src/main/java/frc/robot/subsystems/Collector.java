@@ -2,7 +2,9 @@ package frc.robot.subsystems;
 
 import frc.robot.Constants;
 import frc.robot.Constants.CollectorConstants;
+
 import edu.wpi.first.wpilibj.RobotController;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.led.ColorFlowAnimation;
@@ -111,6 +113,7 @@ public void ReverseMotor(double RPM) {
            //    m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // green
             }else{
            //m_LED.SetColor(255, 255, 255, 255, 0, Constants.LedConstants.kTotalLedCount); // white
+           
            }
         } else {
         

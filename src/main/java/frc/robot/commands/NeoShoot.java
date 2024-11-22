@@ -28,7 +28,7 @@ public class NeoShoot extends Command {
   public void execute() {
 
 
-    m_ShooterSubsystem.NeoShoot(1);
+    m_ShooterSubsystem.NeoShoot(10);
   }
 
   // Called once the command ends or is interrupted.

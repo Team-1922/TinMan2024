@@ -37,7 +37,10 @@ import frc.robot.subsystems.ShooterSubsystem;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
-
+import edu.wpi.first.hal.simulation.RoboRioDataJNI;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -60,14 +63,14 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
   public final ShooterSubsystem m_shooterSubsystem = new ShooterSubsystem();  
-  private final Collector m_Collector = new Collector();
-  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
-  private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
+ // private final Collector m_Collector = new Collector();
+//  private final CollectNote m_CollectNote = new CollectNote(m_Collector);
+ // private final CollectNote m_CollectNote2 = new CollectNote(m_Collector);
   private final RackAndPinionSubsystem m_RAP = new RackAndPinionSubsystem();
-  private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1,m_RAP );
+ // private final Shoot m_shoot = new Shoot(m_shooterSubsystem, m_Collector, false,1,m_RAP );
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
-  private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
-  private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
+ /// private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
+ // private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
   private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
 
@@ -78,7 +81,7 @@ public class RobotContainer {
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
-  private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
+ // private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
   public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
   private final SendableChooser<Command> AutoSelector;
@@ -103,23 +106,25 @@ public class RobotContainer {
   private final JoystickButton robotCentric = new JoystickButton(driver, XboxController.Button.kLeftBumper.value);
   private final JoystickButton dampen = new JoystickButton(driver, XboxController.Button.kRightBumper.value);
 
-  private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+ // private final StopCollector_shooter m_stopCollector_shooter = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   private final JoystickButton DynamicLock = new JoystickButton(driver, XboxController.Button.kA.value);
   private final shootStart m_ShootStart = new shootStart(m_shooterSubsystem,1);
   private final shootStart m_AutoShootStart = new shootStart(m_shooterSubsystem,1.2);
-  private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
-  private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
+//  private final SequentialCommandGroup m_shootGroup = new SequentialCommandGroup(m_shoot, m_stopCollector_shooter, m_CollectNote);
+ // private final StopCollector_shooter m_stopCollector_shooter2 = new StopCollector_shooter(m_Collector, m_shooterSubsystem,m_Controller);
   private final RapLimelightAim m_RapLimelightAim = new RapLimelightAim(m_RAP, m_LimelightSubsystem,m_Rumble);
   private final NeoShoot m_NeoShoot = new NeoShoot(m_shooterSubsystem);
   private final NeoStop m_NeoStop = new NeoStop(m_shooterSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+     DriverStation.silenceJoystickConnectionWarning(true);
+  
     // Configure the trigger bindings
     configureBindings();
     m_ClimberSubsystem.setDefaultCommand(m_Climb);
     m_RAP.setDefaultCommand(m_AngleAdjust);
-
+/* 
     // the commands that are used in pathplanner
     NamedCommands.registerCommand("Shoot",m_AutoShoot2); // shoot command   
     NamedCommands.registerCommand("Collect", m_CollectNoteAuto); // collect command   
@@ -128,7 +133,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("Shoot End Delay", m_AutoShootNoteCheck); // checks for when the tof no longer sees a note 
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
     NamedCommands.registerCommand("RAPmove", m_Angle1); // for testing the rap moving in auto, replace this later
-  
+  */
     s_Swerve.setDefaultCommand(
           new SwerveCommand(
               s_Swerve, 
@@ -187,7 +192,7 @@ public class RobotContainer {
       //m_operatorController.button(2).whileTrue(m_CollectNote2); // B                          | collect
       //m_operatorController.button(3).whileTrue(m_CollectReverse); // X                        | reverse collector
       //m_operatorController.button(5).onTrue(m_ShootStart); // LB                              | starts shooter motors
-      m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
+ //     m_operatorController.pov(180).whileTrue(m_stopCollector_shooter2); // D-PAD Down         | stops collector and shooter (controller will vibrate when held)
       //right trigger                                                                                | moves RAP up (remove after initial testing)
       //left trigger                                                                                | moves RAP down (remove after initial testing)
       m_operatorController.button(8).onTrue(m_ResetRAPangle); //the button with 3 lines    | recalibrates RAP angle    
