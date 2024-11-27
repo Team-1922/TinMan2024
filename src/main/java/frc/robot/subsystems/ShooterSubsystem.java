@@ -23,8 +23,8 @@ import frc.robot.Constants.ShooterConstants;
 public class ShooterSubsystem extends SubsystemBase {
 
   // kp of motors is ~.05
-  private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
-  private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
+  //private static TalonFX m_Left = new TalonFX(ShooterConstants.kLeftShooterMotorID);
+  //private static TalonFX m_Right = new TalonFX(ShooterConstants.kRightShooterMotorID);
   private static CANSparkMax m_LeftSpark = new CANSparkMax(1, MotorType.kBrushless );
   private static CANSparkMax m_RightSpark = new CANSparkMax(2, MotorType.kBrushless);
   LedSubsystem m_LedSubsystem = new LedSubsystem();
@@ -37,7 +37,7 @@ public class ShooterSubsystem extends SubsystemBase {
  
  public void configShooterForTeleop()
  {
-   m_Right.setNeutralMode(NeutralModeValue.Brake);
+  // m_Right.setNeutralMode(NeutralModeValue.Brake);
   
   VoltageConfigs m_VoltageConfigs = new VoltageConfigs();
     m_VoltageConfigs.PeakForwardVoltage = ShooterConstants.kShooterForwardTeleopVoltageLimit;
@@ -47,7 +47,7 @@ public class ShooterSubsystem extends SubsystemBase {
     m_CurrentLimitsConfigs.SupplyCurrentLimit = ShooterConstants.kCurrentLimit;
     m_CurrentLimitsConfigs.StatorCurrentLimitEnable = true;
     m_CurrentLimitsConfigs.StatorCurrentLimit = 60; 
-
+/* 
   m_Left.getConfigurator().apply(m_CurrentLimitsConfigs);
   m_Right.getConfigurator().apply(m_CurrentLimitsConfigs);  
   m_Left.getConfigurator().apply(m_VoltageConfigs);
@@ -57,14 +57,15 @@ public class ShooterSubsystem extends SubsystemBase {
 
   Slot0Configs m_Slot0Configs = new Slot0Configs();
     m_Slot0Configs.kP = .5;    
- 
+
   m_Left.getConfigurator().apply(m_Slot0Configs);
   m_Right.getConfigurator().apply(m_Slot0Configs);
+   */
   m_LeftSpark.setIdleMode(IdleMode.kCoast);
   m_RightSpark.setIdleMode(IdleMode.kCoast);
  }
  
- 
+ /* 
  
  public void configShooterForAuto()
  {
@@ -95,12 +96,11 @@ public class ShooterSubsystem extends SubsystemBase {
   m_Left.getConfigurator().apply(m_Slot0Configs);
   m_Right.getConfigurator().apply(m_Slot0Configs);
  }
- 
+ */
  public void NeoShoot(double Voltage){
 
   m_LeftSpark.setVoltage(-Voltage);
   m_RightSpark.setVoltage(Voltage);
-
  }
  
  public void StopNeo(){
@@ -108,7 +108,6 @@ public class ShooterSubsystem extends SubsystemBase {
   m_LeftSpark.stopMotor();
   m_RightSpark.stopMotor();
   
-
  }
 
   /**
@@ -116,7 +115,7 @@ public class ShooterSubsystem extends SubsystemBase {
    * @param LeftTargetRPS
    * @param RightTargetRPS
    * 
-   */
+   *//* 
 public boolean TargetRpmReached(double LeftTargetRPS, double RightTargetRPS){
 
 boolean Left = (m_Left.getVelocity().getValueAsDouble()) >= (LeftTargetRPS);
@@ -132,13 +131,13 @@ if(Left&&Right){
 
   return Left && Right;
 }
-
+*/
 
 /**
  * 
  * @param RightTargetRPM target RPM for the right shooter motor
  * @param LeftTargetRPM Target RPM for the left shooter motor
- */
+ *//* *
   public void Shoot(double RightTargetRPM,double LeftTargetRPM ){
 
     m_Left.setControl(new VelocityDutyCycle(LeftTargetRPM));
@@ -146,13 +145,14 @@ if(Left&&Right){
   }
 
   /** Stops the shooter motors */
+  /* 
   public void StopShoot(){
     
   m_Left.set(0);
   m_Right.set(0);
   }  
 
-
+*/
 
 
 
@@ -161,8 +161,8 @@ if(Left&&Right){
 
  @Override
  public void periodic(){
-  SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
-  SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
+ // SmartDashboard.putNumber("left temp (C)", m_Left.getDeviceTemp().getValueAsDouble());
+  //SmartDashboard.putNumber("right temp (C)",m_Right.getDeviceTemp().getValueAsDouble());
   //SmartDashboard.putNumber("left rps", m_Left.getVelocity().getValueAsDouble());
   //SmartDashboard.putNumber( "Right rps", m_Right.getVelocity().getValueAsDouble());
 

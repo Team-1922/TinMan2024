@@ -57,9 +57,9 @@ public class Shoot extends Command {
     if(m_IsAuto){
       m_AutoTimer.start();
     }
-    m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
+   // m_ShootSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
 
-    m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
+   // m_ShootSubsystem.Shoot(m_RPMLeft, m_RPMRight); // might need to be higher, starting low to see if it works
 
   }
 
@@ -83,7 +83,7 @@ public class Shoot extends Command {
   public void end(boolean interrupted) {
     
     m_Collector.StopMotor();
-    m_ShootSubsystem.StopShoot();
+  //  m_ShootSubsystem.StopShoot();
     m_AutoTimer.stop();
 
   }

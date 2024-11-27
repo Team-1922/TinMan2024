@@ -41,6 +41,7 @@ import edu.wpi.first.hal.simulation.RoboRioDataJNI;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.RobotController;
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -71,20 +72,20 @@ public class RobotContainer {
   private final AutoCollectCheck m_AutoCollectCheck = new AutoCollectCheck();
  /// private final CollectNoteAuto m_CollectNoteAuto = new CollectNoteAuto(m_Collector);
  // private final CollectReverse m_CollectReverse = new CollectReverse(m_Collector);
-  private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
+ // private final ClimberSubsystem m_ClimberSubsystem = new ClimberSubsystem(); 
   private final XboxController m_Controller = new XboxController(1);
 
   private final Rumble m_Rumble = new Rumble();
   private final CommandXboxController m_operatorController = new CommandXboxController(Constants.OperatorConstants.kOperatorControllerPort);
-  private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
-  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, .2);
+  //private final TorqueLimitClimb m_TClimb = new TorqueLimitClimb(m_ClimberSubsystem, m_operatorController, 5, 0.2,6);
+//  private final Climb m_Climb = new Climb(m_ClimberSubsystem, m_operatorController, 1, 5, .2);
   private final CommandXboxController m_driverController =
       new CommandXboxController(OperatorConstants.kDriverControllerPort);
   private final AutoShootNoteCheck m_AutoShootNoteCheck = new AutoShootNoteCheck(Constants.ShooterConstants.AutoShootEndDelay);
  // private final AutoShoot m_AutoShoot2 = new AutoShoot(m_Collector, true, 5);
   private final PoseEstimator s_PoseEstimator = new PoseEstimator();
-  public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
-  private final SendableChooser<Command> AutoSelector;
+ // public final Swerve s_Swerve = new Swerve(s_PoseEstimator);
+//  private final SendableChooser<Command> AutoSelector;
   private final XboxController driver = new XboxController(0);
 
   private final AngleAdjust m_AngleAdjust = new AngleAdjust(m_RAP, m_operatorController);
@@ -122,7 +123,7 @@ public class RobotContainer {
   
     // Configure the trigger bindings
     configureBindings();
-    m_ClimberSubsystem.setDefaultCommand(m_Climb);
+ //   m_ClimberSubsystem.setDefaultCommand(m_Climb);
     m_RAP.setDefaultCommand(m_AngleAdjust);
 /* 
     // the commands that are used in pathplanner
@@ -134,6 +135,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("CollectReverse", m_CollectReverse); // sptits note out collector
     NamedCommands.registerCommand("RAPmove", m_Angle1); // for testing the rap moving in auto, replace this later
   */
+  /* 
     s_Swerve.setDefaultCommand(
           new SwerveCommand(
               s_Swerve, 
@@ -148,23 +150,23 @@ public class RobotContainer {
       
         
   AutoSelector = AutoBuilder.buildAutoChooser("JustShoot");
-  SmartDashboard.putData("AUTOCHOOSER", AutoSelector);
+  SmartDashboard.putData("AUTOCHOOSER", AutoSelector);*/
   }
 
   public void ResetRAPforAuto(){
     m_RAP.SetCurrentAngleAsDefault();
   };
 
-  public void configShooterSubsystemForAuto(){
+ // public void configShooterSubsystemForAuto(){
 
-    m_shooterSubsystem.configShooterForAuto();
-    SmartDashboard.putBoolean("auto_configs",true);
-  }
-
-  public void configShooterSubsystemForTeleop(){
-    m_shooterSubsystem.configShooterForTeleop();
-    SmartDashboard.putBoolean("auto_configs", false);
-  }
+  //  m_shooterSubsystem.configShooterForAuto();
+  //  SmartDashboard.putBoolean("auto_configs",true);
+ // }
+//
+ // public void configShooterSubsystemForTeleop(){
+//    m_shooterSubsystem.configShooterForTeleop();
+//    SmartDashboard.putBoolean("auto_configs", false);
+//  }
     
 
   /**
@@ -183,8 +185,8 @@ public class RobotContainer {
 
 
     // DRIVER CONTROLLS
-      zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro/field-oriented drive
-      m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrates operator controller
+  //    zeroGyro.onTrue(new InstantCommand(() -> s_Swerve.zeroHeading())); // Y                        | zeros gyro/field-oriented drive
+  //    m_driverController.button(2).whileTrue(m_Rumble); // B                                  | vibrates operator controller
     
 
     // OPERATOR CONTROLLS    
@@ -208,6 +210,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return AutoSelector.getSelected();
+    return null;
+    //AutoSelector.getSelected();
   }
 }

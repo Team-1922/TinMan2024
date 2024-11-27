@@ -108,7 +108,9 @@ public void ReverseMotor(double RPM) {
                 && m_Tof.getRange() > Constants.TofConstants.TofminRange;
         SmartDashboard.putBoolean("Has Note?",InTarget);
          if (InTarget) {
-            if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
+            if(
+                false)
+                //m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS))
             {
            //    m_LED.SetColor(0, 255, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // green
             }else{
@@ -118,7 +120,8 @@ public void ReverseMotor(double RPM) {
         } else {
         
          if ( RobotController.isSysActive()){
-            if(m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS)){
+            if(true){
+                //m_ShooterSubsystem.TargetRpmReached(Constants.ShooterConstants.kLeftTargetRPS, Constants.ShooterConstants.kRightTargetRPS)){
                 //m_LED.SetColor(255, 165, 0, 0, 0, Constants.LedConstants.kTotalLedCount); // orange
             }
             else{

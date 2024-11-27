@@ -31,7 +31,7 @@ public class StopCollector_shooter extends Command {
   @Override
   public void initialize() {
     m_Collector.StopMotor();
-    m_ShooterSubsystem.StopShoot();
+   // m_ShooterSubsystem.StopShoot();
 
   }
 

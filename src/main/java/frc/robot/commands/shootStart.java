@@ -32,14 +32,14 @@ public class shootStart extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() { 
-    m_ShooterSubsystem.Shoot(ShooterConstants.kRightShooterRPS*m_SpeedIncrease, ShooterConstants.kLeftShooterRPS*m_SpeedIncrease);
-    m_ShooterSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
+  //  m_ShooterSubsystem.Shoot(ShooterConstants.kRightShooterRPS*m_SpeedIncrease, ShooterConstants.kLeftShooterRPS*m_SpeedIncrease);
+  //  m_ShooterSubsystem.TargetRpmReached(ShooterConstants.kLeftTargetRPS, ShooterConstants.kRightTargetRPS);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_ShooterSubsystem.StopShoot();
+ //   m_ShooterSubsystem.StopShoot();
   }
 
   // Returns true when the command should end.
