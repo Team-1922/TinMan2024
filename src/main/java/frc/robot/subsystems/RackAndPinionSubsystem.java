@@ -48,6 +48,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPslot0Configs);
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPTalonFXConfiguration);
+  m_Right.getConfigurator().apply(RackAndPinionConstants.RAPTalonFXConfiguration);
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPCurrentLimitsConfigs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPCurrentLimitsConfigs);
 
@@ -122,7 +123,8 @@ public double GetRAPspeed(){
    * @param Pos rotations to go to. 
    */
   public void GoToPositonWithoutMotionMagic( double Pos){
-    m_Left.setControl(new PositionDutyCycle(Pos));
+    m_Left.setControl(new PositionDutyCycle(Pos).withFeedForward(0.005));
+    m_Right.setControl(new PositionDutyCycle(Pos).withFeedForward(0.005));
     m_RAPtarget = Pos;
   }
 
@@ -167,8 +169,8 @@ public double GetRAPspeed(){
    * stops the Rack and pinion motors
    */
   public void StopRAPmotors(){
-    m_Left.stopMotor();
-    m_Right.stopMotor();
+    m_Left.setVoltage(0);
+    m_Right.setVoltage(0);
   }
 
 

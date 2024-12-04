@@ -109,8 +109,8 @@ public final class Constants {
     public static final int RightRAPmotorID = 21;
 
     public static final double RAPgearRatio = 1; //this is not correct, maybe fix this later
-    public static final double RAPmaxAngle = 14; // highest angle in rotations, relitive to reference point
-    public static final double RAPminAngle = 2; // the lowest angle that it can go, in motor rotations relitive to the reference point
+    public static final double RAPmaxAngle = 18; // highest angle in rotations, relitive to reference point
+    public static final double RAPminAngle = 0; // the lowest angle that it can go, in motor rotations relitive to the reference point
     public static final double RAPampAngle = 5; //placeholder 
     public static final double RAPdefaultAngle = 5; // placeholder, this would be whatever angle you would have the robot start in 
     public static final double RAPMinSpeed = .18; // (velocity) minimum speed that the motor can go that will still move the RAP
@@ -121,8 +121,8 @@ public final class Constants {
     // MOTOR CONFIGS
 
     public static VoltageConfigs RAPVoltageConfigs = new VoltageConfigs()
-      .withPeakForwardVoltage(2)
-      .withPeakReverseVoltage(2);
+      .withPeakForwardVoltage(2.5)
+      .withPeakReverseVoltage(2.5);
     
     public static CurrentLimitsConfigs RAPCurrentLimitsConfigs = new CurrentLimitsConfigs()
     .withSupplyCurrentLimit(30)
