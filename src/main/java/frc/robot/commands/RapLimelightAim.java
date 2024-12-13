@@ -59,7 +59,8 @@ public class RapLimelightAim extends Command {
    else {
     m_Rumble.initialize(); // rumble the controller if there is no valid target
    }
-   SmartDashboard.putNumber("aim target", m_target+m_RAP.getRAPreference());
+   
+   SmartDashboard.putNumber("aim target", m_target);
   }
 
   // Called once the command ends or is interrupted.

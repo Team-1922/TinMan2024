@@ -8,9 +8,11 @@ package frc.robot;
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.configs.VoltageConfigs;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 
 /**
@@ -137,7 +139,10 @@ public final class Constants {
 
     public static TalonFXConfiguration RAPTalonFXConfiguration = new TalonFXConfiguration()
     .withFeedback(new FeedbackConfigs().withSensorToMechanismRatio(RAPgearRatio)); 
-    
+
+
+    public static MotorOutputConfigs RAPMotorOutputConfigs = new MotorOutputConfigs()
+      .withNeutralMode(NeutralModeValue.Brake);    
   }
 
   public static class LimelightConstants {

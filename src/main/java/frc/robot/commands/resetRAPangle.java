@@ -12,10 +12,7 @@ import frc.robot.subsystems.RackAndPinionSubsystem;
 
 public class resetRAPangle extends Command {
   RackAndPinionSubsystem m_RackAndPinionSubsystem; 
-    boolean m_StartCheck=false;
-    double TargetSpeed = 1;
-    double MinSpeed = RackAndPinionConstants.RAPMinSpeed;
-    boolean m_end = false;
+
   /** Creates a new resetRAPangle. */
   public resetRAPangle(RackAndPinionSubsystem rackAndPinionSubsystem) {
     m_RackAndPinionSubsystem = rackAndPinionSubsystem;
@@ -26,9 +23,9 @@ public class resetRAPangle extends Command {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_StartCheck =false;
-    m_end= false;
-    //TODO: figure out a good speed to go at
+
+    m_RackAndPinionSubsystem.SetCurrentAngleAsDefault();
+
         
   }
 
@@ -38,21 +35,7 @@ public class resetRAPangle extends Command {
  
     
     
-    if ( m_StartCheck ==false && m_RackAndPinionSubsystem.GetRAPspeed()< MinSpeed){ 
-      m_RackAndPinionSubsystem.SetRAPspeed(TargetSpeed);
-      SmartDashboard.putBoolean("STARTCHECK", false);
-    }
-    if (m_RackAndPinionSubsystem.GetRAPspeed()>= MinSpeed && m_StartCheck==false){
-      m_StartCheck=true;
-      SmartDashboard.putBoolean("STARTCHECK", true);
-   
-    }
-    if (m_StartCheck==true && m_RackAndPinionSubsystem.GetRAPspeed() <=MinSpeed){
-      m_RackAndPinionSubsystem.SetRAPspeed(0);
-      m_RackAndPinionSubsystem.SetCurrentAngleAsDefault();
-      m_end = true;
 
-    }
   }
   
 
@@ -65,6 +48,6 @@ public class resetRAPangle extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_end;
+    return true;
   }
 }

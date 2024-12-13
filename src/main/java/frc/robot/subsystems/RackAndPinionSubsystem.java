@@ -5,6 +5,7 @@
 package frc.robot.subsystems;
 
 
+import com.ctre.phoenix6.configs.MotorOutputConfigs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicDutyCycle;
@@ -13,8 +14,7 @@ import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.VelocityDutyCycle;
 
 import com.ctre.phoenix6.hardware.TalonFX;
-
-
+import com.ctre.phoenix6.signals.InvertedValue;
 
 import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,7 +25,8 @@ public class RackAndPinionSubsystem extends SubsystemBase {
 
   private static TalonFX m_Left = new TalonFX(RackAndPinionConstants.LeftRAPmotorID); 
   private static TalonFX m_Right = new TalonFX(RackAndPinionConstants.RightRAPmotorID); 
-  private double m_LeftStartingAngle;
+
+
   private LedSubsystem m_LED = new LedSubsystem();
   public double m_Position;
   public double[] m_StartingVector = new double[2];
@@ -41,6 +42,7 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   public RackAndPinionSubsystem() {
 
   //TODO: add a limit switch so it can't try and go too far.
+
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPVoltageConfigs);
  // m_Right.setControl(new Follower(13, true));
@@ -52,6 +54,9 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   m_Left.getConfigurator().apply(RackAndPinionConstants.RAPCurrentLimitsConfigs);
   m_Right.getConfigurator().apply(RackAndPinionConstants.RAPCurrentLimitsConfigs);
 
+  m_Left.getConfigurator().apply(RackAndPinionConstants.RAPMotorOutputConfigs);
+  m_Right.getConfigurator().apply(RackAndPinionConstants.RAPMotorOutputConfigs.withInverted(InvertedValue.Clockwise_Positive));
+
   }
 
 
@@ -61,10 +66,11 @@ public class RackAndPinionSubsystem extends SubsystemBase {
   /** sets the position that the motors are currently at as the default, used as a reference angle
     */
   public void SetCurrentAngleAsDefault(){
-     // TODO: this is in rotations, please fix this when we know whatever the conversion ends up being 
-   m_LeftStartingAngle =  m_Left.getPosition().getValueAsDouble();
 
-    SmartDashboard.putNumber("reference in rotations", m_LeftStartingAngle);
+   m_Right.setPosition(0);
+   m_Left.setPosition(0);
+
+   
   }
 
 /**
@@ -103,7 +109,7 @@ public double GetRAPspeed(){
  * @return the current shooter angle
  */
   public double GetShooterAngle(){
-    return (m_Left.getPosition().getValueAsDouble()-m_LeftStartingAngle);
+    return (m_Left.getPosition().getValueAsDouble());
   }
 
 /**
@@ -116,6 +122,7 @@ public double GetRAPspeed(){
     m_Right.setControl(
       new VelocityDutyCycle(Velocity)
     );
+    
   }
 
   /**
@@ -123,15 +130,13 @@ public double GetRAPspeed(){
    * @param Pos rotations to go to. 
    */
   public void GoToPositonWithoutMotionMagic( double Pos){
-    m_Left.setControl(new PositionDutyCycle(Pos).withFeedForward(0.005));
-    m_Right.setControl(new PositionDutyCycle(Pos).withFeedForward(0.005));
+    m_Left.setControl(new PositionDutyCycle(Pos).withFeedForward(0.065));
+    m_Right.setControl(new PositionDutyCycle(Pos).withFeedForward(0.065));
     m_RAPtarget = Pos;
+    
   }
 
- public double getRAPreference(){
-  return m_LeftStartingAngle;
 
- }
 
   /** sets shooter angle 
  * @param Rot position in rotations to set motor to

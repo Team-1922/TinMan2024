@@ -27,7 +27,7 @@ public class RAPgoToAngle extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_RackAndPinionSubsystem.SetShooterAngle(m_Rot+m_RackAndPinionSubsystem.getRAPreference());
+    m_RackAndPinionSubsystem.SetShooterAngle(m_Rot);
   }
 
   // Called once the command ends or is interrupted.
